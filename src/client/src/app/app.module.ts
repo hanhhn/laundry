@@ -4,17 +4,19 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
-import { DefaultLayoutModule } from "./layouts/default-layout/default-layout.module";
-import { AdminLayoutModule } from "./layouts/admin-layout/admin-layout.module";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { DefaultModule } from "./pages/default/default.module";
+import { AdminModule } from "./pages/admin/admin.module";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     AppRoutingModule,
-    DefaultLayoutModule,
-    AdminLayoutModule
+    DefaultModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

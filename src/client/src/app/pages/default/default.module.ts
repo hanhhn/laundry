@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { DefaultLayoutComponent } from "../layouts/default-layout/default-layout.component";
+import { DefaultLayoutComponent } from "src/app/layouts/default-layout/default-layout.component";
 
 const routes: Routes = [
   {
@@ -9,18 +9,19 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        loadChildren: "../pages/default/home/home.module#HomeModule"
+        loadChildren: "./home/home.module#HomeModule"
       },
       {
         path: "login",
-        loadChildren: "../pages/default/login/login.module#LoginModule"
+        loadChildren: "./login/login.module#LoginModule"
       }
     ]
   }
 ];
 
 @NgModule({
+  declarations: [DefaultLayoutComponent],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class DefaultRoutingModule {}
+export class DefaultModule {}

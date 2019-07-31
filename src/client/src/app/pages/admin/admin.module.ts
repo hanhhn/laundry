@@ -20,7 +20,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AdminLayoutComponent],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

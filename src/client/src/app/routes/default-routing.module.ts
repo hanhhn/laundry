@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { DefaultLayoutComponent } from '../layouts/default-layout/default-layout.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { DefaultLayoutComponent } from "../layouts/default-layout/default-layout.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: DefaultLayoutComponent,
     children: [
       {
-        path: '',
-        loadChildren: '../pages/default/home/home.module#HomeModule'
+        path: "",
+        loadChildren: "../pages/default/home/home.module#HomeModule"
       },
       {
-        path: 'login',
-        loadChildren: '../pages/default/login/login.module#LoginModule'
+        path: "login",
+        loadChildren: "../pages/default/login/login.module#LoginModule"
       }
     ]
   }

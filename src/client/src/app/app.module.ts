@@ -16,10 +16,8 @@ import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.compon
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
     FlexLayoutModule,
-    DefaultModule,
-    AdminModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

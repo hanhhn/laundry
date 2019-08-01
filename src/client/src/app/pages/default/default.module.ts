@@ -5,22 +5,16 @@ import { DefaultLayoutComponent } from "src/app/layouts/default-layout/default-l
 const routes: Routes = [
   {
     path: "",
-    component: DefaultLayoutComponent,
-    children: [
-      {
-        path: "",
-        loadChildren: "./home/home.module#HomeModule"
-      },
-      {
-        path: "login",
-        loadChildren: "./login/login.module#LoginModule"
-      }
-    ]
+    loadChildren: "./home/home.module#HomeModule"
+  },
+  {
+    path: "login",
+    loadChildren: "./login/login.module#LoginModule"
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class DefaultModule {}

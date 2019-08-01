@@ -4,23 +4,17 @@ import { AdminLayoutComponent } from "src/app/layouts/admin-layout/admin-layout.
 
 const routes: Routes = [
   {
-    path: "admin",
-    component: AdminLayoutComponent,
-    children: [
-      {
-        path: "",
-        loadChildren: "./dashboard/dashboard.module#DashboardModule"
-      },
-      {
-        path: "dashboard",
-        loadChildren: "./dashboard/dashboard.module#DashboardModule"
-      },
-    ]
+    path: "",
+    loadChildren: "./dashboard/dashboard.module#DashboardModule"
+  },
+  {
+    path: "dashboard",
+    loadChildren: "./dashboard/dashboard.module#DashboardModule"
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AdminModule {}

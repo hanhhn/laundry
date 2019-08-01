@@ -12,12 +12,12 @@ import { DefaultLayoutComponent } from "./layouts/default-layout/default-layout.
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 
 @NgModule({
-  declarations: [AppComponent, DefaultLayoutComponent, AdminLayoutComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

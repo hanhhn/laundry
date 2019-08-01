@@ -1,21 +1,23 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { DefaultLayoutComponent } from "./layouts/default-layout/default-layout.component";
-import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import { NotFoundComponent } from "./pages/error/not-found/not-found.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: DefaultLayoutComponent,
-    loadChildren: "./pages/default/default.module#DefaultModule"
+    loadChildren: "./layouts/default-layout/default-layout.module#DefaultLayoutModule"
   },
   {
     path: "admin",
-    component: AdminLayoutComponent,
-    loadChildren: "./pages/admin/admin.module#AdminModule"
+    loadChildren: "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"
+  },
+  {
+    path: "**",
+    component: NotFoundComponent,
   }
 ];
 @NgModule({
+  declarations: [NotFoundComponent],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

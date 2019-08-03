@@ -1,1 +1,61 @@
-<header>Header</header> 
+<div>
+  <div
+    class="menu-desktop"
+    fxHide.xs
+    fxShow
+    fxLayout="row"
+    fxLayoutAlign="space-between stretch"
+  >
+    <div class="brand">
+      <a routerLink=".">
+        <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
+        <span class="title">Brand</span>
+      </a>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+      <div class="nav-bar">
+        <a mat-flat-button routerLink=".">Về chúng tôi</a>
+        <a mat-flat-button routerLink=".">Dịch vụ</a>
+        <a mat-flat-button routerLink=".">Bảng giá</a>
+        <a mat-flat-button routerLink=".">Liên hệ</a>
+        <a mat-flat-button routerLink=".">Đặt Ngay</a>
+      </div>
+      <div class="account">
+        <i class="fa fa-user" [matMenuTriggerFor]="appMenu"></i>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="menu-mobilde"
+    fxHide
+    fxShow.xs
+    fxLayout="column"
+    fxLayoutAlign="stretch"
+  >
+    <div fxFlex="auto" fxLayout="row" fxLayoutAlign="space-between stretch">
+      <div class="brand">
+        <a routerLink=".">
+          <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
+          <span class="title">Brand</span>
+        </a>
+      </div>
+      <div class="account">
+        <i class="fa fa-user" [matMenuTriggerFor]="appMenu"></i>
+      </div>
+    </div>
+    <div class="nav-bar" fxFlex="auto">
+      <div fxLayout="row" fxLayoutAlign="space-around stretch">
+        <a class="item" fxFlex="auto" routerLink=".">Đặt Ngay</a>
+        <a class="item" fxFlex="auto" routerLink=".">Đặt Ngay</a>
+        <a class="item" fxFlex="auto" routerLink=".">Đặt Ngay</a>
+      </div>
+    </div>
+  </div>
+
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item>Help</button>
+  </mat-menu>
+</div>

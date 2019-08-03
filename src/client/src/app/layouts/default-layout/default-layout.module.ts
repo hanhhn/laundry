@@ -4,16 +4,11 @@ import { DefaultModule } from "src/app/pages/default/default.module";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { DefaultLayoutComponent } from "./default-layout.component";
 import { FooterComponent } from "../../pages/shared/footer/footer.component";
-import { HeaderComponent } from "../../pages/shared/header/header.component";
-import { SideNavComponent } from "../../pages/shared/side-nav/side-nav.component";
+import { SideBarComponent } from "../../pages/shared/side-bar/side-bar.component";
+import { HeaderModule } from "../../pages/shared/header/header.module";
 
 @NgModule({
-  declarations: [
-    DefaultLayoutComponent,
-    HeaderComponent,
-    FooterComponent,
-    SideNavComponent
-  ],
-  imports: [CommonModule, DefaultModule, MatSidenavModule]
+  declarations: [DefaultLayoutComponent, FooterComponent, SideBarComponent],
+  imports: [CommonModule, DefaultModule, HeaderModule, MatSidenavModule]
 })
 export class DefaultLayoutModule {}

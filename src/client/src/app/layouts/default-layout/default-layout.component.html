@@ -1,6 +1,13 @@
-
-<app-header></app-header>
-<div class="default-content">
-    <router-outlet></router-outlet>
-</div>
-<app-footer></app-footer>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <app-side-nav></app-side-nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="10px;">
+      <button mat-button (click)="sidenav.toggle()">Toggle</button>
+      <app-header></app-header>
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

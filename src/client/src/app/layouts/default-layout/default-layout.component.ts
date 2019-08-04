@@ -6,10 +6,5 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./default-layout.component.scss"]
 })
 export class DefaultLayoutComponent implements OnInit {
-  onSideBarToggle(toggle, sidenav) {
-    console.log(sidenav);
-    sidenav.toggle();
-  }
-
   ngOnInit() {}
 }

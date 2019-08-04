@@ -1,44 +1,43 @@
-<div>
-  <div
-    class="menu-desktop"
-    fxHide.xs
-    fxShow
-    fxLayout="row"
-    fxLayoutAlign="space-between stretch"
-  >
-    <div class="brand">
-      <a [routerLink]="['/']">
-        <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
-        <span class="title">Brand</span>
-      </a>
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-between stretch">
-      <div class="nav-bar">
-        <a
-          *ngFor="let link of desktopLinks"
-          [routerLink]="['/' + link.path]"
-          mat-flat-button
-        >
-          {{ link.label }}</a
-        >
-      </div>
-      <div class="account">
-        <a mat-flat-button [matMenuTriggerFor]="appMenu">
-          <mat-icon>account_circle</mat-icon>
+<mat-toolbar class="menu" [ngClass]="{ 'shrink-toolbar': shrinkToolbar }">
+  <mat-toolbar-row fxShow fxHide.xs>
+    <div
+      class="menu-desktop"
+      fxLayout="row"
+      fxLayoutAlign="space-between stretch"
+    >
+      <div class="brand">
+        <a [routerLink]="['/']">
+          <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
+          <span class="title">Brand</span>
         </a>
       </div>
-    </div>
-  </div>
 
-  <div
-    class="menu-mobile"
-    fxHide
-    fxShow.xs
-    fxLayout="column"
-    fxLayoutAlign="stretch"
-  >
-    <div fxFlex="auto" fxLayout="row" fxLayoutAlign="space-between stretch">
+      <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <div class="nav-bar">
+          <a
+            *ngFor="let link of desktopLinks"
+            [routerLink]="['/' + link.path]"
+            mat-flat-button
+          >
+            {{ link.label }}</a
+          >
+        </div>
+        <div class="account">
+          <a mat-flat-button [matMenuTriggerFor]="appMenu">
+            <mat-icon>account_circle</mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row fxHide fxShow.xs>
+    <div
+      class="menu-mobile"
+      fxFlex="auto"
+      fxLayout="row"
+      fxLayoutAlign="space-between stretch"
+    >
       <div class="brand">
         <span (click)="onSideBarToggle()"><mat-icon>menu</mat-icon></span>
         <a [routerLink]="['/']">Brand</a>
@@ -47,25 +46,25 @@
         <mat-icon [matMenuTriggerFor]="appMenu">account_circle</mat-icon>
       </div>
     </div>
-    <div class="nav-bar" fxFlex="auto">
-      <nav mat-tab-nav-bar>
-        <a
-          mat-tab-link
-          fxFlex="auto"
-          *ngFor="let link of mobileLinks"
-          [routerLink]="['/' + link.path]"
-          routerLinkActive
-          #rla="routerLinkActive"
-          [active]="rla.isActive"
-        >
-          {{ link.label }}
-        </a>
-      </nav>
-    </div>
-  </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row fxHide fxShow.xs>
+    <nav class="menu-mobile" mat-tab-nav-bar fxFlex="auto">
+      <a
+        mat-tab-link
+        fxFlex="auto"
+        *ngFor="let link of mobileLinks"
+        [routerLink]="['/' + link.path]"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [active]="rla.isActive"
+      >
+        {{ link.label }}
+      </a>
+    </nav>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-  <mat-menu #appMenu="matMenu">
-    <button mat-menu-item>Settings</button>
-    <button mat-menu-item>Help</button>
-  </mat-menu>
-</div>
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item>Settings</button>
+  <button mat-menu-item>Help</button>
+</mat-menu>

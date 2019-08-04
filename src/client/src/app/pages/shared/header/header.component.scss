@@ -1,17 +1,16 @@
-a {
-  color: #202124;
-  text-decoration: none;
-  background-color: transparent;
+.menu-desktop {
+  width: 100%;
 }
 
-ul {
-  list-style: none;
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
-}
-
-
-.menu-mobide {
+.menu-mobile {
   padding-bottom: 1vh;
+}
+
+.shrink-toolbar {
+  // position: fixed;
+  // top: 0;
+}
+
+.shrink-toolbar-hide {
+  display: none;
 }

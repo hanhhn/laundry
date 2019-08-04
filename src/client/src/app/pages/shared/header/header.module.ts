@@ -9,6 +9,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { RouterModule } from "@angular/router";
 import { MatRippleModule } from "@angular/material/core";
 import { MatIconModule } from "@angular/material/icon";
+import { ScrollDispatchModule } from "@angular/cdk/scrolling";
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -21,7 +22,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatButtonModule,
     MatRippleModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    ScrollDispatchModule
   ],
   exports: [HeaderComponent]
 })

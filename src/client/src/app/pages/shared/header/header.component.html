@@ -7,7 +7,7 @@
     fxLayoutAlign="space-between stretch"
   >
     <div class="brand">
-      <a routerLink=".">
+      <a [routerLink]="['/']">
         <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
         <span class="title">Brand</span>
       </a>
@@ -17,7 +17,7 @@
       <div class="nav-bar">
         <a
           *ngFor="let link of desktopLinks"
-          [routerLink]="['/'+link.path]"
+          [routerLink]="['/' + link.path]"
           mat-flat-button
         >
           {{ link.label }}</a
@@ -38,7 +38,7 @@
   >
     <div fxFlex="auto" fxLayout="row" fxLayoutAlign="space-between stretch">
       <div class="brand">
-        <a routerLink=".">
+        <a [routerLink]="['/']">
           <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
           <span class="title">Brand</span>
         </a>
@@ -53,7 +53,7 @@
           mat-tab-link
           fxFlex="auto"
           *ngFor="let link of mobileLinks"
-          [routerLink]="[link.path]"
+          [routerLink]="['/' + link.path]"
           routerLinkActive
           #rla="routerLinkActive"
           [active]="rla.isActive"

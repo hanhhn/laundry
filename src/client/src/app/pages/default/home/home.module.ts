@@ -5,6 +5,7 @@ import { HomeComponent } from "./home.component";
 import { CarouselModule } from "../../../components/carousel/carousel.module";
 import { ServiceModule } from "../../../components/service/service.module";
 import { ProcessModule } from "../../../components/process/process.module";
+import { GuideModule } from "../../../components/guide/guide.module";
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     CarouselModule,
+    GuideModule,
     ProcessModule,
     ServiceModule,
     RouterModule.forChild(routes)

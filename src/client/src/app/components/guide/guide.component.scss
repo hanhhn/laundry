@@ -1,0 +1,35 @@
+.guide {
+  .guide-background {
+    img {
+      width: 100%;
+    }
+  }
+
+  .guide-follow {
+    .list {
+      list-style: none;
+      counter-reset: step;
+
+      .item::before {
+        font-family: "Material Icons";
+        content: "0" counter(step);
+        position: absolute;
+        left: -25px;
+        top: 5px;
+      }
+
+      .item::after {
+        font-family: "Material Icons";
+        position: absolute;
+        content: "\e5db";
+        left: -25px;
+        top: 20px;
+      }
+
+      .item {
+        counter-increment: step;
+        position: relative;
+      }
+    }
+  }
+}

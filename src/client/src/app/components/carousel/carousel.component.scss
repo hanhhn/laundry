@@ -1,7 +1,48 @@
 .carousel {
-  .background {
-    width: 100%;
+  background-color: #ffcf10 !important;
+  text-align: center;
+  padding-top: 128px;
+  padding-bottom: 128px;
+
+  .title {
+    font-weight: 700;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 16px !important;
   }
 
-  border: 1px #cccccc solid;
+  .description {
+    max-width: 666px;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 24px !important;
+  }
+
+  .action {
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+    justify-content: center !important;
+
+    button {
+      margin: 0 10px;
+    }
+  }
+}
+
+
+.m-carousel {
+  padding-top: 58px !important;
+  padding-bottom: 58px !important;
+}
+
+.slope-left {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vw), 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vw), 0 100%);
+}
+
+.m-slope-left {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0 100%);
 }

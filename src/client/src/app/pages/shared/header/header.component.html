@@ -15,15 +15,16 @@
       <div fxLayout="row" fxLayoutAlign="space-between stretch">
         <div class="nav-bar">
           <a
+            class="item"
             *ngFor="let link of desktopLinks"
             [routerLink]="['/' + link.path]"
-            mat-flat-button
+            mat-button
           >
             {{ link.label }}</a
           >
         </div>
         <div class="account">
-          <a mat-flat-button [matMenuTriggerFor]="appMenu">
+          <a mat-button [matMenuTriggerFor]="appMenu">
             <mat-icon>account_circle</mat-icon>
           </a>
         </div>

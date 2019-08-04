@@ -6,6 +6,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./carousel.component.scss"]
 })
 export class CarouselComponent implements OnInit {
+  background = "../../../assets/background.jpg";
+
   constructor() {}
 
   ngOnInit() {}

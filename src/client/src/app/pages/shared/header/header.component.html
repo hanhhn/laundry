@@ -38,9 +38,9 @@
   >
     <div fxFlex="auto" fxLayout="row" fxLayoutAlign="space-between stretch">
       <div class="brand">
-        <a [routerLink]="['/']">
-          <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
-          <span class="title">Brand</span>
+        <span (click)="onSideBarToggle()"><i class="fa fa-bars"></i></span>
+        <a logo [routerLink]="['/']">
+          <i class="fa fa-eercast" aria-hidden="true"></i>
         </a>
       </div>
       <div class="account">

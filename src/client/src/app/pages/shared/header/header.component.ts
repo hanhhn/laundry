@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output  } from "@angular/core";
 
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"]
 })
+
 export class HeaderComponent implements OnInit {
   desktopLinks = [
     { path: "ve-chung-toi", label: "Về chúng tôi" },
@@ -20,10 +21,17 @@ export class HeaderComponent implements OnInit {
     { path: "dich-vu-va-quy-trinh", label: "Dịch vụ" }
   ];
 
-
   active = "";
+
+  @Output() toggleSideBar = new EventEmitter();
+  toggle = false;
 
   constructor() {}
 
   ngOnInit() {}
+
+  onSideBarToggle() {
+    this.toggle = !this.toggle;
+    this.toggleSideBar.emit(this.toggle);
+  }
 }

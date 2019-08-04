@@ -4,10 +4,10 @@
     <span class="title">Brand</span>
   </a>
   <ul class="menu-item">
-    <li class="item"><a href="#">Link 2</a></li>
-    <li class="item"><a href="#">Link 3</a></li>
-    <li class="item"><a href="#">Link 3</a></li>
-    <li class="item"><a href="#">Link 3</a></li>
-    <li class="item"><a href="#">Link 3</a></li>
+    <li class="item" *ngFor="let item of desktopLinks">
+      <a [routerLink]="['/' + item.path]" (click)="onItemClick()">{{
+        item.label
+      }}</a>
+    </li>
   </ul>
 </nav>

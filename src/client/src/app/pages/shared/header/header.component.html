@@ -24,7 +24,9 @@
         >
       </div>
       <div class="account">
-        <i class="fa fa-user" [matMenuTriggerFor]="appMenu"></i>
+        <button mat-flat-button [matMenuTriggerFor]="appMenu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
       </div>
     </div>
   </div>
@@ -39,12 +41,13 @@
     <div fxFlex="auto" fxLayout="row" fxLayoutAlign="space-between stretch">
       <div class="brand">
         <span (click)="onSideBarToggle()"><i class="fa fa-bars"></i></span>
-        <a logo [routerLink]="['/']">
-          <i class="fa fa-eercast" aria-hidden="true"></i>
+        <a [routerLink]="['/']">
+          <!-- <i class="fa fa-eercast" aria-hidden="true"></i> -->
+          Brand
         </a>
       </div>
       <div class="account">
-        <i class="fa fa-user" [matMenuTriggerFor]="appMenu"></i>
+        <mat-icon [matMenuTriggerFor]="appMenu">account_circle</mat-icon>
       </div>
     </div>
     <div class="nav-bar" fxFlex="auto">

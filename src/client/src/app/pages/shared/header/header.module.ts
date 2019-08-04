@@ -6,8 +6,9 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTabsModule } from "@angular/material/tabs";
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule } from "@angular/router";
 import { MatRippleModule } from "@angular/material/core";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -19,7 +20,8 @@ import { MatRippleModule } from "@angular/material/core";
     MatMenuModule,
     MatButtonModule,
     MatRippleModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule
   ],
   exports: [HeaderComponent]
 })

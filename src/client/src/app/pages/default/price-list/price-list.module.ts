@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 import { PriceListComponent } from "./price-list.component";
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
 
 const routes: Routes = [
   {
@@ -12,6 +14,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [PriceListComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)]
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatSortModule,
+    RouterModule.forChild(routes)
+  ]
 })
 export class PriceListModule {}

@@ -1,13 +1,23 @@
-<nav class="side-nav">
-  <a href="#" class="brand">
-    <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
-    <span class="title">Brand</span>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <a href="#" class="brand">
+      <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
+      <span class="title">Brand</span>
+    </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-nav-list>
+  <h2 matSubheader>sub Title</h2>
+  <a
+    *ngFor="let item of desktopLinks"
+    mat-list-item
+    (click)="onItemClick()"
+    [routerLink]="['/' + item.path]"
+    routerLinkActive="list-item-active"
+  >
+    <!-- <mat-icon matListIcon> {{ item.icon }} </mat-icon> -->
+    {{ item.label }}
   </a>
-  <ul class="menu-item">
-    <li class="item" *ngFor="let item of desktopLinks">
-      <a [routerLink]="['/' + item.path]" (click)="onItemClick()">{{
-        item.label
-      }}</a>
-    </li>
-  </ul>
-</nav>
+  <mat-divider></mat-divider>
+</mat-nav-list>

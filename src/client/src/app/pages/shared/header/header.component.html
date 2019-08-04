@@ -15,11 +15,13 @@
 
     <div fxLayout="row" fxLayoutAlign="space-between stretch">
       <div class="nav-bar">
-        <a mat-flat-button routerLink=".">Về chúng tôi</a>
-        <a mat-flat-button routerLink=".">Dịch vụ</a>
-        <a mat-flat-button routerLink=".">Bảng giá</a>
-        <a mat-flat-button routerLink=".">Liên hệ</a>
-        <a mat-flat-button routerLink=".">Đặt Ngay</a>
+        <a
+          *ngFor="let link of desktopLinks"
+          [routerLink]="['/'+link.path]"
+          mat-flat-button
+        >
+          {{ link.label }}</a
+        >
       </div>
       <div class="account">
         <i class="fa fa-user" [matMenuTriggerFor]="appMenu"></i>
@@ -46,11 +48,19 @@
       </div>
     </div>
     <div class="nav-bar" fxFlex="auto">
-      <div fxLayout="row" fxLayoutAlign="space-around stretch">
-        <a class="item" fxFlex="auto" routerLink=".">Đặt Ngay</a>
-        <a class="item" fxFlex="auto" routerLink=".">Đặt Ngay</a>
-        <a class="item" fxFlex="auto" routerLink=".">Đặt Ngay</a>
-      </div>
+      <nav mat-tab-nav-bar>
+        <a
+          mat-tab-link
+          fxFlex="auto"
+          *ngFor="let link of mobileLinks"
+          [routerLink]="[link.path]"
+          routerLinkActive
+          #rla="routerLinkActive"
+          [active]="rla.isActive"
+        >
+          {{ link.label }}
+        </a>
+      </nav>
     </div>
   </div>
 

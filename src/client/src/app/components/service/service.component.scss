@@ -1,14 +1,51 @@
-.item1 {
-    height: 150px;
-    background-color: gold;
-}
+.service {
+  .item {
+    max-width: 300px;
 
-.item2 {
-    height: 150px;
-    background-color: dodgerblue;
-}
+    .item-header {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 20px;
 
-.item3 {
-    height: 150px;
-    background-color: green;
+      h4 {
+        margin-top: 0px;
+        margin-bottom: 8px;
+      }
+
+      p {
+        margin-top: 0px;
+      }
+    }
+
+    .item-content {
+      .price {
+        display: flex;
+        flex-direction: row;
+
+        .rate {
+          font-size: 34px;
+          font-weight: 700;
+          margin-right: 8px !important;
+        }
+
+        .detail {
+          p {
+            margin: 0 !important;
+          }
+        }
+      }
+
+      .description {
+        list-style: none;
+
+        li {
+          &::before {
+            font-family: "Material Icons";
+            content: "\e876";
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
 }

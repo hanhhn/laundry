@@ -1,31 +1,30 @@
-<div class="guide" fxLayout="row" fxLayoutAlign="space-evenly stretch" fxLayout.xs="column">
+<div
+  class="guide"
+  fxLayout="row"
+  fxLayoutAlign="space-evenly stretch"
+  fxLayout.xs="column"
+>
   <div class="guide-background" fxFlex="auto" fxFlexOrder.xs="2">
-    <img src="https://www.grab.com/vn/wp-content/themes/grabsg/images/mod-howitwork/empty-v2.png" />
+    <img  ngClass.xs="m-img"
+      src="https://www.grab.com/vn/wp-content/themes/grabsg/images/mod-howitwork/empty-v2.png"
+    />
   </div>
   <div class="guide-step" fxHide fxShow.xs fxLayoutGap="20px">
     <ul fxLayout.xs="row" fxLayoutAlign="center center">
-      <li class="item active"><span>2</span></li>
-      <li class="item"><span>3</span></li>
-      <li class="item"><span>4</span></li>
+      <li
+        (click)="onMoved(item)"
+        *ngFor="let item of steps; let i = index"
+        [ngClass]="{'item': true, 'active': item.active}"
+      >
+        <span>{{ i + 1 }}</span>
+      </li>
     </ul>
   </div>
   <div class="guide-follow" fxFlex="auto" fxFlexOrder.xs="1">
     <ul ngClass="list" ngClass.xs="m-list" fxLayout.xs="row">
-      <li class="item active">
-        <h3>Đặt dịch vụ với thao tác đơn giản</h3>
-        <p>Chọn địa điểm nhận đồ và thời gian</p>
-      </li>
-      <li class="item">
-        <h3>Nhân viên sẽ đến tận nơi</h3>
-        <p>SachSe nhận đồ trong thời gian thích hợp nhất của bạn</p>
-      </li>
-      <li class="item">
-        <h3>Theo dỏi quá trình giặt đồ</h3>
-        <p>Bạn có thể theo dỏi quần áo của mình đã giặt xong chưa</p>
-      </li>
-      <li class="item">
-        <h3>Trả đồ</h3>
-        <p>Trả lại đồ tại nhà, tiết kiệm thời gian cho bạn</p>
+      <li *ngFor="let item of steps" class="" [ngClass]="{'item': true, 'active': item.active}" >
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
       </li>
     </ul>
   </div>

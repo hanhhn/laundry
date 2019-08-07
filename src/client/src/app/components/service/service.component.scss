@@ -1,4 +1,39 @@
 .service {
+  background-color: #2b2d6e !important;
+  margin-bottom: -2vw;
+  margin-top: -2vw;
+  padding-top: 8vh;
+  padding-bottom: 8vh;
+
+  -webkit-clip-path: polygon(0 0, 100% 2vw, 100% calc(100% - 2vw), 0 100%);
+  clip-path: polygon(0 0, 100% 2vw, 100% calc(100% - 2vw), 0 100%);
+
+  .slogun {
+    padding-bottom: 30px;
+    max-width: 450px;
+    color: #ffffff;
+    text-align: center !important;
+
+    h1 {
+      font-weight: 700;
+    }
+
+    hr {
+      width: 20%;
+      height: 5px;
+      background-color: #F48024 !important;
+      border: none;
+    }
+
+    p {
+      max-width: 80%;
+    }
+
+    button {
+      background-color: #F48024 !important;
+    }
+  }
+
   .item {
     max-width: 300px;
 
@@ -8,6 +43,7 @@
       margin-bottom: 20px;
 
       h4 {
+        font-size: 21px;
         margin-top: 0px;
         margin-bottom: 8px;
       }
@@ -23,7 +59,7 @@
         flex-direction: row;
 
         .rate {
-          font-size: 34px;
+          font-size: 30px;
           font-weight: 700;
           margin-right: 8px !important;
         }
@@ -31,20 +67,39 @@
         .detail {
           p {
             margin: 0 !important;
+            font-size: 14px;
           }
         }
+
+        margin-bottom: 15px;
       }
 
       .description {
         list-style: none;
+        margin: 0;
+        padding: 0;
 
         li {
-          &::before {
-            font-family: "Material Icons";
-            content: "\e876";
-            margin-right: 10px;
+          display: flex;
+          margin-bottom: 12px !important;
+
+          .icon {
+            margin-right: 6px !important;
+          }
+
+          .text {
+            text-align: left;
+            font-size: 14px;
           }
         }
+      }
+    }
+
+    .item-action {
+      button {
+        background-color: #2b2d6e !important;
+        color: #ffffff;
+        width: 100%;
       }
     }
   }

@@ -1,0 +1,31 @@
+.download {
+  background-color: #7d7a82;
+  color: #ffffff;
+
+  img {
+    width: 100%;
+  }
+
+  .background {
+    width: 450px;
+  }
+
+  .app {
+    .qrcode {
+      width: 200px;
+    }
+
+    .store {
+      display: flex;
+      flex-direction: column;
+
+      .ios {
+        width: 200px;
+      }
+
+      .androind {
+        width: 200px;
+      }
+    }
+  }
+}

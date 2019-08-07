@@ -6,6 +6,8 @@ import { CarouselModule } from "../../../components/carousel/carousel.module";
 import { ServiceModule } from "../../../components/service/service.module";
 import { ProcessModule } from "../../../components/process/process.module";
 import { GuideModule } from "../../../components/guide/guide.module";
+import { DownloadAppModule } from "../../../components/download-app/download-app.module";
+import { SelectionModule } from "../../../components/selection/selection.module";
 
 const routes: Routes = [
   {
@@ -22,6 +24,8 @@ const routes: Routes = [
     GuideModule,
     ProcessModule,
     ServiceModule,
+    DownloadAppModule,
+    SelectionModule,
     RouterModule.forChild(routes)
   ]
 })

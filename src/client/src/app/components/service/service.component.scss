@@ -1,9 +1,9 @@
 .service {
   background-color: #2b2d6e !important;
-  margin-bottom: -2vw;
+  // margin-bottom: -2vw;
   margin-top: -2vw;
-  padding-top: 8vh;
-  padding-bottom: 8vh;
+  padding-top: 5vw;
+  padding-bottom: 8vw;
 
   -webkit-clip-path: polygon(0 0, 100% 2vw, 100% calc(100% - 2vw), 0 100%);
   clip-path: polygon(0 0, 100% 2vw, 100% calc(100% - 2vw), 0 100%);
@@ -19,8 +19,8 @@
     }
 
     hr {
-      width: 20%;
-      height: 5px;
+      width: 10vw;
+      padding: 4px;
       background-color: #F48024 !important;
       border: none;
     }

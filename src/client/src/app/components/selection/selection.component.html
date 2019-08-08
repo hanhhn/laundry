@@ -1,1 +1,48 @@
-<p>selection works!</p>
+<div class="selection" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+    <div class="slogun">
+        <h2>SỰ LỰA CHỌN TỐI ƯU </h2>
+        <hr />
+    </div>
+    <div fxLayout="row" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+        <div class="item-left-wrap" fxLayout="column"  fxLayoutAlign="center center" fxLayoutGap="30px"
+            fxFlexOrder="1">
+            <div class="item after" fxFlex="auto" [ngClass.xs]="{'after': false}">
+                <mat-card>
+                    <label><i class="fa fa-check"></i>Đáp đứng nhu cầu sinh hoạ 1</label>
+                </mat-card>
+            </div>
+            <div class="item after" fxFlex="auto" [ngClass.xs]="{'after': false}">
+                <mat-card>
+                    <label><i class="fa fa-check"></i>Đáp đứng nhu cầu sinh hoạ 1</label>
+                </mat-card>
+            </div>
+            <div class="item after" fxFlex="auto" [ngClass.xs]="{'after': false}">
+                <mat-card>
+                    <label><i class="fa fa-check"></i>Đáp đứng nhu cầu sinh hoạ 1</label>
+                </mat-card>
+            </div>
+        </div>
+        <div class="item-right-wrap" fxLayout="column" fxLayoutAlign="center center"
+            fxLayoutGap="30px" fxFlexOrder="3" fxFlexOrder.xs="2">
+            <div class="item before" fxFlex="auto" [ngClass.xs]="{'before': false}">
+                <mat-card>
+                    <label><i class="fa fa-check"></i>Đáp đứng nhu cầu sinh hoạ 1</label>
+                </mat-card>
+            </div>
+            <div class="item before" fxFlex="auto" [ngClass.xs]="{'before': false}">
+                <mat-card>
+                    <label><i class="fa fa-check"></i>Đáp đứng nhu cầu sinh hoạ 1</label>
+                </mat-card>
+            </div>
+            <div class="item before" fxFlex="auto" [ngClass.xs]="{'before': false}">
+                <mat-card>
+                    <label><i class="fa fa-check"></i>Đáp đứng nhu cầu sinh hoạ 1</label>
+                </mat-card>
+            </div>
+        </div>
+
+        <div class="item-image background" fxFlex="auto" fxFlexOrder="2" fxFlexOrder.xs="3" fxHide.xs>
+            <img src="../../../assets/developer.svg">
+        </div>
+    </div>
+</div>

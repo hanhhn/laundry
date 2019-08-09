@@ -8,29 +8,24 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
   styleUrls: ["./book-now.component.scss"]
 })
 export class BookNowComponent implements OnInit {
-  isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  isLinear = true;
   isMobile = false;
+
+  contactFormGroup: FormGroup;
+  serviceFormGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     breakpointObserver: BreakpointObserver
   ) {
-    breakpointObserver
-      .observe([Breakpoints.XSmall])
-      .subscribe(result => {
-        this.isMobile = result.matches;
-        console.log(result);
-      });
+    breakpointObserver.observe([Breakpoints.XSmall]).subscribe(result => {
+      this.isMobile = result.matches;
+      console.log(result);
+    });
   }
 
   ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ["", Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ["", Validators.required]
-    });
+    this.contactFormGroup = this.formBuilder.group({});
+    this.serviceFormGroup = this.formBuilder.group({});
   }
 }

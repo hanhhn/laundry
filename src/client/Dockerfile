@@ -1,6 +1,7 @@
 FROM node:10.16.0 as node-env
 
 COPY . /app
+COPY package.json /app/package.json
 
 WORKDIR /app
 

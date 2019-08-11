@@ -1,0 +1,10 @@
+<div class="item" (click)="onChecked()">
+  <div class="icon">
+    <img src="{{ itemUrl }}" />
+  </div>
+  <h4 class="name">
+    <mat-checkbox [checked]="checked">
+        {{ itemName }}
+    </mat-checkbox>
+  </h4>
+</div>

@@ -1,0 +1,24 @@
+.book-now {
+  max-width: 959px;
+  margin: 0px auto;
+
+  mat-horizontal-stepper {
+    padding: 30px 0px;
+  }
+
+  .step-content {
+    margin: 50px auto;
+    max-width: 599px;
+    min-height: 300px;
+  }
+
+  .sub-step {
+    .content {
+      margin-left: 30px;
+    }
+
+    textarea {
+      width: 100%;
+    }
+  }
+}

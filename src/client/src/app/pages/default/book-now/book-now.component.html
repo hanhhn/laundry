@@ -1,46 +1,194 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Last name, First name"
-          formControlName="firstCtrl"
-          required
-        />
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
+<div class="book-now">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <!-- <mat-step [stepControl]="itemFormGroup">
+      <form [formGroup]="itemFormGroup">
+        <ng-template matStepLabel>Đồ bạn muốn giặt</ng-template>
+        <div
+          class="step-content"
+          fxLayout="row wrap"
+          fxLayoutAlign="space-around center"
+        >
+          <app-item
+            *ngFor="let item of items; let i = index"
+            id="{{ i }}"
+            itemUrl="{{ item.imageUrl }}"
+            itemName="{{ item.name }}"
+            itemRate="{{ item.rate }}"
+            (itemChecked)="onItemChecked($event, i)"
+          ></app-item>
+        </div>
+        <div class="step-action">
+          <button mat-raised-button matStepperNext color="primary">
+            Tiếp Theo
+          </button>
+        </div>
+      </form>
+    </mat-step> -->
+    <mat-step [stepControl]="serviceFormGroup">
+      <form [formGroup]="serviceFormGroup">
+        <ng-template matStepLabel>Dịch vụ</ng-template>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between start"
+          fxLayoutGap="20px"
+        >
+          <div class="service" fxFlex="auto">
+            <div class="sub-step">
+              <h5 class="title">1. Chọn hình thức giặt</h5>
+              <div class="content">
+                <mat-radio-group fxLayout="row" fxLayoutGap="20px">
+                  <mat-radio-button value="1">Giặt sấy</mat-radio-button>
+                  <mat-radio-button value="2">Giặt hấp</mat-radio-button>
+                  <mat-radio-button value="3">Chỉ giặt</mat-radio-button>
+                  <mat-radio-button value="4">Chỉ sấy</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+            <div class="sub-step">
+              <h5 class="title">2. Chọn nước giặt và xả vải</h5>
+              <div class="content">
+                <mat-radio-group fxLayout="row" fxLayoutGap="20px">
+                  <mat-radio-button value="comfort">Comfort</mat-radio-button>
+                  <mat-radio-button value="downy">Downy</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+            <div class="sub-step">
+              <h5 class="title">3. Ủi đồ</h5>
+              <div class="content">
+                <mat-checkbox [checked]="checked">
+                  Ủi hơi nước miễn phí
+                </mat-checkbox>
+              </div>
+            </div>
+            <div class="sub-step">
+              <h5 class="title">4. Ghi chú</h5>
+              <div class="content">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <textarea
+                    matInput
+                    placeholder="Ghi chú cho chúng tôi"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="discount">
+            <mat-form-field>
+              <input matInput placeholder="Mã giảm giá / Quà tặng" />
+            </mat-form-field>
+            <button mat-raised-button color="primary">Apply</button>
+          </div>
+        </div>
+        <div class="step-action">
+          <button mat-button matStepperPrevious color="primary">Back</button>
+          <button mat-raised-button matStepperNext color="primary">
+            Tiếp Theo
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="contactFormGroup">
+      <form [formGroup]="contactFormGroup">
+        <ng-template matStepLabel>Thông tin liên hệ</ng-template>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between start"
+          fxLayoutGap="20px"
+        >
+          <div class="phone" fxFlex="40">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Số diện thoại"
+                (change)="onPhoneChanged($event)"
+              />
+            </mat-form-field>
+            <button mat-button color="primary" *ngIf="!isShowFormContact">
+              Thêm địa chỉ mới
+            </button>
+          </div>
+          <div class="address" fxFlex="60" *ngIf="!isShowFormContact">
+            <mat-radio-group fxLayout="column" fxLayoutGap="20px">
+              <mat-radio-button value="1">
+                <h5>Hoàng Ngọc Hạnh</h5>
+                <p>
+                  Địa chỉ: Cổng B, Khu cảng cát lái, Đường lê phụng hiểu, Phường
+                  cát lái, Quận 2, Phường Cát Lái, Quận 2, Hồ Chí Minh Việt Nam
+                </p>
+              </mat-radio-button>
+              <mat-radio-button value="2">
+                <h5>Hoàng Kim Quân</h5>
+                <p>
+                  Địa chỉ: Cổng B, Khu cảng cát lái, Đường lê phụng hiểu, Phường
+                  cát lái, Quận 2, Phường Cát Lái, Quận 2, Hồ Chí Minh Việt Nam
+                </p>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div
+            class="contact"
+            fxLayout="column"
+            fxFlex="60"
+            *ngIf="isShowFormContact"
+          >
+            <mat-form-field>
+              <input matInput placeholder="Họ tên" />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Tỉnh/Thành phố</mat-label>
+              <mat-select>
+                <mat-option [value]="1">Huế</mat-option>
+                <mat-option [value]="2">Đà Nẵng</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Quận/Huyện</mat-label>
+              <mat-select>
+                <mat-option [value]="1">Tp Huế</mat-option>
+                <mat-option [value]="2">Tx Hương Thủy</mat-option>
+                <mat-option [value]="3">Tx Hương Trà</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Phường/Xã</mat-label>
+              <mat-select>
+                <mat-option [value]="1">An cựu</mat-option>
+                <mat-option [value]="2">An Hòa</mat-option>
+                <mat-option [value]="3">Phú bình</mat-option>
+                <mat-option [value]="4">Phú Hội</mat-option>
+                <mat-option [value]="5">Thủy xuân</mat-option>
+                <mat-option [value]="6">Vĩnh Ninh</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 100%">
+              <textarea
+                matInput
+                placeholder="Địa chỉ: số nhà, đường..."
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="step-action">
+          <button mat-button matStepperPrevious color="primary">Back</button>
+          <button mat-raised-button matStepperNext color="primary">
+            Tiếp Theo
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Hoàn thành</ng-template>
+      <div class="step-content" style="text-align: center">
+        <h4>Bạn đã đặt dịch vụ thành công!</h4>
       </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Address"
-          formControlName="secondCtrl"
-          required
-        />
-      </mat-form-field>
-      <div>
+      <!-- <div class="step-action">
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div> -->
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
 
 <!-- <div *ngIf="isMobile">
   <mat-vertical-stepper [linear]="true" #stepper>
@@ -56,7 +204,7 @@
           />
         </mat-form-field>
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext>Tiếp Theo</button>
         </div>
       </form>
     </mat-step>
@@ -73,7 +221,7 @@
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext>Tiếp Theo</button>
         </div>
       </form>
     </mat-step>

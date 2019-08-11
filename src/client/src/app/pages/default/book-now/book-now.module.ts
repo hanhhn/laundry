@@ -31,6 +31,7 @@ const routes: Routes = [
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
     MatStepperModule,
     MatFormFieldModule,
     MatButtonModule,

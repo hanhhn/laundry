@@ -38,8 +38,6 @@ const routes: Routes = [
     MatInputModule,
     MatRadioModule,
     MatCheckboxModule,
-    ItemCheckModule,
-    MatGridListModule,
     MatSelectModule,
     RouterModule.forChild(routes)
   ]

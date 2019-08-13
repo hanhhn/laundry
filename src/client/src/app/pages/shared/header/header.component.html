@@ -16,7 +16,7 @@
         <div class="nav-bar">
           <a
             class="item"
-            *ngFor="let link of desktopLinks"
+            *ngFor="let link of getLinkDesktop"
             [routerLink]="['/' + link.path]"
             mat-button
           >
@@ -53,7 +53,7 @@
       <a
         mat-tab-link
         fxFlex="auto"
-        *ngFor="let link of mobileLinks"
+        *ngFor="let link of getLinkMobile"
         [routerLink]="['/' + link.path]"
         routerLinkActive
         #rla="routerLinkActive"

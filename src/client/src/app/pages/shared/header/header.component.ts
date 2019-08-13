@@ -8,18 +8,42 @@ import { map } from "rxjs/operators";
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
-  desktopLinks = [
-    { path: "ve-chung-toi", label: "Về chúng tôi" },
-    { path: "dich-vu-va-quy-trinh", label: "Dịch vụ" },
-    { path: "bang-gia", label: "Bảng giá" },
-    { path: "lien-he", label: "Liên hệ" },
-    { path: "dat-ngay", label: "Đặt ngay" }
-  ];
-
-  mobileLinks = [
-    { path: "dat-ngay", label: "Đặt ngay" },
-    { path: "bang-gia", label: "Bảng giá" },
-    { path: "dich-vu-va-quy-trinh", label: "Dịch vụ" }
+  menuLinks = [
+    {
+      desktopOrder: 1,
+      mobileOrder: 1,
+      mobile: false,
+      path: "ve-chung-toi",
+      label: "Về chúng tôi"
+    },
+    {
+      desktopOrder: 2,
+      mobileOrder: 3,
+      mobile: true,
+      path: "dich-vu-va-quy-trinh",
+      label: "Dịch vụ"
+    },
+    {
+      desktopOrder: 3,
+      mobileOrder: 2,
+      mobile: true,
+      path: "bang-gia",
+      label: "Bảng giá"
+    },
+    {
+      desktopOrder: 4,
+      mobileOrder: 1,
+      mobile: false,
+      path: "lien-he",
+      label: "Liên hệ"
+    },
+    {
+      desktopOrder: 5,
+      mobileOrder: 1,
+      mobile: true,
+      path: "dat-ngay",
+      label: "Đặt ngay"
+    }
   ];
 
   @Output() toggleSideBar = new EventEmitter();
@@ -32,6 +56,36 @@ export class HeaderComponent implements OnInit {
     private scrollDispatcher: ScrollDispatcher,
     private ngZone: NgZone
   ) {}
+
+  get getLinkDesktop() {
+    return this.menuLinks.sort((a, b) => {
+      if (a.desktopOrder > b.desktopOrder) {
+        return 1;
+      }
+
+      if (a.desktopOrder === b.desktopOrder) {
+        return 0;
+      }
+
+      return -1;
+    });
+  }
+
+  get getLinkMobile() {
+    return this.menuLinks
+      .filter(x => x.mobile)
+      .sort((a, b) => {
+        if (a.mobileOrder > b.mobileOrder) {
+          return 1;
+        }
+
+        if (a.mobileOrder === b.mobileOrder) {
+          return 0;
+        }
+
+        return -1;
+      });
+  }
 
   ngOnInit() {
     this.scrollDispatcher

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MAT_CHECKBOX_CLICK_ACTION } from "@angular/material";
 
 @Component({
-  selector: "app-item",
+  selector: "app-item-check",
   templateUrl: "./item-check.component.html",
   styleUrls: ["./item-check.component.scss"],
   providers: [{ provide: MAT_CHECKBOX_CLICK_ACTION, useValue: "noop" }]

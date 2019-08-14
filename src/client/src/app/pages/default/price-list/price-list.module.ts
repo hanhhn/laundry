@@ -6,6 +6,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatTabsModule, MatIconModule } from "@angular/material";
 import { ServiceModule } from "src/app/components/service/service.module";
 import { ItemListModule } from "src/app/components/item-list/item-list.module";
+import { ServiceListModule } from "src/app/components/service-list/service-list.module";
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
     FlexLayoutModule,
     MatTabsModule,
     MatIconModule,
-    ServiceModule,
+    ServiceListModule,
     ItemListModule,
     RouterModule.forChild(routes)
   ]

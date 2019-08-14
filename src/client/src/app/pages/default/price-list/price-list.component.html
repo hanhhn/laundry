@@ -1,22 +1,24 @@
-<div class="price-list" fxLayout="row wrap" fxLayoutAlign="start center">
-  <mat-tab-group>
+<div class="price-list">
+  <mat-tab-group animationDuration="0ms" fxFlex="auto"  fxLayout="column"  fxLayoutAlign="center center">
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-        First
+        Giặt sấy theo combo
       </ng-template>
       <ng-template matTabContent>
-        <app-service></app-service>
+        <div class="content">
+          <app-service-list></app-service-list>
+        </div>
       </ng-template>
     </mat-tab>
 
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-        Second
+        Giặt hấp hoàn hảo
       </ng-template>
       <ng-template matTabContent>
-        <app-item-list></app-item-list>
+        <div class="content">
+          <app-item-list></app-item-list>
+        </div>
       </ng-template>
     </mat-tab>
   </mat-tab-group>

@@ -1,1 +1,26 @@
-<p>contact works!</p>
+<div class="container" fxLayout="row" fxLayoutAlign="space-between start">
+  <div class="contact-form" fxLayout="column" fxFlex="auto">
+    <h3>Gửi thông tin liên hệ</h3>
+    <mat-form-field>
+      <input matInput placeholder="Họ và tên" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Số điện thoại" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Nội dung liên hệ"></textarea>
+    </mat-form-field>
+    <div class="action">
+      <button mat-raised-button color="primary">Gửi yêu cầu</button>
+    </div>
+  </div>
+  <div class="further-info" fxFlex="auto">
+    further info
+  </div>
+</div>

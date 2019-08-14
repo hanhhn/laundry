@@ -2,8 +2,10 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 import { PriceListComponent } from "./price-list.component";
-import { ItemModule } from "../../../components/item/item.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatTabsModule, MatIconModule } from "@angular/material";
+import { ServiceModule } from "src/app/components/service/service.module";
+import { ItemListModule } from "src/app/components/item-list/item-list.module";
 
 const routes: Routes = [
   {
@@ -16,8 +18,11 @@ const routes: Routes = [
   declarations: [PriceListComponent],
   imports: [
     CommonModule,
-    ItemModule,
     FlexLayoutModule,
+    MatTabsModule,
+    MatIconModule,
+    ServiceModule,
+    ItemListModule,
     RouterModule.forChild(routes)
   ]
 })

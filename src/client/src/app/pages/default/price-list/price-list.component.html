@@ -1,13 +1,23 @@
-<div
-  class="price-list container"
-  fxLayout="row wrap"
-  fxLayoutAlign="space-around center"
->
-  <app-item
-    *ngFor="let item of items; let i = index"
-    id="{{ i }}"
-    itemUrl="{{ item.imageUrl }}"
-    itemName="{{ item.name }}"
-    itemRate="{{ item.rate }}"
-  ></app-item>
+<div class="price-list" fxLayout="row wrap" fxLayoutAlign="start center">
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        First
+      </ng-template>
+      <ng-template matTabContent>
+        <app-service></app-service>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Second
+      </ng-template>
+      <ng-template matTabContent>
+        <app-item-list></app-item-list>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
 </div>

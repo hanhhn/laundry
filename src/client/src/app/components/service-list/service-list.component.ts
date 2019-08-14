@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
-  selector: "app-price-list",
-  templateUrl: "./price-list.component.html",
-  styleUrls: ["./price-list.component.scss"]
+  selector: "app-service-list",
+  templateUrl: "./service-list.component.html",
+  styleUrls: ["./service-list.component.scss"]
 })
-export class PriceListComponent implements OnInit {
-  itemNormal = [
+export class ServiceListComponent implements OnInit {
+  @Input()
+  dataSource = [
     {
       title: "item 1",
       description: "asdasd sfdf",
@@ -23,6 +24,8 @@ export class PriceListComponent implements OnInit {
       rate: "40k"
     }
   ];
+
+  constructor() {}
 
   ngOnInit() {}
 }

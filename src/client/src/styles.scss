@@ -57,7 +57,11 @@ a {
 }
 
 .slogun {
-  h2 {
+  padding-bottom: 30px;
+  max-width: 550px;
+  text-align: center !important;
+
+  h1, h2 {
     font-weight: 700;
   }
 
@@ -66,5 +70,9 @@ a {
     border: none;
     padding: 4px;
     background-color: #f48024;
+  }
+
+  button {
+    background-color: #F48024 !important;
   }
 }

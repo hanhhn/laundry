@@ -9,28 +9,10 @@
   clip-path: polygon(0 0, 100% 2vw, 100% calc(100% - 2vw), 0 100%);
 
   .slogun {
-    padding-bottom: 30px;
-    max-width: 450px;
     color: #ffffff;
-    text-align: center !important;
-
-    h1 {
-      font-weight: 700;
-    }
-
-    hr {
-      width: 10vw;
-      padding: 4px;
-      background-color: #F48024 !important;
-      border: none;
-    }
 
     p {
       max-width: 80%;
-    }
-
-    button {
-      background-color: #F48024 !important;
     }
   }
 }

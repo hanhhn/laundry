@@ -1,5 +1,5 @@
 .selection {
-  padding: 3vw 0;
+  padding: 3vw 2vw;
 
   label {
     cursor: pointer;
@@ -10,29 +10,16 @@
     }
   }
 
-  .slogun {
-    h2 {
-      font-weight: 700;
-    }
+  mat-card {
+    z-index: 2;
+  }
 
-    hr {
-      width: 10vw;
-      border: none;
-      padding: 4px;
-      background-color: #f48024;
-    }
+  .item {
+    position: relative;
+    cursor: pointer;
   }
 
   .item-left-wrap {
-    .item {
-      position: relative;
-      cursor: pointer;
-
-      mat-card {
-        z-index: 2;
-      }
-    }
-
     .after {
       &::after {
         position: absolute;
@@ -51,15 +38,6 @@
   }
 
   .item-right-wrap {
-    .item {
-      position: relative;
-      cursor: pointer;
-
-      mat-card {
-        z-index: 2;
-      }
-    }
-
     .before {
       &::before {
         position: absolute;

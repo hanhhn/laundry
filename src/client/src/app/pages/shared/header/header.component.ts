@@ -20,8 +20,8 @@ export class HeaderComponent implements OnInit {
       desktopOrder: 2,
       mobileOrder: 3,
       mobile: true,
-      path: "dich-vu-va-quy-trinh",
-      label: "Dịch vụ"
+      path: "quy-trinh",
+      label: "Quy trình"
     },
     {
       desktopOrder: 3,

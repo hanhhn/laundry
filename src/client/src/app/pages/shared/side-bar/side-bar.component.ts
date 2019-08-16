@@ -8,7 +8,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 export class SideBarComponent implements OnInit {
   desktopLinks = [
     { path: "ve-chung-toi", label: "Về chúng tôi" },
-    { path: "dich-vu-va-quy-trinh", label: "Dịch vụ" },
+    { path: "quy-trinh", label: "Quy trình" },
     { path: "bang-gia", label: "Bảng giá" },
     { path: "lien-he", label: "Liên hệ" },
     { path: "dat-ngay", label: "Đặt ngay" }

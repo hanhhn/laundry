@@ -33,7 +33,7 @@ const routes: Routes = [
         loadChildren: "./pages/default/about/about.module#AboutModule"
       },
       {
-        path: "dich-vu-va-quy-trinh",
+        path: "quy-trinh",
         loadChildren: "./pages/default/process/process.module#ProcessModule"
       },
       {

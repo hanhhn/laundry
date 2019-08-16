@@ -1,17 +1,21 @@
-.contact-form {
-  padding: 20px;
-}
+.contact {
+  padding: 2vw;
 
-.further-info {
-  background: #f5f5f5;
-  padding: 20px 50px 50px 50px;
-  color: rgba(0, 0, 0, 0.87);
-}
+  .contact-form {
+    padding: 0 20px;
+  }
 
-.title {
-  margin-bottom: 30px;
-}
+  .further-info {
+    background: #f5f5f5;
+    padding: 0px 50px;
+    color: rgba(0, 0, 0, 0.87);
+  }
 
-.action {
-  text-align: right;
+  .title {
+    margin-bottom: 30px;
+  }
+
+  .action {
+    text-align: right;
+  }
 }

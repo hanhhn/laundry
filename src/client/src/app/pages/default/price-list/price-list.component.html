@@ -1,25 +1,10 @@
-<div class="price-list">
-  <mat-tab-group animationDuration="0ms" fxFlex="auto"  fxLayout="column"  fxLayoutAlign="center center">
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Giặt sấy theo combo
-      </ng-template>
-      <ng-template matTabContent>
-        <div class="content">
-          <app-service-list></app-service-list>
-        </div>
-      </ng-template>
-    </mat-tab>
-
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Giặt hấp hoàn hảo
-      </ng-template>
-      <ng-template matTabContent>
-        <div class="content">
-          <app-item-list></app-item-list>
-        </div>
-      </ng-template>
-    </mat-tab>
-  </mat-tab-group>
+<div class="price-list container">
+  <div>
+    <h2>1. Giặt sấy theo combo</h2>
+    <app-service-list></app-service-list>
+  </div>
+  <div>
+    <h2>2. Giặt hấp hoàn hảo</h2>
+    <app-item-list></app-item-list>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container background">
   <mat-vertical-stepper class="book-now" [linear]="true" #stepper>
     <mat-step [stepControl]="serviceFormGroup">
       <form [formGroup]="serviceFormGroup">
@@ -67,7 +67,7 @@
               Thêm địa chỉ mới
             </button>
           </div>
-          <div class="address" fxFlex="60" fxFlex.xs="auto" *ngIf="isShowFormContact">
+          <div class="address" fxFlex="60" fxFlex.xs="auto" *ngIf="!isShowFormContact">
             <mat-radio-group fxLayout="column" fxLayoutGap="20px">
               <mat-radio-button value="1">
                 <div class="address-item">
@@ -89,7 +89,7 @@
               </mat-radio-button>
             </mat-radio-group>
           </div>
-          <div class="contact" fxFlex="60" fxLayout="column" fxFlex.xs="auto" *ngIf="!isShowFormContact">
+          <div class="contact" fxFlex="60" fxLayout="column" fxFlex.xs="auto" *ngIf="isShowFormContact">
             <mat-form-field>
               <input matInput placeholder="Họ tên" />
             </mat-form-field>
@@ -154,7 +154,7 @@
 
     <mat-step>
       <ng-template matStepLabel>Hoàn thành</ng-template>
-      <div class="step-content" style="text-align: center">
+      <div class="done">
         <h4>Bạn đã đặt dịch vụ thành công!</h4>
       </div>
       <!-- <div class="step-action">

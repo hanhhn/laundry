@@ -1,4 +1,13 @@
-<app-carousel></app-carousel>
+<app-carousel
+  *ngIf="carousel"
+  title="{{ carousel.title }}"
+  description="{{ carousel.description }}"
+  strokedName="{{ carousel.strokedName }}"
+  strokedLink="{{ carousel.strokedLink }}"
+  flatName="{{ carousel.flatName }}"
+  flatLink="{{ carousel.flatLink }}"
+></app-carousel>
+
 <app-guide></app-guide>
 <app-service></app-service>
 <app-work-follow></app-work-follow>

@@ -1,14 +1,26 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
   selector: "app-carousel",
   templateUrl: "./carousel.component.html",
   styleUrls: ["./carousel.component.scss"]
 })
-export class CarouselComponent implements OnInit {
-  background = "../../../assets/background.jpg";
+export class CarouselComponent {
+  @Input()
+  title: string;
 
-  constructor() {}
+  @Input()
+  description: string;
 
-  ngOnInit() {}
+  @Input()
+  strokedName: string;
+
+  @Input()
+  strokedLink: string;
+
+  @Input()
+  flatName: string;
+
+  @Input()
+  flatLink: string;
 }

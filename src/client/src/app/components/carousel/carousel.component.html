@@ -1,11 +1,12 @@
 <div class="carousel slope-left" ngClass.xs="m-carousel">
-  <h1 class="title">We <3 people who code</h1>
-  <p class="description">
-    We build products that empower developers and connect them to solutions that
-    enable productivity, growth, and discovery.
-  </p>
+  <h1 class="title">{{ title }}</h1>
+  <p class="description">{{ description }}</p>
   <div class="action">
-    <button mat-stroked-button>Bảng giá</button>
-    <button mat-flat-button>Đặt ngay</button>
+    <button mat-stroked-button *ngIf="strokedName" [routerLink]="[strokedLink]">
+      {{ strokedName }}
+    </button>
+    <button mat-flat-button *ngIf="flatName" [routerLink]="[flatLink]">
+      {{ flatName }}
+    </button>
   </div>
 </div>

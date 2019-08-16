@@ -27,4 +27,14 @@
   .step-action {
     margin-top: 20px;
   }
+
+  .date {
+    mat-form-field {
+      min-width: 250px;
+    }
+
+    .pdr{
+      padding-right: 30px;
+    }
+  }
 }

@@ -12,6 +12,7 @@ export class BookNowComponent implements OnInit {
 
   serviceFormGroup: FormGroup;
   contactFormGroup: FormGroup;
+  dateFormGroup: FormGroup;
 
   isShowFormContact: boolean;
 
@@ -22,9 +23,8 @@ export class BookNowComponent implements OnInit {
   ngOnInit() {
     this.serviceFormGroup = this.formBuilder.group({});
     this.contactFormGroup = this.formBuilder.group({});
+    this.dateFormGroup = this.formBuilder.group({});
   }
-
-  onItemChecked(checked: boolean, id: string) {}
 
   onPhoneChanged(e) {
     if (e.target.value) {

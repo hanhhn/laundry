@@ -1,8 +1,17 @@
-.contact-form,
+.contact-form {
+  padding: 20px;
+}
+
 .further-info {
-    padding: 20px;
+  background: #f5f5f5;
+  padding: 20px 50px 50px 50px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.title {
+  margin-bottom: 30px;
 }
 
 .action {
-    text-align: right;
+  text-align: right;
 }

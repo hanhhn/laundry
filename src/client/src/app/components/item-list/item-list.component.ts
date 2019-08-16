@@ -11,11 +11,6 @@ export class ItemListComponent implements OnInit {
   items = [
     {
       imageUrl: this.nacyUrl,
-      name: "Áo/Quần bình thường",
-      rate: "12"
-    },
-    {
-      imageUrl: this.nacyUrl,
       name: "Vest",
       rate: "12"
     },
@@ -36,7 +31,32 @@ export class ItemListComponent implements OnInit {
     },
     {
       imageUrl: this.nacyUrl,
-      name: "Chất liệu khác ",
+      name: "Thú nhồi bông",
+      rate: "12"
+    },
+    {
+      imageUrl: this.nacyUrl,
+      name: "Thú nhồi bông",
+      rate: "12"
+    },
+    {
+      imageUrl: this.nacyUrl,
+      name: "Thú nhồi bông",
+      rate: "12"
+    },
+    {
+      imageUrl: this.nacyUrl,
+      name: "Thú nhồi bông",
+      rate: "12"
+    },
+    {
+      imageUrl: this.nacyUrl,
+      name: "Thú nhồi bông",
+      rate: "12"
+    },
+    {
+      imageUrl: this.nacyUrl,
+      name: "Thú nhồi bông",
       rate: "12"
     }
   ];

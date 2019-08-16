@@ -1,7 +1,6 @@
 .item {
   text-align: center;
   display: block;
-  margin: 20px;
   cursor: pointer;
 
   .icon {
@@ -18,7 +17,6 @@
 
   .name {
     margin: 5px 0 8px 0px;
-    width: 100%;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;

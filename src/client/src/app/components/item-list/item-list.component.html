@@ -1,9 +1,4 @@
-<p>item-list works!</p>
-
-<!-- 
-<app-item
-*ngFor="let item of items; let i = index"
-itemUrl="{{ item.imageUrl }}"
-itemName="{{ item.name }}"
-itemRate="{{ item.rate }}"
-></app-item> -->
+<div class="item-list">
+    <app-item *ngFor="let item of items; let i = index" itemUrl="{{ item.imageUrl }}" itemName="{{ item.name }}"
+        itemRate="{{ item.rate }}"></app-item>
+</div>

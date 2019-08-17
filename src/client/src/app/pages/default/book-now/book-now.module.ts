@@ -9,13 +9,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatRadioModule } from "@angular/material/radio";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { ItemCheckModule } from "../../../components/item-check/item-check.module";
-import {
-  MatCheckboxModule,
-  MatGridListModule,
-  MatSelectChange,
-  MatSelectModule
-} from "@angular/material";
+import { MatCheckboxModule, MatSelectModule } from "@angular/material";
+import { VerticalStepperScrollerDirective } from "../../../cores/directives/vertical-stepper-scroller.directive";
 
 const routes: Routes = [
   {
@@ -25,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BookNowComponent],
+  declarations: [BookNowComponent, VerticalStepperScrollerDirective],
   imports: [
     CommonModule,
     FormsModule,

@@ -85,3 +85,10 @@ a {
     background-color: #f48024 !important;
   }
 }
+
+
+
+//override mat css
+.mat-horizontal-stepper-header {
+  height: 50px !important;
+}

@@ -1,9 +1,15 @@
 <div class="container background">
-  <div class="contact" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between none" fxLayoutGap="40px">
+  <div
+    class="contact"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between none"
+    fxLayoutGap="40px"
+  >
     <div class="contact-form" fxLayout="column" fxFlex="auto">
       <div class="slogun">
         <h2 class="title text-center">Gửi thông tin liên hệ</h2>
-        <hr>
+        <hr />
       </div>
       <mat-form-field>
         <input matInput placeholder="Họ và tên" />
@@ -26,24 +32,30 @@
     </div>
     <div class="further-info" fxFlex="auto">
       <div class="slogun">
-        <h2 class="title text-center">Giatsach.vn, Bạn cần hổ trợ ??</h2>
-        <hr>
+        <h2 class="title text-center">
+          {{ companyInfo.website }}, Bạn cần hổ trợ ??
+        </h2>
+        <hr />
       </div>
       <p class="phone">
         <i class="fa fa-phone-square"></i>
-        0868667670
+        {{ companyInfo.phone }}
       </p>
       <p class="email">
         <i class="fa fa-envelope"></i>
-        hngochanh@outlook.com
+        {{ companyInfo.email }}
       </p>
       <p class="email">
         <i class="fa fa-map-marker"></i>
-        21/12e aLe6 van7 viet, quan 9, ho chi minh
+        {{ companyInfo.address }}
       </p>
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d13565.919162068974!2d106.79703418599895!3d10.860553916448039!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2sus!4v1565881781323!5m2!1svi!2sus"
-        width="100%" height="300px" frameborder="0" style="border:0"></iframe>
+        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d13565.919162068974!2d106.79703418599895!3d10.860553916448039!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2sus!4v1565881781323!5m2!1svi!2susp"
+        width="100%"
+        height="300px"
+        frameborder="0"
+        style="border:0"
+      ></iframe>
     </div>
   </div>
 </div>

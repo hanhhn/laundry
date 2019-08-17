@@ -5,10 +5,10 @@
       fxLayout="row"
       fxLayoutAlign="space-between stretch"
     >
-      <div class="brand">
+      <div class="brand" *ngIf="brand">
         <a [routerLink]="['/']">
           <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
-          <span class="title">Brand</span>
+          <span class="brand">{{ brand }}</span>
         </a>
       </div>
 
@@ -37,17 +37,18 @@
       class="menu-mobile"
       fxFlex="auto"
       fxLayout="row"
-      fxLayoutAlign="space-between stretch"
+      fxLayoutAlign="space-between"
     >
       <div class="brand">
-        <span (click)="onSideBarToggle()"><mat-icon>menu</mat-icon></span>
-        <a [routerLink]="['/']">Brand</a>
+        <span (click)="onSideBarToggle()"><i class="fa fa-bars"></i></span>
+        <a class="brand" [routerLink]="['/']">{{ brand }}</a>
       </div>
       <div class="account">
-        <mat-icon [matMenuTriggerFor]="appMenu">account_circle</mat-icon>
+        <i class="fa fa-user-circle" [matMenuTriggerFor]="appMenu"></i>
       </div>
     </div>
   </mat-toolbar-row>
+
   <mat-toolbar-row fxHide fxShow.xs>
     <nav class="menu-mobile" mat-tab-nav-bar fxFlex="auto">
       <a

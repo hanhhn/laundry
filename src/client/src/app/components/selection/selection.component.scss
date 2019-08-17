@@ -1,5 +1,11 @@
 .selection {
-  margin-bottom: 5vw;
+  padding: 4vw 0;
+  background-color: #e1ecf4 !important;
+
+  h1,
+  h2 {
+    margin-top: 0;
+  }
 
   label {
     cursor: pointer;

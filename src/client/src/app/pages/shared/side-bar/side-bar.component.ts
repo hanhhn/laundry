@@ -10,6 +10,9 @@ export class SideBarComponent implements OnInit {
   @Input()
   menuLinks: Menu[];
 
+  @Input()
+  brand: string;
+
   @Output() toggleSideBar = new EventEmitter();
   toggle = false;
 

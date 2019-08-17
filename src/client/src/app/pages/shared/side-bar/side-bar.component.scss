@@ -1,7 +1,4 @@
 .side-nav {
-  display: flex;
-  flex-direction: column;
-
   a {
     color: #202124;
     text-decoration: none;
@@ -9,56 +6,6 @@
   }
 
   .brand {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    width: 100%;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -ms-flexbox;
-    display: flex;
-    height: 72px;
-    margin-right: auto;
-    padding-left: 24px;
-
-    .logo {
-      display: block;
-      margin-right: 16px;
-      width: 32px;
-    }
-
-    @media screen and (max-width: 1320px) {
-      .logo-animate {
-        animation: mioLogo 1.6s steps(96) forwards;
-        background-position: 0 50%;
-        animation-delay: 0.2s;
-      }
-    }
-
-    .title {
-      color: #202124;
-      font-size: 16px;
-      text-transform: uppercase;
-    }
-  }
-
-  .menu-item {
-    padding-top: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    padding-bottom: 40px;
-    padding-top: 40px;
-
-    .item {
-      overflow: hidden;
-      position: relative;
-
-      a {
-        color: #5f6368;
-        display: block;
-        line-height: 18px;
-        padding: 12px 48px;
-        padding-left: 24px;
-        text-align: left;
-        width: 100%;
-      }
-    }
+    padding: 0 5px;
   }
 }

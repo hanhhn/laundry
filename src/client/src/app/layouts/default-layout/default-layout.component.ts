@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import SettingService from "../../cores/services/setting.service";
-import { Menu } from "../../cores/models/setting.model";
+import { Menu, Company, Link } from "../../cores/models/setting.model";
 
 @Component({
   selector: "app-default-layout",
@@ -10,9 +10,14 @@ import { Menu } from "../../cores/models/setting.model";
 export class DefaultLayoutComponent implements OnInit {
   menuLinks: Menu[];
 
-  constructor() {
+  companyInfo: Company;
+
+  socialLink: Link;
+
+  ngOnInit() {
     const setting = new SettingService();
     this.menuLinks = setting.getMenu();
+    this.companyInfo = setting.getCompany();
+    this.socialLink = setting.getSocialLink();
   }
-  ngOnInit() {}
 }

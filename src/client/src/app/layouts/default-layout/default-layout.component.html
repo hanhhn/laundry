@@ -2,6 +2,7 @@
   <mat-sidenav #sidenav>
     <app-side-bar
       [menuLinks]="menuLinks"
+      [brand]="companyInfo.brand"
       (toggleSideBar)="sidenav.toggle()"
     ></app-side-bar>
   </mat-sidenav>
@@ -9,9 +10,10 @@
     <!-- <button mat-button (click)="sidenav.toggle()">Toggle</button> -->
     <app-header
       [menuLinks]="menuLinks"
+      [brand]="companyInfo.brand"
       (toggleSideBar)="sidenav.toggle()"
     ></app-header>
     <router-outlet></router-outlet>
-    <app-footer></app-footer>
+    <app-footer [company]="companyInfo" [socialLink]="socialLink"></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,15 +1,15 @@
 footer {
   background-color: #242729;
   color: #6a737c;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top:  4vh;
 
   h4 {
     color: #ffffff;
+    margin-top: 0px;
   }
 
-  .content {
-    padding: 15px 0px;
+  a {
+    color: #6a737c;
   }
 
   .about {
@@ -19,15 +19,9 @@ footer {
   }
 
   .link {
-    min-width: 220px;
-
     li {
       display: block;
       margin-bottom: 10px;
-
-      a {
-        color: #6a737c;
-      }
     }
   }
 

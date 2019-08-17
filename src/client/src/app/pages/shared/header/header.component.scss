@@ -9,11 +9,20 @@
 
   .account {
     margin-left: 10px;
+    margin-bottom: 0px;
+  }
+
+  .brand {
+    padding: 0 5px;
   }
 }
 
 .menu-mobile {
   padding-bottom: 1vh;
+
+  .brand {
+    padding: 0 5px;
+  }
 }
 
 // .shrink-toolbar {

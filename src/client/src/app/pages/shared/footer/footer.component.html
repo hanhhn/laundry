@@ -1,46 +1,83 @@
 <footer>
-  <div class="content container" fxLayoutGap="20px" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
-    <div class="about" fxFlex="auto" ngClass.sm="text-center" ngClass.xs="text-center">
-      <img class="logo" src="../../../../assets/logo.png" alt="logo" />
+  <div
+    class="content container"
+    fxLayoutGap="5vw"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+  >
+    <div
+      class="about"
+      fxFlex="auto"
+      ngClass.sm="text-center"
+      ngClass.xs="text-center"
+      *ngIf="company"
+    >
+      <img class="logo" src="{{ company.logo }}" alt="{{ company.name }}" />
       <div class="info">
-        <p>
-          Công Ty TNHH Thương Mại Công Nghệ GO VIET
-        </p>
-        <p>
-          Tầng 6, Trung Tâm Thương Mại RomeA, 117 Nguyễn Đình Chiểu, Phường 06,
-          Quận 3, Thành Phố Hồ Chí Minh
-        </p>
-        <div class="app" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.sm="center" fxLayoutAlign.xs="center">
-          <img src="../../../../assets/app-store-badge-small.png" />
-          <img src="../../../../assets/google-play-badge-small.png" />
+        <p>{{ company.name }}</p>
+        <p>{{ company.address }}</p>
+        <div
+          class="app"
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign.sm="center"
+          fxLayoutAlign.xs="center"
+        >
+          <a href="{{ socialLink.appStore }}" target="_blank">
+            <img src="../../../../assets/app-store-badge-small.png" />
+          </a>
+          <a href="{{ socialLink.googlePlay }}" target="_blank">
+            <img src="../../../../assets/google-play-badge-small.png" />
+          </a>
         </div>
       </div>
     </div>
     <div
       fxFlex="auto"
       fxLayout="column"
-      fxLayoutGap="4vw"
+      fxLayoutGap="3vw"
       ngClass.sm="text-center"
       ngClass.xs="text-center"
     >
-      <div>
-        <div class="list-item link" fxFlex="auto">
-          <h4>Giatsach.vn</h4>
+      <div
+        fxLayoutAlign="space-between start"
+        fxLayoutAlign.xs="space-evenly start"
+        fxLayoutAlign.sm="space-evenly start"
+      >
+        <div class="list-item link" *ngIf="company">
+          <h4>{{ company.website }}</h4>
           <ul>
             <li class="item"><a href=".">Chính sách sử dụng</a></li>
             <li class="item"><a href=".">Chính sách bảo mật</a></li>
           </ul>
         </div>
-        <div class="list-item follow" fxFlex="auto">
+        <div class="list-item follow" *ngIf="socialLink">
           <h4>Follow us</h4>
-          <ul fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center">
-            <li class="item"><i class="fa fa-facebook-square"></i></li>
-            <li class="item"><i class="fa fa-instagram"></i></li>
-            <li class="item"><i class="fa fa-youtube-square"></i></li>
+          <ul
+            fxLayout="row"
+            fxLayoutAlign.xs="center center"
+            fxLayoutAlign.sm="center center"
+          >
+            <li class="item">
+              <a href="{{ socialLink.facebook }}" target="_blank">
+                <i class="fa fa-facebook-square"></i>
+              </a>
+            </li>
+            <li class="item">
+              <a href="{{ socialLink.instagram }}" target="_blank">
+                <i class="fa fa-instagram"></i>
+              </a>
+            </li>
+            <li class="item">
+              <a href="{{ socialLink.youtube }}" target="_blank">
+                <i class="fa fa-youtube-square"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="copyright"><h4>Copyright © 2019 GiatSach</h4></div>
+      <div class="copyright" [innerHTML]="company.copyright"></div>
     </div>
   </div>
 </footer>

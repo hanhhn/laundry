@@ -8,15 +8,13 @@
 </mat-toolbar>
 
 <mat-nav-list>
-  <h2 matSubheader>sub Title</h2>
   <a
-    *ngFor="let item of desktopLinks"
+    *ngFor="let item of getMenuDesktop"
     mat-list-item
     (click)="onItemClick()"
-    [routerLink]="['/' + item.path]"
+    [routerLink]="[item.url]"
     routerLinkActive="list-item-active"
   >
-    <!-- <mat-icon matListIcon> {{ item.icon }} </mat-icon> -->
     {{ item.label }}
   </a>
   <mat-divider></mat-divider>

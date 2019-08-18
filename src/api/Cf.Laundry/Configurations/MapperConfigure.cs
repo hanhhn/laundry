@@ -12,7 +12,9 @@ namespace Cf.Laundry.Configurations
             {
                 config.AddCoreMapper();
             };
-            Mapper.Initialize(InitMapper);
+
+            var configuration = new MapperConfiguration(InitMapper);
+            configuration.CompileMappings();
         }
     }
 }

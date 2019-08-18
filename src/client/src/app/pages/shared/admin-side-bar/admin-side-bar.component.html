@@ -1,0 +1,17 @@
+<div class="side-nav">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <a [routerLink]="['/admin']">
+        <i class="logo logo-animate fa fa-eercast" aria-hidden="true"></i>
+        <span class="brand">Dashboard</span>
+      </a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-nav-list>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="order">Đơn hàng</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="price">Bảng giá</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="service">Dịch vụ</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="coupon">Khuyến mãi</a>
+    <mat-divider></mat-divider>
+  </mat-nav-list>
+</div>

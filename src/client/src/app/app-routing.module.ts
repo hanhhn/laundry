@@ -63,6 +63,22 @@ const routes: Routes = [
       {
         path: "dashboard",
         loadChildren: "./pages/admin/dashboard/dashboard.module#DashboardModule"
+      },
+      {
+        path: "order",
+        loadChildren: "./pages/admin/order/order.module#OrderModule"
+      },
+      {
+        path: "price",
+        loadChildren: "./pages/admin/price-list/price-list.module#PriceListModule"
+      },
+      {
+        path: "service",
+        loadChildren: "./pages/admin/service/service.module#ServiceModule"
+      },
+      {
+        path: "coupon",
+        loadChildren: "./pages/admin/coupon/coupon.module#CouponModule"
       }
     ]
   },

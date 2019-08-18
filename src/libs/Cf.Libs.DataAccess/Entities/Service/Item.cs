@@ -18,10 +18,5 @@ namespace Cf.Libs.DataAccess.Entities.Service
         public int Order { get; set; }
 
         public ItemType ItemType { get; set; }
-
-        [ForeignKey("ItemRates")]
-        public int RateId { get; set; }
-
-        public virtual ICollection<ItemRate> ItemRates { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Cf.Libs.Core.Infrastructure.Entity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Cf.Libs.DataAccess.Entities.Service
@@ -12,10 +13,10 @@ namespace Cf.Libs.DataAccess.Entities.Service
 
         public string Description { get; set; }
 
-        public MethodType MethodType { get; set; }
-
         public decimal Discount { get; set; }
 
         public bool EnableDiscount { get; set; }
+
+        public MethodType MethodType { get; set; }
     }
 }

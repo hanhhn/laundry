@@ -1,7 +1,7 @@
 ﻿using Cf.Libs.Core.Infrastructure.Entity;
 using System;
 
-namespace Cf.Libs.DataAccess.Entities.Service
+namespace Cf.Libs.DataAccess.Entities.Discounts
 {
     public class Coupon : BaseEntity<int>
     {

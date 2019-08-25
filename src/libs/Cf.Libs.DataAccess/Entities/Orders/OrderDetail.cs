@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.DataAccess.Entities.Cart
+namespace Cf.Libs.DataAccess.Entities.Orders
 {
-    class Order
+    public class OrderDetail
     {
     }
 }

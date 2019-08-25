@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.DataAccess.Entities.Common
+namespace Cf.Libs.DataAccess.Entities.Logger
 {
-    class Tag
+    public class LogLevel
     {
     }
 }

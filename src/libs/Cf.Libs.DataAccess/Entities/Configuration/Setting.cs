@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Cf.Libs.Core.Infrastructure.Entity;
 
 namespace Cf.Libs.DataAccess.Entities.Configuration
 {
-    class Setting
+    public class Setting : BaseEntity<string>
     {
+        public string Name { get; set; }
+
+        public string Value { get; set; }
     }
 }

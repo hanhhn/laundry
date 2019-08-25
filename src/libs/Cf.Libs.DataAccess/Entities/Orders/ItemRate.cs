@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.DataAccess.Entities.Service
+namespace Cf.Libs.DataAccess.Entities.Orders
 {
     public class ItemRate : BaseEntity<int>
     {

@@ -1,12 +1,12 @@
 ﻿using Cf.Libs.Core.Enums;
-using Cf.Libs.Core.Infrastructure.Entity;
+using Cf.Libs.Service.ItemRate.Dto;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Cf.Libs.DataAccess.Entities.Items
+namespace Cf.Libs.Service.Item.Dto
 {
-    public class Item : BaseEntity<int>
+    public class ItemDto
     {
+        public int Id { get; set; }
         public string Image { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,6 +14,6 @@ namespace Cf.Libs.DataAccess.Entities.Items
         public int Order { get; set; }
         public ItemType ItemType { get; set; }
 
-        public virtual ICollection<ItemRate> ItemRates { get; set; }
+        public ICollection<ItemRateDto> ItemRates { get; set; }
     }
 }

@@ -1,12 +1,11 @@
-﻿using Cf.Libs.Core.Infrastructure.Entity;
+﻿using Cf.Libs.Service.Item.Dto;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Cf.Libs.DataAccess.Entities.Items
+namespace Cf.Libs.Service.ItemRate.Dto
 {
-    public class ItemRate : BaseEntity<int>
+    public class ItemRateDto
     {
-        [ForeignKey("Item")]
+        public int Id { get; set; }
         public int ItemId { get; set; }
         public decimal Rate { get; set; }
         public byte Tax { get; set; }
@@ -17,6 +16,6 @@ namespace Cf.Libs.DataAccess.Entities.Items
         public DateTime ApplyDate { get; set; }
         public DateTime ExpireDate { get; set; }
 
-        public virtual Item Item { get; set; }
+        public ItemDto Item { get; set; }
     }
 }

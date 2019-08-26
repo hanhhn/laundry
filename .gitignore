@@ -61,6 +61,8 @@ typings/
 
 #visual
 .vs
+/.vs
+.vs/
 *.suo
 *.user
 _ReSharper.*

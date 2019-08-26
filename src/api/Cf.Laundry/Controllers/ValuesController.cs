@@ -1,7 +1,4 @@
-﻿using Cf.Libs.DataAccess.Entities.Account;
-using Cf.Libs.Service.Profile;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Cf.Laundry.Controllers
 {
@@ -9,25 +6,11 @@ namespace Cf.Laundry.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IUserProfileService _service;
-
-        public ValuesController(IUserProfileService service)
-        {
-            _service = service;
-        }
-
         [HttpGet]
-        [Route("profiles")]
-        public IEnumerable<UserProfile> UserProfiles()
+        [Route("index")]
+        public object Get()
         {
-            return _service.UserProfiles();
-        }
-
-        [HttpGet]
-        [Route("add")]
-        public int Add()
-        {
-            return _service.Add();
+            return new { code = "success" };
         }
     }
 }

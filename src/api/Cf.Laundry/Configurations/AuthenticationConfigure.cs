@@ -66,8 +66,8 @@ namespace Cf.Laundry.Configurations
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = "/api/accounts/signin";
+                options.AccessDeniedPath = "/api/accounts/accessdenied";
                 options.SlidingExpiration = true;
             });
         }

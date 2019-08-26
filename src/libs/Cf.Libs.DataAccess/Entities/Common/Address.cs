@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cf.Libs.DataAccess.Entities.Common
+﻿namespace Cf.Libs.DataAccess.Entities.Common
 {
-    class Address
+    public class Address
     {
+        public string Phone { get; set; }
+        public string FullName { get; set; }
+        public string City { get; set; }
+        public string District { get; set; }
+        public string Wards { get; set; }
+        public string Street { get; set; }
     }
 }

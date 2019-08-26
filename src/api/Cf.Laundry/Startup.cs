@@ -45,9 +45,9 @@ namespace Cf.Laundry
 
             services.AddCustomDbContext(Configuration);
 
-            services.AddCustomIdentity();
+            //services.AddCustomIdentity();
 
-            services.AddAuthorizationHandler();
+            //services.AddAuthorizationHandler();
 
             services.AddServicesAndRepository();
 
@@ -55,18 +55,16 @@ namespace Cf.Laundry
 
             services.AddMvc(config =>
             {
-                var policy = new AuthorizationPolicyBuilder()
-                                 .RequireAuthenticatedUser()
-                                 .Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
+                //var policy = new AuthorizationPolicyBuilder()
+                //                 .RequireAuthenticatedUser()
+                //                 .Build();
+                //config.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext dbContext)
         {
-            Console.WriteLine(env.EnvironmentName);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,8 +83,8 @@ namespace Cf.Laundry
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseAuthentication();
+            //app.UseCookiePolicy();
+            //app.UseAuthentication();
             app.UseMvc();
             dbContext.Database.EnsureCreated();
         }

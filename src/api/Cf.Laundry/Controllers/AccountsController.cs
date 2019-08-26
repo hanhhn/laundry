@@ -28,7 +28,7 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
-        [Route("signin")]
+        [Route("signup")]
         public async Task<bool> SignupAsync(SignupDto model)
         {
             if (ModelState.IsValid)

@@ -1,4 +1,5 @@
-﻿using Cf.Libs.Service.Email;
+﻿using Cf.Libs.Service.Account;
+using Cf.Libs.Service.Email;
 using Cf.Libs.Service.Profile;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;

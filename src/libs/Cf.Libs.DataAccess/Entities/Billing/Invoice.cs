@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Cf.Libs.DataAccess.Entities.Billing
 {
-    class Invoice
+    public class Invoice
     {
     }
 }

@@ -5,18 +5,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Cf.Libs.DataAccess.Entities.Service
+namespace Cf.Libs.DataAccess.Entities.Items
 {
     public class Method : BaseEntity<int>
     {
         public string Name { get; set; }
-
         public string Description { get; set; }
-
         public decimal Discount { get; set; }
-
         public bool EnableDiscount { get; set; }
-
-        public MethodType MethodType { get; set; }
+        public MethodType Type { get; set; }
     }
 }

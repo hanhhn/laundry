@@ -1,8 +1,8 @@
 ﻿using Cf.Libs.Core.Infrastructure.Service;
-using Cf.Libs.Service.Dtos.Accounts;
+using Cf.Libs.Service.Account.Dto;
 using System.Threading.Tasks;
 
-namespace Cf.Libs.Service.Profile
+namespace Cf.Libs.Service.Account
 {
     public interface IAccountService : IBaseService
     {

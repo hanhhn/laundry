@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Cf.Libs.Core.Infrastructure.Entity;
 
 namespace Cf.Libs.DataAccess.Entities.Orders
 {
-    public class OrderDetail
+    public class OrderDetail : BaseEntity<int>
     {
     }
 }

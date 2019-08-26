@@ -1,6 +1,8 @@
-﻿namespace Cf.Libs.DataAccess.Entities.Common
+﻿using Cf.Libs.Core.Infrastructure.Entity;
+
+namespace Cf.Libs.DataAccess.Entities.Common
 {
-    public class Address
+    public class Address : BaseEntity<int>
     {
         public string Phone { get; set; }
         public string FullName { get; set; }

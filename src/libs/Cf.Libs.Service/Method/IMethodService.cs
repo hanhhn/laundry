@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.DataAccess.Entities.Billing
+namespace Cf.Libs.Service.Method
 {
-    public class BillDetail
+    public interface IMethodService
     {
     }
 }

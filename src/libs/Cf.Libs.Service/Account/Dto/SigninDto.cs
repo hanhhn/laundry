@@ -1,4 +1,4 @@
-﻿namespace Cf.Libs.Service.Dtos.Accounts
+﻿namespace Cf.Libs.Service.Account.Dto
 {
     public class SigninDto
     {

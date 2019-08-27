@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.Service.OrderDetail
+namespace Cf.Libs.Service.OrderDetails
 {
     public class OrderDetailService : IOrderDetailService
     {

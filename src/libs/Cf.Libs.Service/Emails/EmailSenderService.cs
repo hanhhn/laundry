@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Cf.Libs.Service.Email
+namespace Cf.Libs.Service.Emails
 {
     public class EmailSenderService : IEmailSenderService
     {

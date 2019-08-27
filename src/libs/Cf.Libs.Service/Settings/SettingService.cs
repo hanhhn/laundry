@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.Service.ItemRate
+namespace Cf.Libs.Service.Settings
 {
-    public interface IItemRateService
+    public class SettingService : ISettingService
     {
     }
 }

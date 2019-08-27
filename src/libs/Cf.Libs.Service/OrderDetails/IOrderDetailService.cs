@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.Service.Setting
+namespace Cf.Libs.Service.OrderDetails
 {
-    public class SettingService : ISettingService
+    public interface IOrderDetailService
     {
     }
 }

@@ -77,6 +77,7 @@ namespace Cf.Libs.Core.Infrastructure.DataAccess
             if (common != null)
             {
                 common.Delete();
+                DbSet.Update(entity);
             }
         }
 
@@ -86,6 +87,7 @@ namespace Cf.Libs.Core.Infrastructure.DataAccess
             if (common != null)
             {
                 common.UnDelete();
+                DbSet.Update(entity);
             }
         }
     }

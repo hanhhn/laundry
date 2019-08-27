@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Cf.Libs.DataAccess.Entities.Items;
+using Cf.Libs.Service.Dtos.Item;
 
 namespace Cf.Libs.Service
 {
@@ -14,7 +16,8 @@ namespace Cf.Libs.Service
     {
         public CfServiceProfile()
         {
-            //CreateMap<Setting, SettingDto>();
+            CreateMap<ItemRequest, Item>();
+            CreateMap<Item, ItemDto>();
         }
     }
 }

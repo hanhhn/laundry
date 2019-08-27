@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.Service.Method
+namespace Cf.Libs.Service.Methods
 {
-    public interface IMethodService
+    public class MethodService : IMethodService
     {
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.Service.OrderDetail
+namespace Cf.Libs.Service.Methods
 {
-    public interface IOrderDetailService
+    public interface IMethodService
     {
     }
 }

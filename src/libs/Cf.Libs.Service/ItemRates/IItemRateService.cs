@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cf.Libs.Service.Order
+namespace Cf.Libs.Service.ItemRates
 {
-    public class OrderService : IOrderService
+    public interface IItemRateService
     {
     }
 }

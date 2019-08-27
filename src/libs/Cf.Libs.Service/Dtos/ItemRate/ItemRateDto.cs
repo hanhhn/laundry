@@ -1,7 +1,7 @@
-﻿using Cf.Libs.Service.Item.Dto;
+﻿using Cf.Libs.Service.Dtos.Item;
 using System;
 
-namespace Cf.Libs.Service.ItemRate.Dto
+namespace Cf.Libs.Service.Dtos.ItemRate
 {
     public class ItemRateDto
     {

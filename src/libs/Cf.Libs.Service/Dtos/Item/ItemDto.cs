@@ -1,8 +1,8 @@
 ﻿using Cf.Libs.Core.Enums;
-using Cf.Libs.Service.ItemRate.Dto;
+using Cf.Libs.Service.Dtos.ItemRate;
 using System.Collections.Generic;
 
-namespace Cf.Libs.Service.Item.Dto
+namespace Cf.Libs.Service.Dtos.Item
 {
     public class ItemDto
     {

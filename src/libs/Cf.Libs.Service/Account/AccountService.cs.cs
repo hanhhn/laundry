@@ -3,7 +3,7 @@ using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Account;
 using Cf.Libs.DataAccess.Repository.UserProfiles;
-using Cf.Libs.Service.Account.Dto;
+using Cf.Libs.Service.Dtos.Account;
 using Cf.Libs.Service.Email;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Encodings.Web;

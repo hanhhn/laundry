@@ -4,7 +4,7 @@ using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Account;
 using Cf.Libs.DataAccess.Repository.UserProfiles;
 using Cf.Libs.Service.Dtos.Account;
-using Cf.Libs.Service.Email;
+using Cf.Libs.Service.Emails;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -20,11 +20,11 @@ namespace Cf.Libs.Service.Account
         private readonly IUserProfileRepository _userProfileRepository;
 
         public AccountService(
-            IUnitOfWork unitOfWork, IMapper mapper,
+            IUnitOfWork unitOfWork,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             EmailSenderService emailSender,
-            IUserProfileRepository userProfileRepository) : base(unitOfWork, mapper)
+            IUserProfileRepository userProfileRepository) : base(unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -50,7 +50,7 @@ namespace Cf.Libs.Service.Account
 
         public async Task<bool> SignupAsyn(SignupDto model)
         {
-            User user = _mapper.Map<User>(model);
+            User user = Mapper.Map<User>(model);
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {

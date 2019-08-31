@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{9A2BD9
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cf.Laundry.Common", "src\api\Cf.Laundry.Common\Cf.Laundry.Common.csproj", "{0F0E5A91-7A38-40A7-9133-B6F2C5C04EE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cf.Laundry.Common", "src\api\Cf.Laundry.Common\Cf.Laundry.Common.csproj", "{0F0E5A91-7A38-40A7-9133-B6F2C5C04EE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

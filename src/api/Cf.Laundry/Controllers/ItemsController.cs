@@ -17,36 +17,36 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
-        [Route("all")]
+        [Route("get/{id}")]
+        public ItemDto Get(int id)
+        {
+            return _itemService.Get(id);
+        }
+
+        [HttpGet]
+        [Route("get")]
         public IPagedList<ItemDto> GetAll(int pageIndex = 0, int pageSize = 10)
         {
             return _itemService.GetAll(pageIndex, pageSize);
         }
 
-        [HttpGet]
-        [Route("get/{id}")]
-        public ItemDto GetItem(int id)
-        {
-            return _itemService.Get(id);
-        }
-
         [HttpPost]
         [Route("add")]
-        public ItemDto AddItem(ItemRequest request)
+        public ItemDto Add(ItemRequest request)
         {
             return _itemService.Add(request);
         }
 
         [HttpPost]
         [Route("edit")]
-        public ItemDto EditItem(ItemRequest request)
+        public ItemDto Edit(ItemRequest request)
         {
             return _itemService.Edit(request);
         }
 
         [HttpDelete]
         [Route("delete/{id}")]
-        public bool DeleteItem(int id)
+        public bool Delete(int id)
         {
             return _itemService.Delete(id);
         }

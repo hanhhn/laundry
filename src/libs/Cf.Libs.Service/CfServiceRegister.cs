@@ -1,7 +1,6 @@
-﻿using Cf.Libs.Service.Account;
-using Cf.Libs.Service.Email;
+﻿using Cf.Libs.Service.ItemRates;
+using Cf.Libs.Service.Items;
 using Cf.Libs.Service.Profile;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cf.Libs.Service
@@ -11,9 +10,8 @@ namespace Cf.Libs.Service
         public static void AddCoreServices(this IServiceCollection services)
         {
             services.AddScoped<IUserProfileService, UserProfileService>();
-            services.AddScoped<IEmailSender, EmailSenderService>();
-            services.AddScoped<IEmailSenderService, EmailSenderService>();
-            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IItemRateService, ItemRateService>();
         }
     }
 }

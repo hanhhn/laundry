@@ -1,107 +1,129 @@
 ﻿using AutoMapper;
-using Cf.Libs.Core.BaseObject;
-using Cf.Libs.Core.Enums;
+using Cf.Libs.Core.Exeptions;
+using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Items;
+using Cf.Libs.DataAccess.Repository.ItemRates;
 using Cf.Libs.DataAccess.Repository.Items;
 using Cf.Libs.Service.Dtos.Item;
+using System;
+using System.Linq;
 
 namespace Cf.Libs.Service.Items
 {
     public class ItemService : BaseService, IItemService
     {
         private readonly IItemRepository _itemRepository;
+        private readonly IItemRateRepository _rateRepository;
 
-        public ItemService(IUnitOfWork unitOfWork, IItemRepository itemRepository) 
+        public ItemService(IUnitOfWork unitOfWork, IItemRepository itemRepository, IItemRateRepository rateRepository)
             : base(unitOfWork)
         {
             _itemRepository = itemRepository;
+            _rateRepository = rateRepository;
         }
 
-        public Result<ItemDto> Add(ItemRequest request)
+        public ItemDto Get(int Id)
         {
-            Result<ItemDto> result = new Result<ItemDto>();
+            var record = _itemRepository.Get(Id);
+            if (record == null)
+            {
+                throw new RecordNotFoundException("Record can not be found.");
+            }
 
+            return Mapper.Map<ItemDto>(record);
+        }
+
+        public IPagedList<ItemDto> GetAll(int pageIndex, int pageSize)
+        {
+            var itemQuery = from item in _itemRepository.GetQuery()
+                            orderby item.Order ascending
+                            orderby item.Name ascending
+                            where !item.IsDeleted
+                            select item;
+
+            var rateQuery = from rate in _rateRepository.GetQuery()
+                            where !rate.IsDeleted
+                                && rate.ApplyDate <= DateTime.Now
+                                && rate.ExpireDate >= DateTime.Now
+                            orderby rate.Priority ascending
+                            orderby rate.CreateDate descending
+                            group rate by rate.ItemId into gRate
+                            select gRate.FirstOrDefault();
+
+            var query = from i in itemQuery
+                        join r in rateQuery on i.Id equals r.ItemId
+                        select new ItemDto
+                        {
+                            Id = i.Id,
+                            Image = i.Image,
+                            Name = i.Name,
+                            Description = i.Description,
+                            Highlights = i.Highlights,
+                            Order = i.Order,
+                            Type = i.Type,
+                            Rate = r.Rate,
+                            Discount = r.Discount,
+                            DiscountRate = r.DiscountRate,
+                            Tax = r.Tax
+                        };
+
+            return query.ToPagedList(pageIndex, pageSize);
+        }
+
+        public ItemDto Add(ItemRequest request)
+        {
             var item = Mapper.Map<Item>(request);
-            var entity = _itemRepository.Add(item);
-            if (_unitOfWork.SaveChanges() > 0)
+            var record = _itemRepository.Add(item);
+            if (_unitOfWork.SaveChanges() == 0)
             {
-                result.Data = Mapper.Map<ItemDto>(entity);
-            }
-            else
-            {
-                result.Code = StatusCode.Error;
-                result.Messages.Add(new Messages
-                {
-                    Type = MsgType.Error,
-                    Content = "Xảy ra lỗi trong quá trình lưu dữ liệu."
-                });
+                throw new InformationException("An error occurred during save.");
             }
 
-            return result;
+            return Mapper.Map<ItemDto>(record);
         }
 
-        public Result<ItemDto> Edit(ItemRequest request)
+        public ItemDto Edit(ItemRequest request)
         {
-            Result<ItemDto> result = new Result<ItemDto>();
-
             var record = _itemRepository.Get(request.Id);
-            if(record != null)
+            if (record == null)
             {
-                record.Image = request.Image;
-                record.Name = request.Name;
-                record.Description = request.Description;
-                record.Highlights = request.Highlights;
-                record.Order = request.Order;
-                record.Type = request.Type;
-
-                _itemRepository.Update(record);
+                throw new RecordNotFoundException("Record can not be found.");
             }
 
-            if (_unitOfWork.SaveChanges() > 0)
-            { 
-                result.Data = Mapper.Map<ItemDto>(record);
-            }
-            else
+            record.Image = request.Image;
+            record.Name = request.Name;
+            record.Description = request.Description;
+            record.Highlights = request.Highlights;
+            record.Order = request.Order;
+            record.Type = request.Type;
+
+            _itemRepository.Update(record);
+
+            if (_unitOfWork.SaveChanges() == 0)
             {
-                result.Code = StatusCode.Error;
-                result.Messages.Add(new Messages
-                {
-                    Type = MsgType.Error,
-                    Content = "Xảy ra lỗi trong quá trình lưu dữ liệu."
-                });
+                throw new InformationException("An error occurred during save.");
             }
 
-            return result;
+            return Mapper.Map<ItemDto>(record);
         }
 
-        public Result<bool> Delete(int id)
+        public bool Delete(int id)
         {
-            Result<bool> result = new Result<bool>();
 
             var record = _itemRepository.Get(id);
-            if (record != null)
+            if (record == null)
             {
-                _itemRepository.Delete(record);
+                throw new RecordNotFoundException("Record can not be found.");
             }
 
-            if (_unitOfWork.SaveChanges() > 0)
+            if (_unitOfWork.SaveChanges() == 0)
             {
-                result.Data = true;
-            }
-            else
-            {
-                result.Code = StatusCode.Error;
-                result.Data = false;
-                result.Messages.Add(new Messages
-                {
-                    Type = MsgType.Error,
-                    Content = "Xảy ra lỗi trong quá trình xóa dữ liệu."
-                });
+                throw new InformationException("An error occurred during save.");
             }
 
-            return result;
+            return true;
         }
     }
 }

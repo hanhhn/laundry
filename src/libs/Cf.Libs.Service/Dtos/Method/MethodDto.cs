@@ -1,10 +1,10 @@
 ﻿using Cf.Libs.Core.Enums;
-using Cf.Libs.Core.Infrastructure.Entity;
 
-namespace Cf.Libs.DataAccess.Entities.Items
+namespace Cf.Libs.Service.Dtos.Method
 {
-    public class Method : BaseEntity<int>
+    public class MethodDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Discount { get; set; }

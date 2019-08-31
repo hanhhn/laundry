@@ -12,7 +12,11 @@ namespace Cf.Libs.Service.Dtos.Item
         public string Description { get; set; }
         public bool Highlights { get; set; }
         public int Order { get; set; }
-        public ItemType ItemType { get; set; }
+        public ItemType Type { get; set; }
+        public decimal Rate { get; set; }
+        public byte Tax { get; set; }
+        public decimal DiscountRate { get; set; }
+        public decimal Discount { get; set; }
 
         public ICollection<ItemRateDto> ItemRates { get; set; }
     }

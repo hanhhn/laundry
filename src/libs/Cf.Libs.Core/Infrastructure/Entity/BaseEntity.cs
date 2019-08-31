@@ -8,7 +8,6 @@ namespace Cf.Libs.Core.Infrastructure.Entity
     {
         public T Id { get; private set; }
         public bool IsDeleted { get; private set; }
-        public bool IsVisible { get; set; }
         public DateTime CreateDate { get; private set; }
         public string CreateUserId { get; private set; }
         public DateTime ModifiedDate { get; private set; }

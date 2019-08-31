@@ -11,30 +11,17 @@ namespace Cf.Libs.Core.Infrastructure.Paging
         public int TotalPage { get; private set; }
         public IEnumerable<T> DataSource { get; private set; }
 
-        public PagedList(IQueryable<T> source, int pageIndex, int pageSize)
+        public PagedList(IEnumerable<T> source, int pageIndex, int pageSize, int totalRecord)
         {
             PageSize = pageSize;
             PageIndex = pageIndex;
-            TotalRecord = source.Count();
+            TotalRecord = totalRecord;
             TotalPage = TotalRecord / pageSize;
 
             if (TotalRecord % pageSize > 0)
                 TotalPage++;
 
-            DataSource = source.Skip(pageIndex * pageSize).Take(pageSize).ToList();
-        }
-
-        public PagedList(IEnumerable<T> source, int pageIndex, int pageSize)
-        {
-            PageSize = pageSize;
-            PageIndex = pageIndex;
-            TotalRecord = source.Count();
-            TotalPage = TotalRecord / pageSize;
-
-            if (TotalRecord % pageSize > 0)
-                TotalPage++;
-
-            DataSource = source.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            DataSource = source;
         }
     }
 }

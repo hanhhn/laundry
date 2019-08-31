@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,20 +12,29 @@ namespace Cf.Libs.Core.Infrastructure.Paging
             return pageIndex >= 0 && pageSize >= 1;
         }
 
-        public static PagedList<T> ToPagedList<T>(this IQueryable<T> value, int pageIndex, int pageSize)
+        public static PagedList<TSource> ToPagedList<TSource>(this IQueryable<TSource> query, int pageIndex, int pageSize)
         {
             if (!IsValid(pageIndex, pageSize))
                 throw new ArgumentException(string.Format("Something wrong with pageIndex: {0} or pageSize: {1}", pageIndex, pageSize));
 
-            return new PagedList<T>(value, pageIndex, pageSize);
+
+            int totalRecord = query.Count();
+            var source = query.Skip(pageIndex * pageSize).Take(pageSize).AsEnumerable();
+
+            return new PagedList<TSource>(source, pageIndex, pageSize, totalRecord);
         }
 
-        public static PagedList<T> ToPagedList<T>(this IEnumerable<T> value, int pageIndex, int pageSize)
+        public static PagedList<TDestination> ToPagedList<TSource, TDestination>(this IQueryable<TSource> query, int pageIndex, int pageSize)
         {
             if (!IsValid(pageIndex, pageSize))
                 throw new ArgumentException(string.Format("Something wrong with pageIndex: {0} or pageSize: {1}", pageIndex, pageSize));
 
-            return new PagedList<T>(value, pageIndex, pageSize);
+
+            int totalRecord = query.Count();
+            var source = query.Skip(pageIndex * pageSize).Take(pageSize).AsEnumerable();
+            var result = Mapper.Map<IEnumerable<TDestination>>(source);
+
+            return new PagedList<TDestination>(result, pageIndex, pageSize, totalRecord);
         }
     }
 }

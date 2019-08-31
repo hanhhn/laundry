@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.Service.Dtos.Item;
+using Cf.Libs.Service.Dtos.ItemRate;
+using Cf.Libs.Service.Dtos.Method;
 
 namespace Cf.Libs.Service
 {
@@ -18,6 +20,12 @@ namespace Cf.Libs.Service
         {
             CreateMap<ItemRequest, Item>();
             CreateMap<Item, ItemDto>();
+
+            CreateMap<ItemRateRequest, ItemRate>();
+            CreateMap<ItemRate, ItemRateDto>();
+
+            CreateMap<MethodRequest, Method>();
+            CreateMap<Method, MethodDto>();
         }
     }
 }

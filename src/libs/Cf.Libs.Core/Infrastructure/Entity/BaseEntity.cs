@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cf.Libs.Core.Infrastructure.Entity
 {
@@ -10,7 +9,7 @@ namespace Cf.Libs.Core.Infrastructure.Entity
         public bool IsDeleted { get; private set; }
         public DateTime CreateDate { get; private set; }
         public string CreateUserId { get; private set; }
-        public DateTime ModifiedDate { get; private set; }
+        public DateTime? ModifiedDate { get; private set; }
         public string ModifyUserId { get; private set; }
         public string UpdatedToken { get; private set; }
         public string Note { get; set; }

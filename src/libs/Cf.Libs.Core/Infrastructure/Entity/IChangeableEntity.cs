@@ -6,7 +6,7 @@ namespace Cf.Libs.Core.Infrastructure.Entity
     {
         DateTime CreateDate { get; }
         string CreateUserId { get; }
-        DateTime ModifiedDate { get; }
+        DateTime? ModifiedDate { get; }
         string ModifyUserId { get; }
         string UpdatedToken { get; }
         void Default(bool isAdd, int userId);

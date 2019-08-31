@@ -1,7 +1,6 @@
 ﻿using Cf.Libs.Core.Enums;
 using Cf.Libs.Core.Infrastructure.Entity;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cf.Libs.DataAccess.Entities.Items
 {

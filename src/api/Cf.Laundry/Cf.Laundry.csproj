@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\libs\Cf.Libs.Service\Cf.Libs.Service.csproj" />
+    <ProjectReference Include="..\Cf.Laundry.Common\Cf.Laundry.Common.csproj" />
   </ItemGroup>
 
 </Project>

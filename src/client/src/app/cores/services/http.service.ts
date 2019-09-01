@@ -1,96 +1,73 @@
+import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { StorageService } from "./storage.service";
+import { BASE_API } from "./../../app.config";
+import { from } from "rxjs";
+import { map } from "rxjs/operators";
+
 import {
   Http,
   RequestOptionsArgs,
   ResponseContentType,
   Headers
 } from "@angular/http";
-import { Observable } from "rxjs";
-import { Injectable } from "@angular/core";
-
-const apiUrl = "";
-const tokenKey = "";
 
 @Injectable()
 export class HttpService {
-  addToken = false;
-
-  constructor(private http: Http) {}
+  constructor(private http: Http, private storage: StorageService) {}
 
   doGet(url: string, requestParams: string): Observable<any> {
     const requestOptions: RequestOptionsArgs = {
       responseType: ResponseContentType.Json,
-      params: requestParams
+      params: requestParams,
     };
 
-    if (this.addToken) {
-      const token = "Bearer " + localStorage.getItem(tokenKey);
-      const headers = new Headers();
-      headers.append("Authorization", token);
-      headers.append("Content-Type", "application/json; charset=utf-8");
-      requestOptions.headers = headers;
-    }
-
-    const reqUrl: string = apiUrl + url;
-
-    return this.http.get(reqUrl, requestOptions);
+    const reqUrl: string = BASE_API + url;
+    return this._mapResponseData(this.http.get(reqUrl, requestOptions));
   }
 
   doPost(url: string, bodyParams: any): Observable<any> {
-    const hders = new Headers({
-      "Content-Type": "application/json; charset=utf-8"
-    });
-
-    if (this.addToken) {
-      const token = "Bearer " + localStorage.getItem(tokenKey);
-      hders.append("Authorization", token);
-    }
-
     const requestOptions: RequestOptionsArgs = {
-      responseType: ResponseContentType.Text,
-      headers: hders
+      responseType: ResponseContentType.Json,
+      headers: this._addAuthor()
     };
 
     const body: any = JSON.stringify(bodyParams);
-    const reqUrl: string = apiUrl + url;
-
-    return this.http.post(reqUrl, body, requestOptions);
+    const reqUrl: string = BASE_API + url;
+    return this._mapResponseData(this.http.post(reqUrl, body, requestOptions));
   }
 
   doPut(url: string, bodyParams: any): Observable<any> {
-    const hders = new Headers({
-      "Content-Type": "application/json; charset=utf-8"
-    });
-    if (this.addToken) {
-      const token = "Bearer " + localStorage.getItem(tokenKey);
-      hders.append("Authorization", token);
-    }
-
     const requestOptions: RequestOptionsArgs = {
       responseType: ResponseContentType.Json,
-      headers: hders
+      headers: this._addAuthor()
     };
-    const body: any = JSON.stringify(bodyParams);
-    const reqUrl: string = apiUrl + url;
 
-    return this.http.put(reqUrl, body, requestOptions);
+    const body: any = JSON.stringify(bodyParams);
+    const reqUrl: string = BASE_API + url;
+    return this._mapResponseData(this.http.put(reqUrl, body, requestOptions));
   }
 
   doDelete(url: string, requestParams: string): Observable<any> {
-    const hders = new Headers({
-      "Content-Type": "application/json; charset=utf-8"
-    });
-    if (this.addToken) {
-      const token = "Bearer " + localStorage.getItem(tokenKey);
-      hders.append("Authorization", token);
-    }
-
     const requestOptions: RequestOptionsArgs = {
-      responseType: ResponseContentType.Text,
+      responseType: ResponseContentType.Json,
       params: requestParams,
-      headers: hders
+      headers: this._addAuthor()
     };
-    const reqUrl: string = apiUrl + url;
 
-    return this.http.delete(reqUrl, requestOptions);
+    const reqUrl: string = BASE_API + url;
+    return this._mapResponseData(this.http.delete(reqUrl, requestOptions));
+  }
+
+  _mapResponseData(respon: Observable<any>): any {
+    return from(respon).pipe(map(res => res.data));
+  }
+
+  _addAuthor(): Headers {
+    const token = "Bearer " + this.storage.getToken();
+    const headers = new Headers();
+    headers.append("Authorization", token);
+    headers.append("Content-Type", "application/json; charset=utf-8");
+    return headers;
   }
 }

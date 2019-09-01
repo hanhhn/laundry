@@ -7,7 +7,9 @@
       <button mat-flat-button color="primary">Tìm kiếm</button>
     </div>
     <div class="add">
-      <button mat-flat-button color="primary">Thêm</button>
+      <button mat-flat-button color="primary" (click)="onShowAddDialog()">
+        Thêm
+      </button>
     </div>
   </div>
   <div class="list">
@@ -51,3 +53,73 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  header="Thêm mới dịch vụ"
+  [(visible)]="display"
+  [modal]="true"
+  [responsive]="true"
+  [style]="{ width: '800px' }"
+  [maximizable]="true"
+>
+  <form>
+    <div class="form-group row">
+      <label for="image" class="col-sm-2 col-form-label">Hình ảnh</label>
+      <div class="col-sm-10">
+        <p-fileUpload
+          chooseLabel="Chọn hình ảnh"
+          showCancelButton="false"
+          showUploadButton="false"
+          accept="image/*"
+          [auto]="true"
+        ></p-fileUpload>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label">Tên</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="name" placeholder="Tên dịch vụ" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 col-form-label">Mô tả</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="description" rows="5"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="order" class="col-sm-2 col-form-label">Sắp xếp</label>
+      <div class="col-sm-3">
+        <input
+          class="form-control"
+          id="description"
+          value="1"
+          type="number"
+          min="1"
+        />
+      </div>
+      <div class="col-sm-2">
+        <div class="form-check">
+          <label class="form-check-label" for="highlights">
+            <input class="form-check-input" type="checkbox" id="highlights" />
+            Nỗi bật
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      (click)="display = false"
+    >
+      Save
+    </button>
+    <button type="button" mat-flat-button (click)="display = false">
+      Cancal
+    </button>
+  </p-footer>
+</p-dialog>

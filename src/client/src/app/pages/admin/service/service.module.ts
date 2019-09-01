@@ -9,6 +9,8 @@ import {
   MatTableModule,
   MatIconModule
 } from "@angular/material";
+import { DialogModule } from "primeng/dialog";
+import { FileUploadModule } from "primeng/fileupload";
 
 const routes: Routes = [
   {
@@ -26,6 +28,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatTableModule,
     MatIconModule,
+    DialogModule,
+    FileUploadModule,
     RouterModule.forChild(routes)
   ],
   exports: [ServiceComponent]

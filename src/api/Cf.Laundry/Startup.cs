@@ -51,6 +51,8 @@ namespace Cf.Laundry
 
             services.AddServicesAndRepository();
 
+            services.AddMapper();
+
             services.AddCors();
 
             services.AddMvc(config =>

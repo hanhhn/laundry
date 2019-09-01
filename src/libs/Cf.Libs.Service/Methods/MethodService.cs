@@ -13,8 +13,10 @@ namespace Cf.Libs.Service.Methods
     {
         private readonly IMethodRepository _methodRepository;
 
-        public MethodService(IUnitOfWork unitOfWork, IMethodRepository methodRepository)
-            : base(unitOfWork)
+        public MethodService(
+            IUnitOfWork unitOfWork,
+            IMapper mapper, 
+            IMethodRepository methodRepository) : base(unitOfWork, mapper)
         {
             _methodRepository = methodRepository;
         }
@@ -27,7 +29,7 @@ namespace Cf.Libs.Service.Methods
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
-            return Mapper.Map<MethodDto>(record);
+            return _mapper.Map<MethodDto>(record);
         }
 
         public IPagedList<MethodDto> GetAll(int pageIndex, int pageSize)
@@ -39,14 +41,14 @@ namespace Cf.Libs.Service.Methods
 
         public MethodDto Add(MethodRequest request)
         {
-            var item = Mapper.Map<Method>(request);
+            var item = _mapper.Map<Method>(request);
             var record = _methodRepository.Add(item);
             if (_unitOfWork.SaveChanges() == 0)
             {
                 throw new InformationException("An error occurred during save.");
             }
 
-            return Mapper.Map<MethodDto>(record);
+            return _mapper.Map<MethodDto>(record);
         }
 
         public MethodDto Edit(MethodRequest request)
@@ -70,7 +72,7 @@ namespace Cf.Libs.Service.Methods
                 throw new InformationException("An error occurred during save.");
             }
 
-            return Mapper.Map<MethodDto>(record);
+            return _mapper.Map<MethodDto>(record);
         }
 
         public bool Delete(int id)

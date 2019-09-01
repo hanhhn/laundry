@@ -17,8 +17,11 @@ namespace Cf.Libs.Service.Items
         private readonly IItemRepository _itemRepository;
         private readonly IItemRateRepository _rateRepository;
 
-        public ItemService(IUnitOfWork unitOfWork, IItemRepository itemRepository, IItemRateRepository rateRepository)
-            : base(unitOfWork)
+        public ItemService(
+            IUnitOfWork unitOfWork,
+            IMapper mapper, 
+            IItemRepository itemRepository,
+            IItemRateRepository rateRepository) : base(unitOfWork, mapper)
         {
             _itemRepository = itemRepository;
             _rateRepository = rateRepository;
@@ -32,7 +35,7 @@ namespace Cf.Libs.Service.Items
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
-            return Mapper.Map<ItemDto>(record);
+            return _mapper.Map<ItemDto>(record);
         }
 
         public IPagedList<ItemDto> GetAll(int pageIndex, int pageSize)
@@ -74,14 +77,14 @@ namespace Cf.Libs.Service.Items
 
         public ItemDto Add(ItemRequest request)
         {
-            var item = Mapper.Map<Item>(request);
+            var item = _mapper.Map<Item>(request);
             var record = _itemRepository.Add(item);
             if (_unitOfWork.SaveChanges() == 0)
             {
                 throw new InformationException("An error occurred during save.");
             }
 
-            return Mapper.Map<ItemDto>(record);
+            return _mapper.Map<ItemDto>(record);
         }
 
         public ItemDto Edit(ItemRequest request)
@@ -106,7 +109,7 @@ namespace Cf.Libs.Service.Items
                 throw new InformationException("An error occurred during save.");
             }
 
-            return Mapper.Map<ItemDto>(record);
+            return _mapper.Map<ItemDto>(record);
         }
 
         public bool Delete(int id)

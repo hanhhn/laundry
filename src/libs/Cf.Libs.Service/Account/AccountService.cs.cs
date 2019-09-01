@@ -21,10 +21,11 @@ namespace Cf.Libs.Service.Account
 
         public AccountService(
             IUnitOfWork unitOfWork,
+            IMapper mapper,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             EmailSenderService emailSender,
-            IUserProfileRepository userProfileRepository) : base(unitOfWork)
+            IUserProfileRepository userProfileRepository) : base(unitOfWork, mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;

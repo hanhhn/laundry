@@ -14,8 +14,10 @@ namespace Cf.Libs.Service.ItemRates
     {
         private readonly IItemRateRepository _rateRepository;
 
-        public ItemRateService(IUnitOfWork unitOfWork, IItemRateRepository rateRepository)
-            : base(unitOfWork)
+        public ItemRateService(
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IItemRateRepository rateRepository) : base(unitOfWork, mapper)
         {
             _rateRepository = rateRepository;
         }
@@ -27,14 +29,14 @@ namespace Cf.Libs.Service.ItemRates
                 throw new ArgumentNullException("Param is invalid.");
             }
 
-            var rate = Mapper.Map<ItemRate>(request);
+            var rate = _mapper.Map<ItemRate>(request);
             var record = _rateRepository.Add(rate);
             if (_unitOfWork.SaveChanges() == 0)
             {
                 throw new InformationException("An error occurred during save.");
             }
 
-            return Mapper.Map<ItemRateDto>(record);
+            return _mapper.Map<ItemRateDto>(record);
         }
 
         public ItemRateDto Edit(ItemRateRequest request)
@@ -67,7 +69,7 @@ namespace Cf.Libs.Service.ItemRates
                 throw new InformationException("An error occurred during save.");
             }
 
-            return Mapper.Map<ItemRateDto>(record);
+            return _mapper.Map<ItemRateDto>(record);
         }
 
         public bool Delete(int id)
@@ -94,7 +96,7 @@ namespace Cf.Libs.Service.ItemRates
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
-            return Mapper.Map<ItemRateDto>(record);
+            return _mapper.Map<ItemRateDto>(record);
         }
 
         public IPagedList<ItemRateDto> GetAll(int pageIndex, int pageSize)

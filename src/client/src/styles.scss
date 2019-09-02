@@ -94,3 +94,38 @@ a {
 .mat-horizontal-stepper-header {
   height: 50px !important;
 }
+
+table {
+  tbody {
+    .action {
+      button {
+        margin: 0 10px;
+      }
+    }
+  }
+}
+
+.form-check {
+  line-height: 40px;
+
+  label {
+    line-height: 24px;
+  }
+}
+
+.required::after {
+  content: "(*)";
+  padding: 5px;
+  color: #ff3733;
+  font-weight: bold;
+}
+
+.error {
+  color: #ff3733;
+  margin-top: 5px;
+
+  label {
+    color: #ff3733;
+    margin-top: 5px;
+  }
+}

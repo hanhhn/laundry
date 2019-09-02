@@ -11,6 +11,11 @@ import {
 } from "@angular/material";
 import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
+import { ItemService } from "../../../cores/services/item.service";
+import { FormBuilder, ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ImageService } from "../../../cores/services/image.service";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmationService } from "primeng/api";
 
 const routes: Routes = [
   {
@@ -23,6 +28,8 @@ const routes: Routes = [
   declarations: [ServiceComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
@@ -30,8 +37,10 @@ const routes: Routes = [
     MatIconModule,
     DialogModule,
     FileUploadModule,
+    ConfirmDialogModule,
     RouterModule.forChild(routes)
   ],
+  providers: [ItemService, ImageService, ConfirmationService],
   exports: [ServiceComponent]
 })
 export class ServiceModule {}

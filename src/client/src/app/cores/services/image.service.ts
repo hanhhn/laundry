@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IMGUR_API } from "./../../app.config";
-
+import { IMGUR_API, IMGUR_CLIENT_ID } from "./../../app.config";
 
 @Injectable()
 export class ImageService {
@@ -8,7 +7,7 @@ export class ImageService {
     return new Promise(() => {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", IMGUR_API);
-      xhr.setRequestHeader("Authorization", "Client-ID 3aae9208fae2a49");
+      xhr.setRequestHeader("Authorization", "Client-ID " + IMGUR_CLIENT_ID);
       const data = new FormData();
       data.append("image", file);
       xhr.send(data);

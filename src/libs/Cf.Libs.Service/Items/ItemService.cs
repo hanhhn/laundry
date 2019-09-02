@@ -56,7 +56,8 @@ namespace Cf.Libs.Service.Items
                             select gRate.FirstOrDefault();
 
             var query = from i in itemQuery
-                        join r in rateQuery on i.Id equals r.ItemId
+                        join r in rateQuery on i.Id equals r.ItemId into groupItem
+                        from g in groupItem.DefaultIfEmpty(new ItemRate())
                         select new ItemDto
                         {
                             Id = i.Id,
@@ -66,10 +67,10 @@ namespace Cf.Libs.Service.Items
                             Highlights = i.Highlights,
                             Order = i.Order,
                             Type = i.Type,
-                            Rate = r.Rate,
-                            Discount = r.Discount,
-                            DiscountRate = r.DiscountRate,
-                            Tax = r.Tax
+                            Rate = g.Rate,
+                            Discount = g.Discount,
+                            DiscountRate = g.DiscountRate,
+                            Tax = g.Tax
                         };
 
             return query.ToPagedList(pageIndex, pageSize);
@@ -120,6 +121,8 @@ namespace Cf.Libs.Service.Items
             {
                 throw new RecordNotFoundException("Record can not be found.");
             }
+
+            _itemRepository.Delete(record);
 
             if (_unitOfWork.SaveChanges() == 0)
             {

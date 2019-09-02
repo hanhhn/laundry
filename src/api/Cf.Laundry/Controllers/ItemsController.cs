@@ -31,17 +31,14 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
-        public ItemDto Add(ItemRequest request)
+        [Route("save")]
+        public ItemDto Save(ItemRequest request)
         {
+            if(request.Id > 0)
+            {
+                return _itemService.Edit(request);
+            }
             return _itemService.Add(request);
-        }
-
-        [HttpPost]
-        [Route("edit")]
-        public ItemDto Edit(ItemRequest request)
-        {
-            return _itemService.Edit(request);
         }
 
         [HttpDelete]

@@ -19,7 +19,7 @@ export class HttpService {
   doGet(url: string, requestParams: string): Observable<any> {
     const requestOptions: RequestOptionsArgs = {
       responseType: ResponseContentType.Json,
-      params: requestParams,
+      params: requestParams
     };
 
     const reqUrl: string = BASE_API + url;
@@ -59,11 +59,19 @@ export class HttpService {
     return this._mapResponseData(this.http.delete(reqUrl, requestOptions));
   }
 
-  _mapResponseData(respon: Observable<any>): any {
-    return from(respon).pipe(map(res => res.data));
+  private _mapResponseData(respon: Observable<any>): Observable<any> {
+    return respon.pipe(
+      map(res => {
+        if (res.status === 200) {
+          return res._body;
+        } else {
+          return null;
+        }
+      })
+    );
   }
 
-  _addAuthor(): Headers {
+  private _addAuthor(): Headers {
     const token = "Bearer " + this.storage.getToken();
     const headers = new Headers();
     headers.append("Authorization", token);

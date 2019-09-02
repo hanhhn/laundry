@@ -41,17 +41,15 @@ namespace Cf.Libs.Service.Items
         public IPagedList<ItemDto> GetAll(int pageIndex, int pageSize)
         {
             var itemQuery = from item in _itemRepository.GetQuery()
-                            orderby item.Order ascending
                             orderby item.Name ascending
+                            orderby item.Order ascending
                             where !item.IsDeleted
                             select item;
 
             var rateQuery = from rate in _rateRepository.GetQuery()
                             where !rate.IsDeleted
-                                && rate.ApplyDate <= DateTime.Now
-                                && rate.ExpireDate >= DateTime.Now
+                            orderby rate.ApplyDate descending
                             orderby rate.Priority ascending
-                            orderby rate.CreateDate descending
                             group rate by rate.ItemId into gRate
                             select gRate.FirstOrDefault();
 

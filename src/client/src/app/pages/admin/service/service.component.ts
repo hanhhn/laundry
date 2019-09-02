@@ -69,16 +69,13 @@ export class ServiceComponent implements OnInit {
   }
 
   onShowEditDialog(item: Item) {
+    this.controls.id.patchValue(item.id);
+    this.controls.image.patchValue(item.image);
+    this.controls.name.patchValue(item.name);
+    this.controls.description.patchValue(item.description);
+    this.controls.order.patchValue(item.order);
+    this.controls.highlights.patchValue(item.highlights);
     this.display = true;
-
-    this.formControls = this.formBuilder.group({
-      id: [item.id],
-      image: [item.image, Validators.required],
-      name: [item.name, Validators.required],
-      description: [item.description],
-      order: [item.order, Validators.required],
-      highlights: [item.highlights]
-    });
   }
 
   onSaveItemClick() {

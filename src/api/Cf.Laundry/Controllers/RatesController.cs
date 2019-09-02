@@ -1,8 +1,6 @@
 ﻿using Cf.Libs.Core.Infrastructure.Paging;
-using Cf.Libs.Service.Dtos.Item;
 using Cf.Libs.Service.Dtos.ItemRate;
 using Cf.Libs.Service.ItemRates;
-using Cf.Libs.Service.Items;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cf.Laundry.Controllers
@@ -33,17 +31,14 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
-        public ItemRateDto Add(ItemRateRequest request)
+        [Route("save")]
+        public ItemRateDto Save(ItemRateRequest request)
         {
+            if(request.Id > 0)
+            {
+                return _rateService.Edit(request);
+            }
             return _rateService.Add(request);
-        }
-
-        [HttpPost]
-        [Route("edit")]
-        public ItemRateDto Edit(ItemRateRequest request)
-        {
-            return _rateService.Edit(request);
         }
 
         [HttpDelete]

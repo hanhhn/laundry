@@ -1,5 +1,5 @@
 export class Item {
-  id: string;
+  id: number;
   image: string;
   name: string;
   description: string;
@@ -26,6 +26,34 @@ export class Item {
   }
 }
 
+export class ItemRate {
+  id: number;
+  itemId: number;
+  itemName: string;
+  rate: number;
+  tax: number;
+  discount: number;
+  discountRate: number;
+  priority: number;
+  isActive: boolean;
+  applyDate: Date;
+  expireDate: Date;
+
+  constructor(json: any) {
+    this.id = json.id;
+    this.itemId = json.itemId;
+    this.rate = json.rate;
+    this.tax = json.tax;
+    this.discount = json.discount;
+    this.discountRate = json.discountRate;
+    this.priority = json.priority;
+    this.isActive = json.isActive;
+    this.applyDate = json.applyDate;
+    this.expireDate = json.expireDate;
+  }
+}
+
+
 export class ItemRequest {
   id: string;
   image: string;
@@ -33,4 +61,17 @@ export class ItemRequest {
   description: string;
   highlights: boolean;
   order: number;
+}
+
+
+export class ItemRateRequest {
+  id: number;
+  itemId: number;
+  rate: number;
+  tax: number;
+  discount: number;
+  priority: number;
+  isActive: boolean;
+  applyDate: Date;
+  expireDate: Date;
 }

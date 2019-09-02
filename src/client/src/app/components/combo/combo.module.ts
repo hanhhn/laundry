@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ServiceItemComponent } from "./service-item.component";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { ComboComponent } from "./combo.component";
 import {
   MatButtonModule,
   MatIconModule,
   MatCardModule
 } from "@angular/material";
-import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
-  declarations: [ServiceItemComponent],
+  declarations: [ComboComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -18,6 +18,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatIconModule,
     MatCardModule
   ],
-  exports: [ServiceItemComponent]
+  exports: [ComboComponent]
 })
-export class ServiceItemModule {}
+export class ComboModule {}

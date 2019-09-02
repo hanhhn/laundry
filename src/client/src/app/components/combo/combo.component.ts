@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
-  selector: "app-service-item",
-  templateUrl: "./service-item.component.html",
-  styleUrls: ["./service-item.component.scss"]
+  selector: "app-combo",
+  templateUrl: "./combo.component.html",
+  styleUrls: ["./combo.component.scss"]
 })
-export class ServiceItemComponent implements OnInit {
+export class ComboComponent implements OnInit {
   @Input()
   title: string;
 

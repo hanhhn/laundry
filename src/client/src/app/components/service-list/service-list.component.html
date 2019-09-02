@@ -1,5 +1,15 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center end" fxLayoutAlign.xs="center center" fxLayoutGap="30px">
-    <app-service-item *ngFor="let item of dataSource" title="{{ item.title }}" description="{{ item.description }}"
-        rate="{{ item.rate }}">
-    </app-service-item>
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="center end"
+  fxLayoutAlign.xs="center center"
+  fxLayoutGap="30px"
+>
+  <app-combo
+    *ngFor="let item of dataSource"
+    title="{{ item.title }}"
+    description="{{ item.description }}"
+    rate="{{ item.rate }}"
+  >
+  </app-combo>
 </div>

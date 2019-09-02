@@ -5,10 +5,7 @@ import { Component, OnInit, Input } from "@angular/core";
   templateUrl: "./item.component.html",
   styleUrls: ["./item.component.scss"]
 })
-export class ItemComponent implements OnInit {
-  @Input()
-  id: string;
-
+export class ItemComponent {
   @Input()
   itemUrl: string;
 
@@ -17,6 +14,4 @@ export class ItemComponent implements OnInit {
 
   @Input()
   itemRate: string;
-
-  ngOnInit() {}
 }

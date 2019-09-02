@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { ItemService } from "../../../cores/services/item.service";
+import { Item } from "../../../cores/models/item.model";
 
 @Component({
   selector: "app-price-list",
@@ -24,5 +26,13 @@ export class PriceListComponent implements OnInit {
     }
   ];
 
-  ngOnInit() {}
+  items: Item[] = [];
+
+  constructor(private itemService: ItemService) {}
+
+  ngOnInit() {
+    this.itemService.getAll(0, 100).subscribe(data => {
+      this.items = data ? data.dataSource : [];
+    });
+  }
 }

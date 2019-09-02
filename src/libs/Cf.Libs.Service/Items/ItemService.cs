@@ -47,7 +47,7 @@ namespace Cf.Libs.Service.Items
                             select item;
 
             var rateQuery = from rate in _rateRepository.GetQuery()
-                            where !rate.IsDeleted
+                            where !rate.IsDeleted && DateTime.Now > rate.ApplyDate
                             orderby rate.ApplyDate descending
                             orderby rate.Priority ascending
                             group rate by rate.ItemId into gRate

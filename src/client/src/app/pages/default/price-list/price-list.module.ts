@@ -4,9 +4,9 @@ import { RouterModule, Routes } from "@angular/router";
 import { PriceListComponent } from "./price-list.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatTabsModule, MatIconModule } from "@angular/material";
-import { ServiceModule } from "src/app/components/service/service.module";
-import { ItemListModule } from "src/app/components/item-list/item-list.module";
 import { ServiceListModule } from "src/app/components/service-list/service-list.module";
+import { ItemService } from "../../../cores/services/item.service";
+import { ItemModule } from "../../../components/item/item.module";
 
 const routes: Routes = [
   {
@@ -23,8 +23,9 @@ const routes: Routes = [
     MatTabsModule,
     MatIconModule,
     ServiceListModule,
-    ItemListModule,
+    ItemModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [ItemService]
 })
 export class PriceListModule {}

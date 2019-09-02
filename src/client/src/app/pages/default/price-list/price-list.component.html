@@ -4,9 +4,16 @@
       <h2>1. Giặt sấy theo combo</h2>
       <app-service-list></app-service-list>
     </div>
-    <div>
+    <div *ngIf="items && items.length > 0">
       <h2>2. Giặt hấp hoàn hảo</h2>
-      <app-item-list></app-item-list>
+      <div class="item-list">
+        <app-item
+          *ngFor="let item of items; let i = index"
+          itemUrl="{{ item.image }}"
+          itemName="{{ item.name }}"
+          itemRate="{{ item.rate }}"
+        ></app-item>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cf.Libs.Core.Enums;
 using Cf.Libs.Core.Exeptions;
 using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
@@ -6,6 +7,7 @@ using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
 using Cf.Libs.Service.Dtos.Method;
+using System.Linq;
 
 namespace Cf.Libs.Service.Methods
 {
@@ -15,7 +17,7 @@ namespace Cf.Libs.Service.Methods
 
         public MethodService(
             IUnitOfWork unitOfWork,
-            IMapper mapper, 
+            IMapper mapper,
             IMethodRepository methodRepository) : base(unitOfWork, mapper)
         {
             _methodRepository = methodRepository;
@@ -32,11 +34,44 @@ namespace Cf.Libs.Service.Methods
             return _mapper.Map<MethodDto>(record);
         }
 
+        public IPagedList<MethodDto> GetApplyMethod(int pageIndex, int pageSize)
+        {
+            var methods = from m in _methodRepository.GetQuery()
+                          where !m.IsDeleted
+                          select m;
+
+            return methods.ToPagedList<Method, MethodDto>(pageIndex, pageSize);
+        }
+
+        public IPagedList<MethodDto> GetCleanMethod(int pageIndex, int pageSize)
+        {
+            return GetMethodByType(MethodType.Clean, pageIndex, pageSize);
+        }
+
+        public IPagedList<MethodDto> GetSoftMethod(int pageIndex, int pageSize)
+        {
+            return GetMethodByType(MethodType.Soft, pageIndex, pageSize);
+        }
+
+        public IPagedList<MethodDto> GetDryMethod(int pageIndex, int pageSize)
+        {
+            return GetMethodByType(MethodType.Straight, pageIndex, pageSize);
+        }
+
+        public IPagedList<MethodDto> GetStraightMethod(int pageIndex, int pageSize)
+        {
+            return GetMethodByType(MethodType.Dry, pageIndex, pageSize);
+        }
+
         public IPagedList<MethodDto> GetAll(int pageIndex, int pageSize)
         {
-            var records = _methodRepository.GetQuery().ToPagedList<Method, MethodDto>(pageIndex, pageSize);
+            return _methodRepository.GetQuery().ToPagedList<Method, MethodDto>(pageIndex, pageSize);
+        }
 
-            return records;
+        private IPagedList<MethodDto> GetMethodByType(MethodType type, int pageIndex, int pageSize)
+        {
+            var methods = _methodRepository.FindBy(x => x.Type == type && !x.IsDeleted);
+            return methods.ToPagedList<Method, MethodDto>(pageIndex, pageSize);
         }
 
         public MethodDto Add(MethodRequest request)

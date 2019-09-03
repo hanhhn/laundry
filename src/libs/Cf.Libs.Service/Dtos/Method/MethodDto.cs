@@ -10,5 +10,6 @@ namespace Cf.Libs.Service.Dtos.Method
         public decimal Discount { get; set; }
         public bool EnableDiscount { get; set; }
         public MethodType Type { get; set; }
+        public string TypeName => Type.ToString();
     }
 }

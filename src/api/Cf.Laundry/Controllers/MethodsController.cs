@@ -27,7 +27,7 @@ namespace Cf.Laundry.Controllers
         [Route("apply")]
         public IPagedList<MethodDto> GetApply(int pageIndex = 0, int pageSize = 10)
         {
-            return _methodService.GetCleanMethod(pageIndex, pageSize);
+            return _methodService.GetApplyMethod(pageIndex, pageSize);
         }
 
         [HttpGet]
@@ -66,17 +66,14 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
-        public MethodDto Add(MethodRequest request)
+        [Route("save")]
+        public MethodDto SaveMethod(MethodRequest request)
         {
+            if(request.Id > 0)
+            {
+                return _methodService.Edit(request);
+            }
             return _methodService.Add(request);
-        }
-
-        [HttpPost]
-        [Route("edit")]
-        public MethodDto Edit(MethodRequest request)
-        {
-            return _methodService.Edit(request);
         }
 
         [HttpDelete]

@@ -2,7 +2,7 @@
 {
     public enum MethodType
     {
-        Clean,
+        Clean = 1,
         Soft,
         Dry,
         Straight,

@@ -18,6 +18,7 @@ namespace Cf.Laundry.Configurations
             configuration.CompileMappings();
             IMapper mapper = configuration.CreateMapper();
             services.AddSingleton(mapper);
+            Mapper.Initialize(InitMapper);
         }
     }
 }

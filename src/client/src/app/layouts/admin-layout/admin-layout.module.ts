@@ -5,6 +5,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { AdminSideBarModule } from "../../pages/shared/admin-side-bar/admin-side-bar.module";
 import { AdminHeaderModule } from "../../pages/shared/admin-header/admin-header.module";
 import { MatSidenavModule } from "@angular/material";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmationService } from "primeng/api";
 
 @NgModule({
   declarations: [AdminLayoutComponent],
@@ -14,8 +16,10 @@ import { MatSidenavModule } from "@angular/material";
     AdminHeaderModule,
     AdminSideBarModule,
     MatSidenavModule,
-    RouterModule
+    RouterModule,
+    ConfirmDialogModule
   ],
-  exports: [AdminLayoutComponent]
+  exports: [AdminLayoutComponent],
+  providers: [ConfirmationService]
 })
 export class AdminLayoutModule {}

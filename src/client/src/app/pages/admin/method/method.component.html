@@ -17,22 +17,22 @@
       <thead>
         <tr>
           <th scope="col" width="100">#</th>
-          <th scope="col">Image</th>
           <th scope="col">Name</th>
-          <th scope="col" class="text-right">Rate</th>
+          <!-- <th scope="col">Description</th> -->
           <th scope="col" class="text-right">Discount</th>
-          <th scope="col" width="100">Hightlight</th>
+          <th scope="col" class="text-center">EnableDiscount</th>
+          <th scope="col" class="text-center" width="100">Type</th>
           <th scope="col" width="150"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of dataSource; let i = index">
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ item.image }}</td>
           <td>{{ item.name }}</td>
-          <td class="text-right">{{ item.rate }}</td>
+          <!-- <td>{{ item.description }}</td> -->
           <td class="text-right">{{ item.discount }}</td>
-          <td class="text-center">{{ item.highlights }}</td>
+          <td class="text-center">{{ item.enableDiscount }}</td>
+          <td class="text-center">{{ item.typeName }}</td>
           <td>
             <div class="action text-center">
               <button
@@ -45,7 +45,7 @@
               <button
                 type="button"
                 class="btn btn-sm btn-outline-danger"
-                (click)="onDeleteItemClick(item)"
+                (click)="onDeleteClick(item)"
               >
                 <i class="fa fa-trash"></i>
               </button>
@@ -58,7 +58,7 @@
 </div>
 
 <p-dialog
-  header="Thêm mới dịch vụ"
+  header="Thêm mới giá dịch vụ"
   [(visible)]="display"
   [modal]="true"
   [responsive]="true"
@@ -67,55 +67,32 @@
 >
   <form [formGroup]="formControls">
     <div class="form-group row">
-      <label for="image" class="col-sm-2 col-form-label required"
-        >Hình ảnh</label
+      <label for="name" class="col-sm-2 col-form-label required"
+        >Tên hình thức</label
       >
-      <div class="col-sm-8">
-        <p-fileUpload
-          [chooseLabel]="'Chọn hình ảnh'"
-          accept="image/*"
-          maxFileSize="2000000"
-          [multiple]="false"
-          [showUploadButton]="false"
-          [showCancelButton]="false"
-          [auto]="true"
-          [invalidFileSizeMessageSummary]="
-            '{0}: Vui lòng kiểm tra lại dung lượng file!'
-          "
-          [invalidFileSizeMessageDetail]="'Dung lượng tối đa cho phép là {0}.'"
-          [invalidFileTypeMessageSummary]="'{0}: Định dạng file không hợp lệ!'"
-          [invalidFileTypeMessageDetail]="'Định dạng cho phép: {0}.'"
-          (onSelect)="onImageSelected($event)"
-        >
-        </p-fileUpload>
-        <label>Dung lượng file tối đa là 2MB.</label>
-        <div class="error" *ngIf="submitted && controls.image.errors">
-          <label *ngIf="controls.image.errors.required"
-            >Hình ảnh dịch vụ bắt buộc chọn.</label
-          >
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <img
-          *ngIf="controls.image.value"
-          src="{{ controls.image.value }}"
-          class="img-thumbnail thumbnail"
-        />
-        <div *ngIf="!controls.image.value" class="thumbnail"></div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="name" class="col-sm-2 col-form-label required">Tên</label>
-      <div class="col-sm-10">
+      <div class="col-sm-6">
         <input
           formControlName="name"
           class="form-control"
           id="name"
-          placeholder="Tên dịch vụ"
+          placeholder="Tên hình thức"
         />
         <div class="error" *ngIf="submitted && controls.name.errors">
           <label *ngIf="controls.name.errors.required"
-            >Tên dịch vụ bắt buộc nhập.</label
+            >Tên hình thức bắt buộc nhập.</label
+          >
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <p-dropdown
+          [options]="methodTypes"
+          optionLabel="value"
+          formControlName="type"
+          placeholder="Chọn loại hình"
+        ></p-dropdown>
+        <div class="error" *ngIf="submitted && controls.type.errors">
+          <label *ngIf="controls.type.errors.required"
+            >Loại hình bắt buộc nhập.</label
           >
         </div>
       </div>
@@ -133,38 +110,38 @@
     </div>
 
     <div class="form-group row">
-      <label for="order" class="col-sm-2 col-form-label required"
-        >Thứ tự sắp xếp</label
+      <label for="discount" class="col-sm-2 col-form-label required"
+        >Giảm giá</label
       >
       <div class="col-sm-10">
         <div class="row">
           <div class="col-sm-4">
             <input
-              formControlName="order"
+              formControlName="discount"
               class="form-control"
-              id="description"
+              id="discount"
               type="number"
-              min="1"
+              min="0"
             />
           </div>
           <div class="col-sm-8">
             <div class="form-check">
-              <label class="form-check-label" for="highlights">
+              <label class="form-check-label" for="enableDiscount">
                 <input
-                  formControlName="highlights"
+                  formControlName="enableDiscount"
                   class="form-check-input"
+                  id="enableDiscount"
                   type="checkbox"
-                  id="highlights"
                 />
-                Nỗi bật
+                Kích hoạt
               </label>
             </div>
           </div>
         </div>
 
-        <div class="error" *ngIf="submitted && controls.order.errors">
-          <label *ngIf="controls.order.errors.required"
-            >Thứ tự sắp xếp dịch vụ bắt buộc nhập.</label
+        <div class="error" *ngIf="submitted && controls.discount.errors">
+          <label *ngIf="controls.discount.errors.required"
+            >Giảm giá bắt buộc nhập.</label
           >
         </div>
       </div>
@@ -175,7 +152,7 @@
       type="button"
       class="btn btn-primary"
       color="primary"
-      (click)="onSaveItemClick()"
+      (click)="onSaveClick()"
     >
       Save
     </button>

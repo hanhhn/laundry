@@ -77,6 +77,10 @@ const routes: Routes = [
         loadChildren: "./pages/admin/service/service.module#ServiceModule"
       },
       {
+        path: "method",
+        loadChildren: "./pages/admin/method/method.module#MethodModule"
+      },
+      {
         path: "coupon",
         loadChildren: "./pages/admin/coupon/coupon.module#CouponModule"
       }

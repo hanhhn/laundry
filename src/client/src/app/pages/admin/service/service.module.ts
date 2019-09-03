@@ -37,10 +37,9 @@ const routes: Routes = [
     MatIconModule,
     DialogModule,
     FileUploadModule,
-    ConfirmDialogModule,
     RouterModule.forChild(routes)
   ],
-  providers: [ItemService, ImageService, ConfirmationService],
+  providers: [ItemService, ImageService],
   exports: [ServiceComponent]
 })
 export class ServiceModule {}

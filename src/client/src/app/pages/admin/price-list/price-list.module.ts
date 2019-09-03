@@ -39,12 +39,11 @@ const routes: Routes = [
     MatIconModule,
     DialogModule,
     FileUploadModule,
-    ConfirmDialogModule,
     DropdownModule,
     CalendarModule,
     RouterModule.forChild(routes)
   ],
-  providers: [ItemService, ItemRateService, ConfirmationService],
+  providers: [ItemService, ItemRateService],
   exports: [PriceListComponent]
 })
 export class PriceListModule {}

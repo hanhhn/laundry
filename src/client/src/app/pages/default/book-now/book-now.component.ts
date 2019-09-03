@@ -32,6 +32,8 @@ export class BookNowComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadWayClean();
+
     this.serviceFormGroup = this.formBuilder.group({});
     this.contactFormGroup = this.formBuilder.group({});
     this.dateFormGroup = this.formBuilder.group({});

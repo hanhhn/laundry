@@ -1,5 +1,6 @@
 ﻿using Cf.Libs.Service.ItemRates;
 using Cf.Libs.Service.Items;
+using Cf.Libs.Service.Methods;
 using Cf.Libs.Service.Profile;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,7 @@ namespace Cf.Libs.Service
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IItemRateService, ItemRateService>();
+            services.AddScoped<IMethodService, MethodService>();
         }
     }
 }

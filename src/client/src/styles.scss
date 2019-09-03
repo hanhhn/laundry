@@ -1,5 +1,9 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
+@import "~primeicons/primeicons.css";
+@import "~primeng/resources/themes/nova-light/theme.css";
+@import "~primeng/resources/primeng.min.css";
+@import "~bootstrap/scss/bootstrap.scss";
 @import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
@@ -89,37 +93,4 @@ a {
 //override mat css
 .mat-horizontal-stepper-header {
   height: 50px !important;
-}
-
-table {
-  .action {
-    button {
-      margin: 0 10px;
-    }
-  }
-}
-
-.form-check {
-  line-height: 40px;
-
-  label {
-    line-height: 24px;
-  }
-}
-
-.required::after {
-  content: "(*)";
-  padding: 5px;
-  color: #ff3733;
-  font-weight: bold;
-}
-
-.error {
-  color: #ff3733;
-  margin-top: 5px;
-
-  label {
-    color: #ff3733;
-    margin-top: 5px;
-  }
 }

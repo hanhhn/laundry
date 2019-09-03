@@ -11,35 +11,51 @@
             fxLayoutAlign.xs="none"
           >
             <div class="service" fxFlex="auto">
-              <div class="sub-step">
+              <div
+                class="sub-step"
+                *ngIf="getWayClean && getWayClean.length > 0"
+              >
                 <h5 class="title">1. Chọn hình thức giặt</h5>
                 <div class="content">
                   <mat-radio-group fxLayout="column" fxLayoutGap="10px">
-                    <mat-radio-button value="1">Giặt sấy</mat-radio-button>
-                    <mat-radio-button value="2">Giặt hấp</mat-radio-button>
-                    <mat-radio-button value="3">Chỉ giặt</mat-radio-button>
-                    <mat-radio-button value="4">Chỉ sấy</mat-radio-button>
+                    <mat-radio-button
+                      *ngFor="let item of getWayClean"
+                      value="{{ item.id }}"
+                      >{{ item.name }}</mat-radio-button
+                    >
                   </mat-radio-group>
                 </div>
               </div>
-              <div class="sub-step">
+              <div class="sub-step" *ngIf="getWaySoft && getWaySoft.length > 0">
                 <h5 class="title">2. Chọn nước giặt và xả vải</h5>
                 <div class="content">
                   <mat-radio-group fxLayout="row" fxLayoutGap="10px">
-                    <mat-radio-button value="comfort">Comfort</mat-radio-button>
-                    <mat-radio-button value="downy">Downy</mat-radio-button>
+                    <mat-radio-button
+                      *ngFor="let item of getWaySoft"
+                      value="{{ item.id }}"
+                      >{{ item.name }}</mat-radio-button
+                    >
                   </mat-radio-group>
                 </div>
               </div>
-              <div class="sub-step">
+              <div
+                class="sub-step"
+                *ngIf="getWayStraight && getWayStraight.length > 0"
+              >
                 <h5 class="title">3. Ủi đồ</h5>
                 <div class="content">
-                  <mat-checkbox>
-                    Ủi hơi nước miễn phí
+                  <mat-checkbox
+                    *ngFor="let item of getWayStraight"
+                    value="{{ item.id }}"
+                  >
+                    {{ item.name }}
                   </mat-checkbox>
                 </div>
               </div>
-              <div class="sub-step">
+              <div
+                class="sub-step"
+                *ngIf="getWayClean && getWayStraight && getWaySoft"
+              >
                 <h5 class="title">4. Ghi chú</h5>
                 <div class="content">
                   <mat-form-field appearance="outline" style="width: 100%">

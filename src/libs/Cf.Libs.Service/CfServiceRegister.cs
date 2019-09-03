@@ -1,4 +1,5 @@
-﻿using Cf.Libs.Service.ItemRates;
+﻿using Cf.Libs.Service.Address;
+using Cf.Libs.Service.ItemRates;
 using Cf.Libs.Service.Items;
 using Cf.Libs.Service.Methods;
 using Cf.Libs.Service.Profile;
@@ -14,6 +15,7 @@ namespace Cf.Libs.Service
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IItemRateService, ItemRateService>();
             services.AddScoped<IMethodService, MethodService>();
+            services.AddScoped<IAddressService, AddressService>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Cf.Libs.Core.Infrastructure.Context;
 using Cf.Libs.DataAccess.Entities.Account;
 using Cf.Libs.DataAccess.Entities.Billing;
+using Cf.Libs.DataAccess.Entities.Common;
 using Cf.Libs.DataAccess.Entities.Configuration;
 using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.DataAccess.Entities.Orders;
@@ -29,6 +30,10 @@ namespace Cf.Libs.DataAccess.DbContext
         public DbSet<BillDetail> BillDetails { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Province> Provinces { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<Ward> Wards { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

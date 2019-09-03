@@ -5,7 +5,7 @@ namespace Cf.Libs.Core.Infrastructure.Entity
 {
     public class BaseEntity<T> : IEntityRoot, IChangeableEntity, ICommonEntity<T>
     {
-        public T Id { get; private set; }
+        public T Id { get; set; }
         public bool IsDeleted { get; private set; }
         public DateTime CreateDate { get; private set; }
         public string CreateUserId { get; private set; }

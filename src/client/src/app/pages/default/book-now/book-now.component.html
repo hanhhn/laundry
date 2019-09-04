@@ -17,7 +17,11 @@
               >
                 <h5 class="title">1. Chọn hình thức giặt</h5>
                 <div class="content">
-                  <mat-radio-group fxLayout="column" fxLayoutGap="10px">
+                  <mat-radio-group
+                    formControlName="method"
+                    fxLayout="column"
+                    fxLayoutGap="10px"
+                  >
                     <mat-radio-button
                       *ngFor="let item of getWayClean"
                       value="{{ item.id }}"
@@ -29,7 +33,11 @@
               <div class="sub-step" *ngIf="getWaySoft && getWaySoft.length > 0">
                 <h5 class="title">2. Chọn nước giặt và xả vải</h5>
                 <div class="content">
-                  <mat-radio-group fxLayout="row" fxLayoutGap="10px">
+                  <mat-radio-group
+                    formControlName="soft"
+                    fxLayout="row"
+                    fxLayoutGap="10px"
+                  >
                     <mat-radio-button
                       *ngFor="let item of getWaySoft"
                       value="{{ item.id }}"
@@ -44,12 +52,17 @@
               >
                 <h5 class="title">3. Ủi đồ</h5>
                 <div class="content">
-                  <mat-checkbox
-                    *ngFor="let item of getWayStraight"
-                    value="{{ item.id }}"
+                  <mat-radio-group
+                    formControlName="straight"
+                    fxLayout="column"
+                    fxLayoutGap="10px"
                   >
-                    {{ item.name }}
-                  </mat-checkbox>
+                    <mat-radio-button
+                      *ngFor="let item of getWayStraight"
+                      value="{{ item.id }}"
+                      >{{ item.name }}
+                    </mat-radio-button>
+                  </mat-radio-group>
                 </div>
               </div>
               <div
@@ -60,6 +73,7 @@
                 <div class="content">
                   <mat-form-field appearance="outline" style="width: 100%">
                     <textarea
+                      formControlName="note"
                       matInput
                       placeholder="Ghi chú cho chúng tôi"
                     ></textarea>
@@ -96,12 +110,13 @@
             <div class="phone" fxFlex="40" fxFlex.xs="auto">
               <mat-form-field>
                 <input
+                  formControlName="phone"
                   matInput
                   placeholder="Số diện thoại"
                   (change)="onPhoneChanged($event)"
                 />
               </mat-form-field>
-              <button mat-button color="primary" *ngIf="!isShowFormContact">
+              <button mat-button color="primary" *ngIf="alreadyExists">
                 Thêm địa chỉ mới
               </button>
             </div>
@@ -109,9 +124,13 @@
               class="address"
               fxFlex="60"
               fxFlex.xs="auto"
-              *ngIf="!isShowFormContact"
+              *ngIf="alreadyExists"
             >
-              <mat-radio-group fxLayout="column" fxLayoutGap="20px">
+              <mat-radio-group
+                formControlName="addressId"
+                fxLayout="column"
+                fxLayoutGap="20px"
+              >
                 <mat-radio-button value="1">
                   <div class="address-item">
                     <h5>Hoàng Ngọc Hạnh</h5>
@@ -129,14 +148,21 @@
               fxFlex="60"
               fxLayout="column"
               fxFlex.xs="auto"
-              *ngIf="isShowFormContact"
+              *ngIf="!alreadyExists"
             >
               <mat-form-field>
-                <input matInput placeholder="Họ tên" />
+                <input
+                  formControlName="fullName"
+                  matInput
+                  placeholder="Họ tên"
+                />
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Tỉnh/Thành phố</mat-label>
-                <mat-select (selectionChange)="onProvinceChanged($event.value)">
+                <mat-select
+                  formControlName="province"
+                  (selectionChange)="onProvinceChanged($event.value)"
+                >
                   <mat-option
                     *ngFor="let item of provinces"
                     [value]="item.id"
@@ -146,7 +172,10 @@
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Quận/Huyện</mat-label>
-                <mat-select (selectionChange)="onDistrictChanged($event.value)">
+                <mat-select
+                  formControlName="district"
+                  (selectionChange)="onDistrictChanged($event.value)"
+                >
                   <mat-option
                     *ngFor="let item of districts"
                     [value]="item.id"
@@ -156,7 +185,7 @@
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Phường/Xã</mat-label>
-                <mat-select>
+                <mat-select formControlName="wards">
                   <mat-option *ngFor="let item of wards" [value]="item.id">{{
                     item.name
                   }}</mat-option>
@@ -164,6 +193,7 @@
               </mat-form-field>
               <mat-form-field appearance="outline" style="width: 100%">
                 <textarea
+                  formControlName="street"
                   matInput
                   placeholder="Địa chỉ: số nhà, đường..."
                 ></textarea>
@@ -175,7 +205,7 @@
             <div fxLayout="row" fxLayout.xs="column">
               <mat-form-field ngClass="pdr">
                 <mat-label>Chọn ngày</mat-label>
-                <mat-select>
+                <mat-select formControlName="dateOfReceipt">
                   <mat-option
                     *ngFor="let item of activeDay"
                     [value]="item.key"
@@ -185,7 +215,7 @@
               </mat-form-field>
               <mat-form-field ngClass="pdr">
                 <mat-label>Chọn giờ</mat-label>
-                <mat-select>
+                <mat-select formControlName="hoursOfReceipt">
                   <mat-option
                     *ngFor="let item of transportTime"
                     [value]="item.id"

@@ -24,7 +24,6 @@ export class BookNowComponent implements OnInit {
 
   serviceFormGroup: FormGroup;
   contactFormGroup: FormGroup;
-  dateFormGroup: FormGroup;
 
   methods: Method[];
   provinces: AddressUnit[];
@@ -42,7 +41,7 @@ export class BookNowComponent implements OnInit {
     private itemService: ItemService,
     private timeService: TimeService
   ) {
-    this.isShowFormContact = true;
+    // this.isShowFormContact = true;
     this.methods = [];
     this.isLinear = true;
     this.isMobile = false;
@@ -55,14 +54,33 @@ export class BookNowComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initForm();
     this.loadTheWayClean();
     this.loadProvice();
     this.loadTransportTime();
     this.loadActiveDay();
+    this.loadFullAddress(this.phone);
+  }
 
-    this.serviceFormGroup = this.formBuilder.group({});
-    this.contactFormGroup = this.formBuilder.group({});
-    this.dateFormGroup = this.formBuilder.group({});
+  initForm() {
+    this.serviceFormGroup = this.formBuilder.group({
+      method: [null, Validators.required],
+      soft: [null, Validators.required],
+      straight: [null, Validators.required],
+      note: [null]
+    });
+
+    this.contactFormGroup = this.formBuilder.group({
+      phone: [null, Validators.required],
+      addressId: [null, Validators.required],
+      fullName: [null, Validators.required],
+      province: [null, Validators.required],
+      district: [null, Validators.required],
+      wards: [null, Validators.required],
+      street: [null, Validators.required],
+      dateOfReceipt: [null, Validators.required],
+      hoursOfReceipt: [null, Validators.required]
+    });
   }
 
   get getWayClean() {
@@ -79,11 +97,18 @@ export class BookNowComponent implements OnInit {
     return this.bookNowService.getStraightMethod(this.methods);
   }
 
+  get alreadyExists() {
+    return this.addresses && this.addresses.length > 0;
+  }
+
   onPhoneChanged(e) {
-    if (e.target.value) {
-      this.isShowFormContact = false;
-    } else {
-      this.isShowFormContact = true;
+    if (e.target && e.target.value) {
+      const length = e.target.value.length;
+      this.phone = e.target.value;
+
+      if (10 <= length && length <= 11) {
+        this.loadFullAddress(this.phone);
+      }
     }
   }
 
@@ -95,6 +120,10 @@ export class BookNowComponent implements OnInit {
   onDistrictChanged(id) {
     this.loadWard(id);
   }
+
+  onSaveAddress() {}
+
+  onSaveOrder() {}
 
   loadTheWayClean() {
     this.methodService.getApplyMethod(0, 100).subscribe(
@@ -115,13 +144,14 @@ export class BookNowComponent implements OnInit {
 
   loadActiveDay() {
     this.activeDay = this.timeService.getActiveTime();
-    console.log(this.activeDay);
   }
 
   loadFullAddress(phone: string) {
-    this.addressService.getFullAddress(phone).subscribe(data => {
-      this.addresses = data ? data : [];
-    });
+    if (phone && phone !== "") {
+      this.addressService.getFullAddress(phone).subscribe(data => {
+        this.addresses = data ? data : [];
+      });
+    }
   }
 
   loadProvice() {

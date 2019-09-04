@@ -13,6 +13,7 @@ import { MatCheckboxModule, MatSelectModule } from "@angular/material";
 import { VerticalStepperScrollerDirective } from "../../../cores/directives/vertical-stepper-scroller.directive";
 import { MethodService } from "../../../cores/services/method.service";
 import { BookNowService } from "./book-now.service";
+import { AddressService } from "src/app/cores/services/address.service";
 
 const routes: Routes = [
   {
@@ -38,6 +39,6 @@ const routes: Routes = [
     MatSelectModule,
     RouterModule.forChild(routes)
   ],
-  providers: [MethodService, BookNowService]
+  providers: [MethodService, BookNowService, AddressService]
 })
 export class BookNowModule {}

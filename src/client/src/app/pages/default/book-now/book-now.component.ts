@@ -4,6 +4,8 @@ import { MatStepper } from "@angular/material";
 import { MethodService } from "../../../cores/services/method.service";
 import { BookNowService } from "./book-now.service";
 import { Method } from "../../../cores/models/method.model";
+import { AddressService } from "src/app/cores/services/address.service";
+import { AddressUnit } from "src/app/cores/models/address.model";
 
 @Component({
   selector: "app-book-now",
@@ -11,28 +13,37 @@ import { Method } from "../../../cores/models/method.model";
   styleUrls: ["./book-now.component.scss"]
 })
 export class BookNowComponent implements OnInit {
-  isLinear = true;
-  isMobile = false;
+  isLinear: boolean;
+  isMobile: boolean;
+  isShowFormContact: boolean;
 
   serviceFormGroup: FormGroup;
   contactFormGroup: FormGroup;
   dateFormGroup: FormGroup;
 
-  isShowFormContact: boolean;
-
   methods: Method[];
+  provinces: AddressUnit[];
+  districts: AddressUnit[];
+  wards: AddressUnit[];
 
   constructor(
     private formBuilder: FormBuilder,
     private methodService: MethodService,
-    private bookNowService: BookNowService
+    private bookNowService: BookNowService,
+    private addressService: AddressService
   ) {
     this.isShowFormContact = true;
     this.methods = [];
+    this.isLinear = true;
+    this.isMobile = false;
+    this.provinces = [];
+    this.districts = [];
+    this.wards = [];
   }
 
   ngOnInit() {
     this.loadWayClean();
+    this.loadProvice();
 
     this.serviceFormGroup = this.formBuilder.group({});
     this.contactFormGroup = this.formBuilder.group({});
@@ -61,6 +72,15 @@ export class BookNowComponent implements OnInit {
     }
   }
 
+  onProvinceChanged(id) {
+    this.loadDistrict(id);
+    this.wards = [];
+  }
+
+  onDistrictChanged(id) {
+    this.loadWard(id);
+  }
+
   loadWayClean() {
     this.methodService.getApplyMethod(0, 100).subscribe(
       data => {
@@ -70,5 +90,25 @@ export class BookNowComponent implements OnInit {
         alert("Xảy ra lỗi");
       }
     );
+  }
+
+  loadProvice() {
+    this.addressService.getProvince().subscribe(data => {
+      this.provinces = data ? data : [];
+    });
+    this.districts = [];
+    this.wards = [];
+  }
+
+  loadDistrict(id: number) {
+    this.addressService.getDistrict(id).subscribe(data => {
+      this.districts = data ? data : [];
+    });
+  }
+
+  loadWard(id: number) {
+    this.addressService.getWard(id).subscribe(data => {
+      this.wards = data ? data : [];
+    });
   }
 }

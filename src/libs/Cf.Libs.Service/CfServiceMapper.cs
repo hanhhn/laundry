@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cf.Libs.DataAccess.Entities.Common;
 using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.Service.Dtos.Adresss;
 using Cf.Libs.Service.Dtos.Item;
@@ -27,10 +28,13 @@ namespace Cf.Libs.Service
 
             CreateMap<MethodRequest, Method>();
             CreateMap<Method, MethodDto>();
+            
 
             CreateMap<AddressRequest, DataAccess.Entities.Common.Address>();
             CreateMap<DataAccess.Entities.Common.Address, AddressDto>();
-            CreateMap<DataAccess.Entities.Common.Address, AddressUnitDto>();
+            CreateMap<Province, AddressUnitDto>();
+            CreateMap<District, AddressUnitDto>();
+            CreateMap<Ward, AddressUnitDto>();
         }
     }
 }

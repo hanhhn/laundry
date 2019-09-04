@@ -6,21 +6,21 @@ import { PagedList } from "../models/paged.model";
 import { AddressUnit } from "../models/address.model";
 
 @Injectable()
-export class MethodService {
+export class AddressService {
   constructor(private httpService: HttpService) {}
 
   getProvince(): Observable<AddressUnit[]> {
-    const url = "address/province";
+    const url = "address/get/province";
     return this.httpService.doGet(url, null).pipe(map(this.mapData));
   }
 
   getDistrict(provinceId: number): Observable<AddressUnit[]> {
-    const url = "address/district/" + provinceId;
+    const url = "address/get/district/" + provinceId;
     return this.httpService.doGet(url, null).pipe(map(this.mapData));
   }
 
   getWard(districtId: number): Observable<AddressUnit[]> {
-    const url = "address/ward/" + districtId;
+    const url = "address/get/ward/" + districtId;
     return this.httpService.doGet(url, null).pipe(map(this.mapData));
   }
 

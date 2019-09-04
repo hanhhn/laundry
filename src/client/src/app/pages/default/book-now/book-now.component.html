@@ -4,25 +4,14 @@
       <form [formGroup]="serviceFormGroup">
         <ng-template matStepLabel>Dịch vụ</ng-template>
         <div class="min-height">
-          <div
-            fxLayout="row"
-            fxLayoutAlign="space-between start"
-            fxLayout.xs="column"
-            fxLayoutAlign.xs="none"
-          >
+          <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.xs="column" fxLayoutAlign.xs="none">
             <div class="service" fxFlex="auto">
-              <div
-                class="sub-step"
-                *ngIf="getWayClean && getWayClean.length > 0"
-              >
+              <div class="sub-step" *ngIf="getWayClean && getWayClean.length > 0">
                 <h5 class="title">1. Chọn hình thức giặt</h5>
                 <div class="content">
                   <mat-radio-group fxLayout="column" fxLayoutGap="10px">
-                    <mat-radio-button
-                      *ngFor="let item of getWayClean"
-                      value="{{ item.id }}"
-                      >{{ item.name }}</mat-radio-button
-                    >
+                    <mat-radio-button *ngFor="let item of getWayClean" value="{{ item.id }}">{{ item.name }}
+                    </mat-radio-button>
                   </mat-radio-group>
                 </div>
               </div>
@@ -30,39 +19,24 @@
                 <h5 class="title">2. Chọn nước giặt và xả vải</h5>
                 <div class="content">
                   <mat-radio-group fxLayout="row" fxLayoutGap="10px">
-                    <mat-radio-button
-                      *ngFor="let item of getWaySoft"
-                      value="{{ item.id }}"
-                      >{{ item.name }}</mat-radio-button
-                    >
+                    <mat-radio-button *ngFor="let item of getWaySoft" value="{{ item.id }}">{{ item.name }}
+                    </mat-radio-button>
                   </mat-radio-group>
                 </div>
               </div>
-              <div
-                class="sub-step"
-                *ngIf="getWayStraight && getWayStraight.length > 0"
-              >
+              <div class="sub-step" *ngIf="getWayStraight && getWayStraight.length > 0">
                 <h5 class="title">3. Ủi đồ</h5>
                 <div class="content">
-                  <mat-checkbox
-                    *ngFor="let item of getWayStraight"
-                    value="{{ item.id }}"
-                  >
+                  <mat-checkbox *ngFor="let item of getWayStraight" value="{{ item.id }}">
                     {{ item.name }}
                   </mat-checkbox>
                 </div>
               </div>
-              <div
-                class="sub-step"
-                *ngIf="getWayClean && getWayStraight && getWaySoft"
-              >
+              <div class="sub-step" *ngIf="getWayClean && getWayStraight && getWaySoft">
                 <h5 class="title">4. Ghi chú</h5>
                 <div class="content">
                   <mat-form-field appearance="outline" style="width: 100%">
-                    <textarea
-                      matInput
-                      placeholder="Ghi chú cho chúng tôi"
-                    ></textarea>
+                    <textarea matInput placeholder="Ghi chú cho chúng tôi"></textarea>
                   </mat-form-field>
                 </div>
               </div>
@@ -87,30 +61,16 @@
       <form [formGroup]="contactFormGroup">
         <ng-template matStepLabel>Liên hệ</ng-template>
         <div class="min-height">
-          <div
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutAlign="space-between start"
-            fxLayoutAlign.xs="none"
-          >
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="none">
             <div class="phone" fxFlex="40" fxFlex.xs="auto">
               <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Số diện thoại"
-                  (change)="onPhoneChanged($event)"
-                />
+                <input matInput placeholder="Số diện thoại" (change)="onPhoneChanged($event)" />
               </mat-form-field>
               <button mat-button color="primary" *ngIf="!isShowFormContact">
                 Thêm địa chỉ mới
               </button>
             </div>
-            <div
-              class="address"
-              fxFlex="60"
-              fxFlex.xs="auto"
-              *ngIf="!isShowFormContact"
-            >
+            <div class="address" fxFlex="60" fxFlex.xs="auto" *ngIf="!isShowFormContact">
               <mat-radio-group fxLayout="column" fxLayoutGap="20px">
                 <mat-radio-button value="1">
                   <div class="address-item">
@@ -124,47 +84,30 @@
                 </mat-radio-button>
               </mat-radio-group>
             </div>
-            <div
-              class="contact"
-              fxFlex="60"
-              fxLayout="column"
-              fxFlex.xs="auto"
-              *ngIf="isShowFormContact"
-            >
+            <div class="contact" fxFlex="60" fxLayout="column" fxFlex.xs="auto" *ngIf="isShowFormContact">
               <mat-form-field>
                 <input matInput placeholder="Họ tên" />
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Tỉnh/Thành phố</mat-label>
-                <mat-select>
-                  <mat-option [value]="1">Huế</mat-option>
-                  <mat-option [value]="2">Đà Nẵng</mat-option>
+                <mat-select (selectionChange)="onProvinceChanged($event.value)">
+                  <mat-option  *ngFor="let item of provinces" [value]="item.id">{{ item.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Quận/Huyện</mat-label>
-                <mat-select>
-                  <mat-option [value]="1">Tp Huế</mat-option>
-                  <mat-option [value]="2">Tx Hương Thủy</mat-option>
-                  <mat-option [value]="3">Tx Hương Trà</mat-option>
+                <mat-select (selectionChange)="onDistrictChanged($event.value)">
+                  <mat-option *ngFor="let item of districts" [value]="item.id">{{ item.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Phường/Xã</mat-label>
                 <mat-select>
-                  <mat-option [value]="1">An cựu</mat-option>
-                  <mat-option [value]="2">An Hòa</mat-option>
-                  <mat-option [value]="3">Phú bình</mat-option>
-                  <mat-option [value]="4">Phú Hội</mat-option>
-                  <mat-option [value]="5">Thủy xuân</mat-option>
-                  <mat-option [value]="6">Vĩnh Ninh</mat-option>
+                  <mat-option *ngFor="let item of wards" [value]="item.id">{{ item.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field appearance="outline" style="width: 100%">
-                <textarea
-                  matInput
-                  placeholder="Địa chỉ: số nhà, đường..."
-                ></textarea>
+                <textarea matInput placeholder="Địa chỉ: số nhà, đường..."></textarea>
               </mat-form-field>
             </div>
           </div>
@@ -181,22 +124,10 @@
               <mat-form-field ngClass="pdr">
                 <mat-label>Chọn giờ</mat-label>
                 <mat-select>
-                  <mat-option [value]="1"
-                    ><strong>7h - 8h</strong
-                    ><span>Phí: 10.000đ</span></mat-option
-                  >
-                  <mat-option [value]="1"
-                    ><strong>11h - 13h</strong
-                    ><span>Phí: 15.000đ</span></mat-option
-                  >
-                  <mat-option [value]="1"
-                    ><strong>17h - 19h</strong
-                    ><span>Phí: 10.000đ</span></mat-option
-                  >
-                  <mat-option [value]="1"
-                    ><strong>Sau 19h</strong
-                    ><span>Phí: 15.000đ</span></mat-option
-                  >
+                  <mat-option [value]="1"><strong>7h - 8h</strong><span>Phí: 10.000đ</span></mat-option>
+                  <mat-option [value]="1"><strong>11h - 13h</strong><span>Phí: 15.000đ</span></mat-option>
+                  <mat-option [value]="1"><strong>17h - 19h</strong><span>Phí: 10.000đ</span></mat-option>
+                  <mat-option [value]="1"><strong>Sau 19h</strong><span>Phí: 15.000đ</span></mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

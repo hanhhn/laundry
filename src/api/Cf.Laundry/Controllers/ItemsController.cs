@@ -30,6 +30,27 @@ namespace Cf.Laundry.Controllers
             return _itemService.GetAll(pageIndex, pageSize);
         }
 
+        [HttpGet]
+        [Route("laundry")]
+        public IPagedList<ItemDto> GetLaundry(int pageIndex = 0, int pageSize = 10)
+        {
+            return _itemService.GetLaundry(pageIndex, pageSize);
+        }
+
+        [HttpGet]
+        [Route("dryclean")]
+        public IPagedList<ItemDto> GetDryClean(int pageIndex = 0, int pageSize = 10)
+        {
+            return _itemService.GetDryClean(pageIndex, pageSize);
+        }
+
+        [HttpGet]
+        [Route("transport")]
+        public IPagedList<ItemDto> GetTransport(int pageIndex = 0, int pageSize = 10)
+        {
+            return _itemService.GetTransport(pageIndex, pageSize);
+        }
+
         [HttpPost]
         [Route("save")]
         public ItemDto Save(ItemRequest request)

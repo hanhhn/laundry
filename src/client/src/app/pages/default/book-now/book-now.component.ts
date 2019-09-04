@@ -45,7 +45,7 @@ export class BookNowComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadWayClean();
+    this.loadTheWayClean();
     this.loadProvice();
 
     this.serviceFormGroup = this.formBuilder.group({});
@@ -84,7 +84,7 @@ export class BookNowComponent implements OnInit {
     this.loadWard(id);
   }
 
-  loadWayClean() {
+  loadTheWayClean() {
     this.methodService.getApplyMethod(0, 100).subscribe(
       data => {
         this.methods = data ? data.dataSource : [];
@@ -95,8 +95,8 @@ export class BookNowComponent implements OnInit {
     );
   }
 
-  loadAddress() {
-    this.addressService.getAddress(this.phone).subscribe(data => {
+  loadFullAddress(phone: string) {
+    this.addressService.getFullAddress(phone).subscribe(data => {
       this.addresses = data ? data : [];
     });
   }
@@ -113,6 +113,7 @@ export class BookNowComponent implements OnInit {
     this.addressService.getDistrict(id).subscribe(data => {
       this.districts = data ? data : [];
     });
+    this.wards = [];
   }
 
   loadWard(id: number) {

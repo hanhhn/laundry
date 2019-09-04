@@ -3,6 +3,12 @@ import { CommonModule } from "@angular/common";
 import { PriceListComponent } from "./price-list.component";
 import { Routes, RouterModule } from "@angular/router";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { DialogModule } from "primeng/dialog";
+import { FileUploadModule } from "primeng/fileupload";
+import { ItemService } from "../../../cores/services/item.service";
+import { ItemRateService } from "../../../cores/services/item-rate.service";
+import { DropdownModule } from "primeng/dropdown";
+import { CalendarModule } from "primeng/calendar";
 import {
   MatButtonModule,
   MatInputModule,
@@ -10,14 +16,6 @@ import {
   MatTableModule,
   MatIconModule
 } from "@angular/material";
-import { DialogModule } from "primeng/dialog";
-import { FileUploadModule } from "primeng/fileupload";
-import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { ItemService } from "../../../cores/services/item.service";
-import { ConfirmationService } from "primeng/api";
-import { ItemRateService } from "../../../cores/services/item-rate.service";
-import { DropdownModule } from "primeng/dropdown";
-import { CalendarModule } from "primeng/calendar";
 
 const routes: Routes = [
   {

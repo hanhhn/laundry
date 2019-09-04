@@ -9,7 +9,7 @@ namespace Cf.Libs.Service.Address
         IEnumerable<AddressUnitDto> GetProvince();
         IEnumerable<AddressUnitDto> GetDistrict(int provinceId);
         IEnumerable<AddressUnitDto> GetWard(int districtId);
-        IEnumerable<AddressDto> GetAddress(string phone);
+        IEnumerable<AddressDto> GetFullAddress(string phone);
         IEnumerable<AddressDto> Add(AddressRequest request);
         IEnumerable<AddressDto> Edit(AddressRequest request);
         bool SetDefault(string phone, int id);

@@ -1,6 +1,4 @@
 ﻿using Cf.Libs.Core.Enums;
-using Cf.Libs.Service.Dtos.ItemRate;
-using System.Collections.Generic;
 
 namespace Cf.Libs.Service.Dtos.Item
 {
@@ -13,11 +11,10 @@ namespace Cf.Libs.Service.Dtos.Item
         public bool Highlights { get; set; }
         public int Order { get; set; }
         public ItemType Type { get; set; }
+        public string TypeName => Type.ToString();
         public decimal? Rate { get; set; }
         public byte? Tax { get; set; }
         public decimal? DiscountRate { get; set; }
         public decimal? Discount { get; set; }
-
-        public ICollection<ItemRateDto> ItemRates { get; set; }
     }
 }

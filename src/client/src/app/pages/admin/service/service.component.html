@@ -17,7 +17,7 @@
       <thead>
         <tr>
           <th scope="col" width="100">#</th>
-          <th scope="col">Image</th>
+          <th scope="col">Type</th>
           <th scope="col">Name</th>
           <th scope="col" class="text-right">Rate</th>
           <th scope="col" class="text-right">Discount</th>
@@ -28,7 +28,7 @@
       <tbody>
         <tr *ngFor="let item of dataSource; let i = index">
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ item.image }}</td>
+          <td>{{ item.typeName }}</td>
           <td>{{ item.name }}</td>
           <td class="text-right">{{ item.rate }}</td>
           <td class="text-right">{{ item.discount }}</td>
@@ -67,6 +67,35 @@
 >
   <form [formGroup]="formControls">
     <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label required">Tên</label>
+      <div class="col-sm-5">
+        <input
+          formControlName="name"
+          class="form-control"
+          id="name"
+          placeholder="Tên dịch vụ"
+        />
+        <div class="error" *ngIf="submitted && controls.name.errors">
+          <label *ngIf="controls.name.errors.required"
+            >Tên dịch vụ bắt buộc nhập.</label
+          >
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <p-dropdown
+          [options]="itemTypes"
+          optionLabel="value"
+          formControlName="type"
+          placeholder="Loại dịch vụ"
+        ></p-dropdown>
+        <div class="error" *ngIf="submitted && controls.type.errors">
+          <label *ngIf="controls.type.errors.required"
+            >Loại dịch vụ bắt buộc nhập.</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
       <label for="image" class="col-sm-2 col-form-label required"
         >Hình ảnh</label
       >
@@ -102,22 +131,6 @@
           class="img-thumbnail thumbnail"
         />
         <div *ngIf="!controls.image.value" class="thumbnail"></div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="name" class="col-sm-2 col-form-label required">Tên</label>
-      <div class="col-sm-10">
-        <input
-          formControlName="name"
-          class="form-control"
-          id="name"
-          placeholder="Tên dịch vụ"
-        />
-        <div class="error" *ngIf="submitted && controls.name.errors">
-          <label *ngIf="controls.name.errors.required"
-            >Tên dịch vụ bắt buộc nhập.</label
-          >
-        </div>
       </div>
     </div>
     <div class="form-group row">

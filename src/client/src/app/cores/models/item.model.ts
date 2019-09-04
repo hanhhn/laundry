@@ -6,6 +6,7 @@ export class Item {
   highlights: boolean;
   order: number;
   type: number;
+  typeName: string;
   rate: number;
   tax: number;
   discountRate: number;
@@ -19,6 +20,7 @@ export class Item {
     this.highlights = json.highlights;
     this.order = json.order;
     this.type = json.type;
+    this.typeName = json.typeName;
     this.rate = json.rate;
     this.tax = json.tax;
     this.discountRate = json.discountRate;
@@ -58,6 +60,7 @@ export class ItemRequest {
   id: string;
   image: string;
   name: string;
+  type: number;
   description: string;
   highlights: boolean;
   order: number;

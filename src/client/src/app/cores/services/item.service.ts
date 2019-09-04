@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Item, ItemRequest } from "../models/item.model";
 import { map } from "rxjs/operators";
 import { PagedList } from "../models/paged.model";
+import { KeyValue } from "../models/object.model";
 
 @Injectable()
 export class ItemService {
@@ -27,6 +28,33 @@ export class ItemService {
     );
   }
 
+  getLaundry(pageIndex: number, pageSize: number): Observable<PagedList<Item>> {
+    const url = "items/laundry?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new PagedList(data) : null;
+      })
+    );
+  }
+
+  getDryClean(pageIndex: number, pageSize: number): Observable<PagedList<Item>> {
+    const url = "items/dryclean?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new PagedList(data) : null;
+      })
+    );
+  }
+
+  getTransport(pageIndex: number, pageSize: number): Observable<PagedList<Item>> {
+    const url = "items/transport?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new PagedList(data) : null;
+      })
+    );
+  }
+
   saveItem(item: ItemRequest): Observable<Item> {
     const url = "items/save";
     return this.httpService.doPost(url, item).pipe(
@@ -43,5 +71,13 @@ export class ItemService {
         return data;
       })
     );
+  }
+
+  getItemTypes(): KeyValue[] {
+    return [
+      new KeyValue(1, "Laundry"),
+      new KeyValue(2, "DryClean"),
+      new KeyValue(3, "Transport"),
+    ];
   }
 }

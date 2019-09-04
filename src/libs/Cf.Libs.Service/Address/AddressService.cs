@@ -67,7 +67,7 @@ namespace Cf.Libs.Service.Address
             return _mapper.Map<IEnumerable<AddressUnitDto>>(query.ToList());
         }
 
-        public IEnumerable<AddressDto> GetAddress(string phone)
+        public IEnumerable<AddressDto> GetFullAddress(string phone)
         {
             if(string.IsNullOrEmpty(phone))
             {

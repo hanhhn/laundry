@@ -4,6 +4,7 @@ import { Item, ItemRequest } from "../../../cores/models/item.model";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ImageService } from "../../../cores/services/image.service";
 import { ConfirmationService } from "primeng/api";
+import { KeyValue } from "../../../cores/models/object.model";
 
 @Component({
   selector: "app-service",
@@ -11,11 +12,11 @@ import { ConfirmationService } from "primeng/api";
   styleUrls: ["./service.component.scss"]
 })
 export class ServiceComponent implements OnInit {
-  dataSource: Item[] = [];
+  dataSource: Item[];
+  itemTypes: KeyValue[];
 
-  display = false;
-
-  submitted = false;
+  display: boolean;
+  submitted: boolean;
   formControls: FormGroup;
 
   constructor(
@@ -23,7 +24,12 @@ export class ServiceComponent implements OnInit {
     private itemService: ItemService,
     private imageService: ImageService,
     private confirmationService: ConfirmationService
-  ) {}
+  ) {
+    this.dataSource = [];
+    this.itemTypes = [];
+    this.display = false;
+    this.submitted = false;
+  }
 
   get controls() {
     return this.formControls.controls;
@@ -38,10 +44,12 @@ export class ServiceComponent implements OnInit {
 
   ngOnInit() {
     this.loadItemList();
+    this.loadItemType();
 
     this.formControls = this.formBuilder.group({
       id: [0],
-      image: [null, Validators.required],
+      type: [null, Validators.required],
+      image: [null],
       name: [null, Validators.required],
       description: [null],
       order: [1, Validators.required],
@@ -50,26 +58,27 @@ export class ServiceComponent implements OnInit {
   }
 
   loadItemList() {
-    this.itemService.getAll(0, 10).subscribe(data => {
+    this.itemService.getAll(0, 100).subscribe(data => {
       this.dataSource = data.dataSource ? data.dataSource : [];
     });
   }
 
+  loadItemType() {
+    this.itemTypes = this.itemService.getItemTypes();
+  }
+
   onShowAddDialog() {
     this.display = true;
-
-    this.formControls = this.formBuilder.group({
-      id: [0],
-      image: [null, Validators.required],
-      name: [null, Validators.required],
-      description: [null],
-      order: [1, Validators.required],
-      highlights: [false]
-    });
+    this.formControls.reset();
+    this.controls.id.patchValue(0);
+    this.controls.order.patchValue(1);
+    this.controls.highlights.patchValue(false);
   }
 
   onShowEditDialog(item: Item) {
+    const type = this.itemTypes.filter(x => x.key === item.type);
     this.controls.id.patchValue(item.id);
+    this.controls.type.patchValue(type[0]);
     this.controls.image.patchValue(item.image);
     this.controls.name.patchValue(item.name);
     this.controls.description.patchValue(item.description);
@@ -86,8 +95,9 @@ export class ServiceComponent implements OnInit {
     if (this.formControls.valid) {
       const request = new ItemRequest();
       request.id = this.controls.id.value;
-      request.image = this.controls.image.value;
       request.name = this.controls.name.value;
+      request.type = this.controls.type.value.key;
+      request.image = this.controls.image.value;
       request.description = this.controls.description.value;
       request.order = this.controls.order.value;
       request.highlights = this.controls.highlights.value;

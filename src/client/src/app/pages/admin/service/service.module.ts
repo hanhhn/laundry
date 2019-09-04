@@ -12,10 +12,9 @@ import {
 import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { ItemService } from "../../../cores/services/item.service";
-import { FormBuilder, ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ImageService } from "../../../cores/services/image.service";
-import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { ConfirmationService } from "primeng/api";
+import { DropdownModule } from "primeng/components/dropdown/dropdown";
 
 const routes: Routes = [
   {
@@ -37,6 +36,7 @@ const routes: Routes = [
     MatIconModule,
     DialogModule,
     FileUploadModule,
+    DropdownModule,
     RouterModule.forChild(routes)
   ],
   providers: [ItemService, ImageService],

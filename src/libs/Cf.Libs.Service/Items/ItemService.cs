@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cf.Libs.Core.Enums;
 using Cf.Libs.Core.Exeptions;
 using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
@@ -19,7 +20,7 @@ namespace Cf.Libs.Service.Items
 
         public ItemService(
             IUnitOfWork unitOfWork,
-            IMapper mapper, 
+            IMapper mapper,
             IItemRepository itemRepository,
             IItemRateRepository rateRepository) : base(unitOfWork, mapper)
         {
@@ -40,11 +41,41 @@ namespace Cf.Libs.Service.Items
 
         public IPagedList<ItemDto> GetAll(int pageIndex, int pageSize)
         {
+            return GetByType(pageIndex, pageSize, null);
+        }
+
+        public IPagedList<ItemDto> GetLaundry(int pageIndex, int pageSize)
+        {
+            return GetByType(pageIndex, pageSize, ItemType.Laundry);
+        }
+
+        public IPagedList<ItemDto> GetDryClean(int pageIndex, int pageSize)
+        {
+            return GetByType(pageIndex, pageSize, ItemType.DryClean);
+        }
+
+        public IPagedList<ItemDto> GetTransport(int pageIndex, int pageSize)
+        {
+            return GetByType(pageIndex, pageSize, ItemType.Transport);
+        }
+
+        private IPagedList<ItemDto> GetByType(int pageIndex, int pageSize, ItemType? type)
+        {
+
             var itemQuery = from item in _itemRepository.GetQuery()
-                            orderby item.Name ascending
                             orderby item.Order ascending
+                            orderby item.Name ascending
+                            orderby item.ModifiedDate ascending
+                            orderby item.CreateDate ascending
                             where !item.IsDeleted
                             select item;
+
+            if (type.HasValue)
+            {
+                itemQuery = from item in itemQuery
+                            where item.Type == type
+                            select item;
+            }
 
             var rateQuery = from rate in _rateRepository.GetQuery()
                             where !rate.IsDeleted && DateTime.Now > rate.ApplyDate

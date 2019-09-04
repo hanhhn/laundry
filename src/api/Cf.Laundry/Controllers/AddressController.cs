@@ -39,9 +39,9 @@ namespace Cf.Laundry.Controllers
 
         [HttpGet]
         [Route("get/{phone}")]
-        public IEnumerable<AddressDto> GetAddress(string phone)
+        public IEnumerable<AddressDto> GetFullAddress(string phone)
         {
-            return _addressService.GetAddress(phone);
+            return _addressService.GetFullAddress(phone);
         }
 
         [HttpPost]

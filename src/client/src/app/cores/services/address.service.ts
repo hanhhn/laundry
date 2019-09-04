@@ -23,7 +23,7 @@ export class AddressService {
     return this.httpService.doGet(url, null).pipe(map(this.mapAddressUnit));
   }
 
-  getAddress(phone: string): Observable<Address[]> {
+  getFullAddress(phone: string): Observable<Address[]> {
     const url = "address/get/" + phone;
     return this.httpService.doGet(url, null).pipe(map(this.mapAddress));
   }

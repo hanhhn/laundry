@@ -14,6 +14,8 @@ import { VerticalStepperScrollerDirective } from "../../../cores/directives/vert
 import { MethodService } from "../../../cores/services/method.service";
 import { BookNowService } from "./book-now.service";
 import { AddressService } from "src/app/cores/services/address.service";
+import { ItemService } from "../../../cores/services/item.service";
+import { TimeService } from "../../../cores/services/time.service";
 
 const routes: Routes = [
   {
@@ -39,6 +41,12 @@ const routes: Routes = [
     MatSelectModule,
     RouterModule.forChild(routes)
   ],
-  providers: [MethodService, BookNowService, AddressService]
+  providers: [
+    MethodService,
+    BookNowService,
+    AddressService,
+    ItemService,
+    TimeService
+  ]
 })
 export class BookNowModule {}

@@ -56,7 +56,7 @@ namespace Cf.Libs.Service.Items
 
         public IPagedList<ItemDto> GetTransport(int pageIndex, int pageSize)
         {
-            return GetByType(pageIndex, pageSize, ItemType.Transport);
+            return GetByType(pageIndex, pageSize, ItemType.TransportTime);
         }
 
         private IPagedList<ItemDto> GetByType(int pageIndex, int pageSize, ItemType? type)

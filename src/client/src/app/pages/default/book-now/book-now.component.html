@@ -4,13 +4,24 @@
       <form [formGroup]="serviceFormGroup">
         <ng-template matStepLabel>Dịch vụ</ng-template>
         <div class="min-height">
-          <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.xs="column" fxLayoutAlign.xs="none">
+          <div
+            fxLayout="row"
+            fxLayoutAlign="space-between start"
+            fxLayout.xs="column"
+            fxLayoutAlign.xs="none"
+          >
             <div class="service" fxFlex="auto">
-              <div class="sub-step" *ngIf="getWayClean && getWayClean.length > 0">
+              <div
+                class="sub-step"
+                *ngIf="getWayClean && getWayClean.length > 0"
+              >
                 <h5 class="title">1. Chọn hình thức giặt</h5>
                 <div class="content">
                   <mat-radio-group fxLayout="column" fxLayoutGap="10px">
-                    <mat-radio-button *ngFor="let item of getWayClean" value="{{ item.id }}">{{ item.name }}
+                    <mat-radio-button
+                      *ngFor="let item of getWayClean"
+                      value="{{ item.id }}"
+                      >{{ item.name }}
                     </mat-radio-button>
                   </mat-radio-group>
                 </div>
@@ -19,24 +30,39 @@
                 <h5 class="title">2. Chọn nước giặt và xả vải</h5>
                 <div class="content">
                   <mat-radio-group fxLayout="row" fxLayoutGap="10px">
-                    <mat-radio-button *ngFor="let item of getWaySoft" value="{{ item.id }}">{{ item.name }}
+                    <mat-radio-button
+                      *ngFor="let item of getWaySoft"
+                      value="{{ item.id }}"
+                      >{{ item.name }}
                     </mat-radio-button>
                   </mat-radio-group>
                 </div>
               </div>
-              <div class="sub-step" *ngIf="getWayStraight && getWayStraight.length > 0">
+              <div
+                class="sub-step"
+                *ngIf="getWayStraight && getWayStraight.length > 0"
+              >
                 <h5 class="title">3. Ủi đồ</h5>
                 <div class="content">
-                  <mat-checkbox *ngFor="let item of getWayStraight" value="{{ item.id }}">
+                  <mat-checkbox
+                    *ngFor="let item of getWayStraight"
+                    value="{{ item.id }}"
+                  >
                     {{ item.name }}
                   </mat-checkbox>
                 </div>
               </div>
-              <div class="sub-step" *ngIf="getWayClean && getWayStraight && getWaySoft">
+              <div
+                class="sub-step"
+                *ngIf="getWayClean && getWayStraight && getWaySoft"
+              >
                 <h5 class="title">4. Ghi chú</h5>
                 <div class="content">
                   <mat-form-field appearance="outline" style="width: 100%">
-                    <textarea matInput placeholder="Ghi chú cho chúng tôi"></textarea>
+                    <textarea
+                      matInput
+                      placeholder="Ghi chú cho chúng tôi"
+                    ></textarea>
                   </mat-form-field>
                 </div>
               </div>
@@ -61,16 +87,30 @@
       <form [formGroup]="contactFormGroup">
         <ng-template matStepLabel>Liên hệ</ng-template>
         <div class="min-height">
-          <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="none">
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutAlign="space-between start"
+            fxLayoutAlign.xs="none"
+          >
             <div class="phone" fxFlex="40" fxFlex.xs="auto">
               <mat-form-field>
-                <input matInput placeholder="Số diện thoại" (change)="onPhoneChanged($event)" />
+                <input
+                  matInput
+                  placeholder="Số diện thoại"
+                  (change)="onPhoneChanged($event)"
+                />
               </mat-form-field>
               <button mat-button color="primary" *ngIf="!isShowFormContact">
                 Thêm địa chỉ mới
               </button>
             </div>
-            <div class="address" fxFlex="60" fxFlex.xs="auto" *ngIf="!isShowFormContact">
+            <div
+              class="address"
+              fxFlex="60"
+              fxFlex.xs="auto"
+              *ngIf="!isShowFormContact"
+            >
               <mat-radio-group fxLayout="column" fxLayoutGap="20px">
                 <mat-radio-button value="1">
                   <div class="address-item">
@@ -84,30 +124,49 @@
                 </mat-radio-button>
               </mat-radio-group>
             </div>
-            <div class="contact" fxFlex="60" fxLayout="column" fxFlex.xs="auto" *ngIf="isShowFormContact">
+            <div
+              class="contact"
+              fxFlex="60"
+              fxLayout="column"
+              fxFlex.xs="auto"
+              *ngIf="isShowFormContact"
+            >
               <mat-form-field>
                 <input matInput placeholder="Họ tên" />
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Tỉnh/Thành phố</mat-label>
                 <mat-select (selectionChange)="onProvinceChanged($event.value)">
-                  <mat-option  *ngFor="let item of provinces" [value]="item.id">{{ item.name }}</mat-option>
+                  <mat-option
+                    *ngFor="let item of provinces"
+                    [value]="item.id"
+                    >{{ item.name }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Quận/Huyện</mat-label>
                 <mat-select (selectionChange)="onDistrictChanged($event.value)">
-                  <mat-option *ngFor="let item of districts" [value]="item.id">{{ item.name }}</mat-option>
+                  <mat-option
+                    *ngFor="let item of districts"
+                    [value]="item.id"
+                    >{{ item.name }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
                 <mat-label>Phường/Xã</mat-label>
                 <mat-select>
-                  <mat-option *ngFor="let item of wards" [value]="item.id">{{ item.name }}</mat-option>
+                  <mat-option *ngFor="let item of wards" [value]="item.id">{{
+                    item.name
+                  }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field appearance="outline" style="width: 100%">
-                <textarea matInput placeholder="Địa chỉ: số nhà, đường..."></textarea>
+                <textarea
+                  matInput
+                  placeholder="Địa chỉ: số nhà, đường..."
+                ></textarea>
               </mat-form-field>
             </div>
           </div>
@@ -117,17 +176,30 @@
               <mat-form-field ngClass="pdr">
                 <mat-label>Chọn ngày</mat-label>
                 <mat-select>
-                  <mat-option [value]="1">Hôm nay (16/08)</mat-option>
-                  <mat-option [value]="2">Ngày mai (17/08)</mat-option>
+                  <mat-option
+                    *ngFor="let item of activeDay"
+                    [value]="item.key"
+                    >{{ item.value }}</mat-option
+                  >
                 </mat-select>
               </mat-form-field>
               <mat-form-field ngClass="pdr">
                 <mat-label>Chọn giờ</mat-label>
                 <mat-select>
-                  <mat-option [value]="1"><strong>7h - 8h</strong><span>Phí: 10.000đ</span></mat-option>
-                  <mat-option [value]="1"><strong>11h - 13h</strong><span>Phí: 15.000đ</span></mat-option>
-                  <mat-option [value]="1"><strong>17h - 19h</strong><span>Phí: 10.000đ</span></mat-option>
-                  <mat-option [value]="1"><strong>Sau 19h</strong><span>Phí: 15.000đ</span></mat-option>
+                  <mat-option
+                    *ngFor="let item of transportTime"
+                    [value]="item.id"
+                    ><div
+                      class="inner"
+                      fxLayout="row"
+                      fxLayoutAlign="space-between start"
+                    >
+                      <strong>{{ item.name }}</strong>
+                      <div
+                        *ngIf="item.description && item.description.length > 0"
+                        [innerHTML]="item.description"
+                      ></div></div
+                  ></mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -137,7 +209,7 @@
               Quay lại
             </button>
             <button mat-raised-button matStepperNext color="primary">
-              Tiếp Theo
+              Hoàn thành
             </button>
           </div>
         </div>

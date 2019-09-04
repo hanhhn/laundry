@@ -1,6 +1,6 @@
 export class KeyValue {
-  key: number;
-  value: number;
+  key: any;
+  value: any;
 
   constructor(key: any, value: any) {
     this.key = key;

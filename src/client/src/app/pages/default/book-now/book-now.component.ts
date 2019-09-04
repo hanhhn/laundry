@@ -6,6 +6,10 @@ import { BookNowService } from "./book-now.service";
 import { Method } from "../../../cores/models/method.model";
 import { AddressService } from "src/app/cores/services/address.service";
 import { AddressUnit, Address } from "src/app/cores/models/address.model";
+import { Item } from "../../../cores/models/item.model";
+import { ItemService } from "../../../cores/services/item.service";
+import { KeyValue } from "../../../cores/models/object.model";
+import { TimeService } from "../../../cores/services/time.service";
 
 @Component({
   selector: "app-book-now",
@@ -27,12 +31,16 @@ export class BookNowComponent implements OnInit {
   districts: AddressUnit[];
   wards: AddressUnit[];
   addresses: Address[];
+  transportTime: Item[];
+  activeDay: KeyValue[];
 
   constructor(
     private formBuilder: FormBuilder,
     private methodService: MethodService,
     private bookNowService: BookNowService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private itemService: ItemService,
+    private timeService: TimeService
   ) {
     this.isShowFormContact = true;
     this.methods = [];
@@ -42,11 +50,15 @@ export class BookNowComponent implements OnInit {
     this.districts = [];
     this.wards = [];
     this.addresses = [];
+    this.transportTime = [];
+    this.activeDay = [];
   }
 
   ngOnInit() {
     this.loadTheWayClean();
     this.loadProvice();
+    this.loadTransportTime();
+    this.loadActiveDay();
 
     this.serviceFormGroup = this.formBuilder.group({});
     this.contactFormGroup = this.formBuilder.group({});
@@ -93,6 +105,17 @@ export class BookNowComponent implements OnInit {
         alert("Xảy ra lỗi");
       }
     );
+  }
+
+  loadTransportTime() {
+    this.itemService.getTransport(0, 10).subscribe(data => {
+      this.transportTime = data ? data.dataSource : [];
+    });
+  }
+
+  loadActiveDay() {
+    this.activeDay = this.timeService.getActiveTime();
+    console.log(this.activeDay);
   }
 
   loadFullAddress(phone: string) {

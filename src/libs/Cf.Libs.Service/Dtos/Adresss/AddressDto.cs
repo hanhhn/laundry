@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cf.Libs.Service.Dtos.Adresss
+﻿namespace Cf.Libs.Service.Dtos.Adresss
 {
     public class AddressDto
     {
+        public int Id { get; set; }
+        public string Phone { get; set; }
+        public string FullName { get; set; }
+        public bool IsDefault { get; set; }
+        public int ProviceId { get; set; }
+        public string Provice { get; set; }
+        public int DistrictId { get; set; }
+        public string District { get; set; }
+        public int WardId { get; set; }
+        public string Street { get; set; }
     }
 }

@@ -10,17 +10,17 @@ export class AddressService {
   constructor(private httpService: HttpService) {}
 
   getProvince(): Observable<AddressUnit[]> {
-    const url = "address/get/province";
+    const url = "address/province/get";
     return this.httpService.doGet(url, null).pipe(map(this.mapData));
   }
 
   getDistrict(provinceId: number): Observable<AddressUnit[]> {
-    const url = "address/get/district/" + provinceId;
+    const url = "address/district/get/" + provinceId;
     return this.httpService.doGet(url, null).pipe(map(this.mapData));
   }
 
   getWard(districtId: number): Observable<AddressUnit[]> {
-    const url = "address/get/ward/" + districtId;
+    const url = "address/ward/get/" + districtId;
     return this.httpService.doGet(url, null).pipe(map(this.mapData));
   }
 

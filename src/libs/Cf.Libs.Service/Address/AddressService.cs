@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Cf.Libs.Core.Infrastructure.Paging;
+using Cf.Libs.Core.Exeptions;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Repository.Addresses;
@@ -65,6 +65,85 @@ namespace Cf.Libs.Service.Address
                         select item;
 
             return _mapper.Map<IEnumerable<AddressUnitDto>>(query.ToList());
+        }
+
+        public IEnumerable<AddressDto> GetAddress(string phone)
+        {
+            if(string.IsNullOrEmpty(phone))
+            {
+                throw new InformationException("Param is invalid.");
+            }
+
+            var records = _addressRepository.FindByPhone(phone);
+
+            return _mapper.Map<IEnumerable<AddressDto>>(records.ToList());
+        }
+
+        public IEnumerable<AddressDto> Add(AddressRequest request)
+        {
+            var address = _addressRepository.Get(request.Id);
+            var record = _addressRepository.Add(address);
+            if (_unitOfWork.SaveChanges() == 0)
+            {
+                throw new InformationException("An error occurred during save.");
+            }
+
+            var records = _addressRepository.FindByPhone(request.Phone);
+            return _mapper.Map<IEnumerable<AddressDto>>(records.ToList());
+        }
+
+        public IEnumerable<AddressDto> Edit(AddressRequest request)
+        {
+            var record = _addressRepository.Get(request.Id);
+            if (record == null)
+            {
+                throw new RecordNotFoundException("Record can not be found.");
+            }
+
+            //record.Phone = request.Phone;
+            record.FullName = request.FullName;
+            record.IsDefault = request.IsDefault;
+            record.ProviceId = request.ProviceId;
+            record.Provice = request.Provice;
+            record.DistrictId = request.DistrictId;
+            record.District = request.District;
+            record.WardId = request.WardId;
+            record.Ward = request.Ward;
+            record.Street = request.Street;
+            _addressRepository.Update(record);
+
+            if (_unitOfWork.SaveChanges() == 0)
+            {
+                throw new InformationException("An error occurred during save.");
+            }
+
+            var records = _addressRepository.FindByPhone(request.Phone);
+            return _mapper.Map<IEnumerable<AddressDto>>(records.ToList());
+        }
+
+        public bool SetDefault(string phone, int id)
+        {
+            var record = _addressRepository.Get(id);
+            if (record == null)
+            {
+                throw new RecordNotFoundException("Record can not be found.");
+            }
+
+            var address = _addressRepository.FindByPhone(phone).ToList();
+            foreach (var item in address)
+            {
+                item.IsDefault = false;
+                _addressRepository.Update(item);
+            }
+            record.IsDefault = true;
+            _addressRepository.Update(record);
+
+            if (_unitOfWork.SaveChanges() != address.Count + 1)
+            {
+                throw new InformationException("An error occurred during save.");
+            }
+
+            return true;
         }
     }
 }

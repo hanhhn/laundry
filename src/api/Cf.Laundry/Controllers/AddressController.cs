@@ -17,24 +17,49 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
-        [Route("get/province")]
+        [Route("province/get")]
         public IEnumerable<AddressUnitDto> GetProvince()
         {
             return _addressService.GetProvince();
         }
 
         [HttpGet]
-        [Route("get/district/{id}")]
+        [Route("district/get/{id}")]
         public IEnumerable<AddressUnitDto> GetDistrict(int id)
         {
             return _addressService.GetDistrict(id);
         }
 
         [HttpGet]
-        [Route("get/ward/{id}")]
+        [Route("ward/get/{id}")]
         public IEnumerable<AddressUnitDto> GetWard(int id)
         {
             return _addressService.GetWard(id);
+        }
+
+        [HttpGet]
+        [Route("get/{phone}")]
+        public IEnumerable<AddressDto> GetAddress(string phone)
+        {
+            return _addressService.GetAddress(phone);
+        }
+
+        [HttpPost]
+        [Route("save")]
+        public IEnumerable<AddressDto> SaveAddress(AddressRequest request)
+        {
+            if (request.Id > 0)
+            {
+                return _addressService.Edit(request);
+            }
+            return _addressService.Add(request);
+        }
+
+        [HttpPost]
+        [Route("default")]
+        public bool SetDefaultAddress(string phone, int id)
+        {
+            return _addressService.SetDefault(phone, id);
         }
     }
 }

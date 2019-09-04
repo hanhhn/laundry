@@ -5,7 +5,7 @@ import { MethodService } from "../../../cores/services/method.service";
 import { BookNowService } from "./book-now.service";
 import { Method } from "../../../cores/models/method.model";
 import { AddressService } from "src/app/cores/services/address.service";
-import { AddressUnit } from "src/app/cores/models/address.model";
+import { AddressUnit, Address } from "src/app/cores/models/address.model";
 
 @Component({
   selector: "app-book-now",
@@ -16,6 +16,7 @@ export class BookNowComponent implements OnInit {
   isLinear: boolean;
   isMobile: boolean;
   isShowFormContact: boolean;
+  phone: string;
 
   serviceFormGroup: FormGroup;
   contactFormGroup: FormGroup;
@@ -25,6 +26,7 @@ export class BookNowComponent implements OnInit {
   provinces: AddressUnit[];
   districts: AddressUnit[];
   wards: AddressUnit[];
+  addresses: Address[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +41,7 @@ export class BookNowComponent implements OnInit {
     this.provinces = [];
     this.districts = [];
     this.wards = [];
+    this.addresses = [];
   }
 
   ngOnInit() {
@@ -90,6 +93,12 @@ export class BookNowComponent implements OnInit {
         alert("Xảy ra lỗi");
       }
     );
+  }
+
+  loadAddress() {
+    this.addressService.getAddress(this.phone).subscribe(data => {
+      this.addresses = data ? data : [];
+    });
   }
 
   loadProvice() {

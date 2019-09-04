@@ -11,6 +11,7 @@
         public int DistrictId { get; set; }
         public string District { get; set; }
         public int WardId { get; set; }
+        public int Ward { get; set; }
         public string Street { get; set; }
     }
 }

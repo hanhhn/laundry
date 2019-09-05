@@ -5,7 +5,11 @@ import { MethodService } from "../../../cores/services/method.service";
 import { BookNowService } from "./book-now.service";
 import { Method } from "../../../cores/models/method.model";
 import { AddressService } from "src/app/cores/services/address.service";
-import { AddressUnit, Address } from "src/app/cores/models/address.model";
+import {
+  AddressUnit,
+  Address,
+  AddressRequest
+} from "src/app/cores/models/address.model";
 import { Item } from "../../../cores/models/item.model";
 import { ItemService } from "../../../cores/services/item.service";
 import { KeyValue } from "../../../cores/models/object.model";
@@ -70,12 +74,12 @@ export class BookNowComponent implements OnInit {
     });
 
     this.contactFormGroup = this.formBuilder.group({
+      id: [0],
       phone: [null, Validators.required],
-      addressId: [null, Validators.required],
       fullName: [null, Validators.required],
       province: [null, Validators.required],
       district: [null, Validators.required],
-      wards: [null, Validators.required],
+      ward: [null, Validators.required],
       street: [null, Validators.required],
       dateOfReceipt: [null, Validators.required],
       hoursOfReceipt: [null, Validators.required]
@@ -104,6 +108,14 @@ export class BookNowComponent implements OnInit {
     return this.addresses && this.addresses.length > 0;
   }
 
+  get serviceControls() {
+    return this.serviceFormGroup.controls;
+  }
+
+  get contactControls() {
+    return this.contactFormGroup.controls;
+  }
+
   onPhoneChanged(e) {
     if (e.target && e.target.value) {
       const length = e.target.value.length;
@@ -124,9 +136,28 @@ export class BookNowComponent implements OnInit {
     this.loadWard(id);
   }
 
-  onSaveAddress() {}
+  onConfirmOrder(e) {
+    this.saveAddress();
+  }
 
-  onSaveOrder() {}
+  saveAddress() {
+    if (this.contactFormGroup.valid) {
+      const request = new AddressRequest();
+      request.id = this.contactControls.id.value;
+      request.phone = this.contactControls.phone.value;
+      request.fullName = this.contactControls.fullName.value;
+      request.provinceId = this.contactControls.province.value;
+      request.districtId = this.contactControls.district.value;
+      request.wardId = this.contactControls.ward.value;
+      request.street = this.contactControls.street.value;
+
+      this.addressService.save(request).subscribe(data => {
+        this.addresses = data ? data : [];
+      });
+    }
+  }
+
+  saveOrder() {}
 
   loadTheWayClean() {
     this.methodService.getApplyMethod(0, 100).subscribe(

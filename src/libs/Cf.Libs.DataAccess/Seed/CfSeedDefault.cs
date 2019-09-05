@@ -9,9 +9,9 @@ namespace Cf.Libs.DataAccess.Seed
     {
         public static void Seeding(ModelBuilder builder)
         {
-            //SeedAddress(builder);
+            SeedAddress(builder);
 
-            //SeedMethod(builder);
+            SeedMethod(builder);
         }
 
         private static void SeedAddress(ModelBuilder builder)
@@ -31,8 +31,8 @@ namespace Cf.Libs.DataAccess.Seed
             var tpHue = new District
             {
                 Id = 1,
-                Name = "Tp Huế",
-                Prefix = "Thành phố",
+                Name = "Huế",
+                Prefix = "Tp",
                 ProvinceId = 1,
                 SortOrder = 1,
                 IsPublished = true,
@@ -226,7 +226,40 @@ namespace Cf.Libs.DataAccess.Seed
             };
             method7.Default(true, "system");
 
-            builder.Entity<Method>().HasData(method1, method2, method3, method4, method5, method6, method7);
+            var method8 = new Method
+            {
+                Id = 8,
+                Name = "7h - 11h",
+                Description = "<strong> Phí: </strong> 10.000đ <small>(dưới 5km)</small>",
+                SortOrder = 1,
+                EnableDiscount = false,
+                Type = Core.Enums.MethodType.Delivery.ToString()
+            };
+            method8.Default(true, "system");
+
+            var method9 = new Method
+            {
+                Id = 9,
+                Name = "13h - 15h",
+                Description = "<strong> Phí: </strong> 10.000đ <small>(dưới 5km)</small>",
+                SortOrder = 1,
+                EnableDiscount = false,
+                Type = Core.Enums.MethodType.Delivery.ToString()
+            };
+            method9.Default(true, "system");
+
+            var method10 = new Method
+            {
+                Id = 10,
+                Name = "Sau 18h",
+                Description = "<strong> Phí: </strong> 15.000đ",
+                SortOrder = 1,
+                EnableDiscount = false,
+                Type = Core.Enums.MethodType.Delivery.ToString()
+            };
+            method10.Default(true, "system");
+
+            builder.Entity<Method>().HasData(method1, method2, method3, method4, method5, method6, method7, method8, method9, method10);
         }
     }
 }

@@ -17,26 +17,28 @@ export class Address {
   phone: string;
   fullName: string;
   isDefault: string;
-  proviceId: number;
-  provice: string;
+  provinceId: number;
+  province: string;
   districtId: number;
   district: string;
   wardId: number;
   ward: string;
   street: string;
+  fullAddress: string;
 
   constructor(json) {
     this.id = json.id;
     this.phone = json.phone;
     this.fullName = json.fullName;
     this.isDefault = json.isDefault;
-    this.proviceId = json.proviceId;
-    this.provice = json.provice;
+    this.provinceId = json.provinceId;
+    this.province = json.province;
     this.districtId = json.districtId;
     this.district = json.district;
     this.wardId = json.wardId;
     this.ward = json.ward;
-    this.street = json.wardId;
+    this.street = json.street;
+    this.fullAddress = json.fullAddress;
   }
 }
 
@@ -45,8 +47,9 @@ export class AddressRequest {
   phone: string;
   fullName: string;
   isDefault: string;
-  proviceId: number;
+  provinceId: number;
   districtId: number;
   wardId: number;
+  ward: string;
   street: string;
 }

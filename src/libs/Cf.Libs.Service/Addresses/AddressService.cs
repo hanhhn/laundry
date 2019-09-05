@@ -2,6 +2,7 @@
 using Cf.Libs.Core.Exeptions;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
+using Cf.Libs.DataAccess.Entities.Common;
 using Cf.Libs.DataAccess.Repository.Addresses;
 using Cf.Libs.DataAccess.Repository.Districts;
 using Cf.Libs.DataAccess.Repository.Provinces;
@@ -81,7 +82,15 @@ namespace Cf.Libs.Service.Addresses
 
         public IEnumerable<AddressDto> Add(AddressRequest request)
         {
-            var address = _addressRepository.Get(request.Id);
+            var province = _provinceRepository.Get(request.ProvinceId);
+            var district = _districtRepository.Get(request.DistrictId);
+            var ward = _wardRepository.Get(request.WardId);
+
+            var address = _mapper.Map<Address>(request);
+            address.Province = string.Format("{0} {1}", province.Prefix, province.Name).Trim();
+            address.District = string.Format("{0} {1}", district.Prefix, district.Name).Trim();
+            address.Ward = string.Format("{0} {1}", ward.Prefix, ward.Name).Trim();
+
             var record = _addressRepository.Add(address);
             if (_unitOfWork.SaveChanges() == 0)
             {
@@ -103,8 +112,8 @@ namespace Cf.Libs.Service.Addresses
             //record.Phone = request.Phone;
             record.FullName = request.FullName;
             record.IsDefault = request.IsDefault;
-            record.ProviceId = request.ProviceId;
-            record.Provice = request.Provice;
+            record.ProvinceId = request.ProvinceId;
+            record.Province = request.Province;
             record.DistrictId = request.DistrictId;
             record.District = request.District;
             record.WardId = request.WardId;

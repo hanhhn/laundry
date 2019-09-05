@@ -25,7 +25,7 @@ namespace Cf.Libs.DataAccess.Mapping
             prop = typeof(TEntity).GetProperty(nameof(IChangeableEntity.CreateUserId));
             if (prop != null)
             {
-                builder.Property(nameof(IChangeableEntity.CreateUserId)).HasColumnType("nvarchar(50)");
+                builder.Property(nameof(IChangeableEntity.CreateUserId)).HasColumnType("varchar(50)");
             }
 
             prop = typeof(TEntity).GetProperty(nameof(IChangeableEntity.ModifiedDate));
@@ -34,36 +34,29 @@ namespace Cf.Libs.DataAccess.Mapping
                 builder.Property(nameof(IChangeableEntity.ModifiedDate)).HasColumnType("timestamp");
             }
 
-
             prop = typeof(TEntity).GetProperty(nameof(IChangeableEntity.ModifyUserId));
             if (prop != null)
             {
-                builder.Property(nameof(IChangeableEntity.ModifyUserId)).HasColumnType("nvarchar(50)");
-            }
-
-            prop = typeof(TEntity).GetProperty(nameof(IChangeableEntity.ModifyUserId));
-            if (prop != null)
-            {
-                builder.Property(nameof(IChangeableEntity.ModifyUserId)).HasColumnType("nvarchar(50)");
+                builder.Property(nameof(IChangeableEntity.ModifyUserId)).HasColumnType("varchar(50)");
             }
 
             prop = typeof(TEntity).GetProperty(nameof(IDeleteEntity.IsDeleted));
             if (prop != null)
             {
-                builder.Property(nameof(IChangeableEntity.ModifyUserId)).HasColumnType("boolean");
+                builder.Property(nameof(IDeleteEntity.IsDeleted)).HasColumnType("boolean");
             }
 
             prop = typeof(TEntity).GetProperty(nameof(IChangeableEntity.UpdatedToken));
             if(prop != null)
             {
-                builder.Property(nameof(IChangeableEntity.UpdatedToken)).HasColumnType("nvarchar(50)");
+                builder.Property(nameof(IChangeableEntity.UpdatedToken)).HasColumnType("varchar(50)");
                 builder.Property(nameof(IChangeableEntity.UpdatedToken)).IsConcurrencyToken();
             }
 
             prop = typeof(TEntity).GetProperty("Note");
             if (prop != null)
             {
-                builder.Property("Note").HasColumnType("nvarchar(300)");
+                builder.Property("Note").HasColumnType("varchar(300)");
             }
         }
 

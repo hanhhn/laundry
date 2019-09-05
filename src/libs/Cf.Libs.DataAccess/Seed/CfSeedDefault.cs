@@ -9,9 +9,9 @@ namespace Cf.Libs.DataAccess.Seed
     {
         public static void Seeding(ModelBuilder builder)
         {
-            SeedAddress(builder);
+            //SeedAddress(builder);
 
-            SeedMethod(builder);
+            //SeedMethod(builder);
         }
 
         private static void SeedAddress(ModelBuilder builder)

@@ -23,15 +23,13 @@ namespace Cf.Libs.Core.Infrastructure.Entity
             }
         }
 
-        public void Default(bool isAdd, string userId)
+        public virtual void Default(bool isAdd, string userId)
         {
             DateTime date = DateTime.Now;
             if (isAdd)
             {
                 CreateDate = date;
                 CreateUserId = userId;
-                ModifiedDate = date;
-                ModifyUserId = userId;
                 UpdatedToken = Guid.NewGuid().ToString();
             }
             else
@@ -42,12 +40,12 @@ namespace Cf.Libs.Core.Infrastructure.Entity
             }
         }
 
-        public void Delete()
+        public virtual void Delete()
         {
             IsDeleted = true;
         }
 
-        public void UnDelete()
+        public virtual void UnDelete()
         {
             IsDeleted = false;
         }

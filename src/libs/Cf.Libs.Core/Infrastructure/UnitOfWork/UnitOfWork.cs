@@ -29,13 +29,13 @@ namespace Cf.Libs.Core.Infrastructure.UnitOfWork
 
                     if (dbEntity.State == EntityState.Added)
                     {
-                        entity.Default(true, 0);
+                        entity.Default(true, "system");
                         continue;
                     }
 
                     if (dbEntity.State == EntityState.Modified)
                     {
-                        entity.Default(false, 0);
+                        entity.Default(false, "system");
                     }
                 }
             }

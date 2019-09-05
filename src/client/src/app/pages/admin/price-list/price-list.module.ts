@@ -6,7 +6,6 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { ItemService } from "../../../cores/services/item.service";
-import { ItemRateService } from "../../../cores/services/item-rate.service";
 import { DropdownModule } from "primeng/dropdown";
 import { CalendarModule } from "primeng/calendar";
 import {
@@ -16,6 +15,8 @@ import {
   MatTableModule,
   MatIconModule
 } from "@angular/material";
+import { PriceService } from "src/app/cores/services/price.service";
+import { MethodService } from "src/app/cores/services/method.service";
 
 const routes: Routes = [
   {
@@ -41,7 +42,7 @@ const routes: Routes = [
     CalendarModule,
     RouterModule.forChild(routes)
   ],
-  providers: [ItemService, ItemRateService],
+  providers: [ItemService, PriceService, MethodService],
   exports: [PriceListComponent]
 })
 export class PriceListModule {}

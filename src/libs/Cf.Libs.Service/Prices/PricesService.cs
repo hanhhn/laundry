@@ -8,7 +8,7 @@ using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.DataAccess.Repository.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
 using Cf.Libs.DataAccess.Repository.Prices;
-using Cf.Libs.Service.Dtos.Prices;
+using Cf.Libs.Service.Dtos.Price;
 using System;
 using System.Linq;
 

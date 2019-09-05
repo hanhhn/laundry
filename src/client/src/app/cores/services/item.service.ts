@@ -66,9 +66,15 @@ export class ItemService {
 
   getItemTypes(): KeyValue[] {
     return [
-      new KeyValue(1, "Laundry"),
-      new KeyValue(2, "DryClean"),
-      // new KeyValue(3, "TransportTime"),
+      new KeyValue("Laundry", "Laundry"),
+      new KeyValue("DryClean", "DryClean"),
+    ];
+  }
+
+  getItemCodes(): KeyValue[] {
+    return [
+      new KeyValue("Method", "Method"),
+      new KeyValue("Item", "Item"),
     ];
   }
 }

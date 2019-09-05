@@ -71,7 +71,7 @@ namespace Cf.Libs.Service.Methods
 
         public IPagedList<MethodDto> GetAll(int pageIndex, int pageSize)
         {
-            return _methodRepository.FindBy(x => !x.IsDeleted).ToPagedList<Method, MethodDto>(pageSize, pageSize);
+            return _methodRepository.FindBy(x => !x.IsDeleted).ToPagedList<Method, MethodDto>(pageIndex, pageSize);
         }
 
         private IPagedList<MethodDto> GetMethodByType(int pageIndex, int pageSize, string type = null)

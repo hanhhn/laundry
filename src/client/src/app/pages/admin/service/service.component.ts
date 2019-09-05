@@ -49,11 +49,11 @@ export class ServiceComponent implements OnInit {
     this.formControls = this.formBuilder.group({
       id: [0],
       type: [null, Validators.required],
-      image: [null, Validators.required],
+      image: [null],
       name: [null, Validators.required],
-      description: [null],
-      order: [1, Validators.required],
-      highlights: [false]
+      description: [null, Validators.required],
+      sortOrder: [1, Validators.required],
+      highlight: [false]
     });
   }
 
@@ -71,8 +71,8 @@ export class ServiceComponent implements OnInit {
     this.display = true;
     this.formControls.reset();
     this.controls.id.patchValue(0);
-    this.controls.order.patchValue(1);
-    this.controls.highlights.patchValue(false);
+    this.controls.sortOrder.patchValue(1);
+    this.controls.highlight.patchValue(false);
   }
 
   onShowEditDialog(item: Item) {
@@ -82,8 +82,8 @@ export class ServiceComponent implements OnInit {
     this.controls.image.patchValue(item.image);
     this.controls.name.patchValue(item.name);
     this.controls.description.patchValue(item.description);
-    this.controls.order.patchValue(item.order);
-    this.controls.highlights.patchValue(item.highlights);
+    this.controls.sortOrder.patchValue(item.sortOrder);
+    this.controls.highlight.patchValue(item.highlight);
     this.display = true;
   }
 
@@ -99,8 +99,8 @@ export class ServiceComponent implements OnInit {
       request.type = this.controls.type.value.key;
       request.image = this.controls.image.value;
       request.description = this.controls.description.value;
-      request.order = this.controls.order.value;
-      request.highlights = this.controls.highlights.value;
+      request.sortOrder = this.controls.sortOrder.value;
+      request.highlight = this.controls.highlight.value;
 
       this.itemService.saveItem(request).subscribe(
         data => {

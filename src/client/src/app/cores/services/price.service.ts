@@ -1,16 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
-import { ItemRate, ItemRateRequest } from "../models/item.model";
 import { map } from "rxjs/operators";
 import { PagedList } from "../models/paged.model";
+import { Price, PriceRequest } from "../models/price.model";
 
 @Injectable()
-export class ItemRateService {
+export class PriceService {
   constructor(private httpService: HttpService) {}
 
-  get(id: number): Observable<ItemRate> {
-    const url = "rates/get/" + id;
+  get(id: number): Observable<Price> {
+    const url = "prices/get/" + id;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data;
@@ -18,8 +18,8 @@ export class ItemRateService {
     );
   }
 
-  getAll(pageIndex: number, pageSize: number): Observable<PagedList<ItemRate>> {
-    const url = "rates/get?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+  getAll(pageIndex: number, pageSize: number): Observable<PagedList<Price>> {
+    const url = "prices/get?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? new PagedList(data) : null;
@@ -27,17 +27,17 @@ export class ItemRateService {
     );
   }
 
-  saveRate(item: ItemRateRequest): Observable<ItemRate> {
-    const url = "rates/save";
+  saveRate(item: PriceRequest): Observable<Price> {
+    const url = "prices/save";
     return this.httpService.doPost(url, item).pipe(
       map((data: any) => {
-        return data ? new ItemRate(data) : null;
+        return data ? new Price(data) : null;
       })
     );
   }
 
   deleteRate(id: number): Observable<boolean> {
-    const url = "rates/delete/" + id;
+    const url = "prices/delete/" + id;
     return this.httpService.doDelete(url, null).pipe(
       map((data: any) => {
         return data;

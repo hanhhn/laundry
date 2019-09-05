@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Cf.Libs.Service.Dtos.Prices
+namespace Cf.Libs.Service.Dtos.Price
 {
-    public class PriceDto
+    public class PriceRequest
     {
         public int Id { get; set; }
         public int ItemId { get; set; }

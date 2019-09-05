@@ -22,17 +22,19 @@
           <th scope="col" class="text-right">Rate</th>
           <th scope="col" class="text-right">Discount</th>
           <th scope="col" width="100">Hightlight</th>
+          <th scope="col" width="100">SortOrder</th>
           <th scope="col" width="150"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of dataSource; let i = index">
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ item.typeName }}</td>
+          <td>{{ item.type }}</td>
           <td>{{ item.name }}</td>
           <td class="text-right">{{ item.rate }}</td>
           <td class="text-right">{{ item.discount }}</td>
-          <td class="text-center">{{ item.highlights }}</td>
+          <td class="text-center">{{ item.highlight }}</td>
+          <td class="text-center">{{ item.sortOrder }}</td>
           <td>
             <div class="action text-center">
               <button
@@ -130,7 +132,7 @@
           src="{{ controls.image.value }}"
           class="img-thumbnail thumbnail"
         />
-        <div *ngIf="!controls.image.value" class="thumbnail"></div>
+        <div *ngIf="!controls.image.value || controls.image.value.length === 0" class="thumbnail"></div>
       </div>
     </div>
     <div class="form-group row">
@@ -142,32 +144,37 @@
           id="description"
           rows="5"
         ></textarea>
+        <div class="error" *ngIf="submitted && controls.description.errors">
+            <label *ngIf="controls.description.errors.required"
+              >Mô tả dịch vụ bắt buộc nhập.</label
+            >
+          </div>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="order" class="col-sm-2 col-form-label required"
+      <label for="sortOrder" class="col-sm-2 col-form-label required"
         >Thứ tự sắp xếp</label
       >
       <div class="col-sm-10">
         <div class="row">
           <div class="col-sm-4">
             <input
-              formControlName="order"
+              formControlName="sortOrder"
               class="form-control"
-              id="description"
+              id="sortOrder"
               type="number"
               min="1"
             />
           </div>
           <div class="col-sm-8">
             <div class="form-check">
-              <label class="form-check-label" for="highlights">
+              <label class="form-check-label" for="highlight">
                 <input
-                  formControlName="highlights"
+                  formControlName="highlight"
                   class="form-check-input"
                   type="checkbox"
-                  id="highlights"
+                  id="highlight"
                 />
                 Nỗi bật
               </label>
@@ -175,8 +182,8 @@
           </div>
         </div>
 
-        <div class="error" *ngIf="submitted && controls.order.errors">
-          <label *ngIf="controls.order.errors.required"
+        <div class="error" *ngIf="submitted && controls.sortOrder.errors">
+          <label *ngIf="controls.sortOrder.errors.required"
             >Thứ tự sắp xếp dịch vụ bắt buộc nhập.</label
           >
         </div>

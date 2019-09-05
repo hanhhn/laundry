@@ -4,7 +4,7 @@ using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.Service.Dtos.Adress;
 using Cf.Libs.Service.Dtos.Item;
 using Cf.Libs.Service.Dtos.Method;
-using Cf.Libs.Service.Dtos.Prices;
+using Cf.Libs.Service.Dtos.Price;
 
 namespace Cf.Libs.Service
 {

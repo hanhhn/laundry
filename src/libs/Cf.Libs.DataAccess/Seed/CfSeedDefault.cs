@@ -25,7 +25,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            hue.Default(true, 0);
+            hue.Default(true, "system");
             builder.Entity<Province>().HasData(hue);
 
             var tpHue = new District
@@ -37,7 +37,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            tpHue.Default(true, 0);
+            tpHue.Default(true, "system");
             builder.Entity<District>().HasData(tpHue);
 
             var anHoa = new Ward
@@ -49,7 +49,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            anHoa.Default(true, 0);
+            anHoa.Default(true, "system");
 
             var anCuu = new Ward
             {
@@ -60,7 +60,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            anCuu.Default(true, 0);
+            anCuu.Default(true, "system");
 
             var phuHoa = new Ward
             {
@@ -71,7 +71,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            phuHoa.Default(true, 0);
+            phuHoa.Default(true, "system");
 
             var phuThuan = new Ward
             {
@@ -82,7 +82,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            phuThuan.Default(true, 0);
+            phuThuan.Default(true, "system");
 
             var tayLoc = new Ward
             {
@@ -93,7 +93,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            tayLoc.Default(true, 0);
+            tayLoc.Default(true, "system");
             builder.Entity<Ward>().HasData(anHoa, anCuu, phuHoa, phuThuan, tayLoc);
             #endregion
 
@@ -107,7 +107,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            daNang.Default(true, 0);
+            daNang.Default(true, "system");
             builder.Entity<Province>().HasData(daNang);
 
             var lienChieu = new District
@@ -119,7 +119,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            lienChieu.Default(true, 0);
+            lienChieu.Default(true, "system");
             builder.Entity<District>().HasData(lienChieu);
 
             var hoaKhanhBac = new Ward
@@ -131,7 +131,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            hoaKhanhBac.Default(true, 0);
+            hoaKhanhBac.Default(true, "system");
 
             var hoaKhanhNam = new Ward
             {
@@ -142,7 +142,7 @@ namespace Cf.Libs.DataAccess.Seed
                 SortOrder = 1,
                 IsPublished = true,
             };
-            hoaKhanhNam.Default(true, 0);
+            hoaKhanhNam.Default(true, "system");
             builder.Entity<Ward>().HasData(hoaKhanhBac, hoaKhanhNam);
             #endregion
         }
@@ -158,7 +158,7 @@ namespace Cf.Libs.DataAccess.Seed
                 EnableDiscount = false,
                 Type = Core.Enums.MethodType.Clean.ToString()
             };
-            method1.Default(true, 0);
+            method1.Default(true, "system");
 
             var method2 = new Method
             {
@@ -169,7 +169,7 @@ namespace Cf.Libs.DataAccess.Seed
                 EnableDiscount = false,
                 Type = Core.Enums.MethodType.Clean.ToString()
             };
-            method2.Default(true, 0);
+            method2.Default(true, "system");
 
             var method3 = new Method
             {
@@ -180,18 +180,18 @@ namespace Cf.Libs.DataAccess.Seed
                 EnableDiscount = false,
                 Type = Core.Enums.MethodType.Clean.ToString()
             };
-            method3.Default(true, 0);
+            method3.Default(true, "system");
 
             var method4 = new Method
             {
                 Id = 4,
                 Name = "Chỉ sấy",
                 Description = "Chỉ sấy",
-                SortOrder = 0,
+                SortOrder = 1,
                 EnableDiscount = false,
                 Type = Core.Enums.MethodType.Dry.ToString()
             };
-            method4.Default(true, 0);
+            method4.Default(true, "system");
 
             var method5 = new Method
             {
@@ -202,7 +202,7 @@ namespace Cf.Libs.DataAccess.Seed
                 EnableDiscount = false,
                 Type = Core.Enums.MethodType.Soft.ToString()
             };
-            method5.Default(true, 0);
+            method5.Default(true, "system");
 
             var method6 = new Method
             {
@@ -213,7 +213,7 @@ namespace Cf.Libs.DataAccess.Seed
                 EnableDiscount = false,
                 Type = Core.Enums.MethodType.Soft.ToString()
             };
-            method6.Default(true, 0);
+            method6.Default(true, "system");
 
             var method7 = new Method
             {
@@ -224,7 +224,7 @@ namespace Cf.Libs.DataAccess.Seed
                 EnableDiscount = false,
                 Type = Core.Enums.MethodType.Straight.ToString()
             };
-            method7.Default(true, 0);
+            method7.Default(true, "system");
 
             builder.Entity<Method>().HasData(method1, method2, method3, method4, method5, method6, method7);
         }

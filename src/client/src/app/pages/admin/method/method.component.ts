@@ -48,8 +48,8 @@ export class MethodComponent implements OnInit {
       id: [0],
       type: [null, Validators.required],
       name: [null, Validators.required],
-      description: [null],
-      discount: [0, Validators.required],
+      description: [null, Validators.required],
+      sortOrder: [1, Validators.required],
       enableDiscount: [false]
     });
   }
@@ -69,7 +69,7 @@ export class MethodComponent implements OnInit {
     this.submitted = false;
     this.formControls.reset();
     this.controls.id.patchValue(0);
-    this.controls.discount.patchValue(0);
+    this.controls.sortOrder.patchValue(1);
     this.controls.enableDiscount.patchValue(false);
   }
 
@@ -79,6 +79,7 @@ export class MethodComponent implements OnInit {
     this.controls.type.patchValue(type[0]);
     this.controls.name.patchValue(method.name);
     this.controls.description.patchValue(method.description);
+    this.controls.sortOrder.patchValue(method.sortOrder);
     this.controls.enableDiscount.patchValue(method.enableDiscount);
     this.display = true;
     this.submitted = false;
@@ -94,7 +95,7 @@ export class MethodComponent implements OnInit {
       request.id = this.controls.id.value;
       request.name = this.controls.name.value;
       request.description = this.controls.description.value;
-      request.discount = this.controls.discount.value;
+      request.sortOrder = this.controls.sortOrder.value;
       request.enableDiscount = this.controls.enableDiscount.value;
       request.type = this.controls.type.value.key;
 

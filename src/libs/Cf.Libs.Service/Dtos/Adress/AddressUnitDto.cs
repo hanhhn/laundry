@@ -1,4 +1,4 @@
-﻿namespace Cf.Libs.Service.Dtos.Adresss
+﻿namespace Cf.Libs.Service.Dtos.Adress
 {
     public class AddressUnitDto
     {

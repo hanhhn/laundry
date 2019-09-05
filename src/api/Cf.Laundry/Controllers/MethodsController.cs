@@ -2,6 +2,7 @@
 using Cf.Libs.Service.Dtos.Method;
 using Cf.Libs.Service.Methods;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Cf.Laundry.Controllers
 {
@@ -59,6 +60,13 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
+        [Route("delivery")]
+        public IPagedList<MethodDto> GetDelivery(int pageIndex = 0, int pageSize = 10)
+        {
+            return _methodService.GetDeliveryMethod(pageIndex, pageSize);
+        }
+
+        [HttpGet]
         [Route("get")]
         public IPagedList<MethodDto> GetAll(int pageIndex = 0, int pageSize = 10)
         {
@@ -69,7 +77,12 @@ namespace Cf.Laundry.Controllers
         [Route("save")]
         public MethodDto SaveMethod(MethodRequest request)
         {
-            if(request.Id > 0)
+            if (request == null)
+            {
+                throw new ArgumentNullException("Param is invalid.");
+            }
+
+            if (request.Id > 0)
             {
                 return _methodService.Edit(request);
             }

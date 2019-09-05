@@ -49,7 +49,7 @@ export class ServiceComponent implements OnInit {
     this.formControls = this.formBuilder.group({
       id: [0],
       type: [null, Validators.required],
-      image: [null],
+      image: [null, Validators.required],
       name: [null, Validators.required],
       description: [null],
       order: [1, Validators.required],

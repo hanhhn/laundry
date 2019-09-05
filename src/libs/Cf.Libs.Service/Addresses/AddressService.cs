@@ -6,11 +6,11 @@ using Cf.Libs.DataAccess.Repository.Addresses;
 using Cf.Libs.DataAccess.Repository.Districts;
 using Cf.Libs.DataAccess.Repository.Provinces;
 using Cf.Libs.DataAccess.Repository.Wards;
-using Cf.Libs.Service.Dtos.Adresss;
+using Cf.Libs.Service.Dtos.Adress;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cf.Libs.Service.Address
+namespace Cf.Libs.Service.Addresses
 {
     public class AddressService : BaseService, IAddressService
     {

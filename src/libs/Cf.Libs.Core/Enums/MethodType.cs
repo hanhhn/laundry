@@ -6,5 +6,6 @@
         Soft,
         Dry,
         Straight,
+        Delivery,
     }
 }

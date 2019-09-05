@@ -1,6 +1,7 @@
-﻿using Cf.Libs.Service.Address;
-using Cf.Libs.Service.Dtos.Adresss;
+﻿using Cf.Libs.Service.Addresses;
+using Cf.Libs.Service.Dtos.Adress;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace Cf.Laundry.Controllers
@@ -48,6 +49,11 @@ namespace Cf.Laundry.Controllers
         [Route("save")]
         public IEnumerable<AddressDto> SaveAddress(AddressRequest request)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException("Param is invalid.");
+            }
+
             if (request.Id > 0)
             {
                 return _addressService.Edit(request);

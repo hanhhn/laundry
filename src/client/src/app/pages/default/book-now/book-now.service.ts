@@ -5,10 +5,11 @@ import { AddressUnit } from "src/app/cores/models/address.model";
 import { AddressService } from "src/app/cores/services/address.service";
 
 export const METHOD = {
-  CLEAN: 1,
-  SOFT: 2,
-  DRY: 3,
-  STRAIGHT: 4
+  CLEAN: "Clean",
+  SOFT: "Soft",
+  DRY: "Dry",
+  STRAIGHT: "Straight",
+  DELIVERY: "Delivery"
 };
 
 @Injectable()
@@ -27,5 +28,9 @@ export class BookNowService {
 
   getStraightMethod(dataSource: Method[]): Method[] {
     return dataSource.filter(x => x.type === METHOD.STRAIGHT);
+  }
+
+  getDeliveryMethod(dataSource: Method[]): Method[] {
+    return dataSource.filter(x => x.type === METHOD.DELIVERY);
   }
 }

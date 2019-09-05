@@ -1,10 +1,10 @@
 ﻿using Cf.Libs.DataAccess.Repository.Addresses;
 using Cf.Libs.DataAccess.Repository.Districts;
-using Cf.Libs.DataAccess.Repository.ItemRates;
 using Cf.Libs.DataAccess.Repository.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
 using Cf.Libs.DataAccess.Repository.OrderDetails;
 using Cf.Libs.DataAccess.Repository.Orders;
+using Cf.Libs.DataAccess.Repository.Prices;
 using Cf.Libs.DataAccess.Repository.Provinces;
 using Cf.Libs.DataAccess.Repository.Settings;
 using Cf.Libs.DataAccess.Repository.UserProfiles;
@@ -21,7 +21,7 @@ namespace Cf.Libs.DataAccess
             services.AddScoped<IProvinceRepository, ProvinceRepository>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<IWardRepository, WardRepository>();
-            services.AddScoped<IItemRateRepository, ItemRateRepository>();
+            services.AddScoped<IPriceRepository, PriceRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IMethodRepository, MethodRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();

@@ -58,6 +58,19 @@ export class MethodService {
     return this.httpService.doGet(url, null).pipe(map(this.mapData));
   }
 
+  getDelivery(
+    pageIndex: number,
+    pageSize: number
+  ): Observable<PagedList<Method>> {
+    const url =
+      "methods/delivery?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new PagedList(data) : null;
+      })
+    );
+  }
+
   save(method: MethodRequest): Observable<Method> {
     const url = "methods/save";
     return this.httpService.doPost(url, method).pipe(
@@ -78,10 +91,11 @@ export class MethodService {
 
   getMethodTypes(): KeyValue[] {
     return [
-      new KeyValue(1, "Clean"),
-      new KeyValue(2, "Soft"),
-      new KeyValue(3, "Dry"),
-      new KeyValue(4, "Straight")
+      new KeyValue("Clean", "Clean"),
+      new KeyValue("Soft", "Soft"),
+      new KeyValue("Dry", "Dry"),
+      new KeyValue("Straight", "Straight"),
+      new KeyValue("Delivery", "Delivery")
     ];
   }
 

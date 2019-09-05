@@ -6,7 +6,9 @@ using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
+using Cf.Libs.DataAccess.Repository.Prices;
 using Cf.Libs.Service.Dtos.Method;
+using System;
 using System.Linq;
 
 namespace Cf.Libs.Service.Methods
@@ -14,13 +16,16 @@ namespace Cf.Libs.Service.Methods
     public class MethodService : BaseService, IMethodService
     {
         private readonly IMethodRepository _methodRepository;
+        private readonly IPriceRepository _priceRepository;
 
         public MethodService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
-            IMethodRepository methodRepository) : base(unitOfWork, mapper)
+            IMethodRepository methodRepository,
+            IPriceRepository priceRepository) : base(unitOfWork, mapper)
         {
             _methodRepository = methodRepository;
+            _priceRepository = priceRepository;
         }
 
         public MethodDto Get(int Id)
@@ -36,42 +41,81 @@ namespace Cf.Libs.Service.Methods
 
         public IPagedList<MethodDto> GetApplyMethod(int pageIndex, int pageSize)
         {
-            var methods = from m in _methodRepository.GetQuery()
-                          where !m.IsDeleted
-                          select m;
-
-            return methods.ToPagedList<Method, MethodDto>(pageIndex, pageSize);
+            return GetMethodByType(pageIndex, pageSize);
         }
 
         public IPagedList<MethodDto> GetCleanMethod(int pageIndex, int pageSize)
         {
-            return GetMethodByType(MethodType.Clean, pageIndex, pageSize);
+            return GetMethodByType(pageIndex, pageSize, MethodType.Clean.ToString());
         }
 
         public IPagedList<MethodDto> GetSoftMethod(int pageIndex, int pageSize)
         {
-            return GetMethodByType(MethodType.Soft, pageIndex, pageSize);
+            return GetMethodByType(pageIndex, pageSize, MethodType.Soft.ToString());
         }
 
         public IPagedList<MethodDto> GetDryMethod(int pageIndex, int pageSize)
         {
-            return GetMethodByType(MethodType.Straight, pageIndex, pageSize);
+            return GetMethodByType(pageIndex, pageSize, MethodType.Straight.ToString());
         }
 
         public IPagedList<MethodDto> GetStraightMethod(int pageIndex, int pageSize)
         {
-            return GetMethodByType(MethodType.Dry, pageIndex, pageSize);
+            return GetMethodByType(pageIndex, pageSize, MethodType.Dry.ToString());
+        }
+
+        public IPagedList<MethodDto> GetDeliveryMethod(int pageIndex, int pageSize)
+        {
+            return GetMethodByType(pageIndex, pageSize, MethodType.Delivery.ToString());
         }
 
         public IPagedList<MethodDto> GetAll(int pageIndex, int pageSize)
         {
-            return _methodRepository.FindBy(x => !x.IsDeleted).ToPagedList<Method, MethodDto>(pageIndex, pageSize);
+            return _methodRepository.FindBy(x => !x.IsDeleted).ToPagedList<Method, MethodDto>(pageSize, pageSize);
         }
 
-        private IPagedList<MethodDto> GetMethodByType(MethodType type, int pageIndex, int pageSize)
+        private IPagedList<MethodDto> GetMethodByType(int pageIndex, int pageSize, string type = null)
         {
-            var methods = _methodRepository.FindBy(x => x.Type == type && !x.IsDeleted);
-            return methods.ToPagedList<Method, MethodDto>(pageIndex, pageSize);
+            var methodQuery = from item in _methodRepository.GetQuery()
+                              orderby item.SortOrder ascending
+                              orderby item.Name ascending
+                              orderby item.ModifiedDate ascending
+                              orderby item.CreateDate ascending
+                              where !item.IsDeleted
+                              select item;
+
+            if (!string.IsNullOrEmpty(type))
+            {
+                methodQuery = from item in methodQuery
+                              where item.Type == type
+                              select item;
+            }
+
+            var priceQuery = from rate in _priceRepository.GetQuery()
+                             where !rate.IsDeleted && DateTime.Now > rate.ApplyDate
+                             orderby rate.ApplyDate descending
+                             orderby rate.Priority ascending
+                             group rate by rate.ItemId into gRate
+                             select gRate.FirstOrDefault();
+
+            var query = from i in methodQuery
+                        join r in priceQuery on i.Id equals r.ItemId into groupItem
+                        from g in groupItem.DefaultIfEmpty(new Price())
+                        select new MethodDto
+                        {
+                            Id = i.Id,
+                            Name = i.Name,
+                            Description = i.Description,
+                            SortOrder = i.SortOrder,
+                            Type = i.Type,
+                            Rate = g.Rate,
+                            Tax = g.Tax,
+                            Discount = g.Discount,
+                            DiscountRate = g.DiscountRate,
+                            EnableDiscount = i.EnableDiscount,
+                        };
+
+            return query.ToPagedList(pageIndex, pageSize);
         }
 
         public MethodDto Add(MethodRequest request)
@@ -96,7 +140,6 @@ namespace Cf.Libs.Service.Methods
 
             record.Name = request.Name;
             record.Description = request.Description;
-            record.Discount = request.Discount;
             record.EnableDiscount = request.EnableDiscount;
             record.Type = request.Type;
 

@@ -1,9 +1,9 @@
-﻿using Cf.Libs.Service.Address;
-using Cf.Libs.Service.ItemRates;
+﻿using Cf.Libs.Service.Prices;
 using Cf.Libs.Service.Items;
 using Cf.Libs.Service.Methods;
 using Cf.Libs.Service.Profile;
 using Microsoft.Extensions.DependencyInjection;
+using Cf.Libs.Service.Addresses;
 
 namespace Cf.Libs.Service
 {
@@ -13,7 +13,7 @@ namespace Cf.Libs.Service
         {
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IItemService, ItemService>();
-            services.AddScoped<IItemRateService, ItemRateService>();
+            services.AddScoped<IPriceService, PricesService>();
             services.AddScoped<IMethodService, MethodService>();
             services.AddScoped<IAddressService, AddressService>();
         }

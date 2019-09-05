@@ -4,6 +4,5 @@
     {
         Laundry = 1,
         DryClean,
-        TransportTime
     }
 }

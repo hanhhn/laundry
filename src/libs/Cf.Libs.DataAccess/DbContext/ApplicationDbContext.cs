@@ -22,7 +22,7 @@ namespace Cf.Libs.DataAccess.DbContext
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Item> Items { get; set; }
-        public DbSet<ItemRate> ItemRates { get; set; }
+        public DbSet<Price> Prices { get; set; }
         public DbSet<Method> Methods { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }

@@ -1,6 +1,4 @@
-﻿using Cf.Libs.Core.Enums;
-
-namespace Cf.Libs.Service.Dtos.Item
+﻿namespace Cf.Libs.Service.Dtos.Item
 {
     public class ItemDto
     {
@@ -8,13 +6,12 @@ namespace Cf.Libs.Service.Dtos.Item
         public string Image { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool Highlights { get; set; }
-        public int Order { get; set; }
-        public ItemType Type { get; set; }
-        public string TypeName => Type.ToString();
-        public decimal? Rate { get; set; }
-        public byte? Tax { get; set; }
-        public decimal? DiscountRate { get; set; }
-        public decimal? Discount { get; set; }
+        public bool Highlight { get; set; }
+        public int SortOrder { get; set; }
+        public string Type { get; set; }
+        public decimal Rate { get; set; }
+        public byte Tax { get; set; }
+        public decimal DiscountRate { get; set; }
+        public decimal Discount { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Cf.Libs.Core.Infrastructure.Service;
-using Cf.Libs.Service.Dtos.Adresss;
+using Cf.Libs.Service.Dtos.Adress;
 using System.Collections.Generic;
 
-namespace Cf.Libs.Service.Address
+namespace Cf.Libs.Service.Addresses
 {
     public interface IAddressService : IBaseService
     {

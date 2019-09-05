@@ -217,7 +217,7 @@
                 <mat-label>Chọn giờ</mat-label>
                 <mat-select formControlName="hoursOfReceipt">
                   <mat-option
-                    *ngFor="let item of transportTime"
+                    *ngFor="let item of getDeliveryTime"
                     [value]="item.id"
                     ><div
                       class="inner"

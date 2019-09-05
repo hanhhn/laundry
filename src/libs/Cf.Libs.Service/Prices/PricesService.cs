@@ -1,63 +1,70 @@
 ﻿using AutoMapper;
+using Cf.Laundry.Common;
 using Cf.Libs.Core.Exeptions;
 using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Items;
-using Cf.Libs.DataAccess.Repository.ItemRates;
 using Cf.Libs.DataAccess.Repository.Items;
-using Cf.Libs.Service.Dtos.ItemRate;
+using Cf.Libs.DataAccess.Repository.Methods;
+using Cf.Libs.DataAccess.Repository.Prices;
+using Cf.Libs.Service.Dtos.Prices;
 using System;
 using System.Linq;
 
-namespace Cf.Libs.Service.ItemRates
+namespace Cf.Libs.Service.Prices
 {
-    public class ItemRateService : BaseService, IItemRateService
+    public class PricesService : BaseService, IPriceService
     {
         private readonly IItemRepository _itemRepository;
-        private readonly IItemRateRepository _rateRepository;
+        private readonly IMethodRepository _methodRepository;
+        private readonly IPriceRepository _priceRepository;
 
-        public ItemRateService(
+        public PricesService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
             IItemRepository itemRepository,
-            IItemRateRepository rateRepository) : base(unitOfWork, mapper)
+            IMethodRepository methodRepository,
+            IPriceRepository priceRepository) : base(unitOfWork, mapper)
         {
-            _rateRepository = rateRepository;
+            _priceRepository = priceRepository;
             _itemRepository = itemRepository;
+            _methodRepository = methodRepository;
         }
 
-        public ItemRateDto Add(ItemRateRequest request)
+        public PriceDto Add(PriceRequest request)
         {
             if (request == null)
             {
                 throw new ArgumentNullException("Param is invalid.");
             }
 
-            var rate = _mapper.Map<ItemRate>(request);
-            var record = _rateRepository.Add(rate);
+            var rate = _mapper.Map<Price>(request);
+            rate.DiscountRate = rate.Rate * (rate.Discount / 100 + 1);
+            var record = _priceRepository.Add(rate);
             if (_unitOfWork.SaveChanges() == 0)
             {
                 throw new InformationException("An error occurred during save.");
             }
 
-            return _mapper.Map<ItemRateDto>(record);
+            return _mapper.Map<PriceDto>(record);
         }
 
-        public ItemRateDto Edit(ItemRateRequest request)
+        public PriceDto Edit(PriceRequest request)
         {
             if (request == null)
             {
                 throw new ArgumentNullException("Param is invalid.");
             }
 
-            var record = _rateRepository.Get(request.Id);
+            var record = _priceRepository.Get(request.Id);
             if (record == null)
             {
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
             record.ItemId = request.ItemId;
+            record.ItemCode = request.ItemCode;
             record.Rate = request.Rate;
             record.Tax = request.Tax;
             record.DiscountRate = request.DiscountRate;
@@ -67,25 +74,25 @@ namespace Cf.Libs.Service.ItemRates
             record.ApplyDate = request.ApplyDate;
             record.ExpireDate = request.ExpireDate;
 
-            _rateRepository.Update(record);
+            _priceRepository.Update(record);
 
             if (_unitOfWork.SaveChanges() == 0)
             {
                 throw new InformationException("An error occurred during save.");
             }
 
-            return _mapper.Map<ItemRateDto>(record);
+            return _mapper.Map<PriceDto>(record);
         }
 
         public bool Delete(int id)
         {
-            var record = _rateRepository.Get(id);
+            var record = _priceRepository.Get(id);
             if (record == null)
             {
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
-            _rateRepository.Delete(record);
+            _priceRepository.Delete(record);
             if (_unitOfWork.SaveChanges() == 0)
             {
                 throw new InformationException("An error occurred during save.");
@@ -94,27 +101,28 @@ namespace Cf.Libs.Service.ItemRates
             return true;
         }
 
-        public ItemRateDto Get(int Id)
+        public PriceDto Get(int Id)
         {
-            var rateQuery = from rate in _rateRepository.GetQuery()
+            var rateQuery = from rate in _priceRepository.GetQuery()
                             where rate.Id == Id && !rate.IsDeleted
                             select rate;
+
             var itemQuery = from item in _itemRepository.GetQuery()
                             select item;
 
             var record = (from rate in rateQuery
                           join item in itemQuery on rate.ItemId equals item.Id
-                          select new ItemRateDto
+                          select new PriceDto
                           {
                               Id = rate.Id,
                               ItemId = item.Id,
-                              ItemName = item.Name,
+                              ItemCode = rate.ItemCode,
                               Rate = rate.Rate,
                               Tax = rate.Tax,
                               Discount = rate.Discount,
+                              DiscountRate = rate.DiscountRate,
                               Priority = rate.Priority,
                               IsActive = rate.IsActive,
-                              DiscountRate = rate.DiscountRate,
                               ApplyDate = rate.ApplyDate,
                               ExpireDate = rate.ExpireDate
                           }).SingleOrDefault();
@@ -124,39 +132,29 @@ namespace Cf.Libs.Service.ItemRates
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
-            return _mapper.Map<ItemRateDto>(record);
+            return _mapper.Map<PriceDto>(record);
         }
 
-        public IPagedList<ItemRateDto> GetAll(int pageIndex, int pageSize)
+        public IPagedList<PriceDto> GetAll(int pageIndex, int pageSize)
         {
-            var rateQuery = from rate in _rateRepository.GetQuery()
-                            orderby rate.ApplyDate descending
-                            orderby rate.ModifiedDate descending
-                            orderby rate.CreateDate descending
-                            orderby rate.Id ascending
-                            where !rate.IsDeleted
-                            select rate;
-            var itemQuery = from item in _itemRepository.GetQuery()
-                            select item;
 
-            var query = from rate in rateQuery
-                        join item in itemQuery on rate.ItemId equals item.Id
-                        select new ItemRateDto
-                        {
-                            Id = rate.Id,
-                            ItemId = item.Id,
-                            ItemName = item.Name,
-                            Rate = rate.Rate,
-                            Tax = rate.Tax,
-                            Discount = rate.Discount,
-                            Priority = rate.Priority,
-                            IsActive = rate.IsActive,
-                            DiscountRate = rate.DiscountRate,
-                            ApplyDate = rate.ApplyDate,
-                            ExpireDate = rate.ExpireDate
-                        };
+            var itemQuery = from price in _priceRepository.FindByItem()
+                            join item in _itemRepository.GetQuery() on price.ItemId equals item.Id
+                            select price;
 
-            return query.ToPagedList(pageIndex, pageSize);
+
+            var methodQuery = from price in _priceRepository.FindByMethod()
+                              join method in _methodRepository.GetQuery() on price.ItemId equals method.Id
+                              select price;
+
+            var query = from price in itemQuery.Union(methodQuery)
+                        orderby price.ApplyDate descending
+                        orderby price.ModifiedDate descending
+                        orderby price.CreateDate descending
+                        orderby price.Id ascending
+                        select price;
+
+            return query.ToPagedList<Price, PriceDto>(pageIndex, pageSize);
         }
     }
 }

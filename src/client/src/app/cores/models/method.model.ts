@@ -4,8 +4,7 @@ export class Method {
   description: string;
   discount: string;
   enableDiscount: boolean;
-  type: number;
-  typeName: string;
+  type: string;
 
   constructor(json) {
     this.id = json.id;
@@ -14,7 +13,6 @@ export class Method {
     this.discount = json.discount;
     this.enableDiscount = json.enableDiscount;
     this.type = json.type;
-    this.typeName = json.typeName;
   }
 }
 
@@ -24,5 +22,5 @@ export class MethodRequest {
   description: string;
   discount: string;
   enableDiscount: boolean;
-  type: number;
+  type: string;
 }

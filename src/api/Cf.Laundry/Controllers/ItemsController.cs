@@ -2,6 +2,7 @@
 using Cf.Libs.Service.Dtos.Item;
 using Cf.Libs.Service.Items;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Cf.Laundry.Controllers
 {
@@ -44,18 +45,16 @@ namespace Cf.Laundry.Controllers
             return _itemService.GetDryClean(pageIndex, pageSize);
         }
 
-        [HttpGet]
-        [Route("transport")]
-        public IPagedList<ItemDto> GetTransport(int pageIndex = 0, int pageSize = 10)
-        {
-            return _itemService.GetTransport(pageIndex, pageSize);
-        }
-
         [HttpPost]
         [Route("save")]
         public ItemDto Save(ItemRequest request)
         {
-            if(request.Id > 0)
+            if (request == null)
+            {
+                throw new ArgumentNullException("Param is invalid.");
+            }
+
+            if (request.Id > 0)
             {
                 return _itemService.Edit(request);
             }

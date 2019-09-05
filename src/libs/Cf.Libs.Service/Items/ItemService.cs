@@ -5,8 +5,8 @@ using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Items;
-using Cf.Libs.DataAccess.Repository.ItemRates;
 using Cf.Libs.DataAccess.Repository.Items;
+using Cf.Libs.DataAccess.Repository.Prices;
 using Cf.Libs.Service.Dtos.Item;
 using System;
 using System.Linq;
@@ -16,16 +16,16 @@ namespace Cf.Libs.Service.Items
     public class ItemService : BaseService, IItemService
     {
         private readonly IItemRepository _itemRepository;
-        private readonly IItemRateRepository _rateRepository;
+        private readonly IPriceRepository _priceRepository;
 
         public ItemService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
             IItemRepository itemRepository,
-            IItemRateRepository rateRepository) : base(unitOfWork, mapper)
+            IPriceRepository priceRepository) : base(unitOfWork, mapper)
         {
             _itemRepository = itemRepository;
-            _rateRepository = rateRepository;
+            _priceRepository = priceRepository;
         }
 
         public ItemDto Get(int Id)
@@ -41,43 +41,38 @@ namespace Cf.Libs.Service.Items
 
         public IPagedList<ItemDto> GetAll(int pageIndex, int pageSize)
         {
-            return GetByType(pageIndex, pageSize, null);
+            return GetItemByType(pageIndex, pageSize);
         }
 
         public IPagedList<ItemDto> GetLaundry(int pageIndex, int pageSize)
         {
-            return GetByType(pageIndex, pageSize, ItemType.Laundry);
+            return GetItemByType(pageIndex, pageSize, ItemType.Laundry.ToString());
         }
 
         public IPagedList<ItemDto> GetDryClean(int pageIndex, int pageSize)
         {
-            return GetByType(pageIndex, pageSize, ItemType.DryClean);
+            return GetItemByType(pageIndex, pageSize, ItemType.DryClean.ToString());
         }
 
-        public IPagedList<ItemDto> GetTransport(int pageIndex, int pageSize)
-        {
-            return GetByType(pageIndex, pageSize, ItemType.TransportTime);
-        }
-
-        private IPagedList<ItemDto> GetByType(int pageIndex, int pageSize, ItemType? type)
+        private IPagedList<ItemDto> GetItemByType(int pageIndex, int pageSize, string type = null)
         {
 
             var itemQuery = from item in _itemRepository.GetQuery()
-                            orderby item.Order ascending
+                            orderby item.SortOrder ascending
                             orderby item.Name ascending
                             orderby item.ModifiedDate ascending
                             orderby item.CreateDate ascending
                             where !item.IsDeleted
                             select item;
 
-            if (type.HasValue)
+            if (!string.IsNullOrEmpty(type))
             {
                 itemQuery = from item in itemQuery
                             where item.Type == type
                             select item;
             }
 
-            var rateQuery = from rate in _rateRepository.GetQuery()
+            var priceQuery = from rate in _priceRepository.GetQuery()
                             where !rate.IsDeleted && DateTime.Now > rate.ApplyDate
                             orderby rate.ApplyDate descending
                             orderby rate.Priority ascending
@@ -85,16 +80,16 @@ namespace Cf.Libs.Service.Items
                             select gRate.FirstOrDefault();
 
             var query = from i in itemQuery
-                        join r in rateQuery on i.Id equals r.ItemId into groupItem
-                        from g in groupItem.DefaultIfEmpty(new ItemRate())
+                        join r in priceQuery on i.Id equals r.ItemId into groupItem
+                        from g in groupItem.DefaultIfEmpty(new Price())
                         select new ItemDto
                         {
                             Id = i.Id,
                             Image = i.Image,
                             Name = i.Name,
                             Description = i.Description,
-                            Highlights = i.Highlights,
-                            Order = i.Order,
+                            Highlight = i.Highlight,
+                            SortOrder = i.SortOrder,
                             Type = i.Type,
                             Rate = g.Rate,
                             Discount = g.Discount,
@@ -128,8 +123,8 @@ namespace Cf.Libs.Service.Items
             record.Image = request.Image;
             record.Name = request.Name;
             record.Description = request.Description;
-            record.Highlights = request.Highlights;
-            record.Order = request.Order;
+            record.Highlight = request.Highlight;
+            record.SortOrder = request.SortOrder;
             record.Type = request.Type;
 
             _itemRepository.Update(record);

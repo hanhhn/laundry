@@ -30,7 +30,7 @@ export class BookNowComponent implements OnInit {
   districts: AddressUnit[];
   wards: AddressUnit[];
   addresses: Address[];
-  transportTime: Item[];
+  deliveryTime: Method[];
   activeDay: KeyValue[];
 
   constructor(
@@ -49,7 +49,7 @@ export class BookNowComponent implements OnInit {
     this.districts = [];
     this.wards = [];
     this.addresses = [];
-    this.transportTime = [];
+    this.deliveryTime = [];
     this.activeDay = [];
   }
 
@@ -57,7 +57,6 @@ export class BookNowComponent implements OnInit {
     this.initForm();
     this.loadTheWayClean();
     this.loadProvice();
-    this.loadTransportTime();
     this.loadActiveDay();
     this.loadFullAddress(this.phone);
   }
@@ -97,6 +96,10 @@ export class BookNowComponent implements OnInit {
     return this.bookNowService.getStraightMethod(this.methods);
   }
 
+  get getDeliveryTime() {
+    return this.bookNowService.getDeliveryMethod(this.methods);
+  }
+
   get alreadyExists() {
     return this.addresses && this.addresses.length > 0;
   }
@@ -134,12 +137,6 @@ export class BookNowComponent implements OnInit {
         alert("Xảy ra lỗi");
       }
     );
-  }
-
-  loadTransportTime() {
-    this.itemService.getTransport(0, 10).subscribe(data => {
-      this.transportTime = data ? data.dataSource : [];
-    });
   }
 
   loadActiveDay() {

@@ -46,15 +46,6 @@ export class ItemService {
     );
   }
 
-  getTransport(pageIndex: number, pageSize: number): Observable<PagedList<Item>> {
-    const url = "items/transport?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
-    return this.httpService.doGet(url, null).pipe(
-      map((data: any) => {
-        return data ? new PagedList(data) : null;
-      })
-    );
-  }
-
   saveItem(item: ItemRequest): Observable<Item> {
     const url = "items/save";
     return this.httpService.doPost(url, item).pipe(
@@ -77,7 +68,7 @@ export class ItemService {
     return [
       new KeyValue(1, "Laundry"),
       new KeyValue(2, "DryClean"),
-      new KeyValue(3, "TransportTime"),
+      // new KeyValue(3, "TransportTime"),
     ];
   }
 }

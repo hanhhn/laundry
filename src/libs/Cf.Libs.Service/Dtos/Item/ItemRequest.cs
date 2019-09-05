@@ -1,9 +1,4 @@
-﻿using Cf.Libs.Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cf.Libs.Service.Dtos.Item
+﻿namespace Cf.Libs.Service.Dtos.Item
 {
     public class ItemRequest
     {
@@ -11,8 +6,8 @@ namespace Cf.Libs.Service.Dtos.Item
         public string Image { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool Highlights { get; set; }
-        public int Order { get; set; }
-        public ItemType Type { get; set; }
+        public bool Highlight { get; set; }
+        public int SortOrder { get; set; }
+        public string Type { get; set; }
     }
 }

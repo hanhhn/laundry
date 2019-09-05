@@ -154,9 +154,9 @@ namespace Cf.Libs.DataAccess.Seed
                 Id = 1,
                 Name = "Giặt hấp",
                 Description = "Giặt hấp",
-                Discount = 0,
+                SortOrder = 1,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Clean
+                Type = Core.Enums.MethodType.Clean.ToString()
             };
             method1.Default(true, 0);
 
@@ -165,9 +165,9 @@ namespace Cf.Libs.DataAccess.Seed
                 Id = 2,
                 Name = "Giặt sấy",
                 Description = "Giặt sấy",
-                Discount = 0,
+                SortOrder = 1,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Clean
+                Type = Core.Enums.MethodType.Clean.ToString()
             };
             method2.Default(true, 0);
 
@@ -176,9 +176,9 @@ namespace Cf.Libs.DataAccess.Seed
                 Id = 3,
                 Name = "Chỉ giặt",
                 Description = "Chỉ giặt",
-                Discount = 0,
+                SortOrder = 1,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Clean
+                Type = Core.Enums.MethodType.Clean.ToString()
             };
             method3.Default(true, 0);
 
@@ -187,9 +187,9 @@ namespace Cf.Libs.DataAccess.Seed
                 Id = 4,
                 Name = "Chỉ sấy",
                 Description = "Chỉ sấy",
-                Discount = 0,
+                SortOrder = 0,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Dry
+                Type = Core.Enums.MethodType.Dry.ToString()
             };
             method4.Default(true, 0);
 
@@ -198,9 +198,9 @@ namespace Cf.Libs.DataAccess.Seed
                 Id = 5,
                 Name = "Comfort",
                 Description = "Comfort",
-                Discount = 0,
+                SortOrder = 1,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Soft
+                Type = Core.Enums.MethodType.Soft.ToString()
             };
             method5.Default(true, 0);
 
@@ -209,9 +209,9 @@ namespace Cf.Libs.DataAccess.Seed
                 Id = 6,
                 Name = "Downy",
                 Description = "Downy",
-                Discount = 0,
+                SortOrder = 1,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Soft
+                Type = Core.Enums.MethodType.Soft.ToString()
             };
             method6.Default(true, 0);
 
@@ -220,9 +220,9 @@ namespace Cf.Libs.DataAccess.Seed
                 Id = 7,
                 Name = "Ủi hơi nước miển phí",
                 Description = "Ủi hơi nước miển phí",
-                Discount = 0,
+                SortOrder = 1,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Straight
+                Type = Core.Enums.MethodType.Straight.ToString()
             };
             method7.Default(true, 0);
 

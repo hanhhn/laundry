@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cf.Libs.DataAccess.Mapping.Items
 {
-    public class ItemRateConfigure : EntityTypeConfiguration<ItemRate>
+    public class PriceConfigure : EntityTypeConfiguration<Price>
     {
-        public override void Configure(EntityTypeBuilder<ItemRate> builder)
+        public override void Configure(EntityTypeBuilder<Price> builder)
         {
             base.Configure(builder);
 
-            builder.ToTable(nameof(ItemRate));
+            builder.ToTable(nameof(Price));
         }
     }
 }

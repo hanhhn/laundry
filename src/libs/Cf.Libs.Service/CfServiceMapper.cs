@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Cf.Libs.DataAccess.Entities.Common;
 using Cf.Libs.DataAccess.Entities.Items;
-using Cf.Libs.Service.Dtos.Adresss;
+using Cf.Libs.Service.Dtos.Adress;
 using Cf.Libs.Service.Dtos.Item;
-using Cf.Libs.Service.Dtos.ItemRate;
 using Cf.Libs.Service.Dtos.Method;
+using Cf.Libs.Service.Dtos.Prices;
 
 namespace Cf.Libs.Service
 {
@@ -23,15 +23,15 @@ namespace Cf.Libs.Service
             CreateMap<ItemRequest, Item>();
             CreateMap<Item, ItemDto>();
 
-            CreateMap<ItemRateRequest, ItemRate>();
-            CreateMap<ItemRate, ItemRateDto>();
+            CreateMap<PriceRequest, Price>();
+            CreateMap<Price, PriceDto>();
 
             CreateMap<MethodRequest, Method>();
             CreateMap<Method, MethodDto>();
             
 
-            CreateMap<AddressRequest, DataAccess.Entities.Common.Address>();
-            CreateMap<DataAccess.Entities.Common.Address, AddressDto>();
+            CreateMap<AddressRequest, Address>();
+            CreateMap<Address, AddressDto>();
             CreateMap<Province, AddressUnitDto>();
             CreateMap<District, AddressUnitDto>();
             CreateMap<Ward, AddressUnitDto>();

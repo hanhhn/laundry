@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\api\Cf.Laundry.Common\Cf.Laundry.Common.csproj" />
     <ProjectReference Include="..\Cf.Libs.Core\Cf.Libs.Core.csproj" />
   </ItemGroup>
 

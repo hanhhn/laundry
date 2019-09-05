@@ -1,5 +1,4 @@
-﻿using Cf.Libs.Core.Enums;
-using Cf.Libs.Core.Infrastructure.Entity;
+﻿using Cf.Libs.Core.Infrastructure.Entity;
 
 namespace Cf.Libs.DataAccess.Entities.Items
 {
@@ -7,8 +6,8 @@ namespace Cf.Libs.DataAccess.Entities.Items
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal Discount { get; set; }
         public bool EnableDiscount { get; set; }
-        public MethodType Type { get; set; }
+        public int SortOrder { get; set; }
+        public string Type { get; set; }
     }
 }

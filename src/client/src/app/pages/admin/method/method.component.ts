@@ -68,6 +68,9 @@ export class MethodComponent implements OnInit {
     this.display = true;
     this.submitted = false;
     this.formControls.reset();
+    this.controls.id.patchValue(0);
+    this.controls.discount.patchValue(0);
+    this.controls.enableDiscount.patchValue(false);
   }
 
   onShowEditDialog(method: Method) {
@@ -88,13 +91,11 @@ export class MethodComponent implements OnInit {
 
     if (this.formControls.valid) {
       const request = new MethodRequest();
-      request.id = this.controls.id.value ? this.controls.id.value : 0;
+      request.id = this.controls.id.value;
       request.name = this.controls.name.value;
       request.description = this.controls.description.value;
       request.discount = this.controls.discount.value;
-      request.enableDiscount = this.controls.enableDiscount.value
-        ? this.controls.enableDiscount.value
-        : false;
+      request.enableDiscount = this.controls.enableDiscount.value;
       request.type = this.controls.type.value.key;
 
       this.methodService.save(request).subscribe(

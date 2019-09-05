@@ -40,7 +40,10 @@ namespace Cf.Libs.Service.Prices
             }
 
             var rate = _mapper.Map<Price>(request);
-            rate.DiscountRate = rate.Rate * (rate.Discount / 100 + 1);
+
+            rate.ApplyDate = rate.ApplyDate.ToLocalTime();
+            rate.ExpireDate = rate.ExpireDate.ToLocalTime();
+            rate.DiscountRate = rate.Rate * (1 - rate.Discount / 100);
             var record = _priceRepository.Add(rate);
             if (_unitOfWork.SaveChanges() == 0)
             {
@@ -103,36 +106,7 @@ namespace Cf.Libs.Service.Prices
 
         public PriceDto Get(int Id)
         {
-            var rateQuery = from rate in _priceRepository.GetQuery()
-                            where rate.Id == Id && !rate.IsDeleted
-                            select rate;
-
-            var itemQuery = from item in _itemRepository.GetQuery()
-                            select item;
-
-            var record = (from rate in rateQuery
-                          join item in itemQuery on rate.ItemId equals item.Id
-                          select new PriceDto
-                          {
-                              Id = rate.Id,
-                              ItemId = item.Id,
-                              ItemCode = rate.ItemCode,
-                              Rate = rate.Rate,
-                              Tax = rate.Tax,
-                              Discount = rate.Discount,
-                              DiscountRate = rate.DiscountRate,
-                              Priority = rate.Priority,
-                              IsActive = rate.IsActive,
-                              ApplyDate = rate.ApplyDate,
-                              ExpireDate = rate.ExpireDate
-                          }).SingleOrDefault();
-
-            if (record == null)
-            {
-                throw new RecordNotFoundException("Record can not be found.");
-            }
-
-            return _mapper.Map<PriceDto>(record);
+            throw new NotImplementedException();
         }
 
         public IPagedList<PriceDto> GetAll(int pageIndex, int pageSize)
@@ -140,21 +114,47 @@ namespace Cf.Libs.Service.Prices
 
             var itemQuery = from price in _priceRepository.FindByItem()
                             join item in _itemRepository.GetQuery() on price.ItemId equals item.Id
-                            select price;
+                            select new PriceDto
+                            {
+                                Id = price.Id,
+                                ItemId = item.Id,
+                                ItemCode = price.ItemCode,
+                                ItemName = item.Name,
+                                Rate = price.Rate,
+                                Tax = price.Tax,
+                                Discount = price.Discount,
+                                DiscountRate = price.DiscountRate,
+                                Priority = price.Priority,
+                                IsActive = price.IsActive,
+                                ApplyDate = price.ApplyDate,
+                                ExpireDate = price.ExpireDate
+                            };
 
 
             var methodQuery = from price in _priceRepository.FindByMethod()
                               join method in _methodRepository.GetQuery() on price.ItemId equals method.Id
-                              select price;
+                              select new PriceDto
+                              {
+                                  Id = price.Id,
+                                  ItemId = method.Id,
+                                  ItemCode = price.ItemCode,
+                                  ItemName = method.Name,
+                                  Rate = price.Rate,
+                                  Tax = price.Tax,
+                                  Discount = price.Discount,
+                                  DiscountRate = price.DiscountRate,
+                                  Priority = price.Priority,
+                                  IsActive = price.IsActive,
+                                  ApplyDate = price.ApplyDate,
+                                  ExpireDate = price.ExpireDate
+                              };
 
             var query = from price in itemQuery.Union(methodQuery)
                         orderby price.ApplyDate descending
-                        orderby price.ModifiedDate descending
-                        orderby price.CreateDate descending
                         orderby price.Id ascending
                         select price;
 
-            return query.ToPagedList<Price, PriceDto>(pageIndex, pageSize);
+            return query.ToPagedList(pageIndex, pageSize);
         }
     }
 }

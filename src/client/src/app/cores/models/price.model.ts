@@ -14,7 +14,8 @@ export class PriceRequest {
 export class Price {
   id: number;
   itemId: number;
-  itemCode: number;
+  itemCode: string;
+  itemName: string;
   rate: number;
   tax: number;
   discount: number;
@@ -28,6 +29,7 @@ export class Price {
     this.id = json.id;
     this.itemId = json.itemId;
     this.itemCode = json.itemCode;
+    this.itemName = json.itemName;
     this.rate = json.rate;
     this.tax = json.tax;
     this.discount = json.discount;

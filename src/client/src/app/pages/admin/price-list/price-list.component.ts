@@ -8,6 +8,7 @@ import { PriceService } from "src/app/cores/services/price.service";
 import { KeyValue } from "src/app/cores/models/object.model";
 import { MethodService } from "src/app/cores/services/method.service";
 import { map } from "rxjs/operators";
+import { fromDate } from "../../../cores/helpers/utils.helper";
 @Component({
   selector: "app-price-list",
   templateUrl: "./price-list.component.html",
@@ -48,7 +49,7 @@ export class PriceListComponent implements OnInit {
 
   ngOnInit() {
     this.loadList();
-    this.loadItemCodes();
+    this.itemCodes = this.itemService.getItemCodes();
 
     this.formControls = this.formBuilder.group({
       id: [0],
@@ -59,18 +60,20 @@ export class PriceListComponent implements OnInit {
       discount: [0, Validators.required],
       priority: [1, Validators.required],
       isActive: [true, Validators.required],
-      applyDate: [null, Validators.required]
+      applyDate: [null, Validators.required],
+      expireDate: [null, Validators.required]
     });
   }
 
   loadList() {
     this.priceService.getAll(0, 100).subscribe(data => {
-      this.dataSource = data.dataSource ? data.dataSource : [];
+      const result = data.dataSource ? data.dataSource : [];
+      this.dataSource = result.map(item => {
+        item.applyDate = fromDate(item.applyDate.toString());
+        item.expireDate = fromDate(item.expireDate.toString());
+        return item;
+      });
     });
-  }
-
-  loadItemCodes() {
-    this.itemCodes = this.itemService.getItemCodes();
   }
 
   loadItems(code: string) {
@@ -133,8 +136,10 @@ export class PriceListComponent implements OnInit {
   }
 
   onShowEditDialog(rate: Price) {
+    const itemCode = this.itemCodes.filter(x => x.key === rate.itemCode);
+    this.loadItems(rate.itemCode);
+
     const item = this.items.filter(x => x.key === rate.itemId);
-    const itemCode = this.itemCodes.filter(x => x.key === rate.itemId);
     this.controls.id.patchValue(rate.id);
     this.controls.itemCode.patchValue(itemCode[0]);
     this.controls.item.patchValue(item[0]);
@@ -143,7 +148,8 @@ export class PriceListComponent implements OnInit {
     this.controls.discount.patchValue(rate.discount);
     this.controls.priority.patchValue(rate.priority);
     this.controls.isActive.patchValue(rate.isActive);
-    // this.controls.applyDate.patchValue(rate.applyDate);
+    this.controls.applyDate.patchValue(rate.applyDate);
+    this.controls.expireDate.patchValue(rate.expireDate);
     this.display = true;
   }
 
@@ -155,14 +161,15 @@ export class PriceListComponent implements OnInit {
     if (this.formControls.valid) {
       const request = new PriceRequest();
       request.id = this.controls.id.value;
-      request.itemId = this.controls.item.value.id;
-      request.itemCode = this.controls.item.value.itemCode;
+      request.itemId = this.controls.item.value.key;
+      request.itemCode = this.controls.itemCode.value.key;
       request.rate = this.controls.rate.value;
       request.tax = this.controls.tax.value;
       request.discount = this.controls.discount.value;
       request.priority = this.controls.priority.value;
       request.isActive = this.controls.isActive.value;
       request.applyDate = this.controls.applyDate.value;
+      request.expireDate = this.controls.expireDate.value;
 
       this.priceService.saveRate(request).subscribe(
         data => {

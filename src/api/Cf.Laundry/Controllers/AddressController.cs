@@ -67,5 +67,12 @@ namespace Cf.Laundry.Controllers
         {
             return _addressService.SetDefault(phone, id);
         }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public IEnumerable<AddressDto> DeleteAddress(int id)
+        {
+            return _addressService.Delete(id);
+        }
     }
 }

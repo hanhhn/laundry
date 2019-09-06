@@ -130,6 +130,24 @@ namespace Cf.Libs.Service.Addresses
             return _mapper.Map<IEnumerable<AddressDto>>(records.ToList());
         }
 
+        public IEnumerable<AddressDto> Delete(int id)
+        {
+            var record = _addressRepository.Get(id);
+            if (record == null)
+            {
+                throw new RecordNotFoundException("Record can not be found.");
+            }
+
+            _addressRepository.Delete(record);
+            if (_unitOfWork.SaveChanges() == 0)
+            {
+                throw new InformationException("An error occurred during save.");
+            }
+
+            var records = _addressRepository.FindByPhone(record.Phone);
+            return _mapper.Map<IEnumerable<AddressDto>>(records.ToList());
+        }
+
         public bool SetDefault(string phone, int id)
         {
             var record = _addressRepository.Get(id);

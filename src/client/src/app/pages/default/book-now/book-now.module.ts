@@ -9,13 +9,18 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatRadioModule } from "@angular/material/radio";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatCheckboxModule, MatSelectModule } from "@angular/material";
+import {
+  MatCheckboxModule,
+  MatSelectModule,
+  MatDialogModule
+} from "@angular/material";
 import { VerticalStepperScrollerDirective } from "../../../cores/directives/vertical-stepper-scroller.directive";
 import { MethodService } from "../../../cores/services/method.service";
 import { BookNowService } from "./book-now.service";
 import { AddressService } from "src/app/cores/services/address.service";
 import { ItemService } from "../../../cores/services/item.service";
 import { TimeService } from "../../../cores/services/time.service";
+import { ConfirmModule } from "src/app/components/confirm/confirm.module";
 
 const routes: Routes = [
   {
@@ -39,6 +44,8 @@ const routes: Routes = [
     MatRadioModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatDialogModule,
+    ConfirmModule,
     RouterModule.forChild(routes)
   ],
   providers: [

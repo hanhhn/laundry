@@ -45,4 +45,16 @@
   .min-height {
     min-height: 400px;
   }
+
+  .action {
+    text-align: right;
+  }
+
+  .remove {
+    i {
+      font-size: 18px;
+      cursor: pointer;
+      padding: 2px;
+    }
+  }
 }

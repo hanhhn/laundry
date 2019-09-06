@@ -1,19 +1,21 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatStepper } from "@angular/material";
 import { MethodService } from "../../../cores/services/method.service";
 import { BookNowService } from "./book-now.service";
 import { Method } from "../../../cores/models/method.model";
 import { AddressService } from "src/app/cores/services/address.service";
+import { ItemService } from "../../../cores/services/item.service";
+import { KeyValue } from "../../../cores/models/object.model";
+import { TimeService } from "../../../cores/services/time.service";
+import { StorageService } from "src/app/cores/services/storage.service";
+import { MatDialog } from "@angular/material/dialog";
+
 import {
   AddressUnit,
   Address,
   AddressRequest
 } from "src/app/cores/models/address.model";
-import { Item } from "../../../cores/models/item.model";
-import { ItemService } from "../../../cores/services/item.service";
-import { KeyValue } from "../../../cores/models/object.model";
-import { TimeService } from "../../../cores/services/time.service";
+import { ConfirmComponent } from "src/app/components/confirm/confirm.component";
 
 @Component({
   selector: "app-book-now",
@@ -25,6 +27,7 @@ export class BookNowComponent implements OnInit {
   isMobile: boolean;
   isShowFormContact: boolean;
   phone: string;
+  isOneMoreAddress: boolean;
 
   serviceFormGroup: FormGroup;
   contactFormGroup: FormGroup;
@@ -38,17 +41,20 @@ export class BookNowComponent implements OnInit {
   activeDay: KeyValue[];
 
   constructor(
+    private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private methodService: MethodService,
     private bookNowService: BookNowService,
     private addressService: AddressService,
     private itemService: ItemService,
-    private timeService: TimeService
+    private timeService: TimeService,
+    private storageService: StorageService
   ) {
     // this.isShowFormContact = true;
     this.methods = [];
     this.isLinear = true;
     this.isMobile = false;
+    this.isOneMoreAddress = false;
     this.provinces = [];
     this.districts = [];
     this.wards = [];
@@ -58,24 +64,21 @@ export class BookNowComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initForm();
+    this.phone = this.storageService.getPhone();
+    this.initServiceForm();
+    this.initContactForm();
+
     this.loadTheWayClean();
     this.loadProvice();
     this.loadActiveDay();
+
     this.loadFullAddress(this.phone);
   }
 
-  initForm() {
-    this.serviceFormGroup = this.formBuilder.group({
-      method: [null, Validators.required],
-      soft: [null, Validators.required],
-      straight: [null, Validators.required],
-      note: [null]
-    });
-
+  initContactForm() {
     this.contactFormGroup = this.formBuilder.group({
       id: [0],
-      phone: [null, Validators.required],
+      phone: [this.phone, Validators.required],
       fullName: [null, Validators.required],
       province: [null, Validators.required],
       district: [null, Validators.required],
@@ -83,6 +86,15 @@ export class BookNowComponent implements OnInit {
       street: [null, Validators.required],
       dateOfReceipt: [null, Validators.required],
       hoursOfReceipt: [null, Validators.required]
+    });
+  }
+
+  initServiceForm() {
+    this.serviceFormGroup = this.formBuilder.group({
+      method: [null, Validators.required],
+      soft: [null, Validators.required],
+      straight: [null, Validators.required],
+      note: [null]
     });
   }
 
@@ -122,7 +134,11 @@ export class BookNowComponent implements OnInit {
       this.phone = e.target.value;
 
       if (10 <= length && length <= 11) {
+        this.storageService.savePhone(this.phone);
+
         this.loadFullAddress(this.phone);
+      } else {
+        this.addresses = [];
       }
     }
   }
@@ -136,8 +152,47 @@ export class BookNowComponent implements OnInit {
     this.loadWard(id);
   }
 
+  onOneMoreAddress(e) {
+    e.preventDefault();
+
+    this.contactControls.id.patchValue(0);
+    this.contactControls.fullName.patchValue(null);
+    this.contactControls.province.patchValue(null);
+    this.contactControls.district.patchValue(null);
+    this.contactControls.ward.patchValue(null);
+    this.contactControls.street.patchValue(null);
+
+    this.addresses = [];
+  }
+
+  onCancelMoreAddress(e) {
+    e.preventDefault();
+
+    this.loadFullAddress(this.phone);
+  }
+
   onConfirmOrder(e) {
     this.saveAddress();
+  }
+
+  onRemoveAdress(id) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      minWidth: "350px",
+      data: {
+        title: "Xóa!",
+        message: "Bạn có chắc chắn muốn xóa địa chỉ?",
+        noLabel: "Không",
+        yesLabel: "Có"
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.addressService.delete(id).subscribe(address => {
+          this.addresses = address ? address : [];
+        });
+      }
+    });
   }
 
   saveAddress() {
@@ -154,6 +209,9 @@ export class BookNowComponent implements OnInit {
       this.addressService.save(request).subscribe(data => {
         this.addresses = data ? data : [];
       });
+
+      this.isOneMoreAddress = false;
+      this.storageService.savePhone(request.phone);
     }
   }
 
@@ -179,6 +237,8 @@ export class BookNowComponent implements OnInit {
       this.addressService.getFullAddress(phone).subscribe(data => {
         this.addresses = data ? data : [];
       });
+    } else {
+      this.addresses = [];
     }
   }
 

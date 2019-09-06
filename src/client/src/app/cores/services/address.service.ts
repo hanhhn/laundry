@@ -38,6 +38,11 @@ export class AddressService {
     return this.httpService.doPost(url, request).pipe(map(this.mapAddress));
   }
 
+  delete(id: number): Observable<Address[]> {
+    const url = "address/delete/" + id;
+    return this.httpService.doDelete(url, null).pipe(map(this.mapAddress));
+  }
+
   private mapAddressUnit(data: any): AddressUnit[] {
     return data ? data.map(x => (x ? new AddressUnit(x) : null)) : [];
   }

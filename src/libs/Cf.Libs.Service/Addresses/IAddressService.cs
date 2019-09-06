@@ -12,6 +12,7 @@ namespace Cf.Libs.Service.Addresses
         IEnumerable<AddressDto> GetFullAddress(string phone);
         IEnumerable<AddressDto> Add(AddressRequest request);
         IEnumerable<AddressDto> Edit(AddressRequest request);
+        IEnumerable<AddressDto> Delete(int id);
         bool SetDefault(string phone, int id);
     }
 }

@@ -1,9 +1,11 @@
-﻿using Cf.Libs.Service.Prices;
+﻿using Cf.Libs.DataAccess.Repository.OrderDetails;
+using Cf.Libs.DataAccess.Repository.Orders;
+using Cf.Libs.Service.Addresses;
 using Cf.Libs.Service.Items;
 using Cf.Libs.Service.Methods;
+using Cf.Libs.Service.Prices;
 using Cf.Libs.Service.Profile;
 using Microsoft.Extensions.DependencyInjection;
-using Cf.Libs.Service.Addresses;
 
 namespace Cf.Libs.Service
 {
@@ -16,6 +18,8 @@ namespace Cf.Libs.Service
             services.AddScoped<IPriceService, PricesService>();
             services.AddScoped<IMethodService, MethodService>();
             services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         }
     }
 }

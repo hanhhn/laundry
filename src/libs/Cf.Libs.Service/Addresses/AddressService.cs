@@ -104,6 +104,7 @@ namespace Cf.Libs.Service.Addresses
         public IEnumerable<AddressDto> Edit(AddressRequest request)
         {
             var record = _addressRepository.Get(request.Id);
+
             if (record == null)
             {
                 throw new RecordNotFoundException("Record can not be found.");
@@ -113,12 +114,17 @@ namespace Cf.Libs.Service.Addresses
             record.FullName = request.FullName;
             record.IsDefault = request.IsDefault;
             record.ProvinceId = request.ProvinceId;
-            record.Province = request.Province;
             record.DistrictId = request.DistrictId;
-            record.District = request.District;
             record.WardId = request.WardId;
-            record.Ward = request.Ward;
             record.Street = request.Street;
+
+            var province = _provinceRepository.Get(request.ProvinceId);
+            var district = _districtRepository.Get(request.DistrictId);
+            var ward = _wardRepository.Get(request.WardId);
+            record.Province = string.Format("{0} {1}", province.Prefix, province.Name).Trim();
+            record.District = string.Format("{0} {1}", district.Prefix, district.Name).Trim();
+            record.Ward = string.Format("{0} {1}", ward.Prefix, ward.Name).Trim();
+
             _addressRepository.Update(record);
 
             if (_unitOfWork.SaveChanges() == 0)

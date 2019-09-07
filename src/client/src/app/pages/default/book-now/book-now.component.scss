@@ -50,11 +50,19 @@
     text-align: right;
   }
 
-  .remove {
+  .action {
+    margin-left: 10px;
+
     i {
       font-size: 18px;
       cursor: pointer;
       padding: 2px;
+    }
+
+    .edit, .remove {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
     }
   }
 }

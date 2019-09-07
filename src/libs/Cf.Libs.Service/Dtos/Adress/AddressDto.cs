@@ -13,6 +13,6 @@
         public string Ward { get; set; }
         public string Street { get; set; }
         public bool IsDefault { get; set; }
-        public string FullAddress => string.Format("Địa chỉ: {0}, {1}, {2}.", Street, Ward, District, Province);
+        public string FullAddress => string.Format("Địa chỉ: {0}, {1}, {2}, {3}.", Street, Ward, District, Province);
     }
 }

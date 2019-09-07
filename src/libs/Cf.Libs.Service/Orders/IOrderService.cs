@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Cf.Libs.Core.Infrastructure.Service;
 
 namespace Cf.Libs.Service.Orders
 {
-    public interface IOrderService
+    public interface IOrderService : IBaseService
     {
     }
 }

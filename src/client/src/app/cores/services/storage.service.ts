@@ -21,11 +21,15 @@ export class StorageService {
     return localStorage.getItem(PHONE_TOKEN_KEY);
   }
 
+  removePhone() {
+    localStorage.removeItem(PHONE_TOKEN_KEY);
+  }
+
   getToken() {
     return localStorage.getItem(TOKEN_KEY);
   }
 
   clear() {
-    return localStorage.clear();
+    localStorage.clear();
   }
 }

@@ -37,17 +37,19 @@ export class HeaderComponent implements OnInit {
 
   get getMenuDesktop(): Menu[] {
     if (this.menuLinks) {
-      return this.menuLinks.filter(x => x.url !== "/dat-ngay").sort((a, b) => {
-        if (a.desktopOrder > b.desktopOrder) {
-          return 1;
-        }
+      return this.menuLinks
+        .filter(x => x.url !== "/dat-ngay")
+        .sort((a, b) => {
+          if (a.desktopOrder > b.desktopOrder) {
+            return 1;
+          }
 
-        if (a.desktopOrder === b.desktopOrder) {
-          return 0;
-        }
+          if (a.desktopOrder === b.desktopOrder) {
+            return 0;
+          }
 
-        return -1;
-      });
+          return -1;
+        });
     }
 
     return [];

@@ -1,4 +1,6 @@
 ﻿using Cf.Libs.Core.Infrastructure.Entity;
+using Cf.Libs.DataAccess.Entities.Orders;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cf.Libs.DataAccess.Entities.Common
 {

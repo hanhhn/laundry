@@ -37,9 +37,25 @@
   }
 
   .done {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    .title {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+
+      .mat-icon {
+        height: auto;
+        width: auto;
+      }
+
+      .icon {
+        font-size: 66px;
+        color: #155724;
+      }
+    }
+
+    .content {
+      text-align: left;
+    }
   }
 
   .min-height {

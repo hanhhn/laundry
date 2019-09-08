@@ -10,12 +10,21 @@ import { TimeService } from "../../../cores/services/time.service";
 import { StorageService } from "src/app/cores/services/storage.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmComponent } from "src/app/components/confirm/confirm.component";
+import { OrdersService } from "../../../cores/services/orders.service";
+import { OrderRequest, Order } from "../../../cores/models/orders.model";
 import {
   AddressUnit,
   Address,
   AddressRequest
 } from "src/app/cores/models/address.model";
-import { MatStepper } from "@angular/material";
+import {
+  MatStepper,
+  MatSelectChange,
+  MatOption,
+  MatRadioChange
+} from "@angular/material";
+
+const thankYou = "./../../../../assets/thanks-you-for-your-order.png";
 
 @Component({
   selector: "app-book-now",
@@ -27,9 +36,11 @@ export class BookNowComponent implements OnInit {
   isMobile: boolean;
   isShowFullAddress: boolean;
   isShowOneMoreAddress: boolean;
+  thanksYou = thankYou;
 
   phone: string;
   address: Address;
+  hoursOfReceipt: string;
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -45,6 +56,13 @@ export class BookNowComponent implements OnInit {
   addresses: Address[];
   deliveryTime: Method[];
   activeDay: KeyValue[];
+
+  order: Order;
+  method: string;
+  soft: string;
+  straight: string;
+
+  completed: boolean;
 
   get getWayClean() {
     const way = this.bookNowService.getCleanMethod(this.methods);
@@ -90,6 +108,7 @@ export class BookNowComponent implements OnInit {
     private addressService: AddressService,
     private itemService: ItemService,
     private timeService: TimeService,
+    private ordersService: OrdersService,
     private storageService: StorageService
   ) {
     this.isShowFullAddress = false;
@@ -103,6 +122,7 @@ export class BookNowComponent implements OnInit {
     this.addresses = [];
     this.deliveryTime = [];
     this.activeDay = [];
+    this.completed = false;
   }
 
   ngOnInit() {
@@ -131,7 +151,7 @@ export class BookNowComponent implements OnInit {
     this.serviceFormGroup = this.formBuilder.group({
       method: [null, Validators.required],
       soft: [null, Validators.required],
-      straight: [null, Validators.required],
+      straight: [null],
       note: [null]
     });
   }
@@ -271,12 +291,71 @@ export class BookNowComponent implements OnInit {
       this.contactFormGroup.valid && this.dateTimeFormGroup.valid
     );
 
-    if (this.secondFormGroup.valid) {
-      console.log("ok");
+    if (this.secondFormGroup.valid && this.firstFormGroup.valid) {
+      this.saveOrder();
     }
   }
 
-  saveOrder() {}
+  saveOrder() {
+    const request = new OrderRequest();
+    request.methodId = this.serviceControls.method.value;
+    request.softId = this.serviceControls.soft.value;
+    const straightId = this.serviceControls.straight.value;
+    request.straightId = straightId ? straightId : 0;
+    request.note = this.serviceControls.note.value;
+
+    request.addressId = this.contactControls.id.value;
+    request.phone = this.contactControls.phone.value;
+    request.fullName = this.contactControls.fullName.value;
+    request.provinceId = this.contactControls.province.value;
+    request.districtId = this.contactControls.district.value;
+    request.wardId = this.contactControls.ward.value;
+    request.street = this.contactControls.street.value;
+
+    request.dateOfReceipt = this.dateTimeControls.dateOfReceipt.value;
+    request.deliveryId = this.dateTimeControls.hoursOfReceipt.value;
+    request.hoursOfReceipt = this.hoursOfReceipt;
+
+    this.ordersService.saveOrder(request).subscribe(
+      data => {
+        if (data) {
+          this.order = data;
+          this.order.method = this.method;
+          this.order.soft = this.soft;
+          this.order.straight = this.straight;
+
+          this.completed = true;
+          this.stepper.next();
+
+          this.firstFormGroup.reset();
+          this.secondFormGroup.reset();
+          this.serviceFormGroup.reset();
+          this.contactFormGroup.reset();
+        } else {
+          this.dialog.open(ConfirmComponent, {
+            minWidth: "350px",
+            data: {
+              title: "Thông báo!",
+              message:
+                "Xảy xa lỗi trong quá trình đặt dịch vụ, xin vui lòng đăng ký lại sau!",
+              yesLabel: "OK"
+            }
+          });
+        }
+      },
+      err => {
+        this.dialog.open(ConfirmComponent, {
+          minWidth: "350px",
+          data: {
+            title: "Thông báo!",
+            message:
+              "Xảy xa lỗi trong quá trình đặt dịch vụ, xin vui lòng đăng ký lại sau!",
+            yesLabel: "OK"
+          }
+        });
+      }
+    );
+  }
 
   setDefaultAddress(item: Address) {
     if (item) {
@@ -290,9 +369,40 @@ export class BookNowComponent implements OnInit {
     } else {
       if (this.addresses.length === 0) {
         this.address = null;
+        this.isShowFullAddress = false;
+        this.isShowOneMoreAddress = false;
         this.contactControls.id.patchValue(this.phone);
         this.contactFormGroup.reset();
       }
+    }
+  }
+
+  onDeliveryTimeSelected(event: MatSelectChange) {
+    const data = {
+      text: (event.source.selected as MatOption).viewValue,
+      value: event.source.value
+    };
+    this.hoursOfReceipt = data.text;
+  }
+
+  onMethodChanged(event: MatRadioChange) {
+    const item = this.methods.find(x => x.id === event.source.value);
+    if (item) {
+      this.method = item.name;
+    }
+  }
+
+  onSoftChanged(event: MatRadioChange) {
+    const item = this.methods.find(x => x.id === event.source.value);
+    if (item) {
+      this.soft = item.name;
+    }
+  }
+
+  onStraightChanged(event: MatRadioChange) {
+    const item = this.methods.find(x => x.id === event.source.value);
+    if (item) {
+      this.straight = item.name;
     }
   }
 

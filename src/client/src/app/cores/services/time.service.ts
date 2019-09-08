@@ -18,7 +18,7 @@ export class TimeService {
 
     return [
       new KeyValue(
-        formatDate(today, DATE_FORMAT),
+        today,
         "Hôm nay (" +
           paddingNumer(today.getDate()) +
           "/" +
@@ -26,7 +26,7 @@ export class TimeService {
           ")"
       ),
       new KeyValue(
-        formatDate(tomorrow, DATE_FORMAT),
+        tomorrow,
         "Ngày mai (" +
           paddingNumer(tomorrow.getDate()) +
           "/" +
@@ -34,7 +34,7 @@ export class TimeService {
           ")"
       ),
       new KeyValue(
-        formatDate(dayaftertomorrow, DATE_FORMAT),
+        dayaftertomorrow,
         "Ngày kia (" +
           paddingNumer(dayaftertomorrow.getDate()) +
           "/" +

@@ -12,7 +12,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import {
   MatCheckboxModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatIconModule
 } from "@angular/material";
 import { VerticalStepperScrollerDirective } from "../../../cores/directives/vertical-stepper-scroller.directive";
 import { MethodService } from "../../../cores/services/method.service";
@@ -21,6 +22,7 @@ import { AddressService } from "src/app/cores/services/address.service";
 import { ItemService } from "../../../cores/services/item.service";
 import { TimeService } from "../../../cores/services/time.service";
 import { ConfirmModule } from "src/app/components/confirm/confirm.module";
+import { OrdersService } from "../../../cores/services/orders.service";
 
 const routes: Routes = [
   {
@@ -46,6 +48,7 @@ const routes: Routes = [
     MatSelectModule,
     MatDialogModule,
     ConfirmModule,
+    MatIconModule,
     RouterModule.forChild(routes)
   ],
   providers: [
@@ -53,7 +56,8 @@ const routes: Routes = [
     BookNowService,
     AddressService,
     ItemService,
-    TimeService
+    TimeService,
+    OrdersService
   ]
 })
 export class BookNowModule {}

@@ -5,6 +5,7 @@ using Cf.Libs.Service.OrderDetails;
 using Cf.Libs.Service.Orders;
 using Cf.Libs.Service.Prices;
 using Cf.Libs.Service.Profile;
+using Cf.Libs.Service.Settings;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cf.Libs.Service
@@ -20,6 +21,7 @@ namespace Cf.Libs.Service
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderDetailService, OrderDetailService>();
+            services.AddScoped<ISettingService, SettingService>();
         }
     }
 }

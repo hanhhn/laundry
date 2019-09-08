@@ -5,5 +5,6 @@ namespace Cf.Libs.DataAccess.Repository.Settings
 {
     public interface ISettingRepository : IBaseRepository<Setting>
     {
+        Setting FindByKey(string key);
     }
 }

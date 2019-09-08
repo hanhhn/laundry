@@ -1,7 +1,8 @@
 ﻿namespace Cf.Libs.Core.Enums
 {
-    public enum Setting
+    public enum SettingKey
     {
-        Company
+        Company,
+        Link
     }
 }

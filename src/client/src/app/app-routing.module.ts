@@ -48,6 +48,14 @@ const routes: Routes = [
       {
         path: "dat-ngay",
         loadChildren: "./pages/default/book-now/book-now.module#BookNowModule"
+      },
+      {
+        path: "order/tracking",
+        loadChildren: "./pages/default/tracking/tracking.module#TrackingModule"
+      },
+      {
+        path: "ma-giam-gia",
+        loadChildren: "./pages/default/discount/discount.module#DiscountModule"
       }
     ]
   },

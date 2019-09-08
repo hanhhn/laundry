@@ -32,7 +32,7 @@ export class Order {
   }
 
   get getTrackingUrl(): string {
-    return "/tracking?phone=" + this.phone + "&code=" + this.orderCode;
+    return "order/tracking?phone=" + this.phone + "&code=" + this.orderCode;
   }
 }
 

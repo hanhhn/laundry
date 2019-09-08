@@ -8,7 +8,7 @@ export default class SettingService {
   getMenu(): Menu[] {
     return [
       new Menu({
-        desktopOrder: 1,
+        desktopOrder: 5,
         mobileOrder: 1,
         mobile: false,
         url: "/ve-chung-toi",
@@ -36,7 +36,7 @@ export default class SettingService {
         label: "Liên hệ"
       }),
       new Menu({
-        desktopOrder: 5,
+        desktopOrder: 1,
         mobileOrder: 1,
         mobile: true,
         url: "/dat-ngay",

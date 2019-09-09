@@ -5,7 +5,6 @@ using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Configuration;
 using Cf.Libs.DataAccess.Repository.Settings;
-using Cf.Libs.Service.Dtos.Setting;
 using Newtonsoft.Json;
 
 namespace Cf.Libs.Service.Settings
@@ -22,13 +21,13 @@ namespace Cf.Libs.Service.Settings
             _settingRepository = settingRepository;
         }
 
-        public CompanyInfoDto Get(SettingKey settingKey)
+        public T Get<T>(SettingKey settingKey) where T : class
         {
             var record = _settingRepository.FindByKey(settingKey.ToString());
-            return JsonConvert.DeserializeObject<CompanyInfoDto>(record.Value);
+            return JsonConvert.DeserializeObject<T>(record.Value);
         }
 
-        public bool SaveCompanyInfo(CompanyInfoDto model)
+        public bool Save<T>(SettingKey key, T model) where T : class
         {
             var record = _settingRepository.FindByKey(SettingKey.Company.ToString());
             var setting = JsonConvert.SerializeObject(record.Value);
@@ -37,7 +36,7 @@ namespace Cf.Libs.Service.Settings
             {
                 _settingRepository.Add(new Setting
                 {
-                    Name = SettingKey.Company.ToString(),
+                    Name = key.ToString(),
                     Value = setting
                 });
             }
@@ -48,25 +47,28 @@ namespace Cf.Libs.Service.Settings
             return _unitOfWork.SaveChanges() != 0;
         }
 
-
-        public bool SaveExternalLink(LinkDto model)
+        public bool Delete(SettingKey settingKey)
         {
-            var record = _settingRepository.FindByKey(SettingKey.Link.ToString());
-            var setting = JsonConvert.SerializeObject(record.Value);
-
+            var record = _settingRepository.FindByKey(settingKey.ToString());
             if (record == null)
             {
-                _settingRepository.Add(new Setting
-                {
-                    Name = SettingKey.Link.ToString(),
-                    Value = setting
-                });
+                throw new RecordNotFoundException("Record can not be found.");
             }
 
-            record.Value = setting;
-            _settingRepository.Update(record);
+            _settingRepository.Delete(record);
+            return _unitOfWork.SaveChanges() > 0;
+        }
 
-            return _unitOfWork.SaveChanges() != 0;
+        public bool Remove(int id)
+        {
+            var record = _settingRepository.Get(id);
+            if (record == null)
+            {
+                throw new RecordNotFoundException("Record can not be found.");
+            }
+
+            _settingRepository.Remove(record);
+            return _unitOfWork.SaveChanges() > 0;
         }
     }
 }

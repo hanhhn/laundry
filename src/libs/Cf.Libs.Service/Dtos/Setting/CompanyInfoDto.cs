@@ -1,6 +1,6 @@
 ﻿namespace Cf.Libs.Service.Dtos.Setting
 {
-    public class CompanyInfoDto
+    public class CompanyInfoDto : SettingDto
     {
         public string Brand { get; set; }
         public string Logo { get; set; }

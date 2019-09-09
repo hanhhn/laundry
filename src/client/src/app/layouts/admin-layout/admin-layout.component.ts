@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MenuItem } from "primeng/api";
 
 @Component({
   selector: "app-admin-layout",
@@ -6,7 +7,83 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./admin-layout.component.scss"]
 })
 export class AdminLayoutComponent implements OnInit {
-  constructor() {}
+  menuItems: MenuItem[];
+  constructor() {
+    this.menuItems = [];
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.menuItems = [
+      {
+        label: "Order",
+        items: [
+          {
+            label: "Đơn đặt hàng",
+            icon: "",
+            routerLink: "order"
+          }
+        ]
+      },
+      {
+        label: "Price",
+        items: [
+          {
+            label: "Bảng giá dịch vụ",
+            icon: "",
+            routerLink: "price"
+          }
+        ]
+      },
+      {
+        label: "Service",
+        items: [
+          {
+            label: "Dịch vụ",
+            icon: "",
+            routerLink: "service"
+          }
+        ]
+      },
+      {
+        label: "Method",
+        items: [
+          {
+            label: "Phương án",
+            icon: "",
+            routerLink: "method"
+          }
+        ]
+      },
+      {
+        label: "Discount",
+        items: [
+          {
+            label: "Giảm giá",
+            icon: "",
+            routerLink: "discount"
+          }
+        ]
+      },
+      {
+        label: "Setting",
+        items: [
+          {
+            label: "Tất cả",
+            icon: "",
+            routerLink: "setting/all"
+          },
+          {
+            label: "Company",
+            icon: "",
+            routerLink: "setting/company"
+          },
+          {
+            label: "External Link",
+            icon: "",
+            routerLink: "setting/external-link"
+          }
+        ]
+      }
+    ];
+  }
 }

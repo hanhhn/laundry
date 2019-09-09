@@ -1,12 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { MenuItem } from "primeng/api";
 
 @Component({
   selector: "app-admin-side-bar",
   templateUrl: "./admin-side-bar.component.html",
   styleUrls: ["./admin-side-bar.component.scss"]
 })
-export class AdminSideBarComponent implements OnInit {
-  constructor() {}
+export class AdminSideBarComponent {
+  @Input()
+  items: MenuItem[];
 
-  ngOnInit() {}
+  constructor() {
+    this.items = [];
+  }
 }

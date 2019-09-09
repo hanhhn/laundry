@@ -89,8 +89,20 @@ const routes: Routes = [
         loadChildren: "./pages/admin/method/method.module#MethodModule"
       },
       {
-        path: "coupon",
+        path: "discount",
         loadChildren: "./pages/admin/coupon/coupon.module#CouponModule"
+      },
+      {
+        path: "setting/all",
+        loadChildren: "./pages/admin/setting/setting-all/setting-all.module#SettingAllModule"
+      },
+      {
+        path: "setting/company",
+        loadChildren: "./pages/admin/setting/setting-company/setting-company.module#SettingCompanyModule"
+      },
+      {
+        path: "setting/external-link",
+        loadChildren: "./pages/admin/setting/setting-link/setting-link.module#SettingLinkModule"
       }
     ]
   },

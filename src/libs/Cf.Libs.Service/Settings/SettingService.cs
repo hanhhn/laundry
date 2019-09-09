@@ -21,28 +21,33 @@ namespace Cf.Libs.Service.Settings
             _settingRepository = settingRepository;
         }
 
-        public T Get<T>(SettingKey settingKey) where T : class
+        public T Get<T>(SettingKey settingKey) where T : class, new()
         {
             var record = _settingRepository.FindByKey(settingKey.ToString());
+            if (record == null)
+                return new T();
+
             return JsonConvert.DeserializeObject<T>(record.Value);
         }
 
-        public bool Save<T>(SettingKey key, T model) where T : class
+        public bool Save<T>(SettingKey settingKey, T model) where T : class, new()
         {
-            var record = _settingRepository.FindByKey(SettingKey.Company.ToString());
-            var setting = JsonConvert.SerializeObject(record.Value);
+            var record = _settingRepository.FindByKey(settingKey.ToString());
+            var setting = JsonConvert.SerializeObject(model);
 
             if (record == null)
             {
                 _settingRepository.Add(new Setting
                 {
-                    Name = key.ToString(),
+                    Name = settingKey.ToString(),
                     Value = setting
                 });
             }
-
-            record.Value = setting;
-            _settingRepository.Update(record);
+            else
+            {
+                record.Value = setting;
+                _settingRepository.Update(record);
+            }
 
             return _unitOfWork.SaveChanges() != 0;
         }

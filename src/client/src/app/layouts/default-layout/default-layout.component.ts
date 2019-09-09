@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import SettingService from "../../cores/services/setting.service";
-import { Menu, Company, Link } from "../../cores/models/setting.model";
+import { SettingService } from "../../cores/services/setting.service";
+import { Menu, Company } from "../../cores/models/setting.model";
 
 @Component({
   selector: "app-default-layout",
@@ -10,14 +10,17 @@ import { Menu, Company, Link } from "../../cores/models/setting.model";
 export class DefaultLayoutComponent implements OnInit {
   menuLinks: Menu[];
 
-  companyInfo: Company;
+  company: Company;
 
-  socialLink: Link;
+  brand: string;
+
+  constructor(private setting: SettingService) {}
 
   ngOnInit() {
-    const setting = new SettingService();
-    this.menuLinks = setting.getMenu();
-    this.companyInfo = setting.getCompany();
-    this.socialLink = setting.getSocialLink();
+    this.menuLinks = this.setting.getMenu();
+    this.setting.getCompanyInfo().subscribe(data => {
+      this.company = data;
+      this.brand = data ? data.brand : "GIẶT SẠCH";
+    });
   }
 }

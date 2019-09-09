@@ -1,50 +1,23 @@
 <footer>
-  <div
-    class="content container"
-    fxLayoutGap="5vw"
-    fxLayout="row"
-    fxLayout.sm="column"
-    fxLayout.xs="column"
-  >
-    <div
-      class="about"
-      fxFlex="auto"
-      ngClass.sm="text-center"
-      ngClass.xs="text-center"
-      *ngIf="company"
-    >
+  <div class="content container" fxLayoutGap="5vw" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+    <div class="about" fxFlex="auto" ngClass.sm="text-center" ngClass.xs="text-center" *ngIf="company">
       <img class="logo" src="{{ company.logo }}" alt="{{ company.name }}" />
       <div class="info">
         <p>{{ company.name }}</p>
         <p>{{ company.address }}</p>
-        <div
-          class="app"
-          fxLayout="row"
-          fxLayoutGap="10px"
-          fxLayoutAlign.sm="center"
-          fxLayoutAlign.xs="center"
-        >
-          <a href="{{ socialLink.appStore }}" target="_blank">
+        <div class="app" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.sm="center" fxLayoutAlign.xs="center">
+          <a href="{{ company.appStore }}" target="_blank">
             <img src="../../../../assets/app-store-badge-small.png" />
           </a>
-          <a href="{{ socialLink.googlePlay }}" target="_blank">
+          <a href="{{ company.googlePlay }}" target="_blank">
             <img src="../../../../assets/google-play-badge-small.png" />
           </a>
         </div>
       </div>
     </div>
-    <div
-      fxFlex="auto"
-      fxLayout="column"
-      fxLayoutGap="3vw"
-      ngClass.sm="text-center"
-      ngClass.xs="text-center"
-    >
-      <div
-        fxLayoutAlign="space-between start"
-        fxLayoutAlign.xs="space-evenly start"
-        fxLayoutAlign.sm="space-evenly start"
-      >
+    <div fxFlex="auto" fxLayout="column" fxLayoutGap="3vw" ngClass.sm="text-center" ngClass.xs="text-center">
+      <div fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-evenly start"
+        fxLayoutAlign.sm="space-evenly start">
         <div class="list-item link" *ngIf="company">
           <h4>{{ company.website }}</h4>
           <ul>
@@ -52,25 +25,21 @@
             <li class="item"><a href=".">Chính sách bảo mật</a></li>
           </ul>
         </div>
-        <div class="list-item follow" *ngIf="socialLink">
+        <div class="list-item follow" *ngIf="company">
           <h4>Follow us</h4>
-          <ul
-            fxLayout="row"
-            fxLayoutAlign.xs="center center"
-            fxLayoutAlign.sm="center center"
-          >
+          <ul fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center">
             <li class="item">
-              <a href="{{ socialLink.facebook }}" target="_blank">
+              <a href="{{ company.facebook }}" target="_blank">
                 <i class="fa fa-facebook-square"></i>
               </a>
             </li>
             <li class="item">
-              <a href="{{ socialLink.instagram }}" target="_blank">
+              <a href="{{ company.instagram }}" target="_blank">
                 <i class="fa fa-instagram"></i>
               </a>
             </li>
             <li class="item">
-              <a href="{{ socialLink.youtube }}" target="_blank">
+              <a href="{{ company.youtube }}" target="_blank">
                 <i class="fa fa-youtube-square"></i>
               </a>
             </li>

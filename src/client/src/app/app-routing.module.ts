@@ -93,17 +93,9 @@ const routes: Routes = [
         loadChildren: "./pages/admin/coupon/coupon.module#CouponModule"
       },
       {
-        path: "setting/all",
-        loadChildren: "./pages/admin/setting/setting-all/setting-all.module#SettingAllModule"
-      },
-      {
         path: "setting/company",
-        loadChildren: "./pages/admin/setting/setting-company/setting-company.module#SettingCompanyModule"
+        loadChildren: "./pages/admin/setting/company/company.module#CompanyModule"
       },
-      {
-        path: "setting/external-link",
-        loadChildren: "./pages/admin/setting/setting-link/setting-link.module#SettingLinkModule"
-      }
     ]
   },
   {

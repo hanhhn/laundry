@@ -68,19 +68,9 @@ export class AdminLayoutComponent implements OnInit {
         label: "Setting",
         items: [
           {
-            label: "Tất cả",
-            icon: "",
-            routerLink: "setting/all"
-          },
-          {
             label: "Company",
             icon: "",
             routerLink: "setting/company"
-          },
-          {
-            label: "External Link",
-            icon: "",
-            routerLink: "setting/external-link"
           }
         ]
       }

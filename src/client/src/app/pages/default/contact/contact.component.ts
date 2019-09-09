@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Company } from "../../../cores/models/setting.model";
-import SettingService from "../../../cores/services/setting.service";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { SettingService } from "src/app/cores/services/setting.service";
 
 @Component({
   selector: "app-contact",
@@ -13,11 +13,11 @@ export class ContactComponent implements OnInit {
 
   googleMap: SafeUrl;
 
-  constructor() {
-  }
+  constructor(private setting: SettingService) {}
 
   ngOnInit() {
-    const setting = new SettingService();
-    this.companyInfo = setting.getCompany();
+    this.setting.getCompanyInfo().subscribe(data => {
+      this.companyInfo = data;
+    });
   }
 }

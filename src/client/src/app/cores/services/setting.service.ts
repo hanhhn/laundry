@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Menu, Company, Link } from "../models/setting.model";
+import { HttpService } from "./http.service";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Menu, Company } from "../models/setting.model";
 
 @Injectable()
-export default class SettingService {
-  constructor() {}
+export class SettingService {
+  constructor(private httpService: HttpService) {}
 
   getMenu(): Menu[] {
     return [
@@ -62,13 +65,21 @@ export default class SettingService {
     });
   }
 
-  getSocialLink(): Link {
-    return new Link({
-      facebook: "https://facebook.com/giatsach.vn",
-      instagram: "https://www.instagram.com/giatsach.vn",
-      youtube: "https://www.youtube.com/giatsach.vn",
-      appStore: ".",
-      googlePlay: "."
-    });
+  getCompanyInfo(): Observable<Company> {
+    const url = "settings/companyinfo/get";
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new Company(data) : null;
+      })
+    );
+  }
+
+  saveCompanyInfo(company: Company): Observable<boolean> {
+    const url = "settings/companyinfo/save";
+    return this.httpService.doPost(url, company).pipe(
+      map((data: any) => {
+        return data ? data : false;
+      })
+    );
   }
 }

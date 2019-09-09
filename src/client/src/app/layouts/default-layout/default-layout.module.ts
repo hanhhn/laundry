@@ -6,6 +6,7 @@ import { SideBarModule } from "../../pages/shared/side-bar/side-bar.module";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { FooterModule } from "../../pages/shared/footer/footer.module";
 import { RouterModule } from "@angular/router";
+import { SettingService } from "src/app/cores/services/setting.service";
 
 @NgModule({
   declarations: [DefaultLayoutComponent],
@@ -17,6 +18,7 @@ import { RouterModule } from "@angular/router";
     MatSidenavModule,
     RouterModule
   ],
-  exports: [DefaultLayoutComponent]
+  exports: [DefaultLayoutComponent],
+  providers: [SettingService]
 })
 export class DefaultLayoutModule {}

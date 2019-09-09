@@ -1,4 +1,6 @@
-﻿using Cf.Libs.DataAccess.Entities.Common;
+﻿using Cf.Libs.Core.Enums;
+using Cf.Libs.DataAccess.Entities.Common;
+using Cf.Libs.DataAccess.Entities.Configuration;
 using Cf.Libs.DataAccess.Entities.Items;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace Cf.Libs.DataAccess.Seed
             SeedAddress(builder);
 
             SeedMethod(builder);
+
+            SeedSetting(builder);
         }
 
         private static void SeedAddress(ModelBuilder builder)
@@ -260,6 +264,18 @@ namespace Cf.Libs.DataAccess.Seed
             method10.Default(true, "system");
 
             builder.Entity<Method>().HasData(method1, method2, method3, method4, method5, method6, method7, method8, method9, method10);
+        }
+
+        private static void SeedSetting(ModelBuilder builder)
+        {
+            var link = new Setting
+            {
+                Name = SettingKey.Company.ToString(),
+                Value = "{\"Brand\":\"GIẶT SẠCH\",\"Logo\":null,\"Name\":\"Công Ty TNHH Thương Mại Công Nghệ GIAT SACH\",\"Address\":\"201/2, Lê Văn Việt, Quận 9, Hồ Chí Minh\",\"Email\":\"giatsach.vn@outlook.com\",\"Phone\":\"0866.667.670\",\"Website\":\"giatsach.vn\",\"Copyright\":\"<h4>Copyright © 2019 GiatSach</h4>\",\"Facebook\":\"https://www.facebook.com/giatsach.vn\",\"Instagram\":\"https://www.instagram.com/giatsach.vn\",\"Youtube\":\"https://www.youtube.com/giatsach.vn\",\"AppStore\":\"https://www.facebook.com/giatsach.vn\",\"GooglePlay\":\"https://www.facebook.com/giatsach.vn\",\"GoogleMap\":\"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7838.4585918720995!2d106.72031072183032!3d10.793742481431684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528abfa81c31b%3A0x1089994337b68cdb!2sVinhome%20Central%20Park!5e0!3m2!1sen!2s!4v1568015823795!5m2!1sen!2s\" width=\"100%\" height=\"300\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\"></iframe>\"}"
+            };
+            link.Default(true, "system");
+
+            builder.Entity<Setting>().HasData(link);
         }
     }
 }

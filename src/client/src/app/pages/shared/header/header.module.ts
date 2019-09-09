@@ -9,7 +9,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { RouterModule } from "@angular/router";
 import { MatRippleModule } from "@angular/material/core";
 import { MatIconModule } from "@angular/material/icon";
-import { ScrollDispatchModule } from "@angular/cdk/scrolling";
+import { ScrollDispatchModule, ScrollingModule } from "@angular/cdk/scrolling";
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -23,7 +23,7 @@ import { ScrollDispatchModule } from "@angular/cdk/scrolling";
     MatRippleModule,
     MatTabsModule,
     MatIconModule,
-    ScrollDispatchModule
+    ScrollingModule
   ],
   exports: [HeaderComponent]
 })

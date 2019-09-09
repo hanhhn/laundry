@@ -35,37 +35,29 @@ export class Company {
   logo: string;
   website: string;
   copyright: string;
-  map: string;
-
-  constructor(company: any) {
-    if (company) {
-      this.name = company.name;
-      this.address = company.address;
-      this.phone = company.phone;
-      this.email = company.email;
-      this.brand = company.brand;
-      this.logo = company.logo;
-      this.website = company.website;
-      this.copyright = company.copyright;
-      this.map = company.map;
-    }
-  }
-}
-
-export class Link {
   facebook: string;
   instagram: string;
   youtube: string;
   appStore: string;
   googlePlay: string;
+  googleMap: string;
 
-  constructor(link: any) {
-    if (link) {
-      this.facebook = link.facebook;
-      this.instagram = link.instagram;
-      this.youtube = link.youtube;
-      this.appStore = link.appStore;
-      this.googlePlay = link.googlePlay;
+  constructor(json: any) {
+    if (json) {
+      this.name = json.name;
+      this.address = json.address;
+      this.phone = json.phone;
+      this.email = json.email;
+      this.brand = json.brand;
+      this.logo = json.logo;
+      this.website = json.website;
+      this.copyright = json.copyright;
+      this.facebook = json.facebook;
+      this.instagram = json.instagram;
+      this.youtube = json.youtube;
+      this.appStore = json.appStore;
+      this.googlePlay = json.googlePlay;
+      this.googleMap = json.googleMap;
     }
   }
 }

@@ -40,19 +40,5 @@ namespace Cf.Laundry.Controllers
         {
             return _settingService.Save(SettingKey.Company, request);
         }
-
-        [HttpGet]
-        [Route("externallink/get")]
-        public LinkDto GetExternalLink()
-        {
-            return _settingService.Get<LinkDto>(SettingKey.Link);
-        }
-
-        [HttpPost]
-        [Route("companyinfo/save")]
-        public bool SaveExternalLink(LinkDto request)
-        {
-            return _settingService.Save(SettingKey.Link, request);
-        }
     }
 }

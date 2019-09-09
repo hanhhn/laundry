@@ -9,7 +9,6 @@ import {
 } from "@angular/core";
 import { ScrollDispatcher, CdkScrollable } from "@angular/cdk/overlay";
 import { map } from "rxjs/operators";
-import SettingService from "../../../cores/services/setting.service";
 import { Menu } from "../../../cores/models/setting.model";
 
 @Component({

@@ -23,6 +23,7 @@ import {
   MatOption,
   MatRadioChange
 } from "@angular/material";
+import { SniperService } from "../../../cores/services/sniper.service";
 
 const thankYou = "./../../../../assets/thanks-you-for-your-order.png";
 
@@ -101,6 +102,7 @@ export class BookNowComponent implements OnInit {
   @ViewChild("stepper", { static: false }) stepper: MatStepper;
 
   constructor(
+    private sniper: SniperService,
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private methodService: MethodService,
@@ -126,6 +128,8 @@ export class BookNowComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sniper.showSniper();
+
     this.firstFormGroup = this.formBuilder.group({
       valid: [false, Validators.requiredTrue]
     });
@@ -145,6 +149,8 @@ export class BookNowComponent implements OnInit {
     this.loadTheWayClean();
     this.loadProvice();
     this.loadActiveDay();
+
+    this.sniper.hideSniper();
   }
 
   initServiceForm() {
@@ -215,6 +221,7 @@ export class BookNowComponent implements OnInit {
   }
 
   onSaveAddress(e) {
+    this.sniper.showSniper();
     e.preventDefault();
 
     this.contactFormGroup.markAllAsTouched();
@@ -229,12 +236,19 @@ export class BookNowComponent implements OnInit {
       request.wardId = this.contactControls.ward.value;
       request.street = this.contactControls.street.value;
 
-      this.addressService.save(request).subscribe(data => {
-        this.addresses = data ? data : [];
-        this.setDefaultAddress(this.addresses[0]);
-        this.isShowFullAddress = true;
-        this.storageService.savePhone(request.phone);
-      });
+      this.addressService.save(request).subscribe(
+        data => {
+          this.addresses = data ? data : [];
+          this.setDefaultAddress(this.addresses[0]);
+          this.isShowFullAddress = true;
+          this.storageService.savePhone(request.phone);
+
+          this.sniper.hideSniper();
+        },
+        err => {
+          this.sniper.hideSniper();
+        }
+      );
     }
   }
 
@@ -273,12 +287,19 @@ export class BookNowComponent implements OnInit {
       }
     });
 
+    this.sniper.showSniper();
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
-        this.addressService.delete(id).subscribe(address => {
-          this.addresses = address ? address : [];
-          this.setDefaultAddress(this.addresses[0]);
-        });
+        this.addressService.delete(id).subscribe(
+          address => {
+            this.addresses = address ? address : [];
+            this.setDefaultAddress(this.addresses[0]);
+            this.sniper.hideSniper();
+          },
+          err => {
+            this.sniper.hideSniper();
+          }
+        );
       }
     });
   }
@@ -297,6 +318,7 @@ export class BookNowComponent implements OnInit {
   }
 
   saveOrder() {
+    this.sniper.showSniper();
     const request = new OrderRequest();
     request.methodId = this.serviceControls.method.value;
     request.softId = this.serviceControls.soft.value;
@@ -342,8 +364,12 @@ export class BookNowComponent implements OnInit {
             }
           });
         }
+
+        this.sniper.hideSniper();
       },
       err => {
+        this.sniper.hideSniper();
+
         this.dialog.open(ConfirmComponent, {
           minWidth: "350px",
           data: {
@@ -427,19 +453,26 @@ export class BookNowComponent implements OnInit {
 
   loadFullAddress(phone: string) {
     if (phone && phone !== "" && phone.length > 8) {
-      this.addressService.getFullAddress(phone).subscribe(data => {
-        this.addresses = data ? data : [];
+      this.sniper.showSniper();
+      this.addressService.getFullAddress(phone).subscribe(
+        data => {
+          this.addresses = data ? data : [];
 
-        if (this.addresses.length > 0) {
-          this.setDefaultAddress(this.addresses[0]);
-        }
+          if (this.addresses.length > 0) {
+            this.setDefaultAddress(this.addresses[0]);
+          }
 
-        if (this.addresses.length > 0) {
-          this.isShowFullAddress = true;
-        } else {
-          this.isShowFullAddress = false;
+          if (this.addresses.length > 0) {
+            this.isShowFullAddress = true;
+          } else {
+            this.isShowFullAddress = false;
+          }
+          this.sniper.hideSniper();
+        },
+        err => {
+          this.sniper.showSniper();
         }
-      });
+      );
     }
   }
 

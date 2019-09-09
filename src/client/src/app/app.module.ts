@@ -9,6 +9,7 @@ import { HttpService } from "./cores/services/http.service";
 import { Http, HttpModule } from "@angular/http";
 import { FormsModule } from "@angular/forms";
 import { StorageService } from "./cores/services/storage.service";
+import { SniperService } from "./cores/services/sniper.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,9 +19,9 @@ import { StorageService } from "./cores/services/storage.service";
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
-    FormsModule,
+    FormsModule
   ],
-  providers: [HttpService, StorageService, ItemService],
+  providers: [HttpService, StorageService, ItemService, SniperService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

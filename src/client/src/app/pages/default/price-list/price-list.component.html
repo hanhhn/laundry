@@ -1,8 +1,8 @@
 <div class="container background">
   <div class="price-list">
-    <div>
+    <div *ngIf="combo && combo.length > 0">
       <h2>1. Giặt sấy theo combo</h2>
-      <app-service-list></app-service-list>
+      <app-service-list [dataSource]="combo"></app-service-list>
     </div>
     <div *ngIf="items && items.length > 0">
       <h2>2. Giặt hấp hoàn hảo</h2>

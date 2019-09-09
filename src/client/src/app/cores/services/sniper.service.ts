@@ -7,7 +7,10 @@ export class SniperService {
   showSniper() {
     const element = document.querySelector(".blockUI");
     if (element) {
-      element.setAttribute("style", "display: flex;");
+      const style = element.getAttribute("style");
+      if (style !== "display: flex;") {
+        element.setAttribute("style", "display: flex;");
+      }
     }
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { Item } from "../../cores/models/item.model";
 
 @Component({
   selector: "app-service-list",
@@ -7,23 +8,7 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class ServiceListComponent implements OnInit {
   @Input()
-  dataSource = [
-    {
-      title: "item 1",
-      description: "asdasd sfdf",
-      rate: "10k"
-    },
-    {
-      title: "item 2",
-      description: "asda asd",
-      rate: "20k"
-    },
-    {
-      title: "item 3",
-      description: "123asd ad",
-      rate: "40k"
-    }
-  ];
+  dataSource: Item[];
 
   constructor() {}
 

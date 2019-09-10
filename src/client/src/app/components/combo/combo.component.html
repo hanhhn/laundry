@@ -5,27 +5,15 @@
     </div>
     <div class="item-content">
       <div class="price">
-        <div class="rate">{{ rate }}</div>
+        <div class="rate">{{ rate | kConverter}}</div>
         <div class="detail">
           <div>{{ combo }}</div>
           <div [innerHTML]="delivery"></div>
         </div>
       </div>
       <div class="description" [innerHTML]="description">
-        <ul>
-          <li>
-            <span class="icon"><i class="fa fa-check"></i></span>
-            <div class="text">Unlimited private questions and answers</div>
-          </li>
-          <li>
-            <span class="icon"><i class="fa fa-check"></i></span>
-            <div class="text">Unlimited private questions and answers</div>
-          </li>
-          <li>
-            <span class="icon"><i class="fa fa-check"></i></span>
-            <div class="text">Unlimited private questions and answers</div>
-          </li>
-          <li>
+        <ul class="content">
+          <li class="checked">
             <span class="icon"><i class="fa fa-check"></i></span>
             <div class="text">Unlimited private questions and answers</div>
           </li>

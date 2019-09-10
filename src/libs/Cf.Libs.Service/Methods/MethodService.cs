@@ -69,6 +69,11 @@ namespace Cf.Libs.Service.Methods
             return GetMethodByType(pageIndex, pageSize, MethodType.Delivery.ToString());
         }
 
+        public IPagedList<MethodDto> GetComboMethod(int pageIndex, int pageSize)
+        {
+            return GetMethodByType(pageIndex, pageSize, MethodType.Combo.ToString());
+        }
+
         public IPagedList<MethodDto> GetAll(int pageIndex, int pageSize)
         {
             return _methodRepository.FindBy(x => !x.IsDeleted).ToPagedList<Method, MethodDto>(pageIndex, pageSize);

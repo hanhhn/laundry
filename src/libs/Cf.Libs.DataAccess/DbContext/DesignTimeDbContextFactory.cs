@@ -1,10 +1,7 @@
-﻿using Cf.Libs.DataAccess.DbContext;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 
-namespace Cf.Laundry.Configurations
+namespace Cf.Libs.DataAccess.DbContext
 {
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
@@ -15,14 +12,9 @@ namespace Cf.Laundry.Configurations
         /// </summary>
         public ApplicationDbContext CreateDbContext(string[] args)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.Development.json")
-                .Build();
-
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var connectionString = configuration.GetConnectionString("DefaultConnectionString");
-            builder.UseNpgsql(connectionString ?? "server=127.0.0.1;port=5432;database=laundry;user id=postgres;password=@chocon")
+            var connectionString = "server=127.0.0.1;port=5432;database=laundry;user id=postgres;password=@chocon";
+            builder.UseNpgsql(connectionString ?? "")
                    .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
 
             return new ApplicationDbContext(builder.Options);

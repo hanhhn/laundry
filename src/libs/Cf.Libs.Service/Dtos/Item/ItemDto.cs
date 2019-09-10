@@ -13,8 +13,8 @@
         public byte Tax { get; set; }
         public decimal DiscountRate { get; set; }
         public decimal Discount { get; set; }
-        public int DeliveryId { get; set; }
-        public string DeliveryName { get; set; }
-        public string DeliveryDescription { get; set; }
+        public int ComboId { get; set; }
+        public string ComboName { get; set; }
+        public string ComboDescription { get; set; }
     }
 }

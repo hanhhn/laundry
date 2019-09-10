@@ -1,16 +1,16 @@
 <div class="container background">
   <div class="price-list">
     <div *ngIf="combo && combo.length > 0">
-      <h2><i class="fa fa-tint"></i>  Giặt sấy theo combo</h2>
+      <h2><i class="fa fa-tint"></i> Giặt sấy theo combo</h2>
       <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center end" fxLayoutAlign.xs="center center"
         fxLayoutGap="30px">
-        <app-combo *ngFor="let item of combo" title="{{ item.name }}" combo="{{ item.deliveryName }}"
-          delivery="{{ item.deliveryDescription }}" description="{{ item.description }}" rate="{{ item.rate }}">
+        <app-combo *ngFor="let item of combo" title="{{ item.name }}" combo="{{ item.comboName }}"
+          delivery="{{ item.comboDescription }}" description="{{ item.description }}" rate="{{ item.rate }}">
         </app-combo>
       </div>
     </div>
     <div *ngIf="items && items.length > 0">
-      <h2><i class="fa fa-tint"></i>  Giặt hấp hoàn hảo</h2>
+      <h2><i class="fa fa-tint"></i> Giặt hấp hoàn hảo</h2>
       <div class="item-list">
         <app-item *ngFor="let item of items; let i = index" itemUrl="{{ item.image }}" itemName="{{ item.name }}"
           itemRate="{{ item.rate }}"></app-item>

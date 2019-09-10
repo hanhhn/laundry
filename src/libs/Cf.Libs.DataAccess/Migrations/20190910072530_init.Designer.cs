@@ -5,19 +5,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Cf.Libs.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190910061721_init")]
+    [Migration("20190910072530_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Account.Role", b =>
                 {
@@ -220,102 +222,6 @@ namespace Cf.Libs.DataAccess.Migrations
                     b.ToTable("UserToken");
                 });
 
-            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Billing.Bill", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("CreateUserId");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<string>("ModifyUserId");
-
-                    b.Property<string>("Note");
-
-                    b.Property<string>("UpdatedToken");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Bills");
-                });
-
-            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Billing.BillDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("CreateUserId");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<string>("ModifyUserId");
-
-                    b.Property<string>("Note");
-
-                    b.Property<string>("UpdatedToken");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BillDetails");
-                });
-
-            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Billing.Invoice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("CreateUserId");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<string>("ModifyUserId");
-
-                    b.Property<string>("Note");
-
-                    b.Property<string>("UpdatedToken");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Invoices");
-                });
-
-            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Billing.InvoiceDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("CreateUserId");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<string>("ModifyUserId");
-
-                    b.Property<string>("Note");
-
-                    b.Property<string>("UpdatedToken");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("InvoiceDetails");
-                });
-
             modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Common.Address", b =>
                 {
                     b.Property<int>("Id")
@@ -417,7 +323,7 @@ namespace Cf.Libs.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(2209),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 324, DateTimeKind.Local).AddTicks(8654),
                             CreateUserId = "system",
                             IsDeleted = false,
                             IsPublished = true,
@@ -425,12 +331,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Prefix = "Tp",
                             ProvinceId = 1,
                             SortOrder = 1,
-                            UpdatedToken = "bfd0d75f-04ad-410c-be5e-3fd194499293"
+                            UpdatedToken = "0681a3a8-2829-4959-9e25-0453077013fa"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3672),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(47),
                             CreateUserId = "system",
                             IsDeleted = false,
                             IsPublished = true,
@@ -438,7 +344,7 @@ namespace Cf.Libs.DataAccess.Migrations
                             Prefix = "Quận",
                             ProvinceId = 2,
                             SortOrder = 1,
-                            UpdatedToken = "7a0a25f5-d90d-4a21-b832-dc3e17c22d65"
+                            UpdatedToken = "9ee72bc8-3d1a-4a44-bcb0-d06f30c0d6ed"
                         });
                 });
 
@@ -486,26 +392,26 @@ namespace Cf.Libs.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 452, DateTimeKind.Local).AddTicks(2435),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 322, DateTimeKind.Local).AddTicks(7244),
                             CreateUserId = "system",
                             IsDeleted = false,
                             IsPublished = true,
                             Name = "Huế",
                             Prefix = "",
                             SortOrder = 1,
-                            UpdatedToken = "f62dc66f-52bd-43a0-b280-391855ee3fca"
+                            UpdatedToken = "dbc322a9-c2a7-4822-ac82-c1c5a045914c"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3637),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(14),
                             CreateUserId = "system",
                             IsDeleted = false,
                             IsPublished = true,
                             Name = "Đà Nẵng",
                             Prefix = "",
                             SortOrder = 1,
-                            UpdatedToken = "9a2b4336-b35a-42f2-a206-de29b4773fbd"
+                            UpdatedToken = "66e5e27d-d4a0-494f-9779-2d17b063f823"
                         });
                 });
 
@@ -557,7 +463,7 @@ namespace Cf.Libs.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3438),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 324, DateTimeKind.Local).AddTicks(9848),
                             CreateUserId = "system",
                             DistrictId = 1,
                             IsDeleted = false,
@@ -565,12 +471,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "An Hòa",
                             Prefix = "Phường",
                             SortOrder = 1,
-                            UpdatedToken = "6c2608f8-19cf-44a6-a870-a3eed4b5acf7"
+                            UpdatedToken = "8692a509-0647-48a5-a505-fac6a58913b8"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3470),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 324, DateTimeKind.Local).AddTicks(9880),
                             CreateUserId = "system",
                             DistrictId = 1,
                             IsDeleted = false,
@@ -578,12 +484,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Phú Bình",
                             Prefix = "Phường",
                             SortOrder = 1,
-                            UpdatedToken = "0d0992cd-4743-4ffa-abbc-ce9f9f3b8fb8"
+                            UpdatedToken = "0c010fa8-25ef-4801-8b2e-470404c50538"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3477),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 324, DateTimeKind.Local).AddTicks(9883),
                             CreateUserId = "system",
                             DistrictId = 1,
                             IsDeleted = false,
@@ -591,12 +497,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Phú Hòa",
                             Prefix = "Phường",
                             SortOrder = 1,
-                            UpdatedToken = "cb505b5a-3690-4390-aaf1-ff7f57623881"
+                            UpdatedToken = "de6809c0-7298-48a2-aa7e-c3810b9ec5a6"
                         },
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3480),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 324, DateTimeKind.Local).AddTicks(9893),
                             CreateUserId = "system",
                             DistrictId = 1,
                             IsDeleted = false,
@@ -604,12 +510,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Phú Thuận",
                             Prefix = "Phường",
                             SortOrder = 1,
-                            UpdatedToken = "ff4d087a-8d30-48c6-aab3-18cc7db6ebe2"
+                            UpdatedToken = "b4e6949b-8e22-40b4-8212-47c32f69682e"
                         },
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3489),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 324, DateTimeKind.Local).AddTicks(9896),
                             CreateUserId = "system",
                             DistrictId = 1,
                             IsDeleted = false,
@@ -617,12 +523,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Tây Lộc",
                             Prefix = "Phường",
                             SortOrder = 1,
-                            UpdatedToken = "c3ad04e6-ee9b-46cc-9e9a-b5e284073538"
+                            UpdatedToken = "163b8b16-3755-4ce4-a30f-a70623d69e42"
                         },
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3685),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(63),
                             CreateUserId = "system",
                             DistrictId = 2,
                             IsDeleted = false,
@@ -630,12 +536,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Hòa Khánh Bắc",
                             Prefix = "Phường",
                             SortOrder = 1,
-                            UpdatedToken = "8107539f-fdc8-4dc7-b4d2-89d800dfe405"
+                            UpdatedToken = "9e5ca7bb-9a80-469d-b9a7-f98f7143fdf3"
                         },
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 454, DateTimeKind.Local).AddTicks(3688),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(66),
                             CreateUserId = "system",
                             DistrictId = 2,
                             IsDeleted = false,
@@ -643,7 +549,7 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Hòa Khánh Nam",
                             Prefix = "Phường",
                             SortOrder = 1,
-                            UpdatedToken = "3ac6dbd5-fd5f-41a9-84d2-b74d7d9057aa"
+                            UpdatedToken = "eae624bb-cfe7-44e2-b59f-ac8a65f9e04d"
                         });
                 });
 
@@ -677,12 +583,12 @@ namespace Cf.Libs.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5c69194a-7309-48a8-9210-9232d8e0240d",
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(9788),
+                            Id = "294b3061-f1a4-409b-ace2-51aec60fce8c",
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 328, DateTimeKind.Local).AddTicks(5441),
                             CreateUserId = "system",
                             IsDeleted = false,
                             Name = "Company",
-                            UpdatedToken = "5581b913-d793-493c-8344-ca911c23f5f3",
+                            UpdatedToken = "b6281892-e895-49fc-ade8-64b1840b50d7",
                             Value = "{\"Brand\":\"GIẶT SẠCH\",\"Logo\":\"https://i.imgur.com/1CXl1BP.png\",\"Name\":\"Công Ty TNHH Thương Mại Công Nghệ GIAT SACH\",\"Address\":\"201/2, Lê Văn Việt, Quận 9, Hồ Chí Minh\",\"Email\":\"giatsach.vn@outlook.com\",\"Phone\":\"0866.667.670\",\"Website\":\"giatsach.vn\",\"Copyright\":\"<h4>Copyright © 2019 GiatSach</h4>\",\"Facebook\":\"https://www.facebook.com/giatsach.vn\",\"Instagram\":\"https://www.instagram.com/giatsach.vn\",\"Youtube\":\"https://www.youtube.com/giatsach.vn\",\"AppStore\":\"https://www.facebook.com/giatsach.vn\",\"GooglePlay\":\"https://www.facebook.com/giatsach.vn\",\"GoogleMap\":\" \"}"
                         });
                 });
@@ -693,13 +599,13 @@ namespace Cf.Libs.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
+                    b.Property<int?>("Combo");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp");
 
                     b.Property<string>("CreateUserId")
                         .HasColumnType("varchar(50)");
-
-                    b.Property<int>("Delivery");
 
                     b.Property<string>("Description");
 
@@ -731,9 +637,53 @@ namespace Cf.Libs.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Delivery");
+                    b.HasIndex("Combo");
 
                     b.ToTable("Item");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Combo = 10,
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 329, DateTimeKind.Local).AddTicks(1623),
+                            CreateUserId = "system",
+                            Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
+                            Highlight = false,
+                            IsDeleted = false,
+                            Name = "Giặt thường 1",
+                            SortOrder = 1,
+                            Type = "Laundry",
+                            UpdatedToken = "5ca2798f-bd10-475b-9fe5-12e67687b638"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Combo = 11,
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 329, DateTimeKind.Local).AddTicks(1664),
+                            CreateUserId = "system",
+                            Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
+                            Highlight = false,
+                            IsDeleted = false,
+                            Name = "Giặt thường 2",
+                            SortOrder = 1,
+                            Type = "Laundry",
+                            UpdatedToken = "b92b098a-89f8-4900-a419-3f34d31ed5f8"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Combo = 12,
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 329, DateTimeKind.Local).AddTicks(1671),
+                            CreateUserId = "system",
+                            Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
+                            Highlight = false,
+                            IsDeleted = false,
+                            Name = "Giặt thường 3",
+                            SortOrder = 1,
+                            Type = "Laundry",
+                            UpdatedToken = "677f5aa4-d899-493e-a8b5-35761e30ff66"
+                        });
                 });
 
             modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Items.Method", b =>
@@ -782,7 +732,7 @@ namespace Cf.Libs.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3526),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9734),
                             CreateUserId = "system",
                             Description = "Giặt hấp",
                             EnableDiscount = false,
@@ -790,12 +740,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Giặt hấp",
                             SortOrder = 1,
                             Type = "Clean",
-                            UpdatedToken = "0ce446fb-8efb-42f9-bf00-71736cfb4a7d"
+                            UpdatedToken = "cabe444e-61fd-4d9d-a59f-23d061f10fc5"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3626),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9772),
                             CreateUserId = "system",
                             Description = "Giặt sấy",
                             EnableDiscount = false,
@@ -803,12 +753,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Giặt sấy",
                             SortOrder = 1,
                             Type = "Clean",
-                            UpdatedToken = "3d7300fe-5879-4cbd-82f8-22a29f021d9c"
+                            UpdatedToken = "5afeb209-f680-4fd3-a5fe-1e2c97d1d633"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3632),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9782),
                             CreateUserId = "system",
                             Description = "Chỉ giặt",
                             EnableDiscount = false,
@@ -816,12 +766,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Chỉ giặt",
                             SortOrder = 1,
                             Type = "Clean",
-                            UpdatedToken = "dc2abbfe-14f0-47b8-a677-ff781e68d757"
+                            UpdatedToken = "1a3e923a-2ccc-40bb-962f-852bb9e6e798"
                         },
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3642),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9785),
                             CreateUserId = "system",
                             Description = "Chỉ sấy",
                             EnableDiscount = false,
@@ -829,12 +779,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Chỉ sấy",
                             SortOrder = 1,
                             Type = "Dry",
-                            UpdatedToken = "21297534-2294-4771-a2bd-120b9985941c"
+                            UpdatedToken = "d774970e-a748-4879-a128-3df6d91b6f4c"
                         },
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3648),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9788),
                             CreateUserId = "system",
                             Description = "Comfort",
                             EnableDiscount = false,
@@ -842,12 +792,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Comfort",
                             SortOrder = 1,
                             Type = "Soft",
-                            UpdatedToken = "75c0a624-f84f-4851-9708-2cccf41ac47d"
+                            UpdatedToken = "16acfce0-ff3a-441a-8090-38067ba88cb3"
                         },
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3651),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9795),
                             CreateUserId = "system",
                             Description = "Downy",
                             EnableDiscount = false,
@@ -855,12 +805,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Downy",
                             SortOrder = 1,
                             Type = "Soft",
-                            UpdatedToken = "9f15dacf-2695-4f74-9923-7c59e5ba448c"
+                            UpdatedToken = "4ac1ab02-6f9d-4159-a404-fd63ee70f285"
                         },
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3655),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9798),
                             CreateUserId = "system",
                             Description = "Ủi hơi nước miển phí",
                             EnableDiscount = false,
@@ -868,12 +818,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "Ủi hơi nước miển phí",
                             SortOrder = 1,
                             Type = "Straight",
-                            UpdatedToken = "83072092-a975-409f-974f-16e1f7aa5a95"
+                            UpdatedToken = "23ca4023-add4-482d-aa08-002ceaae5c7b"
                         },
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3658),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9801),
                             CreateUserId = "system",
                             Description = "<strong> Phí: </strong> 10.000đ <small>(dưới 5km)</small>",
                             EnableDiscount = false,
@@ -881,12 +831,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "7h - 11h",
                             SortOrder = 1,
                             Type = "Delivery",
-                            UpdatedToken = "569a1ca0-9d41-4d9d-aa8e-83e00851b864"
+                            UpdatedToken = "349520fd-ae93-4c04-81cb-12c4cd20a12f"
                         },
                         new
                         {
                             Id = 9,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3661),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9805),
                             CreateUserId = "system",
                             Description = "<strong> Phí: </strong> 10.000đ <small>(dưới 5km)</small>",
                             EnableDiscount = false,
@@ -894,12 +844,12 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "13h - 15h",
                             SortOrder = 1,
                             Type = "Delivery",
-                            UpdatedToken = "61ce950a-1d6a-463f-8d99-327fa677eb3d"
+                            UpdatedToken = "bf5489e3-97b0-4a7f-88d4-d54417320163"
                         },
                         new
                         {
                             Id = 10,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3664),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9811),
                             CreateUserId = "system",
                             Description = "<strong>10.000đ <small>(dưới 5km)</small>",
                             EnableDiscount = false,
@@ -907,33 +857,33 @@ namespace Cf.Libs.DataAccess.Migrations
                             Name = "3kg / 1 lần giặt",
                             SortOrder = 1,
                             Type = "Delivery",
-                            UpdatedToken = "fdf4465a-5d41-4572-810e-7396639d91b8"
+                            UpdatedToken = "41ca71b2-d494-4075-9d9e-27932012b6e2"
                         },
                         new
                         {
                             Id = 11,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3671),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9821),
                             CreateUserId = "system",
                             Description = "<strong>Miễn phí vận chuyển </strong><small>(dưới 5km)</small>",
                             EnableDiscount = false,
                             IsDeleted = false,
                             Name = "5kg / 1 lần giặt",
                             SortOrder = 1,
-                            Type = "Delivery",
-                            UpdatedToken = "8c1814b5-77d9-4009-9e14-841c12b69a9d"
+                            Type = "Combo",
+                            UpdatedToken = "0d7a8624-3b46-4500-8255-55e647d200b4"
                         },
                         new
                         {
                             Id = 12,
-                            CreateDate = new DateTime(2019, 9, 10, 13, 17, 21, 455, DateTimeKind.Local).AddTicks(3674),
+                            CreateDate = new DateTime(2019, 9, 10, 14, 25, 30, 325, DateTimeKind.Local).AddTicks(9824),
                             CreateUserId = "system",
                             Description = "<strong>Miễn phí vận chuyển</strong>",
                             EnableDiscount = false,
                             IsDeleted = false,
                             Name = "10kg / 1 lần giặt",
                             SortOrder = 1,
-                            Type = "Delivery",
-                            UpdatedToken = "7644f17a-68ad-4994-bcfc-0fd123704a36"
+                            Type = "Combo",
+                            UpdatedToken = "5185f7f6-7d20-4043-8a9a-ff0c23855800"
                         });
                 });
 
@@ -1174,8 +1124,7 @@ namespace Cf.Libs.DataAccess.Migrations
                 {
                     b.HasOne("Cf.Libs.DataAccess.Entities.Items.Method", "Method")
                         .WithMany("Items")
-                        .HasForeignKey("Delivery")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Combo");
                 });
 
             modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Orders.Order", b =>

@@ -89,7 +89,7 @@ namespace Cf.Libs.Service.Items
 
 
             var query = from i in itemQuery
-                        join m in methodQuery on i.Delivery equals m.Id into groupMethod
+                        join m in methodQuery on i.Combo equals m.Id into groupMethod
                         join r in priceQuery on i.Id equals r.ItemId into groupPrice
                         from gr in groupPrice.DefaultIfEmpty(new Price())
                         from gm in groupMethod.DefaultIfEmpty(new Method())
@@ -106,9 +106,9 @@ namespace Cf.Libs.Service.Items
                             Discount = gr.Discount,
                             DiscountRate = gr.DiscountRate,
                             Tax = gr.Tax,
-                            DeliveryId = gm.Id,
-                            DeliveryName = gm.Name,
-                            DeliveryDescription = gm.Description
+                            ComboId = gm.Id,
+                            ComboName = gm.Name,
+                            ComboDescription = gm.Description
                         };
 
             return query.ToPagedList(pageIndex, pageSize);
@@ -117,13 +117,13 @@ namespace Cf.Libs.Service.Items
         public ItemDto Add(ItemRequest request)
         {
             var item = _mapper.Map<Item>(request);
-            var delivery = _methodRepository.Get(request.DeliveryId);
-            if (delivery == null || delivery.Type != MethodType.Delivery.ToString())
+            var delivery = _methodRepository.Get(request.ComboId);
+            if (delivery == null || delivery.Type != MethodType.Combo.ToString())
             {
                 throw new InformationException("Delivery method can not be found.");
             }
 
-            item.Delivery = delivery.Id;
+            item.Combo = delivery.Id;
             var record = _itemRepository.Add(item);
             if (_unitOfWork.SaveChanges() == 0)
             {
@@ -136,10 +136,10 @@ namespace Cf.Libs.Service.Items
         public ItemDto Edit(ItemRequest request)
         {
             var record = _itemRepository.Get(request.Id);
-            var delivery = _methodRepository.Get(request.DeliveryId);
-            if (delivery == null || delivery.Type != MethodType.Delivery.ToString())
+            var combo = _methodRepository.Get(request.ComboId);
+            if (combo == null || combo.Type != MethodType.Combo.ToString())
             {
-                throw new InformationException("Delivery method not be found.");
+                throw new InformationException("Combo method not be found.");
             }
 
             if (record == null)
@@ -153,7 +153,7 @@ namespace Cf.Libs.Service.Items
             record.Highlight = request.Highlight;
             record.SortOrder = request.SortOrder;
             record.Type = request.Type;
-            record.Delivery = delivery.Id;
+            record.Combo = combo.Id;
 
             _itemRepository.Update(record);
 

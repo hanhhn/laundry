@@ -11,9 +11,9 @@ export class Item {
   tax: number;
   discountRate: number;
   discount: number;
-  deliveryId: number;
-  deliveryName: number;
-  deliveryDescription: string;
+  comboId: number;
+  comboName: number;
+  comboDescription: string;
 
   constructor(json: any) {
     this.id = json.id;
@@ -28,9 +28,9 @@ export class Item {
     this.tax = json.tax;
     this.discountRate = json.discountRate;
     this.discount = json.discount;
-    this.deliveryId = json.deliveryId;
-    this.deliveryName = json.deliveryName;
-    this.deliveryDescription = json.deliveryDescription;
+    this.comboId = json.comboId;
+    this.comboName = json.comboName;
+    this.comboDescription = json.comboDescription;
   }
 }
 
@@ -42,5 +42,5 @@ export class ItemRequest {
   description: string;
   highlight: boolean;
   sortOrder: number;
-  deliveryId: number;
+  comboId: number;
 }

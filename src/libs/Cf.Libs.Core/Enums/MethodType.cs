@@ -7,5 +7,6 @@
         Dry,
         Straight,
         Delivery,
+        Combo
     }
 }

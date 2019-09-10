@@ -13,6 +13,7 @@ namespace Cf.Libs.Service.Methods
         IPagedList<MethodDto> GetDryMethod(int pageIndex, int pageSize);
         IPagedList<MethodDto> GetStraightMethod(int pageIndex, int pageSize);
         IPagedList<MethodDto> GetDeliveryMethod(int pageIndex, int pageSize);
+        IPagedList<MethodDto> GetComboMethod(int pageIndex, int pageSize);
         IPagedList<MethodDto> GetAll(int pageIndex, int pageSize);
         MethodDto Add(MethodRequest request);
         MethodDto Edit(MethodRequest request);

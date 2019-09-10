@@ -71,6 +71,19 @@ export class MethodService {
     );
   }
 
+  getCombo(
+    pageIndex: number,
+    pageSize: number
+  ): Observable<PagedList<Method>> {
+    const url =
+      "methods/combo?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new PagedList(data) : null;
+      })
+    );
+  }
+
   save(method: MethodRequest): Observable<Method> {
     const url = "methods/save";
     return this.httpService.doPost(url, method).pipe(

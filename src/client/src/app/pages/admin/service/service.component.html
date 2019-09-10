@@ -21,7 +21,7 @@
           <th scope="col">Name</th>
           <th scope="col" class="text-right">Rate</th>
           <th scope="col" class="text-right">Discount</th>
-          <th scope="col" class="text-center">Delivery</th>
+          <th scope="col" class="text-center">Combo</th>
           <th scope="col" width="100">Hightlight</th>
           <th scope="col" width="100">SortOrder</th>
           <th scope="col" width="150"></th>
@@ -34,7 +34,7 @@
           <td>{{ item.name }}</td>
           <td class="text-right">{{ item.rate }}</td>
           <td class="text-right">{{ item.discount }}</td>
-          <td class="text-center">{{ item.deliveryName }}</td>
+          <td class="text-center">{{ item.comboName }}</td>
           <td class="text-center">{{ item.highlight }}</td>
           <td class="text-center">{{ item.sortOrder }}</td>
           <td>
@@ -93,10 +93,10 @@
         </div>
       </div>
       <div class="col-sm-3">
-          <p-dropdown [options]="deliveryMethods" optionLabel="name" formControlName="delivery" placeholder="Phương thức vận chuyển">
+          <p-dropdown [options]="comboMethods" optionLabel="name" formControlName="combo" placeholder="Phương thức vận chuyển">
           </p-dropdown>
-          <div class="error" *ngIf="submitted && controls.delivery.errors">
-            <label *ngIf="controls.delivery.errors.required">Phương thức vận chuyển vụ bắt buộc nhập.</label>
+          <div class="error" *ngIf="submitted && controls.combo.errors">
+            <label *ngIf="controls.combo.errors.required">Gói dịch vụ bắt buộc nhập.</label>
           </div>
         </div>
     </div>

@@ -67,6 +67,14 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
+        [Route("combo")]
+        public IPagedList<MethodDto> GetCombo(int pageIndex = 0, int pageSize = 10)
+        {
+            return _methodService.GetComboMethod(pageIndex, pageSize);
+        }
+
+
+        [HttpGet]
         [Route("get")]
         public IPagedList<MethodDto> GetAll(int pageIndex = 0, int pageSize = 10)
         {

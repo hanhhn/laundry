@@ -9,6 +9,6 @@
         public bool Highlight { get; set; }
         public int SortOrder { get; set; }
         public string Type { get; set; }
-        public int DeliveryId { get; set; }
+        public int ComboId { get; set; }
     }
 }

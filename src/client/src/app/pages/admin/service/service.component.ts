@@ -16,7 +16,7 @@ import { Method } from "src/app/cores/models/method.model";
 export class ServiceComponent implements OnInit {
   dataSource: Item[];
   itemTypes: KeyValue[];
-  deliveryMethods: Method[];
+  comboMethods: Method[];
 
   display: boolean;
   submitted: boolean;
@@ -49,14 +49,14 @@ export class ServiceComponent implements OnInit {
   ngOnInit() {
     this.loadItemList();
     this.loadItemType();
-    this.loadDeliveryMethod();
+    this.loadComboMethod();
 
     this.formControls = this.formBuilder.group({
       id: [0],
       type: [null, Validators.required],
       image: [null],
       name: [null, Validators.required],
-      delivery: [null, Validators.required],
+      combo: [null, Validators.required],
       description: [null, Validators.required],
       sortOrder: [1, Validators.required],
       highlight: [false]
@@ -73,9 +73,9 @@ export class ServiceComponent implements OnInit {
     this.itemTypes = this.itemService.getItemTypes();
   }
 
-  loadDeliveryMethod() {
-    this.methodService.getDelivery(0, 100).subscribe(data => {
-      this.deliveryMethods = data ? data.dataSource : [];
+  loadComboMethod() {
+    this.methodService.getCombo(0, 100).subscribe(data => {
+      this.comboMethods = data ? data.dataSource : [];
     });
   }
 
@@ -89,12 +89,12 @@ export class ServiceComponent implements OnInit {
 
   onShowEditDialog(item: Item) {
     const type = this.itemTypes.find(x => x.key === item.type);
-    const delivery = this.deliveryMethods.find(x => x.id === item.deliveryId);
+    const combo = this.comboMethods.find(x => x.id === item.comboId);
     this.controls.id.patchValue(item.id);
     this.controls.type.patchValue(type);
     this.controls.image.patchValue(item.image);
     this.controls.name.patchValue(item.name);
-    this.controls.delivery.patchValue(delivery);
+    this.controls.combo.patchValue(combo);
     this.controls.description.patchValue(item.description);
     this.controls.sortOrder.patchValue(item.sortOrder);
     this.controls.highlight.patchValue(item.highlight);
@@ -111,7 +111,7 @@ export class ServiceComponent implements OnInit {
       request.id = this.controls.id.value;
       request.name = this.controls.name.value;
       request.type = this.controls.type.value.key;
-      request.deliveryId = this.controls.delivery.value.id;
+      request.comboId = this.controls.combo.value.id;
       request.image = this.controls.image.value;
       request.description = this.controls.description.value;
       request.sortOrder = this.controls.sortOrder.value;

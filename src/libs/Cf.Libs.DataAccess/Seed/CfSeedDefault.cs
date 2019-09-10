@@ -17,7 +17,7 @@ namespace Cf.Libs.DataAccess.Seed
 
             SeedSetting(builder);
 
-            //SeedItem(builder);
+            SeedItem(builder);
         }
 
         private static void SeedAddress(ModelBuilder builder)
@@ -272,7 +272,7 @@ namespace Cf.Libs.DataAccess.Seed
                 Description = "<strong>Miễn phí vận chuyển </strong><small>(dưới 5km)</small>",
                 SortOrder = 1,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Delivery.ToString()
+                Type = Core.Enums.MethodType.Combo.ToString()
             };
             method11.Default(true, "system");
 
@@ -283,7 +283,7 @@ namespace Cf.Libs.DataAccess.Seed
                 Description = "<strong>Miễn phí vận chuyển</strong>",
                 SortOrder = 1,
                 EnableDiscount = false,
-                Type = Core.Enums.MethodType.Delivery.ToString()
+                Type = Core.Enums.MethodType.Combo.ToString()
             };
             method12.Default(true, "system");
 
@@ -312,7 +312,7 @@ namespace Cf.Libs.DataAccess.Seed
                 Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
                 SortOrder = 1,
                 Type = Core.Enums.ItemType.Laundry.ToString(),
-                Delivery = 10
+                Combo = 10
             };
             item1.Default(true, "system");
 
@@ -324,7 +324,7 @@ namespace Cf.Libs.DataAccess.Seed
                 Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
                 SortOrder = 1,
                 Type = Core.Enums.ItemType.Laundry.ToString(),
-                Delivery = 11
+                Combo = 11
             };
             item2.Default(true, "system");
 
@@ -336,7 +336,7 @@ namespace Cf.Libs.DataAccess.Seed
                 Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
                 SortOrder = 1,
                 Type = Core.Enums.ItemType.Laundry.ToString(),
-                Delivery = 12
+                Combo = 12
             };
             item3.Default(true, "system");
 

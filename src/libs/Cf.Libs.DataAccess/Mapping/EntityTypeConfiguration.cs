@@ -10,10 +10,15 @@ namespace Cf.Libs.DataAccess.Mapping
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
             PropertyInfo prop = typeof(TEntity).GetProperty("Id");
-            if (prop != null && prop.PropertyType.ToString() == typeof(int).ToString())
+            if (prop != null)
             {
                 builder.HasKey("Id");
-                builder.Property("Id").HasColumnType("integer").ValueGeneratedOnAdd();
+
+                if (prop.PropertyType.ToString() == typeof(int).ToString())
+                {
+                    builder.Property("Id").HasColumnType("integer").ValueGeneratedOnAdd();
+                    builder.Property("Id").UseNpgsqlIdentityAlwaysColumn();
+                }
             }
 
             prop = typeof(TEntity).GetProperty(nameof(IChangeableEntity.CreateDate));

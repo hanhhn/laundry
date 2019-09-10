@@ -61,7 +61,9 @@ export class MethodComponent implements OnInit {
   }
 
   loadMethodType() {
-    this.methodTypes = this.methodService.getMethodTypes();
+    this.methodService.getMethodTypes().subscribe(data => {
+      this.methodTypes = data;
+    });
   }
 
   onShowAddDialog() {

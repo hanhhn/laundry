@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { from, of } from "rxjs";
 import { PagedList } from "../models/paged.model";
 import { Method, MethodRequest } from "../models/method.model";
 import { KeyValue } from "../models/object.model";
@@ -102,14 +103,16 @@ export class MethodService {
     );
   }
 
-  getMethodTypes(): KeyValue[] {
-    return [
+  getMethodTypes(): Observable<KeyValue[]> {
+    const types = [
       new KeyValue("Clean", "Clean"),
       new KeyValue("Soft", "Soft"),
       new KeyValue("Dry", "Dry"),
       new KeyValue("Straight", "Straight"),
-      new KeyValue("Delivery", "Delivery")
+      new KeyValue("Delivery", "Delivery"),
+      new KeyValue("Combo", "Combo")
     ];
+    return of(types);
   }
 
   private mapData(data: any): PagedList<Method> {

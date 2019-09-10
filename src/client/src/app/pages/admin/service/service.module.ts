@@ -15,6 +15,7 @@ import { ItemService } from "../../../cores/services/item.service";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ImageService } from "../../../cores/services/image.service";
 import { DropdownModule } from "primeng/components/dropdown/dropdown";
+import { MethodService } from "src/app/cores/services/method.service";
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
     DropdownModule,
     RouterModule.forChild(routes)
   ],
-  providers: [ItemService, ImageService],
+  providers: [ItemService, ImageService, MethodService],
   exports: [ServiceComponent]
 })
 export class ServiceModule {}

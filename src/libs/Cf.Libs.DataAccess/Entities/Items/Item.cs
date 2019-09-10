@@ -1,5 +1,5 @@
-﻿using Cf.Libs.Core.Enums;
-using Cf.Libs.Core.Infrastructure.Entity;
+﻿using Cf.Libs.Core.Infrastructure.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cf.Libs.DataAccess.Entities.Items
 {
@@ -11,5 +11,8 @@ namespace Cf.Libs.DataAccess.Entities.Items
         public bool Highlight { get; set; }
         public int SortOrder { get; set; }
         public string Type { get; set; }
+        [ForeignKey("Method")]
+        public int Delivery { get; set; }
+        public virtual Method Method { get; set; }
     }
 }

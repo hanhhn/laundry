@@ -6,6 +6,7 @@ using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.DataAccess.Repository.Items;
+using Cf.Libs.DataAccess.Repository.Methods;
 using Cf.Libs.DataAccess.Repository.Prices;
 using Cf.Libs.Service.Dtos.Item;
 using System;
@@ -17,15 +18,18 @@ namespace Cf.Libs.Service.Items
     {
         private readonly IItemRepository _itemRepository;
         private readonly IPriceRepository _priceRepository;
+        private readonly IMethodRepository _methodRepository;
 
         public ItemService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
             IItemRepository itemRepository,
-            IPriceRepository priceRepository) : base(unitOfWork, mapper)
+            IPriceRepository priceRepository,
+            IMethodRepository methodRepository) : base(unitOfWork, mapper)
         {
             _itemRepository = itemRepository;
             _priceRepository = priceRepository;
+            _methodRepository = methodRepository;
         }
 
         public ItemDto Get(int Id)
@@ -72,6 +76,10 @@ namespace Cf.Libs.Service.Items
                             select item;
             }
 
+            var methodQuery = from method in _methodRepository.GetQuery()
+                              where !method.IsDeleted
+                              select method;
+
             var priceQuery = from rate in _priceRepository.GetQuery()
                             where !rate.IsDeleted && DateTime.Now > rate.ApplyDate
                             orderby rate.ApplyDate descending
@@ -80,8 +88,10 @@ namespace Cf.Libs.Service.Items
                             select gRate.FirstOrDefault();
 
             var query = from i in itemQuery
+                        join m in methodQuery on i.Delivery equals m.Id into groupMethod
                         join r in priceQuery on i.Id equals r.ItemId into groupItem
-                        from g in groupItem.DefaultIfEmpty(new Price())
+                        from gr in groupItem.DefaultIfEmpty(new Price())
+                        from gm in groupMethod.DefaultIfEmpty(new Method())
                         select new ItemDto
                         {
                             Id = i.Id,
@@ -91,10 +101,13 @@ namespace Cf.Libs.Service.Items
                             Highlight = i.Highlight,
                             SortOrder = i.SortOrder,
                             Type = i.Type,
-                            Rate = g.Rate,
-                            Discount = g.Discount,
-                            DiscountRate = g.DiscountRate,
-                            Tax = g.Tax
+                            Rate = gr.Rate,
+                            Discount = gr.Discount,
+                            DiscountRate = gr.DiscountRate,
+                            Tax = gr.Tax,
+                            DeliveryId = gm.Id,
+                            DeliveryName = gm.Name,
+                            DeliveryDescription = gm.Description
                         };
 
             return query.ToPagedList(pageIndex, pageSize);
@@ -103,6 +116,13 @@ namespace Cf.Libs.Service.Items
         public ItemDto Add(ItemRequest request)
         {
             var item = _mapper.Map<Item>(request);
+            var delivery = _methodRepository.Get(request.DeliveryId);
+            if(delivery == null || delivery.Type != MethodType.Delivery.ToString())
+            {
+                throw new InformationException("Delivery method can not be found.");
+            }
+
+            item.Delivery = delivery.Id;
             var record = _itemRepository.Add(item);
             if (_unitOfWork.SaveChanges() == 0)
             {
@@ -115,6 +135,12 @@ namespace Cf.Libs.Service.Items
         public ItemDto Edit(ItemRequest request)
         {
             var record = _itemRepository.Get(request.Id);
+            var delivery = _methodRepository.Get(request.DeliveryId);
+            if (delivery == null || delivery.Type != MethodType.Delivery.ToString())
+            {
+                throw new InformationException("Delivery method not be found.");
+            }
+
             if (record == null)
             {
                 throw new RecordNotFoundException("Record can not be found.");
@@ -126,6 +152,7 @@ namespace Cf.Libs.Service.Items
             record.Highlight = request.Highlight;
             record.SortOrder = request.SortOrder;
             record.Type = request.Type;
+            record.Delivery = delivery.Id;
 
             _itemRepository.Update(record);
 

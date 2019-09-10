@@ -9,8 +9,8 @@ namespace Cf.Laundry.Configurations
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         /// <summary>
-        /// cmd in \ksc\src\api\Cf.Ksc
-        /// dotnet ef migrations add init -p G:\ksc\src\ksc\Cf.Ksc.DataAccess\Cf.Ksc.DataAccess.csproj
+        /// cmd in \src\api\Cf.Laundry
+        /// dotnet ef migrations add init -p G:\laundry\src\libs\Cf.Libs.DataAccess\Cf.Libs.DataAccess.csproj
         /// dotnet ef database update
         /// </summary>
         public ApplicationDbContext CreateDbContext(string[] args)
@@ -22,7 +22,7 @@ namespace Cf.Laundry.Configurations
 
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
             var connectionString = configuration.GetConnectionString("DefaultConnectionString");
-            builder.UseMySql(connectionString ?? "server=45.32.125.153;database=ksc;user=root;password=@chocon")
+            builder.UseNpgsql(connectionString ?? "server=127.0.0.1;port=5432;database=laundry;user id=postgres;password=@chocon")
                    .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
 
             return new ApplicationDbContext(builder.Options);

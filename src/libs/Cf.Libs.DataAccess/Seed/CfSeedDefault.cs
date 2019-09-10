@@ -16,6 +16,8 @@ namespace Cf.Libs.DataAccess.Seed
             SeedMethod(builder);
 
             SeedSetting(builder);
+
+            //SeedItem(builder);
         }
 
         private static void SeedAddress(ModelBuilder builder)
@@ -255,15 +257,37 @@ namespace Cf.Libs.DataAccess.Seed
             var method10 = new Method
             {
                 Id = 10,
-                Name = "Sau 18h",
-                Description = "<strong> Phí: </strong> 15.000đ",
+                Name = "3kg / 1 lần giặt",
+                Description = "<strong>10.000đ <small>(dưới 5km)</small>",
                 SortOrder = 1,
                 EnableDiscount = false,
                 Type = Core.Enums.MethodType.Delivery.ToString()
             };
             method10.Default(true, "system");
 
-            builder.Entity<Method>().HasData(method1, method2, method3, method4, method5, method6, method7, method8, method9, method10);
+            var method11 = new Method
+            {
+                Id = 11,
+                Name = "5kg / 1 lần giặt",
+                Description = "<strong>Miễn phí vận chuyển </strong><small>(dưới 5km)</small>",
+                SortOrder = 1,
+                EnableDiscount = false,
+                Type = Core.Enums.MethodType.Delivery.ToString()
+            };
+            method11.Default(true, "system");
+
+            var method12 = new Method
+            {
+                Id = 12,
+                Name = "10kg / 1 lần giặt",
+                Description = "<strong>Miễn phí vận chuyển</strong>",
+                SortOrder = 1,
+                EnableDiscount = false,
+                Type = Core.Enums.MethodType.Delivery.ToString()
+            };
+            method12.Default(true, "system");
+
+            builder.Entity<Method>().HasData(method1, method2, method3, method4, method5, method6, method7, method8, method9, method10, method11, method12);
         }
 
         private static void SeedSetting(ModelBuilder builder)
@@ -276,6 +300,47 @@ namespace Cf.Libs.DataAccess.Seed
             link.Default(true, "system");
 
             builder.Entity<Setting>().HasData(link);
+        }
+
+
+        private static void SeedItem(ModelBuilder builder)
+        {
+            var item1 = new Item
+            {
+                Id = 1,
+                Name = "Giặt thường 1",
+                Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
+                SortOrder = 1,
+                Type = Core.Enums.ItemType.Laundry.ToString(),
+                Delivery = 10
+            };
+            item1.Default(true, "system");
+
+
+            var item2 = new Item
+            {
+                Id = 2,
+                Name = "Giặt thường 2",
+                Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
+                SortOrder = 1,
+                Type = Core.Enums.ItemType.Laundry.ToString(),
+                Delivery = 11
+            };
+            item2.Default(true, "system");
+
+
+            var item3 = new Item
+            {
+                Id = 3,
+                Name = "Giặt thường 3",
+                Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
+                SortOrder = 1,
+                Type = Core.Enums.ItemType.Laundry.ToString(),
+                Delivery = 12
+            };
+            item3.Default(true, "system");
+
+            builder.Entity<Item>().HasData(item1, item2, item3);
         }
     }
 }

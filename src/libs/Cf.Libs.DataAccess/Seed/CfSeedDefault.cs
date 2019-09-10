@@ -11,13 +11,13 @@ namespace Cf.Libs.DataAccess.Seed
     {
         public static void Seeding(ModelBuilder builder)
         {
-            //SeedAddress(builder);
+            SeedAddress(builder);
 
-            //SeedMethod(builder);
+            SeedMethod(builder);
 
-            //SeedSetting(builder);
+            SeedSetting(builder);
 
-            //SeedItem(builder);
+            SeedItem(builder);
         }
 
         private static void SeedAddress(ModelBuilder builder)

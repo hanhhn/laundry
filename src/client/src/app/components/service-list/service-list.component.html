@@ -8,6 +8,8 @@
   <app-combo
     *ngFor="let item of dataSource"
     title="{{ item.name }}"
+    combo="{{ item.deliveryName }}"
+    delivery="{{ item.deliveryDescription }}"
     description="{{ item.description }}"
     rate="{{ item.rate }}"
   >

@@ -81,16 +81,17 @@ namespace Cf.Libs.Service.Items
                               select method;
 
             var priceQuery = from rate in _priceRepository.GetQuery()
-                            where !rate.IsDeleted && DateTime.Now > rate.ApplyDate
-                            orderby rate.ApplyDate descending
-                            orderby rate.Priority ascending
-                            group rate by rate.ItemId into gRate
-                            select gRate.FirstOrDefault();
+                             where !rate.IsDeleted && DateTime.Now > rate.ApplyDate
+                             orderby rate.ApplyDate descending
+                             orderby rate.Priority ascending
+                             group rate by rate.ItemId into gRate
+                             select gRate.FirstOrDefault();
+
 
             var query = from i in itemQuery
                         join m in methodQuery on i.Delivery equals m.Id into groupMethod
-                        join r in priceQuery on i.Id equals r.ItemId into groupItem
-                        from gr in groupItem.DefaultIfEmpty(new Price())
+                        join r in priceQuery on i.Id equals r.ItemId into groupPrice
+                        from gr in groupPrice.DefaultIfEmpty(new Price())
                         from gm in groupMethod.DefaultIfEmpty(new Method())
                         select new ItemDto
                         {
@@ -117,7 +118,7 @@ namespace Cf.Libs.Service.Items
         {
             var item = _mapper.Map<Item>(request);
             var delivery = _methodRepository.Get(request.DeliveryId);
-            if(delivery == null || delivery.Type != MethodType.Delivery.ToString())
+            if (delivery == null || delivery.Type != MethodType.Delivery.ToString())
             {
                 throw new InformationException("Delivery method can not be found.");
             }

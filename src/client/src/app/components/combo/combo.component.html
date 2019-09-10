@@ -7,8 +7,8 @@
       <div class="price">
         <div class="rate">{{ rate }}</div>
         <div class="detail">
-          <p>3kg / Lần</p>
-          <p>Free ship (dưới 5km)</p>
+          <div>{{ combo }}</div>
+          <div [innerHTML]="delivery"></div>
         </div>
       </div>
       <div class="description" [innerHTML]="description">

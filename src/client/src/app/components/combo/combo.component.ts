@@ -10,6 +10,12 @@ export class ComboComponent implements OnInit {
   title: string;
 
   @Input()
+  combo: string;
+
+  @Input()
+  delivery: string;
+
+  @Input()
   description: string;
 
   @Input()

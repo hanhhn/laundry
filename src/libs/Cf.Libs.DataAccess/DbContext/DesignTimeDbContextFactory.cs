@@ -14,7 +14,7 @@ namespace Cf.Libs.DataAccess.DbContext
         {
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
             var connectionString = "server=127.0.0.1;port=5432;database=laundry;user id=postgres;password=@chocon";
-            builder.UseNpgsql(connectionString ?? "")
+            builder.UseNpgsql(connectionString)
                    .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
 
             return new ApplicationDbContext(builder.Options);

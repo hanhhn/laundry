@@ -4,9 +4,11 @@ using Cf.Libs.DataAccess.Repository.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
 using Cf.Libs.DataAccess.Repository.OrderDetails;
 using Cf.Libs.DataAccess.Repository.Orders;
+using Cf.Libs.DataAccess.Repository.Posts;
 using Cf.Libs.DataAccess.Repository.Prices;
 using Cf.Libs.DataAccess.Repository.Provinces;
 using Cf.Libs.DataAccess.Repository.Settings;
+using Cf.Libs.DataAccess.Repository.Tags;
 using Cf.Libs.DataAccess.Repository.UserProfiles;
 using Cf.Libs.DataAccess.Repository.Wards;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,8 @@ namespace Cf.Libs.DataAccess
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ISettingRepository, SettingRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
         }
     }
 }

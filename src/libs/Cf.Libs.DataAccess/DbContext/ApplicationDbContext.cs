@@ -4,6 +4,7 @@ using Cf.Libs.DataAccess.Entities.Billing;
 using Cf.Libs.DataAccess.Entities.Common;
 using Cf.Libs.DataAccess.Entities.Configuration;
 using Cf.Libs.DataAccess.Entities.Items;
+using Cf.Libs.DataAccess.Entities.News;
 using Cf.Libs.DataAccess.Entities.Orders;
 using Cf.Libs.DataAccess.Seed;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -34,6 +35,8 @@ namespace Cf.Libs.DataAccess.DbContext
         public DbSet<Province> Provinces { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Ward> Wards { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

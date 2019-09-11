@@ -5,7 +5,9 @@
   <mat-sidenav-content>
     <!-- <button mat-button (click)="sidenav.toggle()">Toggle</button> -->
     <app-header [menuLinks]="menuLinks" [brand]="brand" (toggleSideBar)="sidenav.toggle()"></app-header>
-    <router-outlet></router-outlet>
+    <div class="body-container">
+      <router-outlet></router-outlet>
+    </div>
     <app-footer *ngIf="company" [company]="company"></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

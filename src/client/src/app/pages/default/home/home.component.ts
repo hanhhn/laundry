@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { Reason } from "src/app/cores/models/setting.model";
+import { SettingService } from "src/app/cores/services/setting.service";
+import { fork } from "cluster";
+import { forkJoin } from "rxjs";
 
 @Component({
   selector: "app-home",
@@ -16,7 +20,13 @@ export class HomeComponent implements OnInit {
     flatLink: "/dat-ngay"
   };
 
-  constructor() {}
+  selection: Reason;
 
-  ngOnInit() {}
+  constructor(private setting: SettingService) {}
+
+  ngOnInit() {
+    this.setting.getReason().subscribe(data => {
+      this.selection = data;
+    });
+  }
 }

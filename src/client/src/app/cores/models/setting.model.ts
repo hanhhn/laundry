@@ -61,3 +61,17 @@ export class Company {
     }
   }
 }
+
+export class Reason {
+  title: string;
+  image: string;
+  description: string;
+  reasons: string[];
+
+  constructor(json: any) {
+    this.title = json.title;
+    this.image = json.image;
+    this.description = json.description;
+    this.reasons = json.reasons ? json.reasons : [];
+  }
+}

@@ -28,7 +28,7 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
-        [Route("companyinfo/get")]
+        [Route("companyinfo")]
         public CompanyInfoDto GetCompanyInfo()
         {
             return _settingService.Get<CompanyInfoDto>(SettingKey.Company);
@@ -39,6 +39,21 @@ namespace Cf.Laundry.Controllers
         public bool SaveCompanyInfo(CompanyInfoDto request)
         {
             return _settingService.Save(SettingKey.Company, request);
+        }
+
+
+        [HttpGet]
+        [Route("reason")]
+        public ReasonDto GetReason()
+        {
+            return _settingService.Get<ReasonDto>(SettingKey.Reason);
+        }
+
+        [HttpPost]
+        [Route("reason/save")]
+        public bool SaveReason(ReasonDto request)
+        {
+            return _settingService.Save(SettingKey.Reason, request);
         }
     }
 }

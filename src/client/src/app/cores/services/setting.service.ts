@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Menu, Company } from "../models/setting.model";
+import { Menu, Company, Reason } from "../models/setting.model";
 
 @Injectable()
 export class SettingService {
@@ -48,9 +48,8 @@ export class SettingService {
     ];
   }
 
- // giatsach.vn@outlook.com | giatsach2019
   getCompanyInfo(): Observable<Company> {
-    const url = "settings/companyinfo/get";
+    const url = "settings/companyinfo";
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? new Company(data) : null;
@@ -61,6 +60,24 @@ export class SettingService {
   saveCompanyInfo(company: Company): Observable<boolean> {
     const url = "settings/companyinfo/save";
     return this.httpService.doPost(url, company).pipe(
+      map((data: any) => {
+        return data ? data : false;
+      })
+    );
+  }
+
+  getReason(): Observable<Reason> {
+    const url = "settings/reason";
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new Reason(data) : null;
+      })
+    );
+  }
+
+  saveReason(setting: Reason): Observable<boolean> {
+    const url = "settings/reason/save";
+    return this.httpService.doPost(url, setting).pipe(
       map((data: any) => {
         return data ? data : false;
       })

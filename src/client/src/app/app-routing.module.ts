@@ -96,6 +96,10 @@ const routes: Routes = [
         path: "setting/company",
         loadChildren: "./pages/admin/setting/company/company.module#CompanyModule"
       },
+      {
+        path: "setting/reasons",
+        loadChildren: "./pages/admin/setting/reason/reason.module#ReasonModule"
+      },
     ]
   },
   {

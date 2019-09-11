@@ -3,6 +3,7 @@
     public enum SettingKey
     {
         Company,
-        Link
+        Link,
+        Reason
     }
 }

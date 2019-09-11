@@ -8,6 +8,7 @@ import { GuideModule } from "../../../components/guide/guide.module";
 import { DownloadAppModule } from "../../../components/download-app/download-app.module";
 import { SelectionModule } from "../../../components/selection/selection.module";
 import { WorkFollowModule } from "../../../components/work-follow/work-follow.module";
+import { SettingService } from "src/app/cores/services/setting.service";
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     DownloadAppModule,
     SelectionModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [SettingService]
 })
 export class HomeModule {}

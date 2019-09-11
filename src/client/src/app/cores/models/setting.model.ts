@@ -75,3 +75,23 @@ export class Reason {
     this.reasons = json.reasons ? json.reasons : [];
   }
 }
+
+export class Jumbotron {
+  background: string;
+  title: string;
+  description: string;
+  firstButton: string;
+  firstLink: string;
+  secondButton: string;
+  secondLink: string;
+
+  constructor(json: any) {
+    this.background = json.background;
+    this.title = json.title;
+    this.description = json.description;
+    this.firstButton = json.firstButton;
+    this.firstLink = json.firstLink;
+    this.secondButton = json.secondButton;
+    this.secondLink = json.secondLink;
+  }
+}

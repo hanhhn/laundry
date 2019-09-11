@@ -2,13 +2,13 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./home.component";
-import { CarouselModule } from "../../../components/carousel/carousel.module";
 import { ServiceModule } from "../../../components/service/service.module";
 import { GuideModule } from "../../../components/guide/guide.module";
 import { DownloadAppModule } from "../../../components/download-app/download-app.module";
 import { SelectionModule } from "../../../components/selection/selection.module";
 import { WorkFollowModule } from "../../../components/work-follow/work-follow.module";
 import { SettingService } from "src/app/cores/services/setting.service";
+import { JumbotronModule } from "src/app/components/jumbotron/jumbotron.module";
 
 const routes: Routes = [
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   declarations: [HomeComponent],
   imports: [
     CommonModule,
-    CarouselModule,
+    JumbotronModule,
     GuideModule,
     WorkFollowModule,
     ServiceModule,

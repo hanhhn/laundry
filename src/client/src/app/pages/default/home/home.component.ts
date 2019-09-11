@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Reason } from "src/app/cores/models/setting.model";
+import { Reason, Jumbotron } from "src/app/cores/models/setting.model";
 import { SettingService } from "src/app/cores/services/setting.service";
 import { fork } from "cluster";
 import { forkJoin } from "rxjs";
+import { SniperService } from "src/app/cores/services/sniper.service";
 
 @Component({
   selector: "app-home",
@@ -10,23 +11,23 @@ import { forkJoin } from "rxjs";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  carousel = {
-    title: "We love people who code  ",
-    description:
-      "Linux does not use extensions. It is up to the creator of the file to decide if he wants the name to have an extension.",
-    strokedName: "Bảng giá",
-    strokedLink: "/bang-gia",
-    flatName: "Đặt ngay",
-    flatLink: "/dat-ngay"
-  };
-
+  carousel: Jumbotron;
   selection: Reason;
 
-  constructor(private setting: SettingService) {}
+  constructor(private setting: SettingService, private sniper: SniperService) {}
 
   ngOnInit() {
-    this.setting.getReason().subscribe(data => {
-      this.selection = data;
-    });
+    this.sniper.showSniper();
+    forkJoin([this.setting.getJumbotron(), this.setting.getReason()]).subscribe(
+      ([carousel, selection]) => {
+        this.carousel = carousel;
+        this.selection = selection;
+
+        this.sniper.hideSniper();
+      },
+      err => {
+        this.sniper.hideSniper();
+      }
+    );
   }
 }

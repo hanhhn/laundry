@@ -78,7 +78,8 @@ const routes: Routes = [
       },
       {
         path: "price",
-        loadChildren: "./pages/admin/price-list/price-list.module#PriceListModule"
+        loadChildren:
+          "./pages/admin/price-list/price-list.module#PriceListModule"
       },
       {
         path: "service",
@@ -94,12 +95,18 @@ const routes: Routes = [
       },
       {
         path: "setting/company",
-        loadChildren: "./pages/admin/setting/company/company.module#CompanyModule"
+        loadChildren:
+          "./pages/admin/setting/company/company.module#CompanyModule"
       },
       {
         path: "setting/reasons",
         loadChildren: "./pages/admin/setting/reason/reason.module#ReasonModule"
       },
+      {
+        path: "setting/jumbotron",
+        loadChildren:
+          "./pages/admin/setting/jumbotron/jumbotron.module#JumbotronModule"
+      }
     ]
   },
   {

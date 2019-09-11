@@ -76,6 +76,11 @@ export class AdminLayoutComponent implements OnInit {
             label: "Reasons",
             icon: "",
             routerLink: "setting/reasons"
+          },
+          {
+            label: "jumbotron",
+            icon: "",
+            routerLink: "setting/jumbotron"
           }
         ]
       }

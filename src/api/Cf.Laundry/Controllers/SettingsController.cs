@@ -55,5 +55,19 @@ namespace Cf.Laundry.Controllers
         {
             return _settingService.Save(SettingKey.Reason, request);
         }
+
+        [HttpGet]
+        [Route("jumbotron")]
+        public JumbotronDto GetJumbotron()
+        {
+            return _settingService.Get<JumbotronDto>(SettingKey.Jumbotron);
+        }
+
+        [HttpPost]
+        [Route("jumbotron/save")]
+        public bool SaveJumbotron(JumbotronDto request)
+        {
+            return _settingService.Save(SettingKey.Jumbotron, request);
+        }
     }
 }

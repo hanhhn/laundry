@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
-  selector: "app-carousel",
-  templateUrl: "./carousel.component.html",
-  styleUrls: ["./carousel.component.scss"]
+  selector: "app-jumbotron",
+  templateUrl: "./jumbotron.component.html",
+  styleUrls: ["./jumbotron.component.scss"]
 })
-export class CarouselComponent {
+export class JumbotronComponent {
   @Input()
   title: string;
 

@@ -1,12 +1,12 @@
-<app-carousel
+<app-jumbotron
   *ngIf="carousel"
   title="{{ carousel.title }}"
   description="{{ carousel.description }}"
-  strokedName="{{ carousel.strokedName }}"
-  strokedLink="{{ carousel.strokedLink }}"
-  flatName="{{ carousel.flatName }}"
-  flatLink="{{ carousel.flatLink }}"
-></app-carousel>
+  strokedName="{{ carousel.firstButton }}"
+  strokedLink="{{ carousel.firstLink }}"
+  flatName="{{ carousel.secondButton }}"
+  flatLink="{{ carousel.secondLink }}"
+></app-jumbotron>
 
 <app-guide></app-guide>
 <app-service></app-service>

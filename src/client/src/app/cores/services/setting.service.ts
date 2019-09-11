@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Menu, Company, Reason } from "../models/setting.model";
+import { Menu, Company, Reason, Jumbotron } from "../models/setting.model";
 
 @Injectable()
 export class SettingService {
@@ -77,6 +77,24 @@ export class SettingService {
 
   saveReason(setting: Reason): Observable<boolean> {
     const url = "settings/reason/save";
+    return this.httpService.doPost(url, setting).pipe(
+      map((data: any) => {
+        return data ? data : false;
+      })
+    );
+  }
+
+  getJumbotron(): Observable<Jumbotron> {
+    const url = "settings/jumbotron";
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new Jumbotron(data) : null;
+      })
+    );
+  }
+
+  saveJumbotron(setting: Jumbotron): Observable<boolean> {
+    const url = "settings/jumbotron/save";
     return this.httpService.doPost(url, setting).pipe(
       map((data: any) => {
         return data ? data : false;

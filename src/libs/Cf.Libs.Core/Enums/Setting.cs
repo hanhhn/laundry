@@ -4,6 +4,7 @@
     {
         Company,
         Link,
-        Reason
+        Reason,
+        Jumbotron
     }
 }

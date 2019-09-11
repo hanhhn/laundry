@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Reason, Jumbotron } from "src/app/cores/models/setting.model";
 import { SettingService } from "src/app/cores/services/setting.service";
-import { fork } from "cluster";
 import { forkJoin } from "rxjs";
 import { SniperService } from "src/app/cores/services/sniper.service";
 

@@ -9,7 +9,7 @@ namespace Cf.Libs.DataAccess.Entities.Common
         public int Id { get; set; }
         public string Name { get; set; }
         [ForeignKey("News")]
-        public string NewsId { get; set; }
+        public string PostId { get; set; }
 
         public virtual  Post Post { get; set; }
     }

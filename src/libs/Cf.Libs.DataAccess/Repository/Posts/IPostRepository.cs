@@ -5,5 +5,6 @@ namespace Cf.Libs.DataAccess.Repository.Posts
 {
     public interface IPostRepository : IBaseRepository<Post>
     {
+        Post GetByUrl(string url);
     }
 }

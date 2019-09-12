@@ -55,6 +55,16 @@ export class AdminLayoutComponent implements OnInit {
         ]
       },
       {
+        label: "News",
+        items: [
+          {
+            label: "Posts",
+            icon: "",
+            routerLink: "post"
+          }
+        ]
+      },
+      {
         label: "Discount",
         items: [
           {

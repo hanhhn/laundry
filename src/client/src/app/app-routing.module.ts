@@ -90,6 +90,14 @@ const routes: Routes = [
         loadChildren: "./pages/admin/method/method.module#MethodModule"
       },
       {
+        path: "post/:id",
+        loadChildren: "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
+      },
+      {
+        path: "post",
+        loadChildren: "./pages/admin/news/post/post.module#PostModule"
+      },
+      {
         path: "discount",
         loadChildren: "./pages/admin/coupon/coupon.module#CouponModule"
       },

@@ -17,8 +17,17 @@ namespace Cf.Laundry.Controllers
             _service = service;
         }
 
+
         [HttpGet]
-        [Route("get/{id}")]
+        [Route("get/{url}")]
+        public PostDto GetByUrl(string url)
+        {
+            return _service.GetByUrl(url);
+        }
+
+
+        [HttpGet]
+        [Route("detail/{id}")]
         public PostDto Get(string id)
         {
             return _service.Get(id);
@@ -29,6 +38,13 @@ namespace Cf.Laundry.Controllers
         public IPagedList<PostDto> GetAll(int pageIndex = 0, int pageSize = 10)
         {
             return _service.GetAll(pageIndex, pageSize);
+        }
+
+        [HttpGet]
+        [Route("unique/{url}")]
+        public bool IsUniqueUrl(string url)
+        {
+            return _service.IsUniqueUrl(url);
         }
 
         [HttpPost]
@@ -43,7 +59,7 @@ namespace Cf.Laundry.Controllers
             return _service.Save(request);
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("delete/{id}")]
         public bool Delete(string id)
         {

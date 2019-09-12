@@ -7,6 +7,8 @@ using Cf.Libs.DataAccess.Repository.Orders;
 using Cf.Libs.DataAccess.Repository.Posts;
 using Cf.Libs.DataAccess.Repository.Prices;
 using Cf.Libs.DataAccess.Repository.Provinces;
+using Cf.Libs.DataAccess.Repository.SeoMetadatas;
+using Cf.Libs.DataAccess.Repository.SeoRecords;
 using Cf.Libs.DataAccess.Repository.Settings;
 using Cf.Libs.DataAccess.Repository.Tags;
 using Cf.Libs.DataAccess.Repository.UserProfiles;
@@ -32,6 +34,8 @@ namespace Cf.Libs.DataAccess
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<ISeoRecordRepository, SeoRecordRepository>();
+            services.AddScoped<ISeoMetadataRepository, SeoMetadataRepository>();
         }
     }
 }

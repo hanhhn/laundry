@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cf.Libs.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190910160253_init")]
+    [Migration("20190912115200_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -369,6 +369,24 @@ namespace Cf.Libs.DataAccess.Migrations
                     b.ToTable("Province");
                 });
 
+            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Common.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PostId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Tag");
+                });
+
             modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Common.Ward", b =>
                 {
                     b.Property<int>("Id")
@@ -593,6 +611,52 @@ namespace Cf.Libs.DataAccess.Migrations
                     b.ToTable("Price");
                 });
 
+            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.News.Post", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("CreateUserId")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPublished");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("ModifyUserId")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<DateTime?>("PublishedDate");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("UniqueUrl");
+
+                    b.Property<string>("UpdatedToken")
+                        .IsConcurrencyToken()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Post");
+                });
+
             modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Orders.Order", b =>
                 {
                     b.Property<string>("Id")
@@ -699,6 +763,44 @@ namespace Cf.Libs.DataAccess.Migrations
                     b.ToTable("OrderDetail");
                 });
 
+            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Seo.SeoMetadata", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("RecordId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecordId");
+
+                    b.ToTable("SeoMetadata");
+                });
+
+            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Seo.SeoRecord", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Keywords");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SeoRecord");
+                });
+
             modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Account.RoleClaim", b =>
                 {
                     b.HasOne("Cf.Libs.DataAccess.Entities.Account.Role")
@@ -764,6 +866,13 @@ namespace Cf.Libs.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Common.Tag", b =>
+                {
+                    b.HasOne("Cf.Libs.DataAccess.Entities.News.Post", "Post")
+                        .WithMany("Tags")
+                        .HasForeignKey("PostId");
+                });
+
             modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Common.Ward", b =>
                 {
                     b.HasOne("Cf.Libs.DataAccess.Entities.Common.District", "District")
@@ -792,6 +901,13 @@ namespace Cf.Libs.DataAccess.Migrations
                     b.HasOne("Cf.Libs.DataAccess.Entities.Orders.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("Cf.Libs.DataAccess.Entities.Seo.SeoMetadata", b =>
+                {
+                    b.HasOne("Cf.Libs.DataAccess.Entities.Seo.SeoRecord", "SeoRecord")
+                        .WithMany("SeoMetadatas")
+                        .HasForeignKey("RecordId");
                 });
 #pragma warning restore 612, 618
         }

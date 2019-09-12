@@ -62,6 +62,31 @@ namespace Cf.Libs.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Post",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    CreateUserId = table.Column<string>(type: "varchar(50)", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp", nullable: true),
+                    ModifyUserId = table.Column<string>(type: "varchar(50)", nullable: true),
+                    UpdatedToken = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Note = table.Column<string>(type: "varchar(300)", nullable: true),
+                    UniqueUrl = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Body = table.Column<string>(nullable: true),
+                    IsPublished = table.Column<bool>(nullable: false),
+                    PublishedDate = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Post", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Price",
                 columns: table => new
                 {
@@ -126,6 +151,21 @@ namespace Cf.Libs.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SeoRecord",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Url = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Keywords = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SeoRecord", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -237,6 +277,26 @@ namespace Cf.Libs.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tag",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    Name = table.Column<string>(nullable: true),
+                    PostId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tag", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tag_Post_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Post",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "District",
                 columns: table => new
                 {
@@ -285,6 +345,27 @@ namespace Cf.Libs.DataAccess.Migrations
                         principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SeoMetadata",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    RecordId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SeoMetadata", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SeoMetadata_SeoRecord_RecordId",
+                        column: x => x.RecordId,
+                        principalTable: "SeoRecord",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -505,6 +586,16 @@ namespace Cf.Libs.DataAccess.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SeoMetadata_RecordId",
+                table: "SeoMetadata",
+                column: "RecordId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tag_PostId",
+                table: "Tag",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "User",
                 column: "NormalizedEmail");
@@ -561,7 +652,13 @@ namespace Cf.Libs.DataAccess.Migrations
                 name: "RoleClaim");
 
             migrationBuilder.DropTable(
+                name: "SeoMetadata");
+
+            migrationBuilder.DropTable(
                 name: "Settings");
+
+            migrationBuilder.DropTable(
+                name: "Tag");
 
             migrationBuilder.DropTable(
                 name: "UserClaim");
@@ -583,6 +680,12 @@ namespace Cf.Libs.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Order");
+
+            migrationBuilder.DropTable(
+                name: "SeoRecord");
+
+            migrationBuilder.DropTable(
+                name: "Post");
 
             migrationBuilder.DropTable(
                 name: "Role");

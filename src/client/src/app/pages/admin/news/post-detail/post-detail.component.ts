@@ -44,7 +44,7 @@ export class PostDetailComponent implements OnInit {
       uniqueUrl: [null, Validators.required],
       description: [null, Validators.required],
       body: [null, Validators.required],
-      isPublished: [false]
+      isPublished: [true]
     });
 
     if (this.id) {

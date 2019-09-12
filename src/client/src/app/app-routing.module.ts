@@ -90,7 +90,11 @@ const routes: Routes = [
         loadChildren: "./pages/admin/method/method.module#MethodModule"
       },
       {
-        path: "post/:id",
+        path: "post/add",
+        loadChildren: "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
+      },
+      {
+        path: "post/detail/:id",
         loadChildren: "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
       },
       {

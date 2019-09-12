@@ -83,6 +83,8 @@ namespace Cf.Libs.Service.Posts
             if (record == null)
             {
                 record = _mapper.Map<Post>(request);
+                record.Id = Guid.NewGuid().ToString();
+                record.PublishedDate = null;
                 _postRepository.Add(record);
             }
             else

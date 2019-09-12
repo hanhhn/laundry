@@ -35,10 +35,10 @@
         <div class="col-sm-8">
             <input formControlName="uniqueUrl" class="form-control" id="uniqueUrl" placeholder="UniqueUrl" />
             <div class="error" *ngIf="submitted && controls.uniqueUrl.errors">
-                <label *ngIf="controls.uniqueUrl.errors.required">Url bắt buộc nhập.</label>
+                <label *ngIf="controls.uniqueUrl.errors.required">UniqueUrl bắt buộc nhập.</label>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
             <i class="fa fa-check"></i>
         </div>
     </div>
@@ -46,7 +46,7 @@
     <div class="form-group row">
         <label for="description" class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-8">
-            <textarea formControlName="description" class="form-control" id="description" rows="3"></textarea>
+            <textarea formControlName="description" class="form-control" id="description" rows="3" placeholder="Description"></textarea>
             <div class="error" *ngIf="submitted && controls.description.errors">
                 <label *ngIf="controls.description.errors.required">Description bắt buộc nhập.</label>
             </div>

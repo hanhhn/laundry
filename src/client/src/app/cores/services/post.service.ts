@@ -19,7 +19,7 @@ export class PostService {
   }
 
   getById(id: string): Observable<Post> {
-    const url = "posts/get/" + id;
+    const url = "posts/detail/" + id;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? new Post(data) : null;

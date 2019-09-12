@@ -26,11 +26,9 @@ export class PostComponent implements OnInit {
     });
   }
 
-  onEditClicked(item: Post) {}
-
-  onDeleteClick(item) {
+  onDeleteClick(item: Post) {
     this.confirmationService.confirm({
-      message: "Bạn chắc chắn muốn xóa '" + item.name + "'",
+      message: "Bạn chắc chắn muốn xóa '" + item.title + "'",
       acceptLabel: "Xác nhận",
       rejectLabel: "Hủy",
       accept: () => {

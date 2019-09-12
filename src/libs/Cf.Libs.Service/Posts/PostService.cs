@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Cf.Libs.Core.Enums;
 using Cf.Libs.Core.Exeptions;
 using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.News;
 using Cf.Libs.DataAccess.Repository.Posts;
+using Cf.Libs.DataAccess.Repository.Settings;
 using Cf.Libs.DataAccess.Repository.Tags;
 using Cf.Libs.Service.Dtos.Post;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 
@@ -16,15 +19,18 @@ namespace Cf.Libs.Service.Posts
     {
         private readonly IPostRepository _postRepository;
         private readonly ITagRepository _tagRepository;
+        private readonly ISettingRepository _settingRepository;
 
         public PostService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
             IPostRepository postRepository,
-            ITagRepository tagRepository) : base(unitOfWork, mapper)
+            ITagRepository tagRepository,
+            ISettingRepository settingRepository) : base(unitOfWork, mapper)
         {
             _postRepository = postRepository;
             _tagRepository = tagRepository;
+            _settingRepository = settingRepository;
         }
 
         public PostDto Get(string id)
@@ -157,6 +163,20 @@ namespace Cf.Libs.Service.Posts
             }
 
             return true;
+        }
+
+        public IPagedList<PostDto> GetHomePost(int pageIndex, int pageSize)
+        {
+            var record = _settingRepository.FindByKey(SettingKey.HomePost.ToString());
+
+            var posts = JsonConvert.DeserializeObject<string[]>(record.Value).ToList();
+
+            var query = from post in _postRepository.GetQuery()
+                        orderby post.CreateDate descending
+                        orderby post.PublishedDate descending
+                        where !post.IsDeleted && post.IsPublished && posts.Contains(post.Id)
+                        select post;
+            return query.ToPagedList<Post, PostDto>(pageIndex, pageSize);
         }
     }
 }

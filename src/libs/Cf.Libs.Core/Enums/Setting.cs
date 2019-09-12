@@ -5,6 +5,7 @@
         Company,
         Link,
         Reason,
-        Jumbotron
+        Jumbotron,
+        HomePost
     }
 }

@@ -14,5 +14,6 @@ namespace Cf.Libs.Service.Posts
         bool Delete(string id);
         bool Published(string id);
         bool UnPublished(string id);
+        IPagedList<PostDto> GetHomePost(int pageIndex, int pageSize)
     }
 }

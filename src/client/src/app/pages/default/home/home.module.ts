@@ -6,9 +6,9 @@ import { ServiceModule } from "../../../components/service/service.module";
 import { GuideModule } from "../../../components/guide/guide.module";
 import { DownloadAppModule } from "../../../components/download-app/download-app.module";
 import { SelectionModule } from "../../../components/selection/selection.module";
-import { WorkFollowModule } from "../../../components/work-follow/work-follow.module";
 import { SettingService } from "src/app/cores/services/setting.service";
 import { JumbotronModule } from "src/app/components/jumbotron/jumbotron.module";
+import { PostListModule } from "../../../components/post-list/post-list.module";
 
 const routes: Routes = [
   {
@@ -23,10 +23,10 @@ const routes: Routes = [
     CommonModule,
     JumbotronModule,
     GuideModule,
-    WorkFollowModule,
     ServiceModule,
     DownloadAppModule,
     SelectionModule,
+    PostListModule,
     RouterModule.forChild(routes)
   ],
   providers: [SettingService]

@@ -79,5 +79,12 @@ namespace Cf.Laundry.Controllers
         {
             return _service.UnPublished(id);
         }
+
+        [HttpGet]
+        [Route("home")]
+        public IPagedList<PostDto> GetHomePost(int pageIndex = 0, int pageSize = 10)
+        {
+            return _service.GetHomePost(pageIndex, pageSize);
+        }
     }
 }

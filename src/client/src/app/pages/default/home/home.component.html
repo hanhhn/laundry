@@ -10,6 +10,19 @@
 
 <app-guide></app-guide>
 <app-service></app-service>
-<app-work-follow></app-work-follow>
-<!-- <app-download-app></app-download-app> -->
+
+<div
+  class="work-follow"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="30px"
+  *ngIf="posts"
+>
+  <div class="slogun">
+    <h2>Learn and grow with Stack Overflow</h2>
+    <hr />
+  </div>
+  <app-post-list></app-post-list>
+</div>
+
 <app-selection [dataSource]="selection"></app-selection>

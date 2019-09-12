@@ -3,6 +3,8 @@ import { Reason, Jumbotron } from "src/app/cores/models/setting.model";
 import { SettingService } from "src/app/cores/services/setting.service";
 import { forkJoin } from "rxjs";
 import { SniperService } from "src/app/cores/services/sniper.service";
+import { Post } from "../../../cores/models/post.model";
+import { PostService } from "../../../cores/services/post.service";
 
 @Component({
   selector: "app-home",
@@ -12,15 +14,25 @@ import { SniperService } from "src/app/cores/services/sniper.service";
 export class HomeComponent implements OnInit {
   carousel: Jumbotron;
   selection: Reason;
+  posts: Post[];
 
-  constructor(private setting: SettingService, private sniper: SniperService) {}
+  constructor(
+    private setting: SettingService,
+    private postService: PostService,
+    private sniper: SniperService
+  ) {}
 
   ngOnInit() {
     this.sniper.showSniper();
-    forkJoin([this.setting.getJumbotron(), this.setting.getReason()]).subscribe(
-      ([carousel, selection]) => {
+    forkJoin([
+      this.setting.getJumbotron(),
+      this.setting.getReason(),
+      this.postService.getHomePost(0, 4)
+    ]).subscribe(
+      ([carousel, selection, posts]) => {
         this.carousel = carousel;
         this.selection = selection;
+        this.posts = posts ? posts.dataSource : [];
 
         this.sniper.hideSniper();
       },

@@ -62,4 +62,13 @@ export class PostService {
       })
     );
   }
+
+  getHomePost(pageIndex: number, pageSize: number): Observable<PagedList<Post>> {
+    const url = "posts/home?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new PagedList(data) : null;
+      })
+    );
+  }
 }

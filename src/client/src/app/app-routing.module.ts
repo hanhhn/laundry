@@ -118,6 +118,11 @@ const routes: Routes = [
         path: "setting/jumbotron",
         loadChildren:
           "./pages/admin/setting/jumbotron/jumbotron.module#JumbotronModule"
+      },
+      {
+        path: "setting/home-post",
+        loadChildren:
+          "./pages/admin/setting/learn-more/learn-more.module#LearnMoreModule"
       }
     ]
   },

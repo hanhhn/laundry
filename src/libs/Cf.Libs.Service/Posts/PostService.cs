@@ -11,6 +11,7 @@ using Cf.Libs.DataAccess.Repository.Tags;
 using Cf.Libs.Service.Dtos.Post;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Cf.Libs.Service.Posts
@@ -169,7 +170,11 @@ namespace Cf.Libs.Service.Posts
         {
             var record = _settingRepository.FindByKey(SettingKey.HomePost.ToString());
 
-            var posts = JsonConvert.DeserializeObject<string[]>(record.Value).ToList();
+            List<string> posts = new List<string>();
+            if (record != null)
+            {
+                posts = JsonConvert.DeserializeObject<string[]>(record.Value).ToList();
+            }
 
             var query = from post in _postRepository.GetQuery()
                         orderby post.CreateDate descending

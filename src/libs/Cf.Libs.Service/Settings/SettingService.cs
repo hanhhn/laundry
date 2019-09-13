@@ -52,6 +52,37 @@ namespace Cf.Libs.Service.Settings
             return _unitOfWork.SaveChanges() != 0;
         }
 
+        public string[] Get(SettingKey settingKey)
+        {
+            var record = _settingRepository.FindByKey(settingKey.ToString());
+            if (record == null)
+                return new string[0];
+
+            return JsonConvert.DeserializeObject<string[]>(record.Value);
+        }
+
+        public bool Save(SettingKey key, string[] model)
+        {
+            var record = _settingRepository.FindByKey(key.ToString());
+            var setting = JsonConvert.SerializeObject(model);
+
+            if (record == null)
+            {
+                _settingRepository.Add(new Setting
+                {
+                    Name = key.ToString(),
+                    Value = setting
+                });
+            }
+            else
+            {
+                record.Value = setting;
+                _settingRepository.Update(record);
+            }
+
+            return _unitOfWork.SaveChanges() != 0;
+        }
+
         public bool Delete(SettingKey settingKey)
         {
             var record = _settingRepository.FindByKey(settingKey.ToString());

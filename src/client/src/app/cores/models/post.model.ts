@@ -1,11 +1,11 @@
 export class Post {
-  id: number;
+  id: string;
   uniqueUrl: string;
   image: string;
   title: string;
-  description: number;
-  body: number;
-  isPublished: number;
+  description: string;
+  body: string;
+  isPublished: boolean;
   publishedDate: Date;
   tags: string[];
 
@@ -23,13 +23,13 @@ export class Post {
 }
 
 export class PostRequest {
-  id: number;
+  id: string;
   uniqueUrl: string;
   image: string;
   title: string;
-  description: number;
-  body: number;
-  isPublished: number;
+  description: string;
+  body: string;
+  isPublished: string;
   publishedDate: Date;
   tags: string[];
 }

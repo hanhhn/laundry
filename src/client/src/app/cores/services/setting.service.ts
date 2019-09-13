@@ -101,4 +101,22 @@ export class SettingService {
       })
     );
   }
+
+  getHomePost(): Observable<string[]> {
+    const url = "settings/homepost";
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? data : [];
+      })
+    );
+  }
+
+  saveHomePost(setting: string[]): Observable<boolean> {
+    const url = "settings/homepost/save";
+    return this.httpService.doPost(url, setting).pipe(
+      map((data: any) => {
+        return data ? data : false;
+      })
+    );
+  }
 }

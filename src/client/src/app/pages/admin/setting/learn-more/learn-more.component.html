@@ -1,0 +1,24 @@
+<div class="setting-post">
+    <form [formGroup]="formControls" style="margin: 20px 0px;">
+
+        <div class="form-group row">
+            <label for="posts" class="col-sm-2 col-form-label required">Posts</label>
+            <div class="col-sm-7">
+                <p-multiSelect formControlName="posts" placeholder="Chọn bài viết hiển thị ở trang home"
+                    [style]="{'width':'500px'}" [options]="dataSource" optionLabel="title" [filter]="true"
+                    filterBy="title" [virtualScroll]="true" itemSize="30"></p-multiSelect>
+
+                <div class="error" *ngIf="submitted && controls.posts.errors">
+                    <label *ngIf="controls.posts.errors.required">Posts bắt buộc nhập.</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-7 offset-sm-2">
+                <button class="btn btn-primary" type="button" (click)="onSaveClicked($event)">Lưu</button>
+            </div>
+        </div>
+
+    </form>
+</div>

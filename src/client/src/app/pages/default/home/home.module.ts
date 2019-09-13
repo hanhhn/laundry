@@ -9,6 +9,7 @@ import { SelectionModule } from "../../../components/selection/selection.module"
 import { SettingService } from "src/app/cores/services/setting.service";
 import { JumbotronModule } from "src/app/components/jumbotron/jumbotron.module";
 import { PostListModule } from "../../../components/post-list/post-list.module";
+import { PostService } from "src/app/cores/services/post.service";
 
 const routes: Routes = [
   {
@@ -29,6 +30,6 @@ const routes: Routes = [
     PostListModule,
     RouterModule.forChild(routes)
   ],
-  providers: [SettingService]
+  providers: [SettingService, PostService]
 })
 export class HomeModule {}

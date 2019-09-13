@@ -1,5 +1,6 @@
 .admin-content {
   padding: 0px 20px;
+  min-height: calc(100vh - 70px);
 
   mat-sidenav {
     min-width: 300px;

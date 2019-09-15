@@ -1,85 +1,144 @@
 <form [formGroup]="formControls">
-    <div class="form-group row">
-        <label for="image" class="col-sm-2 col-form-label required">Hình ảnh</label>
-        <div class="col-sm-8">
-            <p-fileUpload [chooseLabel]="'Chọn hình ảnh'" accept="image/*" maxFileSize="2000000" [multiple]="false"
-                [showUploadButton]="false" [showCancelButton]="false" [auto]="true" [invalidFileSizeMessageSummary]="
-                '{0}: Vui lòng kiểm tra lại dung lượng file!'
-              " [invalidFileSizeMessageDetail]="'Dung lượng tối đa cho phép là {0}.'"
-                [invalidFileTypeMessageSummary]="'{0}: Định dạng file không hợp lệ!'"
-                [invalidFileTypeMessageDetail]="'Định dạng cho phép: {0}.'" (onSelect)="onImageSelected($event)">
-            </p-fileUpload>
-            <label>Dung lượng file tối đa là 2MB.</label>
-            <div class="error" *ngIf="submitted && controls.image.errors">
-                <label *ngIf="controls.image.errors.required">Hình ảnh bắt buộc chọn.</label>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <img *ngIf="controls.image.value" src="{{ controls.image.value }}" class="img-thumbnail thumbnail" />
-            <div *ngIf="!controls.image.value || controls.image.value.length === 0" class="thumbnail"></div>
-        </div>
+  <div class="form-group row">
+    <label for="image" class="col-sm-2 col-form-label required">Hình ảnh</label>
+    <div class="col-sm-8">
+      <p-fileUpload
+        [chooseLabel]="'Chọn hình ảnh'"
+        accept="image/*"
+        maxFileSize="2000000"
+        [multiple]="false"
+        [showUploadButton]="false"
+        [showCancelButton]="false"
+        [auto]="true"
+        [invalidFileSizeMessageSummary]="
+          '{0}: Vui lòng kiểm tra lại dung lượng file!'
+        "
+        [invalidFileSizeMessageDetail]="'Dung lượng tối đa cho phép là {0}.'"
+        [invalidFileTypeMessageSummary]="'{0}: Định dạng file không hợp lệ!'"
+        [invalidFileTypeMessageDetail]="'Định dạng cho phép: {0}.'"
+        (onSelect)="onImageSelected($event)"
+      >
+      </p-fileUpload>
+      <label>Dung lượng file tối đa là 2MB.</label>
+      <div class="error" *ngIf="submitted && controls.image.errors">
+        <label *ngIf="controls.image.errors.required"
+          >Hình ảnh bắt buộc chọn.</label
+        >
+      </div>
     </div>
+    <div class="col-sm-2">
+      <img
+        *ngIf="controls.image.value"
+        src="{{ controls.image.value }}"
+        class="img-thumbnail thumbnail"
+      />
+      <div
+        *ngIf="!controls.image.value || controls.image.value.length === 0"
+        class="thumbnail"
+      ></div>
+    </div>
+  </div>
 
-    <div class="form-group row">
-        <label for="title" class="col-sm-2 col-form-label required">title</label>
-        <div class="col-sm-8">
-            <input formControlName="title" class="form-control" id="title" placeholder="Tiêu đề" />
-            <div class="error" *ngIf="submitted && controls.title.errors">
-                <label *ngIf="controls.title.errors.required">Title vụ bắt buộc nhập.</label>
-            </div>
-        </div>
+  <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label required">title</label>
+    <div class="col-sm-8">
+      <input
+        formControlName="title"
+        class="form-control"
+        id="title"
+        placeholder="Tiêu đề"
+      />
+      <div class="error" *ngIf="submitted && controls.title.errors">
+        <label *ngIf="controls.title.errors.required"
+          >Title vụ bắt buộc nhập.</label
+        >
+      </div>
     </div>
+  </div>
 
-    <div class="form-group row">
-        <label for="uniqueUrl" class="col-sm-2 col-form-label required">UniqueUrl</label>
-        <div class="col-sm-8">
-            <input formControlName="uniqueUrl" class="form-control" id="uniqueUrl" placeholder="UniqueUrl" />
-            <div class="error" *ngIf="submitted && controls.uniqueUrl.errors">
-                <label *ngIf="controls.uniqueUrl.errors.required">UniqueUrl bắt buộc nhập.</label>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <i class="fa fa-check"></i>
-        </div>
+  <div class="form-group row">
+    <label for="uniqueUrl" class="col-sm-2 col-form-label required"
+      >UniqueUrl</label
+    >
+    <div class="col-sm-8">
+      <input
+        formControlName="uniqueUrl"
+        class="form-control"
+        id="uniqueUrl"
+        placeholder="UniqueUrl"
+      />
+      <div class="error" *ngIf="submitted && controls.uniqueUrl.errors">
+        <label *ngIf="controls.uniqueUrl.errors.required"
+          >UniqueUrl bắt buộc nhập.</label
+        >
+      </div>
     </div>
+    <div class="col-sm-2">
+      <i class="fa fa-check"></i>
+    </div>
+  </div>
 
-    <div class="form-group row">
-        <label for="description" class="col-sm-2 col-form-label">Description</label>
-        <div class="col-sm-8">
-            <textarea formControlName="description" class="form-control" id="description" rows="3" placeholder="Description"></textarea>
-            <div class="error" *ngIf="submitted && controls.description.errors">
-                <label *ngIf="controls.description.errors.required">Description bắt buộc nhập.</label>
-            </div>
-        </div>
+  <div class="form-group row">
+    <label for="description" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-sm-8">
+      <textarea
+        formControlName="description"
+        class="form-control"
+        id="description"
+        rows="3"
+        placeholder="Description"
+      ></textarea>
+      <div class="error" *ngIf="submitted && controls.description.errors">
+        <label *ngIf="controls.description.errors.required"
+          >Description bắt buộc nhập.</label
+        >
+      </div>
     </div>
+  </div>
 
-    <div class="form-group row">
-        <label for="body" class="col-sm-2 col-form-label">Body</label>
-        <div class="col-sm-8">
-            <textarea formControlName="body" class="form-control" id="body" rows="10"></textarea>
-            <div class="error" *ngIf="submitted && controls.body.errors">
-                <label *ngIf="controls.body.errors.required">Body bắt buộc nhập.</label>
-            </div>
-        </div>
+  <div class="form-group row">
+    <label for="body" class="col-sm-2 col-form-label">Body</label>
+    <div class="col-sm-8">
+      <textarea
+        formControlName="body"
+        class="form-control"
+        id="body"
+        rows="10"
+      ></textarea>
+      <div class="error" *ngIf="submitted && controls.body.errors">
+        <label *ngIf="controls.body.errors.required">Body bắt buộc nhập.</label>
+      </div>
     </div>
+  </div>
 
-    <div class="form-group row">
-        <label for="isPublished" class="col-sm-2 col-form-label required">IsPublished</label>
-        <div class="col-sm-8">
-            <div class="form-check">
-                <label class="form-check-label" for="isPublished">
-                    <input formControlName="isPublished" class="form-check-input" type="checkbox" id="isPublished" />
-                    Published
-                </label>
-            </div>
-        </div>
+  <div class="form-group row">
+    <label for="isPublished" class="col-sm-2 col-form-label required"
+      >IsPublished</label
+    >
+    <div class="col-sm-8">
+      <div class="form-check">
+        <label class="form-check-label" for="isPublished">
+          <input
+            formControlName="isPublished"
+            class="form-check-input"
+            type="checkbox"
+            id="isPublished"
+          />
+          Published
+        </label>
+      </div>
     </div>
+  </div>
 
-    <div class="form-group row">
-        <div class="col-sm-3 offset-sm-2">
-            <button type="button" class="btn btn-primary" (click)="onSaveItemClick()">Save</button>
-            <button type="button" class="btn btn-default btn-primary">Quay lại</button>
-            <button type="button" class="btn btn-default">Cancal</button>
-        </div>
+  <div class="form-group row">
+    <div class="col-sm-3 offset-sm-2">
+      <button type="button" class="btn btn-primary" (click)="onSaveItemClick()">
+        Save
+      </button>
+      <button type="button" class="btn btn-default btn-primary">
+        Quay lại
+      </button>
+      <button type="button" class="btn btn-default">Cancal</button>
     </div>
+  </div>
 </form>

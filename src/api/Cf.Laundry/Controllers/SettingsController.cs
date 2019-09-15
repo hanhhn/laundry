@@ -81,7 +81,7 @@ namespace Cf.Laundry.Controllers
         [Route("homepost/save")]
         public bool SaveHomePost(string[] request)
         {
-            return _settingService.Save(SettingKey.Jumbotron, request);
+            return _settingService.Save(SettingKey.HomePost, request);
         }
     }
 }

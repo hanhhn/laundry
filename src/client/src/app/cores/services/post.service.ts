@@ -54,7 +54,7 @@ export class PostService {
     );
   }
 
-  delete(id: number): Observable<boolean> {
+  delete(id: string): Observable<boolean> {
     const url = "posts/delete/" + id;
     return this.httpService.doDelete(url, null).pipe(
       map((data: any) => {
@@ -63,11 +63,11 @@ export class PostService {
     );
   }
 
-  getHomePost(pageIndex: number, pageSize: number): Observable<PagedList<Post>> {
+  getHomePost(pageIndex: number, pageSize: number): Observable<Post[]> {
     const url = "posts/home?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
-        return data ? new PagedList(data) : null;
+        return data ? data.map(x => new Post(x)) : [];
       })
     );
   }

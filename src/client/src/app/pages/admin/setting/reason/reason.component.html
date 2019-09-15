@@ -1,72 +1,133 @@
 <div class="setting-link">
-    <form *ngIf="formControls" [formGroup]="formControls">
-        <div class="form-group row">
-            <label for="image" class="col-sm-2 col-form-label required">Hình ảnh</label>
-            <div class="col-sm-7">
-                <p-fileUpload [chooseLabel]="'Chọn hình ảnh'" accept="image/*" maxFileSize="2000000" [multiple]="false"
-                    [showUploadButton]="false" [showCancelButton]="false" [auto]="true" [invalidFileSizeMessageSummary]="
-                          '{0}: Vui lòng kiểm tra lại dung lượng file!'
-                        " [invalidFileSizeMessageDetail]="'Dung lượng tối đa cho phép là {0}.'"
-                    [invalidFileTypeMessageSummary]="'{0}: Định dạng file không hợp lệ!'"
-                    [invalidFileTypeMessageDetail]="'Định dạng cho phép: {0}.'" (onSelect)="onImageSelected($event)">
-                </p-fileUpload>
-                <label>Dung lượng file tối đa là 2MB.</label>
-                <div class="error" *ngIf="submitted && controls.image.errors">
-                    <label *ngIf="controls.image.errors.required">Hình ảnh bắt buộc chọn.</label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <img *ngIf="controls.image.value" src="{{ controls.image.value }}" class="img-thumbnail thumbnail" />
-                <div *ngIf="!controls.image.value || controls.image.value.length === 0" class="thumbnail"></div>
-            </div>
+  <form *ngIf="formControls" [formGroup]="formControls">
+    <div class="form-group row">
+      <label for="image" class="col-sm-2 col-form-label required"
+        >Hình ảnh</label
+      >
+      <div class="col-sm-7">
+        <p-fileUpload
+          [chooseLabel]="'Chọn hình ảnh'"
+          accept="image/*"
+          maxFileSize="2000000"
+          [multiple]="false"
+          [showUploadButton]="false"
+          [showCancelButton]="false"
+          [auto]="true"
+          [invalidFileSizeMessageSummary]="
+            '{0}: Vui lòng kiểm tra lại dung lượng file!'
+          "
+          [invalidFileSizeMessageDetail]="'Dung lượng tối đa cho phép là {0}.'"
+          [invalidFileTypeMessageSummary]="'{0}: Định dạng file không hợp lệ!'"
+          [invalidFileTypeMessageDetail]="'Định dạng cho phép: {0}.'"
+          (onSelect)="onImageSelected($event)"
+        >
+        </p-fileUpload>
+        <label>Dung lượng file tối đa là 2MB.</label>
+        <div class="error" *ngIf="submitted && controls.image.errors">
+          <label *ngIf="controls.image.errors.required"
+            >Hình ảnh bắt buộc chọn.</label
+          >
         </div>
+      </div>
+      <div class="col-sm-2">
+        <img
+          *ngIf="controls.image.value"
+          src="{{ controls.image.value }}"
+          class="img-thumbnail thumbnail"
+        />
+        <div
+          *ngIf="!controls.image.value || controls.image.value.length === 0"
+          class="thumbnail"
+        ></div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="title" class="col-sm-2 col-form-label required">Title</label>
-            <div class="col-sm-7">
-                <input formControlName="title" class="form-control" id="title" type="text" />
-                <div class="error" *ngIf="submitted && controls.title.errors">
-                    <label *ngIf="controls.title.errors.required">title bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="title" class="col-sm-2 col-form-label required">Title</label>
+      <div class="col-sm-7">
+        <input
+          formControlName="title"
+          class="form-control"
+          id="title"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.title.errors">
+          <label *ngIf="controls.title.errors.required"
+            >title bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div *ngFor="let item of reasonControls; let i = index;" class="form-group row">
-            <label for="{{item}}" class="col-sm-2 col-form-label required">Reason {{ i + 1 }}</label>
-            <div class="col-sm-7">
-                <input formControlName="{{ item }}" class="form-control" id="{{item}}" type="text" />
-                <div class="error" *ngIf="submitted && formControls.get(item).errors">
-                    <label *ngIf="formControls.get(item).errors.required">Reason bắt buộc nhập.</label>
-                </div>
-            </div>
-            <div class="col-sm-1">
-                <span class="btn btn-danger" type="button" (click)="onRmoveReasonClicked(item)">
-                    <i class="fa fa-remove"></i>
-                </span>
-            </div>
+    <div
+      *ngFor="let item of reasonControls; let i = index"
+      class="form-group row"
+    >
+      <label for="{{ item }}" class="col-sm-2 col-form-label required"
+        >Reason {{ i + 1 }}</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="{{ item }}"
+          class="form-control"
+          id="{{ item }}"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && formControls.get(item).errors">
+          <label *ngIf="formControls.get(item).errors.required"
+            >Reason bắt buộc nhập.</label
+          >
         </div>
+      </div>
+      <div class="col-sm-1">
+        <span
+          class="btn btn-danger"
+          type="button"
+          (click)="onRmoveReasonClicked(item)"
+        >
+          <i class="fa fa-remove"></i>
+        </span>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="description" class="col-sm-2 col-form-label required">Description</label>
-            <div class="col-sm-7">
-                <textarea formControlName="description" class="form-control" id="description" rows="3"></textarea>
-                <div class="error" *ngIf="submitted && controls.description.errors">
-                    <label *ngIf="controls.description.errors.required">Description bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 col-form-label required"
+        >Description</label
+      >
+      <div class="col-sm-7">
+        <textarea
+          formControlName="description"
+          class="form-control"
+          id="description"
+          rows="3"
+        ></textarea>
+        <div class="error" *ngIf="submitted && controls.description.errors">
+          <label *ngIf="controls.description.errors.required"
+            >Description bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-
-        <div class="form-group row">
-            <div class="col-sm-1 offset-sm-2">
-                <button class="btn btn-primary" type="button" (click)="onSaveClicked($event)">Lưu</button>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-primary" type="button" (click)="onMoreReasonClicked($event)">
-                    <i class="fa fa-plus"></i>
-                </button>
-            </div>
-        </div>
-
-    </form>
+    <div class="form-group row">
+      <div class="col-sm-1 offset-sm-2">
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="onSaveClicked($event)"
+        >
+          Lưu
+        </button>
+      </div>
+      <div class="col-sm-1">
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="onMoreReasonClicked($event)"
+        >
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

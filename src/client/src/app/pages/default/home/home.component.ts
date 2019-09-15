@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
       ([carousel, selection, posts]) => {
         this.carousel = carousel;
         this.selection = selection;
-        this.posts = posts ? posts.dataSource : [];
+        this.posts = posts;
 
         this.sniper.hideSniper();
       },

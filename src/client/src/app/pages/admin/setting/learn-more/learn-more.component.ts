@@ -45,7 +45,7 @@ export class LearnMoreComponent implements OnInit {
       this.dataSource = source ? source.dataSource : [];
 
       if (posts) {
-        const items = this.dataSource.map(x => posts.includes(x.id));
+        const items = this.dataSource.filter(x => posts.includes(x.id));
         this.controls.posts.setValue(items);
       }
     });

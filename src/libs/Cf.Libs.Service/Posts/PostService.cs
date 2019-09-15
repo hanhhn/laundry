@@ -166,7 +166,7 @@ namespace Cf.Libs.Service.Posts
             return true;
         }
 
-        public IPagedList<PostDto> GetHomePost(int pageIndex, int pageSize)
+        public IEnumerable<PostDto> GetHomePost(int pageIndex, int pageSize)
         {
             var record = _settingRepository.FindByKey(SettingKey.HomePost.ToString());
 
@@ -181,7 +181,10 @@ namespace Cf.Libs.Service.Posts
                         orderby post.PublishedDate descending
                         where !post.IsDeleted && post.IsPublished && posts.Contains(post.Id)
                         select post;
-            return query.ToPagedList<Post, PostDto>(pageIndex, pageSize);
+
+            var result = _mapper.Map<IEnumerable<PostDto>>(query.AsEnumerable());
+
+            return result;
         }
     }
 }

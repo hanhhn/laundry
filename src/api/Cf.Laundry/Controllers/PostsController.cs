@@ -3,6 +3,7 @@ using Cf.Libs.Service.Dtos.Post;
 using Cf.Libs.Service.Posts;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace Cf.Laundry.Controllers
 {
@@ -82,7 +83,7 @@ namespace Cf.Laundry.Controllers
 
         [HttpGet]
         [Route("home")]
-        public IPagedList<PostDto> GetHomePost(int pageIndex = 0, int pageSize = 10)
+        public IEnumerable<PostDto> GetHomePost(int pageIndex = 0, int pageSize = 10)
         {
             return _service.GetHomePost(pageIndex, pageSize);
         }

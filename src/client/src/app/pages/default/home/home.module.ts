@@ -4,7 +4,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./home.component";
 import { ServiceModule } from "../../../components/service/service.module";
 import { GuideModule } from "../../../components/guide/guide.module";
-import { DownloadAppModule } from "../../../components/download-app/download-app.module";
 import { SelectionModule } from "../../../components/selection/selection.module";
 import { SettingService } from "src/app/cores/services/setting.service";
 import { JumbotronModule } from "src/app/components/jumbotron/jumbotron.module";
@@ -25,7 +24,6 @@ const routes: Routes = [
     JumbotronModule,
     GuideModule,
     ServiceModule,
-    DownloadAppModule,
     SelectionModule,
     PostListModule,
     RouterModule.forChild(routes)

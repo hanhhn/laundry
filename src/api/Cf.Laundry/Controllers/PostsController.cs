@@ -82,10 +82,17 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
-        [Route("home")]
-        public IEnumerable<PostDto> GetHomePost(int pageIndex = 0, int pageSize = 10)
+        [Route("process")]
+        public IEnumerable<PostDto> GetProcessPost(int pageIndex = 0, int pageSize = 10)
         {
-            return _service.GetHomePost(pageIndex, pageSize);
+            return _service.GetProcessPost(pageIndex, pageSize);
+        }
+
+        [HttpGet]
+        [Route("guide")]
+        public GuidePost GetGuidePost(int pageIndex = 0, int pageSize = 10)
+        {
+            return _service.GetGuidePost(pageIndex, pageSize);
         }
     }
 }

@@ -95,3 +95,17 @@ export class Jumbotron {
     this.secondLink = json.secondLink;
   }
 }
+
+export class Guide {
+  image: string;
+  title: string;
+  description: string;
+  steppers: any;
+
+  constructor(json: any) {
+    this.image = json.image;
+    this.title = json.title;
+    this.description = json.description;
+    this.steppers = json.steppers;
+  }
+}

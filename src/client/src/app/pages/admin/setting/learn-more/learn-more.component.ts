@@ -40,7 +40,7 @@ export class LearnMoreComponent implements OnInit {
   getSettings() {
     forkJoin([
       this.postService.getAll(0, 100),
-      this.settingsService.getHomePost()
+      this.settingsService.getProcessPost()
     ]).subscribe(([source, posts]) => {
       this.dataSource = source ? source.dataSource : [];
 
@@ -60,7 +60,7 @@ export class LearnMoreComponent implements OnInit {
       const ids = this.controls.posts.value;
       const item = ids.map((x: Post) => x.id);
 
-      this.settingsService.saveHomePost(item).subscribe(data => {
+      this.settingsService.saveProcessPost(item).subscribe(data => {
         if (data) {
           alert("Lưu dữ liệu thành công!");
         } else {

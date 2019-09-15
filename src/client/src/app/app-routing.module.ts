@@ -120,9 +120,14 @@ const routes: Routes = [
           "./pages/admin/setting/jumbotron/jumbotron.module#JumbotronModule"
       },
       {
-        path: "setting/home-post",
+        path: "setting/process",
         loadChildren:
           "./pages/admin/setting/learn-more/learn-more.module#LearnMoreModule"
+      },
+      {
+        path: "setting/guide",
+        loadChildren:
+          "./pages/admin/setting/stepper/stepper.module#StepperModule"
       }
     ]
   },

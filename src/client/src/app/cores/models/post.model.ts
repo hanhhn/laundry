@@ -33,3 +33,17 @@ export class PostRequest {
   publishedDate: Date;
   tags: string[];
 }
+
+export class GuidePost {
+  image: string;
+  title: string;
+  description: string;
+  posts: Post[];
+
+  constructor(json) {
+    this.image = json.image;
+    this.title = json.title;
+    this.description = json.description;
+    this.posts = json.posts ? json.posts.map(x => new Post(x)) : [];
+  }
+}

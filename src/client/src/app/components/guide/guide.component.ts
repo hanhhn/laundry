@@ -1,46 +1,75 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { map } from "rxjs/operators";
+import { Post } from "../../cores/models/post.model";
 
 @Component({
   selector: "app-guide",
   templateUrl: "./guide.component.html",
   styleUrls: ["./guide.component.scss"]
 })
-export class GuideComponent implements OnInit {
-  steps = [
-    {
-      active: true,
-      title: "Đặt dịch vụ với thao tác đơn giản",
-      description: "Chọn địa điểm nhận đồ và thời gian"
-    },
-    {
-      active: false,
-      title: "Nhân viên sẽ đến tận nơi",
-      description: "Nhân viên sẽ nhận đồ trong thời gian thích hợp nhất của bạn"
-    },
-    {
-      active: false,
-      title: "Theo dỏi quá trình giặt đồ",
-      description: "Bạn có thể theo dỏi quần áo của mình đã giặt xong chưa"
-    },
-    {
-      active: false,
-      title: "Trả đồ",
-      description: "Trả lại đồ tại nhà, tiết kiệm thời gian cho bạn"
+export class GuideComponent implements OnInit, OnDestroy {
+  @Input()
+  title: string;
+
+  @Input()
+  description: string;
+
+  @Input()
+  background: string;
+
+  @Input()
+  dataSource: Post[];
+
+  steps = [];
+
+  activeItem: any;
+
+  i: number;
+
+  loop: any;
+
+  constructor() {
+    this.i = 0;
+  }
+
+  ngOnInit() {
+    if (this.dataSource) {
+      this.dataSource.map(x => {
+        this.steps.push(false);
+      });
+
+      this.steps[0] = true;
+
+      const post = this.dataSource[0];
+      this.activeItem = {
+        title: post.title,
+        description: post.description
+      };
+
+      this.loop = setInterval(() => {
+        this.move(this.i++ % this.dataSource.length);
+      }, 4000);
     }
-  ];
+  }
 
-  constructor() {}
+  ngOnDestroy(): void {
+    clearInterval(this.loop);
+  }
 
-  ngOnInit() {}
+  onMoveClicked(i) {
+    this.move(i);
+  }
 
-  onMoved(item) {
-    this.steps.map(x => {
-      if (x === item) {
-        x.active = true;
-      } else {
-        x.active = false;
-      }
+  move(i) {
+    this.steps.forEach((value, index) => {
+      this.steps[index] = false;
     });
+
+    this.steps[i] = true;
+    const post = this.dataSource[i];
+    this.activeItem = {
+      title: post.title,
+      description: post.description
+    };
   }
 }

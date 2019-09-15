@@ -93,9 +93,14 @@ export class AdminLayoutComponent implements OnInit {
             routerLink: "setting/jumbotron"
           },
           {
-            label: "HonePost",
+            label: "Process Post",
             icon: "",
-            routerLink: "setting/home-post"
+            routerLink: "setting/process"
+          },
+          {
+            label: "Guide Post",
+            icon: "",
+            routerLink: "setting/guide"
           }
         ]
       }

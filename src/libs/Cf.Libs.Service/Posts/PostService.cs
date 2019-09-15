@@ -9,6 +9,7 @@ using Cf.Libs.DataAccess.Repository.Posts;
 using Cf.Libs.DataAccess.Repository.Settings;
 using Cf.Libs.DataAccess.Repository.Tags;
 using Cf.Libs.Service.Dtos.Post;
+using Cf.Libs.Service.Dtos.Setting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -166,9 +167,9 @@ namespace Cf.Libs.Service.Posts
             return true;
         }
 
-        public IEnumerable<PostDto> GetHomePost(int pageIndex, int pageSize)
+        public IEnumerable<PostDto> GetProcessPost(int pageIndex, int pageSize)
         {
-            var record = _settingRepository.FindByKey(SettingKey.HomePost.ToString());
+            var record = _settingRepository.FindByKey(SettingKey.Process.ToString());
 
             List<string> posts = new List<string>();
             if (record != null)
@@ -185,6 +186,33 @@ namespace Cf.Libs.Service.Posts
             var result = _mapper.Map<IEnumerable<PostDto>>(query.AsEnumerable());
 
             return result;
+        }
+
+        public GuidePost GetGuidePost(int pageIndex, int pageSize)
+        {
+            var record = _settingRepository.FindByKey(SettingKey.Guide.ToString());
+
+            GuideDto posts = new GuideDto();
+            if (record != null && !string.IsNullOrEmpty(record.Value))
+            {
+                posts = JsonConvert.DeserializeObject<GuideDto>(record.Value);
+            }
+
+            var query = from post in _postRepository.GetQuery()
+                        orderby post.CreateDate descending
+                        orderby post.PublishedDate descending
+                        where !post.IsDeleted && post.IsPublished && posts.Steppers.Contains(post.Id)
+                        select post;
+
+            var result = _mapper.Map<IEnumerable<PostDto>>(query.AsEnumerable());
+
+            return new GuidePost
+            {
+                Title = posts.Title,
+                Description = posts.Description,
+                Image = posts.Image,
+                Posts = result
+            };
         }
     }
 }

@@ -6,6 +6,7 @@
         Link,
         Reason,
         Jumbotron,
-        HomePost
+        Process,
+        Guide
     }
 }

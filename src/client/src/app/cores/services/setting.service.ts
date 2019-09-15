@@ -2,7 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Menu, Company, Reason, Jumbotron } from "../models/setting.model";
+import {
+  Menu,
+  Company,
+  Reason,
+  Jumbotron,
+  Guide
+} from "../models/setting.model";
 
 @Injectable()
 export class SettingService {
@@ -102,8 +108,8 @@ export class SettingService {
     );
   }
 
-  getHomePost(): Observable<string[]> {
-    const url = "settings/homepost";
+  getProcessPost(): Observable<string[]> {
+    const url = "settings/process";
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? data : [];
@@ -111,8 +117,26 @@ export class SettingService {
     );
   }
 
-  saveHomePost(setting: string[]): Observable<boolean> {
-    const url = "settings/homepost/save";
+  saveProcessPost(setting: string[]): Observable<boolean> {
+    const url = "settings/process/save";
+    return this.httpService.doPost(url, setting).pipe(
+      map((data: any) => {
+        return data ? data : false;
+      })
+    );
+  }
+
+  getGuides(): Observable<Guide> {
+    const url = "settings/guide";
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new Guide(data) : null;
+      })
+    );
+  }
+
+  saveGuides(setting: Guide): Observable<boolean> {
+    const url = "settings/guide/save";
     return this.httpService.doPost(url, setting).pipe(
       map((data: any) => {
         return data ? data : false;

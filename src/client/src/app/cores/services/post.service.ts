@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Post, PostRequest } from "../models/post.model";
+import { Post, PostRequest, GuidePost } from "../models/post.model";
 import { PagedList } from "../models/paged.model";
 
 @Injectable()
@@ -63,11 +63,21 @@ export class PostService {
     );
   }
 
-  getHomePost(pageIndex: number, pageSize: number): Observable<Post[]> {
-    const url = "posts/home?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+  getProcessPost(pageIndex: number, pageSize: number): Observable<Post[]> {
+    const url =
+      "posts/process?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? data.map(x => new Post(x)) : [];
+      })
+    );
+  }
+
+  getGuidePost(pageIndex: number, pageSize: number): Observable<GuidePost> {
+    const url = "posts/guide?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new GuidePost(data) : null;
       })
     );
   }

@@ -4,25 +4,52 @@
   fxLayoutAlign="space-evenly stretch"
   fxLayout.xs="column"
 >
-  <div class="guide-background" fxFlex="auto" fxFlexOrder.xs="2">
-    <img  ngClass.xs="m-img" [ngStyle.sm]="{'width': '70%'}" [ngStyle.md]="{'width': '45%'}" [ngStyle]="{'width': '38%'}"
-      src="https://www.grab.com/vn/wp-content/themes/grabsg/images/mod-howitwork/empty-v2.png"
+  <div
+    class="guide-background"
+    fxFlex="50"
+    fxFlex.sm="50"
+    fxFlex.sx="auto"
+    fxFlexOrder.xs="2"
+  >
+    <img
+      class="m-img"
+      [ngStyle]="{ width: '40%' }"
+      [ngStyle.md]="{ width: '45%' }"
+      [ngStyle.sm]="{ width: '70%' }"
+      [ngStyle.xs]="{ width: '70%' }"
+      src="{{ background }}"
     />
   </div>
-  <div class="guide-step" fxHide fxShow.xs fxLayoutGap="20px">
+  <div
+    class="guide-step"
+    fxHide
+    fxShow.xs
+    fxLayoutGap="20px"
+    fxLayoutGap.xs="0"
+  >
     <ul fxLayout.xs="row" fxLayoutAlign="center center">
       <li
-        (click)="onMoved(item)"
-        *ngFor="let item of steps; let i = index"
-        [ngClass]="{'item': true, 'active': item.active}"
+        *ngFor="let item of dataSource; let i = index"
+        (click)="onMoveClicked(i)"
+        [ngClass]="{ item: true, active: steps[i] }"
       >
         <span>{{ i + 1 }}</span>
       </li>
     </ul>
   </div>
-  <div class="guide-follow" fxFlex="auto" fxFlexOrder.xs="1">
+  <div
+    class="guide-follow"
+    fxFlex="50"
+    fxFlex.sm="50"
+    fxFlex.sx="auto"
+    fxFlexOrder.xs="1"
+  >
     <ul ngClass="list" ngClass.xs="m-list" fxLayout.xs="row">
-      <li *ngFor="let item of steps" class="" [ngClass]="{'item': true, 'active': item.active}" >
+      <li
+        *ngFor="let item of dataSource; let i = index"
+        (click)="onMoveClicked(i)"
+        [ngClass]="{ item: true, active: steps[i] }"
+      >
         <h3>{{ item.title }}</h3>
         <p>{{ item.description }}</p>
       </li>

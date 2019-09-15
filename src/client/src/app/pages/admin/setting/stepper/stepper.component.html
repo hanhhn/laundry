@@ -1,8 +1,8 @@
 <div class="setting-link">
-  <form [formGroup]="formControls">
+  <form *ngIf="formControls" [formGroup]="formControls">
     <div class="form-group row">
       <label for="image" class="col-sm-2 col-form-label required"
-        >Background</label
+        >Hình ảnh</label
       >
       <div class="col-sm-7">
         <p-fileUpload
@@ -23,22 +23,20 @@
         >
         </p-fileUpload>
         <label>Dung lượng file tối đa là 2MB.</label>
-        <div class="error" *ngIf="submitted && controls.background.errors">
-          <label *ngIf="controls.background.errors.required"
-            >Background dịch vụ bắt buộc chọn.</label
+        <div class="error" *ngIf="submitted && controls.image.errors">
+          <label *ngIf="controls.image.errors.required"
+            >Hình ảnh bắt buộc chọn.</label
           >
         </div>
       </div>
       <div class="col-sm-2">
         <img
-          *ngIf="controls.background.value"
-          src="{{ controls.background.value }}"
+          *ngIf="controls.image.value"
+          src="{{ controls.image.value }}"
           class="img-thumbnail thumbnail"
         />
         <div
-          *ngIf="
-            !controls.background.value || controls.background.value.length === 0
-          "
+          *ngIf="!controls.image.value || controls.image.value.length === 0"
           class="thumbnail"
         ></div>
       </div>
@@ -61,72 +59,43 @@
       </div>
     </div>
 
-    <div class="form-group row">
-      <label for="firstButton" class="col-sm-2 col-form-label required"
-        >First Button</label
+    <div formArrayName="steppers">
+      <div
+        class="form-group row"
+        *ngFor="let item of steppers.controls; index as i"
       >
-      <div class="col-sm-3">
-        <input
-          formControlName="firstButton"
-          class="form-control"
-          id="firstButton"
-          type="text"
-        />
-        <div class="error" *ngIf="submitted && controls.firstButton.errors">
-          <label *ngIf="controls.firstButton.errors.required"
-            >First Text bắt buộc nhập.</label
+        <label for="{{ i }}" class="col-sm-2 col-form-label required"
+          >Step {{ i + 1 }}</label
+        >
+        <div class="col-sm-7">
+          <p-dropdown
+            [options]="dataSource"
+            optionLabel="title"
+            [formControlName]="i"
+            placeholder="Chọn bài viết"
+            [style]="{ width: '100%' }"
           >
+          </p-dropdown>
+          <div class="error" *ngIf="submitted && steppers.controls[i].errors">
+            <label *ngIf="steppers.controls[i].errors.required"
+              >Step {{ i + 1 }} bắt buộc nhập.</label
+            >
+          </div>
         </div>
-      </div>
-      <div class="col-sm-4">
-        <input
-          formControlName="firstLink"
-          class="form-control"
-          id="firstLink"
-          type="text"
-        />
-        <div class="error" *ngIf="submitted && controls.firstLink.errors">
-          <label *ngIf="controls.firstLink.errors.required"
-            >First Link bắt buộc nhập.</label
+        <div class="col-sm-1">
+          <span
+            class="btn btn-danger"
+            type="button"
+            (click)="onRemoveClicked(i)"
           >
+            <i class="fa fa-remove"></i>
+          </span>
         </div>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="secondButton" class="col-sm-2 col-form-label required"
-        >Second Button</label
-      >
-      <div class="col-sm-3">
-        <input
-          formControlName="secondButton"
-          class="form-control"
-          id="secondButton"
-          type="text"
-        />
-        <div class="error" *ngIf="submitted && controls.secondButton.errors">
-          <label *ngIf="controls.secondButton.errors.required"
-            >Second Text bắt buộc nhập.</label
-          >
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <input
-          formControlName="secondLink"
-          class="form-control"
-          id="secondLink"
-          type="text"
-        />
-        <div class="error" *ngIf="submitted && controls.secondLink.errors">
-          <label *ngIf="controls.secondLink.errors.required"
-            >Second Link bắt buộc nhập.</label
-          >
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="description" class="col-sm-2 col-form-label required"
+      <label for="description" class="col-sm-2 col-form-label"
         >Description</label
       >
       <div class="col-sm-7">
@@ -134,7 +103,7 @@
           formControlName="description"
           class="form-control"
           id="description"
-          rows="5"
+          rows="3"
         ></textarea>
         <div class="error" *ngIf="submitted && controls.description.errors">
           <label *ngIf="controls.description.errors.required"
@@ -145,13 +114,22 @@
     </div>
 
     <div class="form-group row">
-      <div class="col-sm-7 offset-sm-2">
+      <div class="col-sm-1 offset-sm-2">
         <button
           class="btn btn-primary"
           type="button"
           (click)="onSaveClicked($event)"
         >
           Lưu
+        </button>
+      </div>
+      <div class="col-sm-1">
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="onMoreClicked($event)"
+        >
+          <i class="fa fa-plus"></i>
         </button>
       </div>
     </div>

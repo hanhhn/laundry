@@ -55,17 +55,8 @@
       </div>
     </div>
 
-    <div
-      class="item-image background"
-      fxFlex="auto"
-      fxFlexOrder="2"
-      fxHide.xs
-    >
-      <img
-        src="{{
-          dataSource.image ? dataSource.image : '../../../assets/developer.svg'
-        }}"
-      />
+    <div class="item-image background" fxFlex="auto" fxFlexOrder="2" fxHide.xs>
+      <img style="max-width: 200px;" src="{{ dataSource.image }}" />
     </div>
   </div>
 </div>

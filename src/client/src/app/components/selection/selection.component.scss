@@ -1,5 +1,5 @@
 .selection {
-  padding: 4vw 0;
+  padding: 2vw 0;
   background-color: #e1ecf4 !important;
 
   h1,
@@ -23,10 +23,12 @@
   .item {
     position: relative;
     cursor: pointer;
-    margin: 0 30px;
+    margin: 0px 30px;
   }
 
   .item-left-wrap {
+    margin-bottom: 30px;
+
     .after {
       &::after {
         position: absolute;
@@ -45,6 +47,8 @@
   }
 
   .item-right-wrap {
+    margin-bottom: 30px;
+
     .before {
       &::before {
         position: absolute;

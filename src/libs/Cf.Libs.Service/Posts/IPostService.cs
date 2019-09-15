@@ -15,6 +15,7 @@ namespace Cf.Libs.Service.Posts
         bool Delete(string id);
         bool Published(string id);
         bool UnPublished(string id);
-        IEnumerable<PostDto> GetHomePost(int pageIndex, int pageSize);
+        IEnumerable<PostDto> GetProcessPost(int pageIndex, int pageSize);
+        GuidePost GetGuidePost(int pageIndex, int pageSize);
     }
 }

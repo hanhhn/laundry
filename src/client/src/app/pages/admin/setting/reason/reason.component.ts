@@ -125,7 +125,7 @@ export class ReasonComponent implements OnInit {
           file,
           respon => {
             if (respon && respon.status === 200) {
-              this.controls.logo.setValue(respon.data.link);
+              this.controls.image.setValue(respon.data.link);
             }
           },
           error => {

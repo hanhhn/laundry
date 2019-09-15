@@ -3,7 +3,7 @@ import { Reason, Jumbotron } from "src/app/cores/models/setting.model";
 import { SettingService } from "src/app/cores/services/setting.service";
 import { forkJoin } from "rxjs";
 import { SniperService } from "src/app/cores/services/sniper.service";
-import { Post } from "../../../cores/models/post.model";
+import { Post, GuidePost } from "../../../cores/models/post.model";
 import { PostService } from "../../../cores/services/post.service";
 
 @Component({
@@ -14,7 +14,8 @@ import { PostService } from "../../../cores/services/post.service";
 export class HomeComponent implements OnInit {
   carousel: Jumbotron;
   selection: Reason;
-  posts: Post[];
+  process: Post[];
+  guide: GuidePost;
 
   constructor(
     private setting: SettingService,
@@ -27,12 +28,14 @@ export class HomeComponent implements OnInit {
     forkJoin([
       this.setting.getJumbotron(),
       this.setting.getReason(),
-      this.postService.getHomePost(0, 4)
+      this.postService.getProcessPost(0, 4),
+      this.postService.getGuidePost(0, 10)
     ]).subscribe(
-      ([carousel, selection, posts]) => {
+      ([carousel, selection, process, guide]) => {
         this.carousel = carousel;
         this.selection = selection;
-        this.posts = posts;
+        this.process = process;
+        this.guide = guide;
 
         this.sniper.hideSniper();
       },

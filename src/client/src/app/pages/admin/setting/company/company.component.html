@@ -1,161 +1,294 @@
 <div class="setting-link">
-    <form [formGroup]="formControls">
-        <div class="form-group row">
-            <label for="image" class="col-sm-2 col-form-label required">Logo</label>
-            <div class="col-sm-7">
-                <p-fileUpload [chooseLabel]="'Chọn hình ảnh'" accept="image/*" maxFileSize="2000000" [multiple]="false"
-                    [showUploadButton]="false" [showCancelButton]="false" [auto]="true" [invalidFileSizeMessageSummary]="
-                          '{0}: Vui lòng kiểm tra lại dung lượng file!'
-                        " [invalidFileSizeMessageDetail]="'Dung lượng tối đa cho phép là {0}.'"
-                    [invalidFileTypeMessageSummary]="'{0}: Định dạng file không hợp lệ!'"
-                    [invalidFileTypeMessageDetail]="'Định dạng cho phép: {0}.'" (onSelect)="onImageSelected($event)">
-                </p-fileUpload>
-                <label>Dung lượng file tối đa là 2MB.</label>
-                <div class="error" *ngIf="submitted && controls.logo.errors">
-                    <label *ngIf="controls.logo.errors.required">Logo dịch vụ bắt buộc chọn.</label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <img *ngIf="controls.logo.value" src="{{ controls.logo.value }}" class="img-thumbnail thumbnail" />
-                <div *ngIf="!controls.logo.value || controls.logo.value.length === 0" class="thumbnail"></div>
-            </div>
+  <form [formGroup]="formControls">
+    <div class="form-group row">
+      <label for="image" class="col-sm-2 col-form-label required">Logo</label>
+      <div class="col-sm-7">
+        <p-fileUpload
+          [chooseLabel]="'Chọn hình ảnh'"
+          accept="image/*"
+          maxFileSize="2000000"
+          [multiple]="false"
+          [showUploadButton]="false"
+          [showCancelButton]="false"
+          [auto]="true"
+          [invalidFileSizeMessageSummary]="
+            '{0}: Vui lòng kiểm tra lại dung lượng file!'
+          "
+          [invalidFileSizeMessageDetail]="'Dung lượng tối đa cho phép là {0}.'"
+          [invalidFileTypeMessageSummary]="'{0}: Định dạng file không hợp lệ!'"
+          [invalidFileTypeMessageDetail]="'Định dạng cho phép: {0}.'"
+          (onSelect)="onImageSelected($event)"
+        >
+        </p-fileUpload>
+        <label>Dung lượng file tối đa là 2MB.</label>
+        <div class="error" *ngIf="submitted && controls.logo.errors">
+          <label *ngIf="controls.logo.errors.required"
+            >Logo dịch vụ bắt buộc chọn.</label
+          >
         </div>
+      </div>
+      <div class="col-sm-2">
+        <img
+          *ngIf="controls.logo.value"
+          src="{{ controls.logo.value }}"
+          class="img-thumbnail thumbnail"
+        />
+        <div
+          *ngIf="!controls.logo.value || controls.logo.value.length === 0"
+          class="thumbnail"
+        ></div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="brand" class="col-sm-2 col-form-label required">Brand</label>
-            <div class="col-sm-7">
-                <input formControlName="brand" class="form-control" id="brand" type="text" />
-                <div class="error" *ngIf="submitted && controls.brand.errors">
-                    <label *ngIf="controls.brand.errors.required">Brand bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="brand" class="col-sm-2 col-form-label required">Brand</label>
+      <div class="col-sm-7">
+        <input
+          formControlName="brand"
+          class="form-control"
+          id="brand"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.brand.errors">
+          <label *ngIf="controls.brand.errors.required"
+            >Brand bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label required">Name</label>
-            <div class="col-sm-7">
-                <input formControlName="name" class="form-control" id="name" type="text" />
-                <div class="error" *ngIf="submitted && controls.name.errors">
-                    <label *ngIf="controls.name.errors.required">Name bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label required">Name</label>
+      <div class="col-sm-7">
+        <input
+          formControlName="name"
+          class="form-control"
+          id="name"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.name.errors">
+          <label *ngIf="controls.name.errors.required"
+            >Name bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="address" class="col-sm-2 col-form-label required">Address</label>
-            <div class="col-sm-7">
-                <input formControlName="address" class="form-control" id="address" type="text" />
-                <div class="error" *ngIf="submitted && controls.address.errors">
-                    <label *ngIf="controls.address.errors.required">Address bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="address" class="col-sm-2 col-form-label required"
+        >Address</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="address"
+          class="form-control"
+          id="address"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.address.errors">
+          <label *ngIf="controls.address.errors.required"
+            >Address bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="email" class="col-sm-2 col-form-label required">Email</label>
-            <div class="col-sm-7">
-                <input formControlName="email" class="form-control" id="email" type="text" />
-                <div class="error" *ngIf="submitted && controls.email.errors">
-                    <label *ngIf="controls.email.errors.required">Email bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label required">Email</label>
+      <div class="col-sm-7">
+        <input
+          formControlName="email"
+          class="form-control"
+          id="email"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.email.errors">
+          <label *ngIf="controls.email.errors.required"
+            >Email bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="phone" class="col-sm-2 col-form-label required">Phone</label>
-            <div class="col-sm-7">
-                <input formControlName="phone" class="form-control" id="phone" type="text" />
-                <div class="error" *ngIf="submitted && controls.phone.errors">
-                    <label *ngIf="controls.phone.errors.required">Phone bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="phone" class="col-sm-2 col-form-label required">Phone</label>
+      <div class="col-sm-7">
+        <input
+          formControlName="phone"
+          class="form-control"
+          id="phone"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.phone.errors">
+          <label *ngIf="controls.phone.errors.required"
+            >Phone bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="website" class="col-sm-2 col-form-label required">Website</label>
-            <div class="col-sm-7">
-                <input formControlName="website" class="form-control" id="website" type="text" />
-                <div class="error" *ngIf="submitted && controls.website.errors">
-                    <label *ngIf="controls.website.errors.required">Website bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="website" class="col-sm-2 col-form-label required"
+        >Website</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="website"
+          class="form-control"
+          id="website"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.website.errors">
+          <label *ngIf="controls.website.errors.required"
+            >Website bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="copyright" class="col-sm-2 col-form-label required">Copyright</label>
-            <div class="col-sm-7">
-                <input formControlName="copyright" class="form-control" id="copyright" type="text" />
-                <div class="error" *ngIf="submitted && controls.copyright.errors">
-                    <label *ngIf="controls.copyright.errors.required">Copyright bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="copyright" class="col-sm-2 col-form-label required"
+        >Copyright</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="copyright"
+          class="form-control"
+          id="copyright"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.copyright.errors">
+          <label *ngIf="controls.copyright.errors.required"
+            >Copyright bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="facebook" class="col-sm-2 col-form-label required">Facebook</label>
-            <div class="col-sm-7">
-                <input formControlName="facebook" class="form-control" id="facebook" type="text" />
-                <div class="error" *ngIf="submitted && controls.facebook.errors">
-                    <label *ngIf="controls.facebook.errors.required">Facebook bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="facebook" class="col-sm-2 col-form-label required"
+        >Facebook</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="facebook"
+          class="form-control"
+          id="facebook"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.facebook.errors">
+          <label *ngIf="controls.facebook.errors.required"
+            >Facebook bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="instagram" class="col-sm-2 col-form-label required">Instagram</label>
-            <div class="col-sm-7">
-                <input formControlName="instagram" class="form-control" id="instagram" type="text" />
-                <div class="error" *ngIf="submitted && controls.instagram.errors">
-                    <label *ngIf="controls.instagram.errors.required">Instagram bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="instagram" class="col-sm-2 col-form-label required"
+        >Instagram</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="instagram"
+          class="form-control"
+          id="instagram"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.instagram.errors">
+          <label *ngIf="controls.instagram.errors.required"
+            >Instagram bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="youtube" class="col-sm-2 col-form-label required">Youtube</label>
-            <div class="col-sm-7">
-                <input formControlName="youtube" class="form-control" id="youtube" type="text" />
-                <div class="error" *ngIf="submitted && controls.youtube.errors">
-                    <label *ngIf="controls.youtube.errors.required">Youtube bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="youtube" class="col-sm-2 col-form-label required"
+        >Youtube</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="youtube"
+          class="form-control"
+          id="youtube"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.youtube.errors">
+          <label *ngIf="controls.youtube.errors.required"
+            >Youtube bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="appStore" class="col-sm-2 col-form-label required">AppStore</label>
-            <div class="col-sm-7">
-                <input formControlName="appStore" class="form-control" id="appStore" type="text" />
-                <div class="error" *ngIf="submitted && controls.appStore.errors">
-                    <label *ngIf="controls.appStore.errors.required">AppStore bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="appStore" class="col-sm-2 col-form-label required"
+        >AppStore</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="appStore"
+          class="form-control"
+          id="appStore"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.appStore.errors">
+          <label *ngIf="controls.appStore.errors.required"
+            >AppStore bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="googlePlay" class="col-sm-2 col-form-label required">GooglePlay</label>
-            <div class="col-sm-7">
-                <input formControlName="googlePlay" class="form-control" id="googlePlay" type="text" />
-                <div class="error" *ngIf="submitted && controls.googlePlay.errors">
-                    <label *ngIf="controls.googlePlay.errors.required">GooglePlay bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="googlePlay" class="col-sm-2 col-form-label required"
+        >GooglePlay</label
+      >
+      <div class="col-sm-7">
+        <input
+          formControlName="googlePlay"
+          class="form-control"
+          id="googlePlay"
+          type="text"
+        />
+        <div class="error" *ngIf="submitted && controls.googlePlay.errors">
+          <label *ngIf="controls.googlePlay.errors.required"
+            >GooglePlay bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="googleMap" class="col-sm-2 col-form-label required">GoogleMap</label>
-            <div class="col-sm-7">
-                <textarea formControlName="googleMap" class="form-control" id="googleMap" rows="5"></textarea>
-                <div class="error" *ngIf="submitted && controls.googleMap.errors">
-                    <label *ngIf="controls.googleMap.errors.required">GoogleMap bắt buộc nhập.</label>
-                </div>
-            </div>
+    <div class="form-group row">
+      <label for="googleMap" class="col-sm-2 col-form-label required"
+        >GoogleMap</label
+      >
+      <div class="col-sm-7">
+        <textarea
+          formControlName="googleMap"
+          class="form-control"
+          id="googleMap"
+          rows="5"
+        ></textarea>
+        <div class="error" *ngIf="submitted && controls.googleMap.errors">
+          <label *ngIf="controls.googleMap.errors.required"
+            >GoogleMap bắt buộc nhập.</label
+          >
         </div>
+      </div>
+    </div>
 
-        <div class="form-group row">
-            <div class="col-sm-7 offset-sm-2">
-                <button class="btn btn-primary" type="button" (click)="onSaveClicked($event)">Lưu</button>
-            </div>
-        </div>
-
-    </form>
+    <div class="form-group row">
+      <div class="col-sm-7 offset-sm-2">
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="onSaveClicked($event)"
+        >
+          Lưu
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

@@ -71,17 +71,31 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
-        [Route("homepost")]
-        public string[] GetHomePost()
+        [Route("process")]
+        public string[] GetProcessPost()
         {
-            return _settingService.Get(SettingKey.HomePost);
+            return _settingService.Get(SettingKey.Process);
         }
 
         [HttpPost]
-        [Route("homepost/save")]
-        public bool SaveHomePost(string[] request)
+        [Route("process/save")]
+        public bool SaveProcessPost(string[] request)
         {
-            return _settingService.Save(SettingKey.HomePost, request);
+            return _settingService.Save(SettingKey.Process, request);
+        }
+
+        [HttpGet]
+        [Route("guide")]
+        public GuideDto GetGuide()
+        {
+            return _settingService.Get<GuideDto>(SettingKey.Guide);
+        }
+
+        [HttpPost]
+        [Route("guide/save")]
+        public bool SaveGuide(GuideDto request)
+        {
+            return _settingService.Save(SettingKey.Guide, request);
         }
     }
 }

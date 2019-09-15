@@ -20,7 +20,6 @@ export class PostListComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.dataSource);
     if (this.dataSource) {
       const reasons = this.dataSource
         .reverse()

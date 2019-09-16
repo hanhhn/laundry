@@ -1,3 +1,5 @@
+import { Jumbotron } from "./setting.model";
+
 export class Item {
   id: number;
   image: string;
@@ -43,4 +45,13 @@ export class ItemRequest {
   highlight: boolean;
   sortOrder: number;
   comboId: number;
+}
+
+export class ItemCombo extends Jumbotron {
+  items: Item[];
+
+  constructor(json) {
+    super(json);
+    this.items = json.items ? json.items : [];
+  }
 }

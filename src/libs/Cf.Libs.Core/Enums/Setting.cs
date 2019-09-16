@@ -7,6 +7,7 @@
         Reason,
         Jumbotron,
         Process,
-        Guide
+        Guide,
+        Combo
     }
 }

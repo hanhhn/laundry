@@ -3,10 +3,18 @@ import { CommonModule } from "@angular/common";
 import { ServiceComponent } from "./service.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatButtonModule } from "@angular/material";
+import { RouterModule } from "@angular/router";
+import { ComboModule } from "../combo/combo.module";
 
 @NgModule({
   declarations: [ServiceComponent],
-  imports: [CommonModule, MatButtonModule, FlexLayoutModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    RouterModule,
+    ComboModule
+  ],
   exports: [ServiceComponent]
 })
 export class ServiceModule {}

@@ -1,11 +1,20 @@
 <div class="service" fxLayout="column" fxLayoutAlign="center center">
   <div class="slogun" fxLayout="column" fxLayoutAlign="center center">
-    <h2>Unlock siloed knowledge with Stack Overflow for Teams</h2>
+    <h2>{{ title }}</h2>
     <hr />
-    <p>Wikis, chat messages, or formal documentation for knowledge management aren’t effective. Our question and answer
-      format is a proven approach for accessing the right information in less time.</p>
-    <button mat-button>Learn more</button>
+    <div class="action">
+      <button mat-stroked-button *ngIf="strokedName" [routerLink]="[strokedLink]">
+        {{ strokedName }}
+      </button>
+      <button mat-flat-button *ngIf="flatName" [routerLink]="[flatLink]">
+        {{ flatName }}
+      </button>
+    </div>
   </div>
-  <div class="service-list">
+  <div class="service-list" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center end"
+    fxLayoutAlign.xs="center center" fxLayoutGap="30px">
+    <app-combo *ngFor="let item of combo" title="{{ item.name }}" combo="{{ item.comboName }}"
+      delivery="{{ item.comboDescription }}" description="{{ item.description }}" rate="{{ item.rate }}">
+    </app-combo>
   </div>
 </div>

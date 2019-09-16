@@ -91,11 +91,13 @@ const routes: Routes = [
       },
       {
         path: "post/add",
-        loadChildren: "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
+        loadChildren:
+          "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
       },
       {
         path: "post/detail/:id",
-        loadChildren: "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
+        loadChildren:
+          "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
       },
       {
         path: "post",
@@ -128,6 +130,10 @@ const routes: Routes = [
         path: "setting/guide",
         loadChildren:
           "./pages/admin/setting/stepper/stepper.module#StepperModule"
+      },
+      {
+        path: "setting/combo",
+        loadChildren: "./pages/admin/setting/combo/combo.module#ComboModule"
       }
     ]
   },

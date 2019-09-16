@@ -1,11 +1,12 @@
 <app-jumbotron
   *ngIf="carousel"
-  title="{{ carousel.title }}"
-  description="{{ carousel.description }}"
-  strokedName="{{ carousel.firstButton }}"
-  strokedLink="{{ carousel.firstLink }}"
-  flatName="{{ carousel.secondButton }}"
-  flatLink="{{ carousel.secondLink }}"
+  [title]="carousel.title"
+  [description]="carousel.description"
+  [strokedName]="carousel.firstButton"
+  [strokedLink]="carousel.firstLink"
+  [flatName]="carousel.secondButton"
+  [flatLink]="carousel.secondLink"
+  [description]="carousel.description" 
 ></app-jumbotron>
 
 <app-guide
@@ -15,7 +16,18 @@
   [background]="guide.image"
   [dataSource]="guide.posts"
 ></app-guide>
-<app-service></app-service>
+
+<app-service
+  *ngIf="combo" 
+  [title]="combo.title"
+  [description]="combo.description"
+  [strokedName]="combo.firstButton"
+  [strokedLink]="combo.firstLink"
+  [flatName]="combo.secondButton"
+  [flatLink]="combo.secondLink"
+  [description]="combo.description" 
+  [dataSource]="combo.items"
+></app-service>
 
 <div
   style="text-align: center"

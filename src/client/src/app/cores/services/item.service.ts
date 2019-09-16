@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
-import { Item, ItemRequest } from "../models/item.model";
+import { Item, ItemRequest, ItemCombo } from "../models/item.model";
 import { map } from "rxjs/operators";
 import { PagedList } from "../models/paged.model";
 import { KeyValue } from "../models/object.model";
@@ -29,7 +29,8 @@ export class ItemService {
   }
 
   getLaundry(pageIndex: number, pageSize: number): Observable<PagedList<Item>> {
-    const url = "items/laundry?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    const url =
+      "items/laundry?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? new PagedList(data) : null;
@@ -37,8 +38,12 @@ export class ItemService {
     );
   }
 
-  getDryClean(pageIndex: number, pageSize: number): Observable<PagedList<Item>> {
-    const url = "items/dryclean?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+  getDryClean(
+    pageIndex: number,
+    pageSize: number
+  ): Observable<PagedList<Item>> {
+    const url =
+      "items/dryclean?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? new PagedList(data) : null;
@@ -64,17 +69,23 @@ export class ItemService {
     );
   }
 
+  getCombo(): Observable<ItemCombo> {
+    const url = "items/combo";
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new ItemCombo(data) : null;
+      })
+    );
+  }
+
   getItemTypes(): KeyValue[] {
     return [
       new KeyValue("Laundry", "Laundry"),
-      new KeyValue("DryClean", "DryClean"),
+      new KeyValue("DryClean", "DryClean")
     ];
   }
 
   getItemCodes(): KeyValue[] {
-    return [
-      new KeyValue("Method", "Method"),
-      new KeyValue("Item", "Item"),
-    ];
+    return [new KeyValue("Method", "Method"), new KeyValue("Item", "Item")];
   }
 }

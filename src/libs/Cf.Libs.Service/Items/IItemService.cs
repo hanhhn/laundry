@@ -1,6 +1,4 @@
-﻿using Cf.Libs.Core.BaseObject;
-using Cf.Libs.Core.Enums;
-using Cf.Libs.Core.Infrastructure.Paging;
+﻿using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Service.Dtos.Item;
 
@@ -15,5 +13,6 @@ namespace Cf.Libs.Service.Items
         ItemDto Add(ItemRequest request);
         ItemDto Edit(ItemRequest request);
         bool Delete(int id);
+        ItemCombo GetItemCombo();
     }
 }

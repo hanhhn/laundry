@@ -9,6 +9,7 @@ using Cf.Libs.Service.Dtos.Method;
 using Cf.Libs.Service.Dtos.Orders;
 using Cf.Libs.Service.Dtos.Post;
 using Cf.Libs.Service.Dtos.Price;
+using Cf.Libs.Service.Dtos.Setting;
 
 namespace Cf.Libs.Service
 {
@@ -46,6 +47,9 @@ namespace Cf.Libs.Service
             CreateMap<Post, PostDto>();
             CreateMap<PostRequest, Post>();
             CreateMap<Tag, TagDto>();
+
+
+            CreateMap<JumbotronDto, ItemCombo>();
         }
     }
 }

@@ -97,5 +97,19 @@ namespace Cf.Laundry.Controllers
         {
             return _settingService.Save(SettingKey.Guide, request);
         }
+
+        [HttpGet]
+        [Route("combo")]
+        public JumbotronDto GetItemCombo()
+        {
+            return _settingService.Get<JumbotronDto>(SettingKey.Combo);
+        }
+
+        [HttpPost]
+        [Route("combo/save")]
+        public bool SaveItemCombo(JumbotronDto request)
+        {
+            return _settingService.Save(SettingKey.Combo, request);
+        }
     }
 }

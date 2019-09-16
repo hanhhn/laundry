@@ -143,4 +143,22 @@ export class SettingService {
       })
     );
   }
+
+  getCombo(): Observable<Jumbotron> {
+    const url = "settings/combo";
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new Jumbotron(data) : null;
+      })
+    );
+  }
+
+  saveCombo(setting: Jumbotron): Observable<boolean> {
+    const url = "settings/combo/save";
+    return this.httpService.doPost(url, setting).pipe(
+      map((data: any) => {
+        return data ? data : false;
+      })
+    );
+  }
 }

@@ -1,6 +1,6 @@
 <div class="carousel slope-left" ngClass.xs="m-carousel">
   <h1 class="title">{{ title }}</h1>
-  <p class="description">{{ description }}</p>
+  <div class="description" [innerHTML]="description"></div>
   <div class="action">
     <button mat-stroked-button *ngIf="strokedName" [routerLink]="[strokedLink]">
       {{ strokedName }}

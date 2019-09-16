@@ -101,6 +101,11 @@ export class AdminLayoutComponent implements OnInit {
             label: "Guide Post",
             icon: "",
             routerLink: "setting/guide"
+          },
+          {
+            label: "Item combo",
+            icon: "",
+            routerLink: "setting/combo"
           }
         ]
       }

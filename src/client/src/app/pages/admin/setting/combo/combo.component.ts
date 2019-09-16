@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SettingService } from "src/app/cores/services/setting.service";
-import { Jumbotron } from "src/app/cores/models/setting.model";
+import { Company, Jumbotron } from "src/app/cores/models/setting.model";
 import { ImageService } from "src/app/cores/services/image.service";
 
 @Component({
-  selector: "app-jumbotron",
-  templateUrl: "./jumbotron.component.html",
-  styleUrls: ["./jumbotron.component.scss"]
+  selector: "app-combo",
+  templateUrl: "./combo.component.html",
+  styleUrls: ["./combo.component.scss"]
 })
-export class JumbotronComponent implements OnInit {
+export class ComboComponent implements OnInit {
   submitted: boolean;
   formControls: FormGroup;
 
@@ -33,15 +33,15 @@ export class JumbotronComponent implements OnInit {
       background: [null],
       title: [null, Validators.required],
       description: [null, Validators.required],
-      firstButton: [null, Validators.required],
-      firstLink: [null, Validators.required],
-      secondButton: [null, Validators.required],
-      secondLink: [null, Validators.required]
+      firstButton: [null],
+      firstLink: [null],
+      secondButton: [null],
+      secondLink: [null]
     });
   }
 
   getExternalLink() {
-    this.settingsService.getJumbotron().subscribe(data => {
+    this.settingsService.getCombo().subscribe(data => {
       if (data) {
         this.controls.background.patchValue(data.background);
         this.controls.title.patchValue(data.title);
@@ -70,15 +70,13 @@ export class JumbotronComponent implements OnInit {
         secondLink: this.controls.secondLink.value
       };
 
-      this.settingsService
-        .saveJumbotron(new Jumbotron(item))
-        .subscribe(data => {
-          if (data) {
-            alert("Lưu dữ liệu thành công!");
-          } else {
-            alert("Xảy ra lỗi");
-          }
-        });
+      this.settingsService.saveCombo(new Jumbotron(item)).subscribe(data => {
+        if (data) {
+          alert("Lưu dữ liệu thành công!");
+        } else {
+          alert("Xảy ra lỗi");
+        }
+      });
     }
   }
 

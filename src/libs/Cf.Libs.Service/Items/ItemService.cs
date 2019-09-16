@@ -8,7 +8,10 @@ using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.DataAccess.Repository.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
 using Cf.Libs.DataAccess.Repository.Prices;
+using Cf.Libs.DataAccess.Repository.Settings;
 using Cf.Libs.Service.Dtos.Item;
+using Cf.Libs.Service.Dtos.Setting;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 
@@ -19,17 +22,20 @@ namespace Cf.Libs.Service.Items
         private readonly IItemRepository _itemRepository;
         private readonly IPriceRepository _priceRepository;
         private readonly IMethodRepository _methodRepository;
+        private readonly ISettingRepository _settingRepository;
 
         public ItemService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
             IItemRepository itemRepository,
             IPriceRepository priceRepository,
-            IMethodRepository methodRepository) : base(unitOfWork, mapper)
+            IMethodRepository methodRepository,
+            ISettingRepository settingRepository) : base(unitOfWork, mapper)
         {
             _itemRepository = itemRepository;
             _priceRepository = priceRepository;
             _methodRepository = methodRepository;
+            _settingRepository = settingRepository;
         }
 
         public ItemDto Get(int Id)
@@ -182,6 +188,23 @@ namespace Cf.Libs.Service.Items
             }
 
             return true;
+        }
+
+        public ItemCombo GetItemCombo()
+        {
+            var record = _settingRepository.FindByKey(SettingKey.Combo.ToString());
+
+            JumbotronDto setting = new JumbotronDto();
+            if (record != null && !string.IsNullOrEmpty(record.Value))
+            {
+                setting = JsonConvert.DeserializeObject<JumbotronDto>(record.Value);
+            }
+
+            var combo = GetLaundry(0, 3);
+
+            var result = _mapper.Map<ItemCombo>(setting);
+            result.Items = combo.DataSource;
+            return result;
         }
     }
 }

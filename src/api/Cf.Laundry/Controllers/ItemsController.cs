@@ -67,5 +67,12 @@ namespace Cf.Laundry.Controllers
         {
             return _itemService.Delete(id);
         }
+
+        [HttpGet]
+        [Route("combo")]
+        public ItemCombo GetItemCombo()
+        {
+            return _itemService.GetItemCombo();
+        }
     }
 }

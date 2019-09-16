@@ -61,8 +61,8 @@ export function vnToEn(str) {
   str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
   str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
   str = str.replace(/Đ/g, "D");
+  str = str.replace(/ /g, "-");
   str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // Huyền sắc hỏi ngã nặng
-  str = str.replace(/[^a-zA-Z0-9]/g, "");
-  str = str.replace(/ /g, "");
+  str = str.replace(/[^a-zA-Z0-9-]/g, "");
   return str;
 }

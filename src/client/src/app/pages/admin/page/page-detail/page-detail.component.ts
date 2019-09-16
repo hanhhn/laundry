@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Post, PostRequest } from "src/app/cores/models/post.model";
-import { PostService } from "src/app/cores/services/post.service";
+import { Page, PageRequest } from "src/app/cores/models/page.model";
+import { PageService } from "src/app/cores/services/page.service";
 import { ImageService } from "src/app/cores/services/image.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { vnToEn, formatDate } from "src/app/cores/helpers/utils.helper";
@@ -13,7 +13,7 @@ import { vnToEn, formatDate } from "src/app/cores/helpers/utils.helper";
 })
 export class PageDetailComponent implements OnInit {
   id: string;
-  post: Post;
+  page: Page;
 
   submitted: boolean;
   formControls: FormGroup;
@@ -24,7 +24,7 @@ export class PageDetailComponent implements OnInit {
     route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private postService: PostService,
+    private pageService: PageService,
     private imageService: ImageService
   ) {
     this.submitted = false;
@@ -43,18 +43,18 @@ export class PageDetailComponent implements OnInit {
   ngOnInit() {
     this.formControls = this.formBuilder.group({
       id: [0],
-      image: [null],
+      image: [null, Validators.required],
       title: [null, Validators.required],
       uniqueUrl: [null, Validators.required],
       description: [null, Validators.required],
       body: [null, Validators.required],
-      isPublished: [true]
+      sortOrder: [1, Validators.required]
     });
 
     this.controls.uniqueUrl.disable();
 
     if (this.id) {
-      this.postService.getById(this.id).subscribe(data => {
+      this.pageService.getById(this.id).subscribe(data => {
         if (data) {
           this.controls.id.patchValue(data.id);
           this.controls.image.patchValue(data.image);
@@ -62,7 +62,7 @@ export class PageDetailComponent implements OnInit {
           this.controls.uniqueUrl.patchValue(data.uniqueUrl);
           this.controls.description.patchValue(data.description);
           this.controls.body.patchValue(data.body);
-          this.controls.isPublished.patchValue(data.isPublished);
+          this.controls.sortOrder.patchValue(data.sortOrder);
         }
       });
     }
@@ -73,20 +73,20 @@ export class PageDetailComponent implements OnInit {
     this.formControls.markAllAsTouched();
 
     if (this.formControls.valid) {
-      const request = new PostRequest();
+      const request = new PageRequest();
       request.id = this.controls.id.value;
       request.image = this.controls.image.value;
       request.title = this.controls.title.value;
       request.uniqueUrl = this.controls.uniqueUrl.value;
       request.description = this.controls.description.value;
       request.body = this.controls.body.value;
-      request.isPublished = this.controls.isPublished.value;
+      request.sortOrder = this.controls.sortOrder.value;
 
-      this.postService.save(request).subscribe(
+      this.pageService.save(request).subscribe(
         data => {
           if (data) {
             alert("Lưu dữ liệu thành công");
-            this.router.navigate(["/admin/post"]);
+            this.router.navigate(["/admin/page"]);
           } else {
             alert("Xẩy ra lỗi xin vui lòng thử lại sau.");
           }
@@ -108,16 +108,16 @@ export class PageDetailComponent implements OnInit {
         vnToEn(e.target.value) + "-" + formatDate(new Date(), null)
       );
 
-      this.postService
-      .isUniqueUrl(this.controls.uniqueUrl.value)
-      .subscribe(valid => {
-        this.validUniqueUrl = valid;
-      });
+      this.pageService
+        .isUniqueUrl(this.controls.uniqueUrl.value)
+        .subscribe(valid => {
+          this.validUniqueUrl = valid;
+        });
     }
   }
 
   onUniqueUrlChanged(e) {
-    this.postService
+    this.pageService
       .isUniqueUrl(this.controls.uniqueUrl.value)
       .subscribe(valid => {
         this.validUniqueUrl = valid;

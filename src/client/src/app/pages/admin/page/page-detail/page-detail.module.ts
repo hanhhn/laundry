@@ -6,7 +6,7 @@ import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { DropdownModule } from "primeng/dropdown";
 import { CalendarModule } from "primeng/calendar";
-import { PostService } from "src/app/cores/services/post.service";
+import { PageService } from "../../../../cores/services/page.service";
 import { ImageService } from "src/app/cores/services/image.service";
 import { PageDetailComponent } from "./page-detail.component";
 import {
@@ -41,7 +41,7 @@ const routes: Routes = [
     CalendarModule,
     RouterModule.forChild(routes)
   ],
-  providers: [PostService, ImageService],
+  providers: [PageService, ImageService],
   exports: [PageDetailComponent]
 })
 export class PageDetailModule {}

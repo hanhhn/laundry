@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { PostService } from "src/app/cores/services/post.service";
-import { Post } from "src/app/cores/models/post.model";
 import { ConfirmationService } from "primeng/api";
+import { Page } from "../../../../cores/models/page.model";
+import { PageService } from "../../../../cores/services/page.service";
 
 @Component({
   selector: "app-page",
@@ -9,10 +9,10 @@ import { ConfirmationService } from "primeng/api";
   styleUrls: ["./page.component.scss"]
 })
 export class PageComponent implements OnInit {
-  dataSource: Post[];
+  dataSource: Page[];
 
   constructor(
-    private postService: PostService,
+    private pageService: PageService,
     private confirmationService: ConfirmationService
   ) {}
 
@@ -21,18 +21,18 @@ export class PageComponent implements OnInit {
   }
 
   loadDataDataSource(pageIndex: number, pageSize: number) {
-    this.postService.getAll(pageIndex, pageSize).subscribe(data => {
+    this.pageService.getAll(pageIndex, pageSize).subscribe(data => {
       this.dataSource = data.dataSource;
     });
   }
 
-  onDeleteClick(item: Post) {
+  onDeleteClick(item: Page) {
     this.confirmationService.confirm({
       message: "Bạn chắc chắn muốn xóa '" + item.title + "'",
       acceptLabel: "Xác nhận",
       rejectLabel: "Hủy",
       accept: () => {
-        this.postService.delete(item.id).subscribe(data => {
+        this.pageService.delete(item.id).subscribe(data => {
           if (data) {
             alert("Xóa dữ liệu thành công");
           } else {

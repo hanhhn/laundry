@@ -5,7 +5,7 @@ import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { DropdownModule } from "primeng/components/dropdown/dropdown";
-import { PostService } from "src/app/cores/services/post.service";
+import { PageService } from "../../../../cores/services/page.service";
 import { ImageService } from "src/app/cores/services/image.service";
 import { PageComponent } from "./page.component";
 import {
@@ -39,7 +39,7 @@ const routes: Routes = [
     DropdownModule,
     RouterModule.forChild(routes)
   ],
-  providers: [PostService, ImageService],
+  providers: [PageService, ImageService],
   exports: [PageComponent]
 })
-export class PostModule {}
+export class PageModule {}

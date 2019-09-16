@@ -43,7 +43,7 @@ export class PostDetailComponent implements OnInit {
   ngOnInit() {
     this.formControls = this.formBuilder.group({
       id: [0],
-      image: [null],
+      image: [null, Validators.required],
       title: [null, Validators.required],
       uniqueUrl: [null, Validators.required],
       description: [null, Validators.required],

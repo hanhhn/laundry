@@ -167,6 +167,8 @@ namespace Cf.Libs.Service.Methods
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
+            _methodRepository.Delete(record);
+
             if (_unitOfWork.SaveChanges() == 0)
             {
                 throw new InformationException("An error occurred during save.");

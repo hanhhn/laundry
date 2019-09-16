@@ -47,6 +47,7 @@
         class="form-control"
         id="title"
         placeholder="Tiêu đề"
+        (change)="onTitleChanged($event)"
       />
       <div class="error" *ngIf="submitted && controls.title.errors">
         <label *ngIf="controls.title.errors.required"
@@ -60,12 +61,13 @@
     <label for="uniqueUrl" class="col-sm-2 col-form-label required"
       >UniqueUrl</label
     >
-    <div class="col-sm-8">
+    <div class="col-sm-7">
       <input
         formControlName="uniqueUrl"
         class="form-control"
         id="uniqueUrl"
         placeholder="UniqueUrl"
+        (change)="onUniqueUrlChanged($event)"
       />
       <div class="error" *ngIf="submitted && controls.uniqueUrl.errors">
         <label *ngIf="controls.uniqueUrl.errors.required"
@@ -73,8 +75,11 @@
         >
       </div>
     </div>
+    <div class="col-sm-1">
+      <button (click)="onEditUniqueUrlClicked($event)" type="button" class="btn btn-primary">Edit</button>
+    </div>
     <div class="col-sm-2">
-      <i class="fa fa-check"></i>
+      <i class="fa fa-check" [ngClass]="validUniqueUrl ? 'valid' : 'inValid'"></i>
     </div>
   </div>
 
@@ -135,10 +140,9 @@
       <button type="button" class="btn btn-primary" (click)="onSaveItemClick()">
         Save
       </button>
-      <button type="button" class="btn btn-default btn-primary">
+      <button type="button" class="btn btn-default btn-primary"  routerLink="/admin/post">
         Quay lại
       </button>
-      <button type="button" class="btn btn-default">Cancal</button>
     </div>
   </div>
 </form>

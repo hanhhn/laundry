@@ -4,22 +4,25 @@ import { Post, PostRequest } from "src/app/cores/models/post.model";
 import { PostService } from "src/app/cores/services/post.service";
 import { ImageService } from "src/app/cores/services/image.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { vnToEn, formatDate } from "src/app/cores/helpers/utils.helper";
 
 @Component({
-  selector: "app-post-detail",
-  templateUrl: "./post-detail.component.html",
-  styleUrls: ["./post-detail.component.scss"]
+  selector: "app-page-detail",
+  templateUrl: "./page-detail.component.html",
+  styleUrls: ["./page-detail.component.scss"]
 })
-export class PostDetailComponent implements OnInit {
+export class PageDetailComponent implements OnInit {
+  id: string;
   post: Post;
 
   submitted: boolean;
   formControls: FormGroup;
 
-  id: string;
+  validUniqueUrl: boolean;
 
   constructor(
     route: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder,
     private postService: PostService,
     private imageService: ImageService
@@ -30,6 +33,7 @@ export class PostDetailComponent implements OnInit {
         this.id = param.id;
       }
     });
+    this.validUniqueUrl = true;
   }
 
   get controls() {
@@ -46,6 +50,8 @@ export class PostDetailComponent implements OnInit {
       body: [null, Validators.required],
       isPublished: [true]
     });
+
+    this.controls.uniqueUrl.disable();
 
     if (this.id) {
       this.postService.getById(this.id).subscribe(data => {
@@ -80,6 +86,7 @@ export class PostDetailComponent implements OnInit {
         data => {
           if (data) {
             alert("Lưu dữ liệu thành công");
+            this.router.navigate(["/admin/post"]);
           } else {
             alert("Xẩy ra lỗi xin vui lòng thử lại sau.");
           }
@@ -89,6 +96,32 @@ export class PostDetailComponent implements OnInit {
         }
       );
     }
+  }
+
+  onEditUniqueUrlClicked(e) {
+    this.controls.uniqueUrl.enable();
+  }
+
+  onTitleChanged(e) {
+    if (e && e.target.value) {
+      this.controls.uniqueUrl.patchValue(
+        vnToEn(e.target.value) + "-" + formatDate(new Date(), null)
+      );
+
+      this.postService
+      .isUniqueUrl(this.controls.uniqueUrl.value)
+      .subscribe(valid => {
+        this.validUniqueUrl = valid;
+      });
+    }
+  }
+
+  onUniqueUrlChanged(e) {
+    this.postService
+      .isUniqueUrl(this.controls.uniqueUrl.value)
+      .subscribe(valid => {
+        this.validUniqueUrl = valid;
+      });
   }
 
   onImageSelected(event: any) {

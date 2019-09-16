@@ -36,11 +36,11 @@ export class PostService {
     );
   }
 
-  isUniqueUrl(id: number): Observable<Post> {
-    const url = "posts/unique/" + id;
+  isUniqueUrl(uniqueUrl: string): Observable<boolean> {
+    const url = "posts/unique/" + uniqueUrl;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
-        return data;
+        return data ? data : false;
       })
     );
   }

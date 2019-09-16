@@ -92,16 +92,31 @@ const routes: Routes = [
       {
         path: "post/add",
         loadChildren:
-          "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
+          "./pages/admin/post/post-detail/post-detail.module#PostDetailModule"
       },
       {
         path: "post/detail/:id",
         loadChildren:
-          "./pages/admin/news/post-detail/post-detail.module#PostDetailModule"
+          "./pages/admin/post/post-detail/post-detail.module#PostDetailModule"
       },
       {
         path: "post",
-        loadChildren: "./pages/admin/news/post/post.module#PostModule"
+        loadChildren: "./pages/admin/post/post/post.module#PostModule"
+      },
+
+      {
+        path: "page/add",
+        loadChildren:
+          "./pages/admin/page/page-detail/page-detail.module#PageDetailModule"
+      },
+      {
+        path: "page/detail/:id",
+        loadChildren:
+          "./pages/admin/page/page-detail/page-detail.module#PageDetailModule"
+      },
+      {
+        path: "page",
+        loadChildren: "./pages/admin/page/page/page.module#PageModule"
       },
       {
         path: "discount",

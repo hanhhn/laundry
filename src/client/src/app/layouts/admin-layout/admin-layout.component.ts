@@ -25,6 +25,36 @@ export class AdminLayoutComponent implements OnInit {
         ]
       },
       {
+        label: "Posts",
+        items: [
+          {
+            label: "New Post",
+            icon: "",
+            routerLink: "post/add"
+          },
+          {
+            label: "Posts",
+            icon: "",
+            routerLink: "post"
+          }
+        ]
+      },
+      {
+        label: "Page",
+        items: [
+          {
+            label: "New Page",
+            icon: "",
+            routerLink: "page/add"
+          },
+          {
+            label: "Pages",
+            icon: "",
+            routerLink: "page"
+          }
+        ]
+      },
+      {
         label: "Price",
         items: [
           {
@@ -51,16 +81,6 @@ export class AdminLayoutComponent implements OnInit {
             label: "Phương án",
             icon: "",
             routerLink: "method"
-          }
-        ]
-      },
-      {
-        label: "News",
-        items: [
-          {
-            label: "Posts",
-            icon: "",
-            routerLink: "post"
           }
         ]
       },

@@ -1,0 +1,56 @@
+<div class="post-list">
+  <div class="form">
+    <div class="search">
+      <mat-form-field>
+        <input matInput placeholder="Tên dịch vụ" />
+      </mat-form-field>
+      <button mat-flat-button color="primary">Tìm kiếm</button>
+    </div>
+    <div class="add">
+      <button mat-flat-button color="primary" routerLink="add">Thêm</button>
+    </div>
+  </div>
+  <div class="list">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" width="50">#</th>
+          <th scope="col" width="200" class="text-center">Image</th>
+          <th scope="col" class="text-center">Title</th>
+          <th scope="col" class="text-center">Description</th>
+          <th scope="col" width="100" class="text-center">IsPublished</th>
+          <th scope="col" width="150"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dataSource; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td class="text-left">
+            <img width="100%" src="{{ item.image }}" alt="{{ item.title }}" />
+          </td>
+          <td class="text-left">{{ item.title }}</td>
+          <td class="text-left">{{ item.description }}</td>
+          <td class="text-center">{{ item.isPublished }}</td>
+          <td>
+            <div class="action text-center">
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                [routerLink]="'detail/' + item.id"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                (click)="onDeleteClick(item)"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

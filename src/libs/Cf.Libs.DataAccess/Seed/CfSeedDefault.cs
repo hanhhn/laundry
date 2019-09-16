@@ -312,7 +312,7 @@ namespace Cf.Libs.DataAccess.Seed
                 Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
                 SortOrder = 1,
                 Type = Core.Enums.ItemType.Laundry.ToString(),
-                Combo = 10
+                MethodId = 10
             };
             item1.Default(true, "system");
 
@@ -324,7 +324,7 @@ namespace Cf.Libs.DataAccess.Seed
                 Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
                 SortOrder = 1,
                 Type = Core.Enums.ItemType.Laundry.ToString(),
-                Combo = 11
+                MethodId = 11
             };
             item2.Default(true, "system");
 
@@ -336,7 +336,7 @@ namespace Cf.Libs.DataAccess.Seed
                 Description = "<ul class=\"content\"><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li><li class=\"checked\"><span class=\"icon\"><i class=\"fa fa-check\"></i></span><divclass=\"text\">Unlimited private questions and answers</div></li></ul>",
                 SortOrder = 1,
                 Type = Core.Enums.ItemType.Laundry.ToString(),
-                Combo = 12
+                MethodId = 12
             };
             item3.Default(true, "system");
 

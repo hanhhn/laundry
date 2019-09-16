@@ -9,7 +9,8 @@ namespace Cf.Libs.Service.Items
         ItemDto Get(int Id);
         IPagedList<ItemDto> GetAll(int pageIndex, int pageSize);
         IPagedList<ItemDto> GetLaundry(int pageIndex, int pageSize);
-        IPagedList<ItemDto> GetDryClean(int pageIndex, int pageSize);
+        IPagedList<ItemDto> GetCombo(int pageIndex, int pageSize);
+        IPagedList<ItemDto> GetPriceList(int pageIndex, int pageSize);
         ItemDto Add(ItemRequest request);
         ItemDto Edit(ItemRequest request);
         bool Delete(int id);

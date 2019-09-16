@@ -3,6 +3,7 @@
     public enum ItemType
     {
         Laundry = 1,
-        DryClean,
+        Combo,
+        PriceList
     }
 }

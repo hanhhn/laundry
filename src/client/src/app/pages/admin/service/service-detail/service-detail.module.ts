@@ -1,7 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ServiceComponent } from "./service.component";
 import { Routes, RouterModule } from "@angular/router";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { DialogModule } from "primeng/dialog";
+import { FileUploadModule } from "primeng/fileupload";
+import { DropdownModule } from "primeng/dropdown";
 import {
   MatButtonModule,
   MatInputModule,
@@ -9,23 +12,20 @@ import {
   MatTableModule,
   MatIconModule
 } from "@angular/material";
-import { DialogModule } from "primeng/dialog";
-import { FileUploadModule } from "primeng/fileupload";
-import { ItemService } from "../../../cores/services/item.service";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { ImageService } from "../../../cores/services/image.service";
-import { DropdownModule } from "primeng/components/dropdown/dropdown";
-import { MethodService } from "src/app/cores/services/method.service";
+import { ImageService } from "src/app/cores/services/image.service";
+import { MethodService } from "../../../../cores/services/method.service";
+import { ItemService } from "../../../../cores/services/item.service";
+import { ServiceDetailComponent } from "./service-detail.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: ServiceComponent
+    component: ServiceDetailComponent
   }
 ];
 
 @NgModule({
-  declarations: [ServiceComponent],
+  declarations: [ServiceDetailComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -41,6 +41,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [ItemService, ImageService, MethodService],
-  exports: [ServiceComponent]
+  exports: [ServiceDetailComponent]
 })
-export class ServiceModule {}
+export class ServiceDetailModule {}

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Item, ItemRequest, ItemCombo } from "../models/item.model";
 import { map } from "rxjs/operators";
 import { PagedList } from "../models/paged.model";
@@ -69,8 +69,8 @@ export class ItemService {
     );
   }
 
-  getCombo(): Observable<ItemCombo> {
-    const url = "items/combo";
+  getItemCombo(): Observable<ItemCombo> {
+    const url = "items/itemcombo";
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? new ItemCombo(data) : null;
@@ -78,14 +78,16 @@ export class ItemService {
     );
   }
 
-  getItemTypes(): KeyValue[] {
-    return [
+  getItemTypes(): Observable<KeyValue[]> {
+    const types = [
       new KeyValue("Laundry", "Laundry"),
-      new KeyValue("DryClean", "DryClean")
+      new KeyValue("Combo", "Combo"),
+      new KeyValue("PriceList", "Price List")
     ];
+    return of(types);
   }
 
-  getItemCodes(): KeyValue[] {
-    return [new KeyValue("Method", "Method"), new KeyValue("Item", "Item")];
+  getItemCodes(): Observable<KeyValue[]> {
+    return of([new KeyValue("Method", "Method"), new KeyValue("Item", "Item")]);
   }
 }

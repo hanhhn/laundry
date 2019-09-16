@@ -49,7 +49,9 @@ export class PriceListComponent implements OnInit {
 
   ngOnInit() {
     this.loadList();
-    this.itemCodes = this.itemService.getItemCodes();
+    this.itemService.getItemCodes().subscribe(data => {
+      this.itemCodes = data;
+    });
 
     this.formControls = this.formBuilder.group({
       id: [0],

@@ -13,9 +13,9 @@ export class Item {
   tax: number;
   discountRate: number;
   discount: number;
-  comboId: number;
-  comboName: number;
-  comboDescription: string;
+  methodId: number;
+  methodName: number;
+  methodDescription: string;
 
   constructor(json: any) {
     this.id = json.id;
@@ -30,9 +30,9 @@ export class Item {
     this.tax = json.tax;
     this.discountRate = json.discountRate;
     this.discount = json.discount;
-    this.comboId = json.comboId;
-    this.comboName = json.comboName;
-    this.comboDescription = json.comboDescription;
+    this.methodId = json.methodId;
+    this.methodName = json.methodName;
+    this.methodDescription = json.methodDescription;
   }
 }
 
@@ -44,7 +44,7 @@ export class ItemRequest {
   description: string;
   highlight: boolean;
   sortOrder: number;
-  comboId: number;
+  methodId: number;
 }
 
 export class ItemCombo extends Jumbotron {

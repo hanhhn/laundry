@@ -1,0 +1,172 @@
+<form [formGroup]="formControls">
+  <div class="form-group row">
+    <label for="image" class="col-sm-2 col-form-label required">Hình ảnh</label>
+    <div class="col-sm-8">
+      <p-fileUpload
+        [chooseLabel]="'Chọn hình ảnh'"
+        accept="image/*"
+        maxFileSize="2000000"
+        [multiple]="false"
+        [showUploadButton]="false"
+        [showCancelButton]="false"
+        [auto]="true"
+        [invalidFileSizeMessageSummary]="
+          '{0}: Vui lòng kiểm tra lại dung lượng file!'
+        "
+        [invalidFileSizeMessageDetail]="'Dung lượng tối đa cho phép là {0}.'"
+        [invalidFileTypeMessageSummary]="'{0}: Định dạng file không hợp lệ!'"
+        [invalidFileTypeMessageDetail]="'Định dạng cho phép: {0}.'"
+        (onSelect)="onImageSelected($event)"
+      >
+      </p-fileUpload>
+      <label>Dung lượng file tối đa là 2MB.</label>
+      <div class="error" *ngIf="submitted && controls.image.errors">
+        <label *ngIf="controls.image.errors.required"
+          >Hình ảnh dịch vụ bắt buộc chọn.</label
+        >
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <img
+        *ngIf="controls.image.value"
+        src="{{ controls.image.value }}"
+        class="img-thumbnail thumbnail"
+      />
+      <div
+        *ngIf="!controls.image.value || controls.image.value.length === 0"
+        class="thumbnail"
+      ></div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label required">Tên</label>
+    <div class="col-sm-8">
+      <input
+        formControlName="name"
+        class="form-control"
+        id="name"
+        placeholder="Tên dịch vụ"
+      />
+      <div class="error" *ngIf="submitted && controls.name.errors">
+        <label *ngIf="controls.name.errors.required"
+          >Tên dịch vụ bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label required">Dịch vụ</label>
+    <div class="col-sm-3">
+      <p-dropdown
+        [options]="itemTypes"
+        optionLabel="value"
+        formControlName="type"
+        placeholder="Loại dịch vụ"
+        [style]="{ width: '100%' }"
+      >
+      </p-dropdown>
+      <div class="error" *ngIf="submitted && controls.type.errors">
+        <label *ngIf="controls.type.errors.required"
+          >Loại dịch vụ bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <p-dropdown
+        [options]="methods"
+        optionLabel="fullName"
+        formControlName="method"
+        placeholder="Phương thức"
+        [style]="{ width: '100%' }"
+      >
+      </p-dropdown>
+      <div class="error" *ngIf="submitted && controls.method.errors">
+        <label *ngIf="controls.method.errors.required"
+          >Phương thức dịch vụ bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="description" class="col-sm-2 col-form-label required"
+      >Mô tả</label
+    >
+    <div class="col-sm-10">
+      <textarea
+        formControlName="description"
+        class="form-control"
+        id="description"
+        rows="5"
+      ></textarea>
+      <div class="error" *ngIf="submitted && controls.description.errors">
+        <label *ngIf="controls.description.errors.required"
+          >Mô tả dịch vụ bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="sortOrder" class="col-sm-2 col-form-label required"
+      >Thứ tự sắp xếp</label
+    >
+    <div class="col-sm-10">
+      <div class="row">
+        <div class="col-sm-4">
+          <input
+            formControlName="sortOrder"
+            class="form-control"
+            id="sortOrder"
+            type="number"
+            min="1"
+          />
+        </div>
+        <div class="col-sm-8">
+          <div class="form-check">
+            <label class="form-check-label" for="highlight">
+              <input
+                formControlName="highlight"
+                class="form-check-input"
+                type="checkbox"
+                id="highlight"
+              />
+              Nỗi bật
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="error"
+        *ngIf="
+          submitted && (controls.sortOrder.errors || controls.highlight.errors)
+        "
+      >
+        <label *ngIf="controls.sortOrder.errors.required"
+          >Thứ tự sắp xếp dịch vụ bắt buộc nhập.</label
+        >
+        <label *ngIf="controls.highlight.errors.required"
+          >Nỗi bật bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-4 offset-sm-2">
+      <button
+        type="button"
+        class="btn btn-primary"
+        color="primary"
+        (click)="onSaveItemClick()"
+      >
+        Lưu
+      </button>
+      <button type="button" class="btn btn-default">
+        Quay lại
+      </button>
+    </div>
+  </div>
+</form>

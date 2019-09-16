@@ -9,6 +9,7 @@ export class Method {
   discountRate: number;
   discount: number;
   enableDiscount: boolean;
+  fullName: string;
 
   constructor(json: any) {
     this.id = json.id;
@@ -21,6 +22,7 @@ export class Method {
     this.tax = json.tax;
     this.discountRate = json.discountRate;
     this.discount = json.discount;
+    this.fullName = json.fullName;
   }
 }
 

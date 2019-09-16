@@ -39,10 +39,17 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
-        [Route("dryclean")]
-        public IPagedList<ItemDto> GetDryClean(int pageIndex = 0, int pageSize = 10)
+        [Route("combo")]
+        public IPagedList<ItemDto> GetCombo(int pageIndex = 0, int pageSize = 10)
         {
-            return _itemService.GetDryClean(pageIndex, pageSize);
+            return _itemService.GetCombo(pageIndex, pageSize);
+        }
+
+        [HttpGet]
+        [Route("price")]
+        public IPagedList<ItemDto> GetPriceList(int pageIndex = 0, int pageSize = 10)
+        {
+            return _itemService.GetPriceList(pageIndex, pageSize);
         }
 
         [HttpPost]
@@ -69,7 +76,7 @@ namespace Cf.Laundry.Controllers
         }
 
         [HttpGet]
-        [Route("combo")]
+        [Route("itemcombo")]
         public ItemCombo GetItemCombo()
         {
             return _itemService.GetItemCombo();

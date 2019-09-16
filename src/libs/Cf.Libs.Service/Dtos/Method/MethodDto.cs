@@ -12,5 +12,6 @@
         public decimal Discount { get; set; }
         public decimal DiscountRate { get; set; }
         public bool EnableDiscount { get; set; }
+        public string FullName => string.Format("{0} - {1}", Type, Name);
     }
 }

@@ -59,9 +59,14 @@ namespace Cf.Libs.Service.Items
             return GetItemByType(pageIndex, pageSize, ItemType.Laundry.ToString());
         }
 
-        public IPagedList<ItemDto> GetDryClean(int pageIndex, int pageSize)
+        public IPagedList<ItemDto> GetCombo(int pageIndex, int pageSize)
         {
-            return GetItemByType(pageIndex, pageSize, ItemType.DryClean.ToString());
+            return GetItemByType(pageIndex, pageSize, ItemType.Combo.ToString());
+        }
+
+        public IPagedList<ItemDto> GetPriceList(int pageIndex, int pageSize)
+        {
+            return GetItemByType(pageIndex, pageSize, ItemType.PriceList.ToString());
         }
 
         private IPagedList<ItemDto> GetItemByType(int pageIndex, int pageSize, string type = null)
@@ -95,7 +100,7 @@ namespace Cf.Libs.Service.Items
 
 
             var query = from i in itemQuery
-                        join m in methodQuery on i.Combo equals m.Id into groupMethod
+                        join m in methodQuery on i.MethodId equals m.Id into groupMethod
                         join r in priceQuery on i.Id equals r.ItemId into groupPrice
                         from gr in groupPrice.DefaultIfEmpty(new Price())
                         from gm in groupMethod.DefaultIfEmpty(new Method())
@@ -112,9 +117,9 @@ namespace Cf.Libs.Service.Items
                             Discount = gr.Discount,
                             DiscountRate = gr.DiscountRate,
                             Tax = gr.Tax,
-                            ComboId = gm.Id,
-                            ComboName = gm.Name,
-                            ComboDescription = gm.Description
+                            MethodId = gm.Id,
+                            MethodName = gm.Name,
+                            MethodDescription = gm.Description
                         };
 
             return query.ToPagedList(pageIndex, pageSize);
@@ -123,13 +128,7 @@ namespace Cf.Libs.Service.Items
         public ItemDto Add(ItemRequest request)
         {
             var item = _mapper.Map<Item>(request);
-            var delivery = _methodRepository.Get(request.ComboId);
-            if (delivery == null || delivery.Type != MethodType.Combo.ToString())
-            {
-                throw new InformationException("Delivery method can not be found.");
-            }
-
-            item.Combo = delivery.Id;
+            item.Method = _methodRepository.Get(request.MethodId);
             var record = _itemRepository.Add(item);
             if (_unitOfWork.SaveChanges() == 0)
             {
@@ -142,11 +141,6 @@ namespace Cf.Libs.Service.Items
         public ItemDto Edit(ItemRequest request)
         {
             var record = _itemRepository.Get(request.Id);
-            var combo = _methodRepository.Get(request.ComboId);
-            if (combo == null || combo.Type != MethodType.Combo.ToString())
-            {
-                throw new InformationException("Combo method not be found.");
-            }
 
             if (record == null)
             {
@@ -159,7 +153,7 @@ namespace Cf.Libs.Service.Items
             record.Highlight = request.Highlight;
             record.SortOrder = request.SortOrder;
             record.Type = request.Type;
-            record.Combo = combo.Id;
+            record.Method = _methodRepository.Get(request.MethodId);
 
             _itemRepository.Update(record);
 

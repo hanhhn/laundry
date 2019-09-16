@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     this.sniper.showSniper();
     forkJoin([
       this.setting.getJumbotron(),
-      this.itemService.getCombo(),
+      this.itemService.getItemCombo(),
       this.setting.getReason(),
       this.postService.getProcessPost(0, 4),
       this.postService.getGuidePost(0, 10)

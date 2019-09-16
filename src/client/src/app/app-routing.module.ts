@@ -82,8 +82,18 @@ const routes: Routes = [
           "./pages/admin/price-list/price-list.module#PriceListModule"
       },
       {
+        path: "service/add",
+        loadChildren:
+          "./pages/admin/service/service-detail/service-detail.module#ServiceDetailModule"
+      },
+      {
+        path: "service/detail/:id",
+        loadChildren:
+          "./pages/admin/service/service-detail/service-detail.module#ServiceDetailModule"
+      },
+      {
         path: "service",
-        loadChildren: "./pages/admin/service/service.module#ServiceModule"
+        loadChildren: "./pages/admin/service/service/service.module#ServiceModule"
       },
       {
         path: "method",
@@ -103,7 +113,6 @@ const routes: Routes = [
         path: "post",
         loadChildren: "./pages/admin/post/post/post.module#PostModule"
       },
-
       {
         path: "page/add",
         loadChildren:

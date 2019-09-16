@@ -1,6 +1,4 @@
 ﻿using Cf.Libs.Core.Infrastructure.Entity;
-using Cf.Libs.DataAccess.Entities.News;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cf.Libs.DataAccess.Entities.Common
 {
@@ -8,9 +6,6 @@ namespace Cf.Libs.DataAccess.Entities.Common
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        [ForeignKey("News")]
-        public string PostId { get; set; }
-
-        public virtual  Post Post { get; set; }
+        public string Url { get; set; }
     }
 }

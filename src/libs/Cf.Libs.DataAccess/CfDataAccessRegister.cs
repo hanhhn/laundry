@@ -4,6 +4,7 @@ using Cf.Libs.DataAccess.Repository.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
 using Cf.Libs.DataAccess.Repository.OrderDetails;
 using Cf.Libs.DataAccess.Repository.Orders;
+using Cf.Libs.DataAccess.Repository.Pages;
 using Cf.Libs.DataAccess.Repository.Posts;
 using Cf.Libs.DataAccess.Repository.Prices;
 using Cf.Libs.DataAccess.Repository.Provinces;
@@ -36,6 +37,7 @@ namespace Cf.Libs.DataAccess
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ISeoRecordRepository, SeoRecordRepository>();
             services.AddScoped<ISeoMetadataRepository, SeoMetadataRepository>();
+            services.AddScoped<IPageRepository, PageRepository>();
         }
     }
 }

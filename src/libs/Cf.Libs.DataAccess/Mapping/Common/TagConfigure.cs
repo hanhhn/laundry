@@ -10,7 +10,6 @@ namespace Cf.Libs.DataAccess.Mapping.Common
         {
             base.Configure(builder);
             builder.ToTable(nameof(Tag));
-            builder.HasOne(x => x.Post).WithMany(x => x.Tags);
         }
     }
 }

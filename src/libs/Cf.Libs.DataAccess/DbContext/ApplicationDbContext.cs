@@ -7,6 +7,7 @@ using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.DataAccess.Entities.News;
 using Cf.Libs.DataAccess.Entities.Orders;
 using Cf.Libs.DataAccess.Entities.Seo;
+using Cf.Libs.DataAccess.Entities.Static;
 using Cf.Libs.DataAccess.Seed;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,7 @@ namespace Cf.Libs.DataAccess.DbContext
         public DbSet<District> Districts { get; set; }
         public DbSet<Ward> Wards { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Page> Pages { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<SeoRecord> SeoRecords { get; set; }
         public DbSet<SeoMetadata> SeoMetadatas { get; set; }

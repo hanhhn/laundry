@@ -44,7 +44,6 @@ namespace Cf.Libs.Service.Posts
             }
 
             var result = _mapper.Map<PostDto>(record);
-            result.Tags = _tagRepository.GetByPost(id).Select(x => x.Name);
 
             return result;
         }
@@ -58,7 +57,6 @@ namespace Cf.Libs.Service.Posts
             }
 
             var result = _mapper.Map<PostDto>(record);
-            result.Tags = _tagRepository.GetByPost(record.Id).Select(x => x.Name);
 
             return result;
         }

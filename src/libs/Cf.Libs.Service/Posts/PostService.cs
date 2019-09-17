@@ -38,14 +38,7 @@ namespace Cf.Libs.Service.Posts
         public PostDto Get(string id)
         {
             var record = _postRepository.Get(id);
-            if (record == null)
-            {
-                throw new RecordNotFoundException("Record can not be found.");
-            }
-
-            var result = _mapper.Map<PostDto>(record);
-
-            return result;
+            return _mapper.Map<PostDto>(record);
         }
 
         public PostDto GetByUrl(string uniqueUrl)

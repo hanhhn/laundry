@@ -38,12 +38,17 @@ export class ItemService {
     );
   }
 
-  getDryClean(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<PagedList<Item>> {
-    const url =
-      "items/dryclean?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+  getCombo(pageIndex: number, pageSize: number): Observable<PagedList<Item>> {
+    const url = "items/combo?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, null).pipe(
+      map((data: any) => {
+        return data ? new PagedList(data) : null;
+      })
+    );
+  }
+
+  getPriceList(pageIndex: number, pageSize: number): Observable<PagedList<Item>> {
+    const url = "items/price?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
     return this.httpService.doGet(url, null).pipe(
       map((data: any) => {
         return data ? new PagedList(data) : null;

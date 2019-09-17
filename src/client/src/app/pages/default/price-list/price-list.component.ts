@@ -10,9 +10,11 @@ import { Observable, forkJoin } from "rxjs";
   styleUrls: ["./price-list.component.scss"]
 })
 export class PriceListComponent implements OnInit {
-  items: Item[] = [];
+  prices: Item[] = [];
 
   combo: Item[] = [];
+
+  laundry: Item[] = [];
 
   constructor(
     private sniper: SniperService,
@@ -26,12 +28,15 @@ export class PriceListComponent implements OnInit {
   loadService() {
     this.sniper.showSniper();
     forkJoin([
-      this.itemService.getLaundry(0, 3),
-      this.itemService.getDryClean(0, 100)
+      this.itemService.getPriceList(0, 3),
+      this.itemService.getCombo(0, 3),
+      this.itemService.getLaundry(0, 100)
     ]).subscribe(
-      ([laundry, dryClean]) => {
-        this.combo = laundry ? laundry.dataSource : [];
-        this.items = dryClean ? dryClean.dataSource : [];
+      ([prices, combo, laundry]) => {
+        this.prices = prices ? prices.dataSource : [];
+        this.combo = combo ? combo.dataSource : [];
+        this.laundry = laundry ? laundry.dataSource : [];
+
         this.sniper.hideSniper();
       },
       err => {

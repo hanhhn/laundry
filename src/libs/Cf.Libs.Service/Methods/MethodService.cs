@@ -31,11 +31,6 @@ namespace Cf.Libs.Service.Methods
         public MethodDto Get(int Id)
         {
             var record = _methodRepository.Get(Id);
-            if (record == null)
-            {
-                throw new RecordNotFoundException("Record can not be found.");
-            }
-
             return _mapper.Map<MethodDto>(record);
         }
 

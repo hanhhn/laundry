@@ -11,7 +11,7 @@ import {
 } from "@angular/material";
 
 @NgModule({
-  declarations: [ComboComponent, KConverterPipe],
+  declarations: [ComboComponent],
   imports: [
     CommonModule,
     MatButtonModule,

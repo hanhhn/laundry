@@ -12,7 +12,7 @@ namespace Cf.Libs.DataAccess.Entities.Items
         public int SortOrder { get; set; }
         public string Type { get; set; }
         [ForeignKey("Method")]
-        public int MethodId { get; set; }
+        public int? MethodId { get; set; }
         public virtual Method Method { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ɵConsole } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ImageService } from "src/app/cores/services/image.service";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -72,7 +72,7 @@ export class ServiceDetailComponent implements OnInit {
       if (item) {
         const type = this.itemTypes.find(x => x.key === item.type);
         const method = this.methods.find(x => x.id === item.methodId);
-        this.controls.id.patchValue(item.id);
+        this.controls.id.patchValue(this.id);
         this.controls.type.patchValue(type);
         this.controls.image.patchValue(item.image);
         this.controls.name.patchValue(item.name);
@@ -93,16 +93,20 @@ export class ServiceDetailComponent implements OnInit {
       request.id = this.controls.id.value;
       request.name = this.controls.name.value;
       request.type = this.controls.type.value.key;
-      request.methodId = this.controls.method.value.id;
       request.image = this.controls.image.value;
       request.description = this.controls.description.value;
       request.sortOrder = this.controls.sortOrder.value;
       request.highlight = this.controls.highlight.value;
 
+      if (this.controls.method.value) {
+        request.methodId = this.controls.method.value.id;
+      }
+
       this.itemService.saveItem(request).subscribe(
         data => {
           if (data) {
             alert("Lưu dữ liệu thành công");
+            this.router.navigate(["/admin/service"]);
           } else {
             alert("Xẩy ra lỗi xin vui lòng thử lại sau.");
           }

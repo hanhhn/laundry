@@ -41,11 +41,6 @@ namespace Cf.Libs.Service.Items
         public ItemDto Get(int Id)
         {
             var record = _itemRepository.Get(Id);
-            if (record == null)
-            {
-                throw new RecordNotFoundException("Record can not be found.");
-            }
-
             return _mapper.Map<ItemDto>(record);
         }
 
@@ -128,7 +123,14 @@ namespace Cf.Libs.Service.Items
         public ItemDto Add(ItemRequest request)
         {
             var item = _mapper.Map<Item>(request);
-            item.Method = _methodRepository.Get(request.MethodId);
+            var method = _methodRepository.Get(request.MethodId);
+            item.MethodId = null;
+
+            if (method != null)
+            {
+                item.MethodId = method.Id;
+            }
+
             var record = _itemRepository.Add(item);
             if (_unitOfWork.SaveChanges() == 0)
             {
@@ -147,13 +149,20 @@ namespace Cf.Libs.Service.Items
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
+            var method = _methodRepository.Get(request.MethodId);
+            record.MethodId = null;
+
+            if (method != null)
+            {
+                record.MethodId = method.Id;
+            }
+
             record.Image = request.Image;
             record.Name = request.Name;
             record.Description = request.Description;
             record.Highlight = request.Highlight;
             record.SortOrder = request.SortOrder;
             record.Type = request.Type;
-            record.Method = _methodRepository.Get(request.MethodId);
 
             _itemRepository.Update(record);
 

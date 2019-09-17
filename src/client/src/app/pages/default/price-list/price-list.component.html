@@ -1,18 +1,27 @@
 <div class="container background">
   <div class="price-list">
+    <div *ngIf="prices && prices.length > 0">
+      <h2><i class="fa fa-tint"></i> Giặt sấy thường</h2>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center end" fxLayoutAlign.xs="center center"
+        fxLayoutGap="30px">
+        <app-price *ngFor="let item of prices" title="{{ item.name }}" image="{{ item.image }}"
+          description="{{ item.description }}" rate="{{ item.rate }}">
+        </app-price>
+      </div>
+    </div>
     <div *ngIf="combo && combo.length > 0">
       <h2><i class="fa fa-tint"></i> Giặt sấy theo combo</h2>
       <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center end" fxLayoutAlign.xs="center center"
         fxLayoutGap="30px">
-        <app-combo *ngFor="let item of combo" title="{{ item.name }}" combo="{{ item.comboName }}"
-          delivery="{{ item.comboDescription }}" description="{{ item.description }}" rate="{{ item.rate }}">
+        <app-combo *ngFor="let item of combo" title="{{ item.name }}" combo="{{ item.methodName }}"
+          delivery="{{ item.methodDescription }}" description="{{ item.description }}" rate="{{ item.rate }}">
         </app-combo>
       </div>
     </div>
-    <div *ngIf="items && items.length > 0">
+    <div *ngIf="laundry && laundry.length > 0">
       <h2><i class="fa fa-tint"></i> Giặt hấp hoàn hảo</h2>
       <div class="item-list">
-        <app-item *ngFor="let item of items; let i = index" itemUrl="{{ item.image }}" itemName="{{ item.name }}"
+        <app-item *ngFor="let item of laundry; let i = index" itemUrl="{{ item.image }}" itemName="{{ item.name }}"
           itemRate="{{ item.rate }}"></app-item>
       </div>
     </div>

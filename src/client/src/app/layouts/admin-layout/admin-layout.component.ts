@@ -68,7 +68,12 @@ export class AdminLayoutComponent implements OnInit {
         label: "Service",
         items: [
           {
-            label: "Dịch vụ",
+            label: "New Service",
+            icon: "",
+            routerLink: "service/add"
+          },
+          {
+            label: "Service",
             icon: "",
             routerLink: "service"
           }

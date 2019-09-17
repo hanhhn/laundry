@@ -29,7 +29,7 @@ export class PageDetailComponent implements OnInit {
   ) {
     this.submitted = false;
     route.params.subscribe(param => {
-      if (param) {
+      if (param && param.id) {
         this.id = param.id;
       }
     });

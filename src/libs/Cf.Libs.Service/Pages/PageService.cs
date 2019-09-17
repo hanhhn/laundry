@@ -34,14 +34,7 @@ namespace Cf.Libs.Service.Pages
         public PageDto Get(string id)
         {
             var record = _pageRepository.Get(id);
-            if (record == null)
-            {
-                throw new RecordNotFoundException("Record can not be found.");
-            }
-
-            var result = _mapper.Map<PageDto>(record);
-
-            return result;
+            return _mapper.Map<PageDto>(record);
         }
 
         public PageDto GetByUrl(string uniqueUrl)

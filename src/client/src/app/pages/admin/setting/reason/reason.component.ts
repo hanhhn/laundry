@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
+import { SettingService } from "src/app/cores/services/setting.service";
+import { Reason } from "src/app/cores/models/setting.model";
+import { ImageService } from "src/app/cores/services/image.service";
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl
 } from "@angular/forms";
-import { SettingService } from "src/app/cores/services/setting.service";
-import { Company, Reason } from "src/app/cores/models/setting.model";
-import { ImageService } from "src/app/cores/services/image.service";
-import { ThrowStmt } from "@angular/compiler";
+
 
 @Component({
   selector: "app-reason",

@@ -1,29 +1,48 @@
 <div class="container background">
-  <div class="contact" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between none" fxLayoutGap="40px">
-    <div class="contact-form" fxLayout="column" fxFlex="auto">
+  <div
+    class="contact"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between none"
+    fxLayoutGap="40px"
+  >
+    <form
+      *ngIf="formControls"
+      [formGroup]="formControls"
+      class="contact-form"
+      fxLayout="column"
+      fxFlex="auto"
+    >
       <div class="slogun">
         <h2 class="title text-center">Gửi thông tin liên hệ</h2>
         <hr />
       </div>
       <mat-form-field>
-        <input matInput placeholder="Họ và tên" />
+        <input formControlName="fullName" matInput placeholder="Họ và tên" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Email" />
+        <input formControlName="email" matInput placeholder="Email" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Số điện thoại" />
+        <input formControlName="phone" matInput placeholder="Số điện thoại" />
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <textarea rows="8" matInput placeholder="Nội dung liên hệ"></textarea>
+      <mat-form-field>
+        <textarea
+          formControlName="content"
+          rows="8"
+          matInput
+          placeholder="Nội dung liên hệ"
+        ></textarea>
       </mat-form-field>
       <div class="action">
-        <button mat-raised-button color="primary">Gửi yêu cầu</button>
+        <button (click)="sendRequest($event)" mat-raised-button color="primary">
+          Gửi yêu cầu
+        </button>
       </div>
-    </div>
+    </form>
     <div class="further-info" fxFlex="auto" *ngIf="companyInfo">
       <div class="slogun">
         <h2 class="title text-center">
@@ -43,7 +62,7 @@
         <i class="fa fa-map-marker"></i>
         {{ companyInfo.address }}
       </p>
-      <div [innerHTML]="companyInfo.googleMap"> </div>
+      <div [innerHTML]="companyInfo.googleMap"></div>
     </div>
   </div>
 </div>

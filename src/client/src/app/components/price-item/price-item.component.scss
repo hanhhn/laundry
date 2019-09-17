@@ -3,7 +3,14 @@
     width: 100%;
   }
 
+  .title {
+    font-weight: bold;
+    margin: 0px;
+  }
+
   .rate {
-    margin-right: 8px;
+    font-size: 30px;
+    font-weight: 600;
+    margin-right: 8px !important;
   }
 }

@@ -1,5 +1,15 @@
 .price-list {
   padding: 2vw;
+  
+  .title {
+    margin-top: 0px;
+    margin-bottom: 30px;
+    color: #f48024;
+  }
+
+  .item {
+    margin-bottom: 50px;
+  }
 
   .item-list {
     display: flex;

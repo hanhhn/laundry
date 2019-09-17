@@ -9,6 +9,7 @@ import {
   MatIconModule,
   MatCardModule
 } from "@angular/material";
+import { MoneyConvertModule } from "../../cores/money-convert.module";
 
 @NgModule({
   declarations: [ComboComponent],
@@ -18,7 +19,8 @@ import {
     FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MoneyConvertModule
   ],
   exports: [ComboComponent]
 })

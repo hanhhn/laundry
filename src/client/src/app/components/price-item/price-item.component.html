@@ -1,7 +1,18 @@
 <div class="item">
-  <img src="{{ image }}" alt="{{ title }}">
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <h3 class="rate">{{rate | kConverter}}</h3>
-    <div class="description" [innerHTML]="description"></div>
+  <div style="text-align: center;">
+    <img
+      [ngStyle]="{ width: '100%' }"
+      [ngStyle.sm]="{ width: '85%' }"
+      [ngStyle.xs]="{ width: '85%' }"
+      src="{{ image }}"
+      alt="{{ title }}"
+    />
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 5px;">
+    <div class="rate">{{ rate | kConverter }}</div>
+    <div>
+      <p class="title" *ngIf="title">{{ title }}</p>
+      <div class="description" [innerHTML]="description"></div>
+    </div>
   </div>
 </div>

@@ -7,7 +7,7 @@
     margin-bottom: 20px;
 
     h4 {
-      font-size: 21px;
+      font-size: 18px;
       margin-top: 0px;
       margin-bottom: 8px;
     }
@@ -30,7 +30,11 @@
 
       .detail {
         margin: 0 !important;
-        font-size: 14px;
+
+        p {
+          font-weight: bold;
+          margin: 0px;
+        }
       }
 
       margin-bottom: 15px;

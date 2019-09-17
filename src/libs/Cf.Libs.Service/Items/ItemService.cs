@@ -203,7 +203,7 @@ namespace Cf.Libs.Service.Items
                 setting = JsonConvert.DeserializeObject<JumbotronDto>(record.Value);
             }
 
-            var combo = GetLaundry(0, 3);
+            var combo = GetCombo(0, 5);
 
             var result = _mapper.Map<ItemCombo>(setting);
             result.Items = combo.DataSource;

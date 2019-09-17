@@ -28,8 +28,8 @@ export class PriceListComponent implements OnInit {
   loadService() {
     this.sniper.showSniper();
     forkJoin([
-      this.itemService.getPriceList(0, 3),
-      this.itemService.getCombo(0, 3),
+      this.itemService.getPriceList(0, 5),
+      this.itemService.getCombo(0, 5),
       this.itemService.getLaundry(0, 100)
     ]).subscribe(
       ([prices, combo, laundry]) => {

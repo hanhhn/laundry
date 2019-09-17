@@ -30,6 +30,9 @@
       delivery="{{ item.methodDescription }}"
       description="{{ item.description }}"
       rate="{{ item.rate }}"
+      [fxFlex]="100 / dataSource.length"
+      fxFlex.xs="auto"
+      fxFlex.sm="auto"
     >
     </app-combo>
   </div>

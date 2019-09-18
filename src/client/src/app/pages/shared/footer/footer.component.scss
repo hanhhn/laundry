@@ -6,6 +6,7 @@ footer {
   h4 {
     color: #ffffff;
     margin-top: 0px;
+    margin-bottom: 15px;
   }
 
   a {
@@ -41,5 +42,11 @@ footer {
       padding: 0;
       margin: 0;
     }
+  }
+
+  .copyright {
+    text-align: center;
+    background-color: #e1ecf4 !important;
+    padding: 5px 0px;
   }
 }

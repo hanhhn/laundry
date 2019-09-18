@@ -1,11 +1,29 @@
 <footer>
-  <div class="content container" fxLayoutGap="5vw" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
-    <div class="about" fxFlex="auto" ngClass.sm="text-center" ngClass.xs="text-center" *ngIf="company">
+  <div
+    class="content container"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutGap="20px"
+  >
+    <div
+      class="about"
+      fxFlex="auto"
+      ngClass.sm="text-center"
+      ngClass.xs="text-center"
+      *ngIf="company"
+    >
       <img class="logo" src="{{ company.logo }}" alt="{{ company.name }}" />
       <div class="info">
         <p>{{ company.name }}</p>
         <p>{{ company.address }}</p>
-        <div class="app" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign.sm="center" fxLayoutAlign.xs="center">
+        <div
+          class="app"
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign.sm="center"
+          fxLayoutAlign.xs="center"
+        >
           <a href="{{ company.appStore }}" target="_blank">
             <img src="../../../../assets/app-store-badge-small.png" />
           </a>
@@ -15,38 +33,76 @@
         </div>
       </div>
     </div>
-    <div fxFlex="auto" fxLayout="column" fxLayoutGap="3vw" ngClass.sm="text-center" ngClass.xs="text-center">
-      <div fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-evenly start"
-        fxLayoutAlign.sm="space-evenly start">
-        <div class="list-item link" *ngIf="company">
-          <h4>{{ company.website }}</h4>
-          <ul>
-            <li class="item"><a href=".">Chính sách sử dụng</a></li>
-            <li class="item"><a href=".">Chính sách bảo mật</a></li>
-          </ul>
+    <div fxFlex="auto" ngClass.sm="text-center" ngClass.xs="text-center">
+      <div
+        fxLayoutAlign="space-between start"
+        fxLayoutAlign.xs="center center"
+        fxLayoutAlign.sm="center center"
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayout.sm="column"
+        fxLayoutGap="20px"
+      >
+        <div class="list-item fanpage" *ngIf="company">
+          <!-- <h4>{{ company.website }}</h4> -->
+          <fb-page
+            *ngIf="company.facebook"
+            smallHeader="false"
+            href="{{ company.facebook }}"
+          ></fb-page>
         </div>
-        <div class="list-item follow" *ngIf="company">
-          <h4>Follow us</h4>
-          <ul fxLayout="row" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center">
-            <li class="item">
-              <a href="{{ company.facebook }}" target="_blank">
-                <i class="fa fa-facebook-square"></i>
-              </a>
-            </li>
-            <li class="item">
-              <a href="{{ company.instagram }}" target="_blank">
-                <i class="fa fa-instagram"></i>
-              </a>
-            </li>
-            <li class="item">
-              <a href="{{ company.youtube }}" target="_blank">
-                <i class="fa fa-youtube-square"></i>
-              </a>
-            </li>
-          </ul>
+
+        <div
+          class="list-item"
+          *ngIf="company"
+          fxLayout="column"
+          fxLayout.xs="row"
+          fxLayout.sm="row"
+          fxLayoutAlign="space-between start"
+          fxLayoutGap="10px"
+        >
+          <div class="link" fxFlex="auto">
+            <h4>{{ company.website }}</h4>
+            <ul>
+              <li class="item"><a href=".">Chính sách sử dụng</a></li>
+              <li class="item"><a href=".">Chính sách bảo mật</a></li>
+            </ul>
+          </div>
+
+          <div class="follow" fxFlex="auto">
+            <h4>Follow us</h4>
+            <ul
+              fxLayout="row"
+              fxLayoutAlign.xs="center center"
+              fxLayoutAlign.sm="center center"
+            >
+              <li class="item">
+                <a href="{{ company.facebook }}" target="_blank">
+                  <i class="fa fa-facebook-square"></i>
+                </a>
+              </li>
+              <li class="item">
+                <a href="{{ company.instagram }}" target="_blank">
+                  <i class="fa fa-instagram"></i>
+                </a>
+              </li>
+              <li class="item">
+                <a href="{{ company.youtube }}" target="_blank">
+                  <i class="fa fa-youtube-square"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="copyright" [innerHTML]="company.copyright"></div>
     </div>
   </div>
+  <div class="copyright" [innerHTML]="company.copyright"></div>
+  <!-- <div
+    class="fb-customerchat"
+    page_id="PAGE_ID"
+    theme_color="HEX_COLOR_CODE"
+    logged_in_greeting="GREETING_MESSAGE_FOR_LOGGED_IN_USERS"
+    logged_out_greeting="GREETING_MESSAGE_FOR_LOGGED_OUT_USERS"
+  ></div> -->
 </footer>

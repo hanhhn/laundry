@@ -5,6 +5,7 @@ using Cf.Libs.DataAccess.Entities.News;
 using Cf.Libs.DataAccess.Entities.Orders;
 using Cf.Libs.DataAccess.Entities.Static;
 using Cf.Libs.Service.Dtos.Adress;
+using Cf.Libs.Service.Dtos.Contact;
 using Cf.Libs.Service.Dtos.Item;
 using Cf.Libs.Service.Dtos.Method;
 using Cf.Libs.Service.Dtos.Orders;
@@ -41,6 +42,7 @@ namespace Cf.Libs.Service
             CreateMap<Province, AddressUnitDto>();
             CreateMap<District, AddressUnitDto>();
             CreateMap<Ward, AddressUnitDto>();
+            CreateMap<ContactRequest, Contact>();
 
             CreateMap<OrderRequest, Address>();
             CreateMap<Order, OrderDto>();

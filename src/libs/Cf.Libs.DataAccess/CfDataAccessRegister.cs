@@ -1,4 +1,5 @@
 ﻿using Cf.Libs.DataAccess.Repository.Addresses;
+using Cf.Libs.DataAccess.Repository.Contacts;
 using Cf.Libs.DataAccess.Repository.Districts;
 using Cf.Libs.DataAccess.Repository.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
@@ -38,6 +39,7 @@ namespace Cf.Libs.DataAccess
             services.AddScoped<ISeoRecordRepository, SeoRecordRepository>();
             services.AddScoped<ISeoMetadataRepository, SeoMetadataRepository>();
             services.AddScoped<IPageRepository, PageRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
         }
     }
 }

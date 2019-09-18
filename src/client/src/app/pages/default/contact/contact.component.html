@@ -62,7 +62,16 @@
         <i class="fa fa-map-marker"></i>
         {{ companyInfo.address }}
       </p>
-      <div [innerHTML]="companyInfo.googleMap"></div>
+      <div>
+        <iframe
+          [src]="trustResourceUrl(companyInfo.googleMap)"
+          frameborder="0"
+          style="border:0"
+          width="100%"
+          height="320px"
+        >
+        </iframe>
+      </div>
     </div>
   </div>
 </div>

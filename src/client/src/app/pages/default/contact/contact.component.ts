@@ -27,12 +27,17 @@ export class ContactComponent implements OnInit {
   googleMap: SafeUrl;
 
   constructor(
+    private sanitizer: DomSanitizer,
     private sniper: SniperService,
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private setting: SettingService,
     private contactService: ContactService
   ) {}
+
+  trustResourceUrl(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 
   ngOnInit() {
     this.sniper.showSniper();

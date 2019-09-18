@@ -13,5 +13,5 @@ export class ItemComponent {
   itemName: string;
 
   @Input()
-  itemRate: string;
+  itemRate: number;
 }

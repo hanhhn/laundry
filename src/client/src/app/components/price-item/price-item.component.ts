@@ -16,5 +16,5 @@ export class PriceItemComponent {
   description: string;
 
   @Input()
-  rate: string;
+  rate: number;
 }

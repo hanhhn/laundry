@@ -19,7 +19,7 @@ export class ComboComponent implements OnInit {
   description: string;
 
   @Input()
-  rate: string;
+  rate: number;
 
   constructor() {}
 

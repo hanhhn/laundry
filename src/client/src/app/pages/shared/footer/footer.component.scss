@@ -29,10 +29,17 @@ footer {
   .follow {
     li {
       display: inline;
-      margin-right: 20px;
       font-size: 34px;
       font-weight: 700;
       cursor: pointer;
+    }
+    
+    .mgr {
+      margin-right: 20px;
+    }
+
+    .mg {
+      margin: 0px 8px;
     }
   }
 

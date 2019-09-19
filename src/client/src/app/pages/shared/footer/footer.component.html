@@ -36,8 +36,8 @@
     <div fxFlex="auto" ngClass.sm="text-center" ngClass.xs="text-center">
       <div
         fxLayoutAlign="space-between start"
-        fxLayoutAlign.xs="center center"
-        fxLayoutAlign.sm="center center"
+        fxLayoutAlign.xs="start stretch"
+        fxLayoutAlign="start stretch"
         fxLayout="row"
         fxLayout.xs="column"
         fxLayout.sm="column"
@@ -58,10 +58,10 @@
           fxLayout="column"
           fxLayout.xs="row"
           fxLayout.sm="row"
-          fxLayoutAlign="space-between start"
           fxLayoutGap="10px"
+          fxLayoutAlign="space-evenly start"
         >
-          <div class="link" fxFlex="auto">
+          <div class="link">
             <h4>{{ company.website }}</h4>
             <ul>
               <li class="item"><a href=".">Chính sách sử dụng</a></li>
@@ -69,24 +69,24 @@
             </ul>
           </div>
 
-          <div class="follow" fxFlex="auto">
+          <div class="follow">
             <h4>Follow us</h4>
             <ul
               fxLayout="row"
               fxLayoutAlign.xs="center center"
               fxLayoutAlign.sm="center center"
             >
-              <li class="item">
+              <li ngClass="mgr" ngClass.sm="mg" ngClass.xs="mg">
                 <a href="{{ company.facebook }}" target="_blank">
                   <i class="fa fa-facebook-square"></i>
                 </a>
               </li>
-              <li class="item">
+              <li ngClass="mgr" ngClass.sm="mg" ngClass.xs="mg">
                 <a href="{{ company.instagram }}" target="_blank">
                   <i class="fa fa-instagram"></i>
                 </a>
               </li>
-              <li class="item">
+              <li ngClass="mgr" ngClass.sm="mg" ngClass.xs="mg">
                 <a href="{{ company.youtube }}" target="_blank">
                   <i class="fa fa-youtube-square"></i>
                 </a>

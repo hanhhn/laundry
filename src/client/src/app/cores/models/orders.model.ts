@@ -12,10 +12,6 @@ export class Order {
   note: string;
   fullAddress: string;
 
-  method: string;
-  soft: string;
-  straight: string;
-
   constructor(json) {
     this.id = json.id;
     this.orderCode = json.orderCode;
@@ -37,9 +33,8 @@ export class Order {
 }
 
 export class OrderRequest {
-  methodId: number;
-  softId: number;
-  straightId: number;
+  cleanId: number;
+  optionsId: number[];
   deliveryId: number;
   addressId: string;
   phone: string;

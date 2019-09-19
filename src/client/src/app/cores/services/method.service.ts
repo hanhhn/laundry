@@ -25,66 +25,6 @@ export class MethodService {
     return this.httpService.doGet(url, null).pipe(map(this.mapData));
   }
 
-  getCleanMethod(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<PagedList<Method>> {
-    const url =
-      "methods/clean?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
-    return this.httpService.doGet(url, null).pipe(map(this.mapData));
-  }
-
-  getSoftMethod(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<PagedList<Method>> {
-    const url = "methods/soft?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
-    return this.httpService.doGet(url, null).pipe(map(this.mapData));
-  }
-
-  getDryMethod(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<PagedList<Method>> {
-    const url = "methods/dry?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
-    return this.httpService.doGet(url, null).pipe(map(this.mapData));
-  }
-
-  getStraightMethod(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<PagedList<Method>> {
-    const url =
-      "methods/straight?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
-    return this.httpService.doGet(url, null).pipe(map(this.mapData));
-  }
-
-  getDelivery(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<PagedList<Method>> {
-    const url =
-      "methods/delivery?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
-    return this.httpService.doGet(url, null).pipe(
-      map((data: any) => {
-        return data ? new PagedList(data) : null;
-      })
-    );
-  }
-
-  getCombo(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<PagedList<Method>> {
-    const url =
-      "methods/combo?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
-    return this.httpService.doGet(url, null).pipe(
-      map((data: any) => {
-        return data ? new PagedList(data) : null;
-      })
-    );
-  }
-
   save(method: MethodRequest): Observable<Method> {
     const url = "methods/save";
     return this.httpService.doPost(url, method).pipe(
@@ -105,12 +45,10 @@ export class MethodService {
 
   getMethodTypes(): Observable<KeyValue[]> {
     const types = [
-      new KeyValue("Clean", "Clean"),
-      new KeyValue("Soft", "Soft"),
-      new KeyValue("Dry", "Dry"),
-      new KeyValue("Straight", "Straight"),
-      new KeyValue("Delivery", "Delivery"),
-      new KeyValue("Combo", "Combo")
+      new KeyValue("Clean", "Clean - Giặt Ủi"),
+      new KeyValue("Delivery", "Delivery - Giao hàng"),
+      new KeyValue("Combo", "Combo - Kết hợp"),
+      new KeyValue("Other", "Other - Khác"),
     ];
     return of(types);
   }

@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { MethodService } from "../../../cores/services/method.service";
-import { BookNowService } from "./book-now.service";
 import { Method } from "../../../cores/models/method.model";
 import { AddressService } from "src/app/cores/services/address.service";
-import { ItemService } from "../../../cores/services/item.service";
 import { KeyValue } from "../../../cores/models/object.model";
 import { TimeService } from "../../../cores/services/time.service";
 import { StorageService } from "src/app/cores/services/storage.service";
@@ -12,6 +10,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ConfirmComponent } from "src/app/components/confirm/confirm.component";
 import { OrdersService } from "../../../cores/services/orders.service";
 import { OrderRequest, Order } from "../../../cores/models/orders.model";
+import { SniperService } from "../../../cores/services/sniper.service";
 import {
   AddressUnit,
   Address,
@@ -23,9 +22,14 @@ import {
   MatOption,
   MatRadioChange
 } from "@angular/material";
-import { SniperService } from "../../../cores/services/sniper.service";
 
 const thankYou = "./../../../../assets/thanks-you-for-your-order.png";
+
+const METHOD = {
+  CLEAN: "Clean",
+  DELIVERY: "Delivery",
+  OTHER: "Other"
+};
 
 @Component({
   selector: "app-book-now",
@@ -43,11 +47,7 @@ export class BookNowComponent implements OnInit {
   address: Address;
   hoursOfReceipt: string;
 
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-
   serviceFormGroup: FormGroup;
-  dateTimeFormGroup: FormGroup;
   contactFormGroup: FormGroup;
 
   methods: Method[];
@@ -59,28 +59,21 @@ export class BookNowComponent implements OnInit {
   activeDay: KeyValue[];
 
   order: Order;
-  method: string;
-  soft: string;
-  straight: string;
+  clean: string;
+  options: string[] = [];
 
   completed: boolean;
 
   get getWayClean() {
-    const way = this.bookNowService.getCleanMethod(this.methods);
-    way.push(...this.bookNowService.getDryMethod(this.methods));
-    return way;
+    return this.methods.filter(x => x.type === METHOD.CLEAN);
   }
 
-  get getWaySoft() {
-    return this.bookNowService.getSoftMethod(this.methods);
-  }
-
-  get getWayStraight() {
-    return this.bookNowService.getStraightMethod(this.methods);
+  get getOptions() {
+    return this.methods.filter(x => x.type === METHOD.OTHER);
   }
 
   get getDeliveryTime() {
-    return this.bookNowService.getDeliveryMethod(this.methods);
+    return this.methods.filter(x => x.type === METHOD.DELIVERY);
   }
 
   get alreadyExists() {
@@ -95,8 +88,16 @@ export class BookNowComponent implements OnInit {
     return this.contactFormGroup.controls;
   }
 
-  get dateTimeControls() {
-    return this.dateTimeFormGroup.controls;
+  get optionControls(): FormArray {
+    return this.serviceFormGroup.get("options") as FormArray;
+  }
+
+  get deliveryControls() {
+    return (this.contactFormGroup.get("delivery") as FormGroup).controls;
+  }
+
+  get addressControls() {
+    return (this.contactFormGroup.get("address") as FormGroup).controls;
   }
 
   @ViewChild("stepper", { static: false }) stepper: MatStepper;
@@ -106,9 +107,7 @@ export class BookNowComponent implements OnInit {
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private methodService: MethodService,
-    private bookNowService: BookNowService,
     private addressService: AddressService,
-    private itemService: ItemService,
     private timeService: TimeService,
     private ordersService: OrdersService,
     private storageService: StorageService
@@ -129,22 +128,14 @@ export class BookNowComponent implements OnInit {
 
   ngOnInit() {
     this.sniper.showSniper();
-
-    this.firstFormGroup = this.formBuilder.group({
-      valid: [false, Validators.requiredTrue]
-    });
-
-    this.secondFormGroup = this.formBuilder.group({
-      valid: [false, Validators.requiredTrue]
-    });
-
     this.phone = this.storageService.getPhone();
-    if (this.phone && this.phone.length > 0) {
-      this.loadFullAddress(this.phone);
-    }
 
     this.initServiceForm();
     this.initContactForm();
+
+    if (this.phone && this.phone.length > 0) {
+      this.loadFullAddress(this.phone);
+    }
 
     this.loadTheWayClean();
     this.loadProvice();
@@ -155,27 +146,27 @@ export class BookNowComponent implements OnInit {
 
   initServiceForm() {
     this.serviceFormGroup = this.formBuilder.group({
-      method: [null, Validators.required],
-      soft: [null, Validators.required],
-      straight: [null],
+      clean: [null, Validators.required],
+      options: this.formBuilder.array([]),
       note: [null]
     });
   }
 
   initContactForm() {
     this.contactFormGroup = this.formBuilder.group({
-      id: [0],
       phone: [this.phone, Validators.required],
-      fullName: [null, Validators.required],
-      province: [null, Validators.required],
-      district: [null, Validators.required],
-      ward: [null, Validators.required],
-      street: [null, Validators.required]
-    });
-
-    this.dateTimeFormGroup = this.formBuilder.group({
-      dateOfReceipt: [null, Validators.required],
-      hoursOfReceipt: [null, Validators.required]
+      delivery: this.formBuilder.group({
+        dateOfReceipt: [null, Validators.required],
+        hoursOfReceipt: [null, Validators.required]
+      }),
+      address: this.formBuilder.group({
+        id: [0],
+        fullName: [null, Validators.required],
+        province: [null, Validators.required],
+        district: [null, Validators.required],
+        ward: [null, Validators.required],
+        street: [null, Validators.required]
+      })
     });
   }
 
@@ -183,8 +174,7 @@ export class BookNowComponent implements OnInit {
     e.preventDefault();
 
     this.serviceFormGroup.markAllAsTouched();
-    this.firstFormGroup.controls.valid.setValue(this.serviceFormGroup.valid);
-    if (this.firstFormGroup.valid) {
+    if (this.serviceFormGroup.valid) {
       this.stepper.next();
     }
   }
@@ -214,28 +204,29 @@ export class BookNowComponent implements OnInit {
   onOneMoreAddress(e) {
     e.preventDefault();
     this.contactFormGroup.reset();
-    this.contactControls.id.patchValue(0);
+    this.addressControls.id.patchValue(0);
     this.contactControls.phone.patchValue(this.phone);
     this.isShowOneMoreAddress = true;
     this.isShowFullAddress = false;
   }
 
   onSaveAddress(e) {
-    this.sniper.showSniper();
     e.preventDefault();
 
-    this.contactFormGroup.markAllAsTouched();
+    const addressFormGroup = this.contactFormGroup.get("address") as FormGroup;
+    addressFormGroup.markAllAsTouched();
 
-    if (this.contactFormGroup.valid) {
+    if (addressFormGroup.valid) {
       const request = new AddressRequest();
-      request.id = this.contactControls.id.value;
+      request.id = this.addressControls.id.value;
       request.phone = this.contactControls.phone.value;
-      request.fullName = this.contactControls.fullName.value;
-      request.provinceId = this.contactControls.province.value;
-      request.districtId = this.contactControls.district.value;
-      request.wardId = this.contactControls.ward.value;
-      request.street = this.contactControls.street.value;
+      request.fullName = this.addressControls.fullName.value;
+      request.provinceId = this.addressControls.province.value;
+      request.districtId = this.addressControls.district.value;
+      request.wardId = this.addressControls.ward.value;
+      request.street = this.addressControls.street.value;
 
+      this.sniper.showSniper();
       this.addressService.save(request).subscribe(
         data => {
           this.addresses = data ? data : [];
@@ -258,12 +249,12 @@ export class BookNowComponent implements OnInit {
     this.loadDistrict(item.provinceId);
     this.loadWard(item.districtId);
 
-    this.contactControls.id.patchValue(item.id);
-    this.contactControls.fullName.patchValue(item.fullName);
-    this.contactControls.province.patchValue(item.provinceId);
-    this.contactControls.district.patchValue(item.districtId);
-    this.contactControls.ward.patchValue(item.wardId);
-    this.contactControls.street.patchValue(item.street);
+    this.addressControls.id.patchValue(item.id);
+    this.addressControls.fullName.patchValue(item.fullName);
+    this.addressControls.province.patchValue(item.provinceId);
+    this.addressControls.district.patchValue(item.districtId);
+    this.addressControls.ward.patchValue(item.wardId);
+    this.addressControls.street.patchValue(item.street);
 
     this.isShowFullAddress = false;
     this.isShowOneMoreAddress = true;
@@ -306,13 +297,8 @@ export class BookNowComponent implements OnInit {
 
   onConfirmOrder(e) {
     this.contactFormGroup.markAllAsTouched();
-    this.dateTimeFormGroup.markAllAsTouched();
 
-    this.secondFormGroup.controls.valid.setValue(
-      this.contactFormGroup.valid && this.dateTimeFormGroup.valid
-    );
-
-    if (this.secondFormGroup.valid && this.firstFormGroup.valid) {
+    if (this.serviceFormGroup.valid && this.contactFormGroup.valid) {
       this.saveOrder();
     }
   }
@@ -320,39 +306,38 @@ export class BookNowComponent implements OnInit {
   saveOrder() {
     this.sniper.showSniper();
     const request = new OrderRequest();
-    request.methodId = this.serviceControls.method.value;
-    request.softId = this.serviceControls.soft.value;
-    const straightId = this.serviceControls.straight.value;
-    request.straightId = straightId ? straightId : 0;
+    request.cleanId = this.serviceControls.clean.value;
     request.note = this.serviceControls.note.value;
+    request.optionsId = [];
+    this.optionControls.controls.map((value, index) => {
+      if (value) {
+        const item = this.getOptions[index];
+        request.optionsId.push(item.id);
+        this.options.push(item.name);
+      }
+    });
 
-    request.addressId = this.contactControls.id.value;
+    request.addressId = this.addressControls.id.value;
     request.phone = this.contactControls.phone.value;
-    request.fullName = this.contactControls.fullName.value;
-    request.provinceId = this.contactControls.province.value;
-    request.districtId = this.contactControls.district.value;
-    request.wardId = this.contactControls.ward.value;
-    request.street = this.contactControls.street.value;
+    request.fullName = this.addressControls.fullName.value;
+    request.provinceId = this.addressControls.province.value;
+    request.districtId = this.addressControls.district.value;
+    request.wardId = this.addressControls.ward.value;
+    request.street = this.addressControls.street.value;
 
-    request.dateOfReceipt = this.dateTimeControls.dateOfReceipt.value;
-    request.deliveryId = this.dateTimeControls.hoursOfReceipt.value;
+    request.dateOfReceipt = this.deliveryControls.dateOfReceipt.value;
+    request.deliveryId = this.deliveryControls.hoursOfReceipt.value;
     request.hoursOfReceipt = this.hoursOfReceipt;
 
     this.ordersService.saveOrder(request).subscribe(
       data => {
         if (data) {
+          this.clean = this.methods.find(x => x.id === request.cleanId).name;
+          console.log(this.clean);
+          console.log(this.options);
           this.order = data;
-          this.order.method = this.method;
-          this.order.soft = this.soft;
-          this.order.straight = this.straight;
-
           this.completed = true;
           this.stepper.next();
-
-          this.firstFormGroup.reset();
-          this.secondFormGroup.reset();
-          this.serviceFormGroup.reset();
-          this.contactFormGroup.reset();
         } else {
           this.dialog.open(ConfirmComponent, {
             minWidth: "350px",
@@ -386,18 +371,18 @@ export class BookNowComponent implements OnInit {
   setDefaultAddress(item: Address) {
     if (item) {
       this.address = item;
-      this.contactControls.id.patchValue(item.id);
-      this.contactControls.fullName.patchValue(item.fullName);
-      this.contactControls.province.patchValue(item.provinceId);
-      this.contactControls.district.patchValue(item.districtId);
-      this.contactControls.ward.patchValue(item.wardId);
-      this.contactControls.street.patchValue(item.street);
+      this.addressControls.id.patchValue(item.id);
+      this.addressControls.fullName.patchValue(item.fullName);
+      this.addressControls.province.patchValue(item.provinceId);
+      this.addressControls.district.patchValue(item.districtId);
+      this.addressControls.ward.patchValue(item.wardId);
+      this.addressControls.street.patchValue(item.street);
     } else {
       if (this.addresses.length === 0) {
         this.address = null;
         this.isShowFullAddress = false;
         this.isShowOneMoreAddress = false;
-        this.contactControls.id.patchValue(this.phone);
+        this.addressControls.id.patchValue(0);
         this.contactFormGroup.reset();
       }
     }
@@ -411,24 +396,10 @@ export class BookNowComponent implements OnInit {
     this.hoursOfReceipt = data.text;
   }
 
-  onMethodChanged(event: MatRadioChange) {
+  onCleanChanged(event: MatRadioChange) {
     const item = this.methods.find(x => x.id === event.source.value);
     if (item) {
-      this.method = item.name;
-    }
-  }
-
-  onSoftChanged(event: MatRadioChange) {
-    const item = this.methods.find(x => x.id === event.source.value);
-    if (item) {
-      this.soft = item.name;
-    }
-  }
-
-  onStraightChanged(event: MatRadioChange) {
-    const item = this.methods.find(x => x.id === event.source.value);
-    if (item) {
-      this.straight = item.name;
+      this.clean = item.name;
     }
   }
 
@@ -444,11 +415,17 @@ export class BookNowComponent implements OnInit {
   loadTheWayClean() {
     this.methodService.getApplyMethod(0, 100).subscribe(data => {
       this.methods = data ? data.dataSource : [];
+
+      this.getOptions.map((value, index) => {
+        this.optionControls.controls.push(this.formBuilder.control(false));
+      });
     });
   }
 
   loadActiveDay() {
-    this.activeDay = this.timeService.getActiveTime();
+    this.timeService.getActiveTime().subscribe(data => {
+      this.activeDay = data;
+    });
   }
 
   loadFullAddress(phone: string) {

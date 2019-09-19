@@ -2,9 +2,8 @@
 {
     public class OrderRequest
     {
-        public int MethodId { get; set; }
-        public int SoftId { get; set; }
-        public int StraightId { get; set; }
+        public int CleanId { get; set; }
+        public int[] OptionsId { get; set; }
         public int DeliveryId { get; set; }
         public string Note { get; set; }
 

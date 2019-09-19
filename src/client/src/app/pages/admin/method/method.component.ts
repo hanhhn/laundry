@@ -33,13 +33,6 @@ export class MethodComponent implements OnInit {
     return this.formControls.controls;
   }
 
-  private markAllControlDirty(): void {
-    // tslint:disable-next-line:forin
-    for (const i in this.formControls.controls) {
-      this.formControls.controls[i].markAsDirty();
-    }
-  }
-
   ngOnInit() {
     this.loadList();
     this.loadMethodType();
@@ -89,8 +82,7 @@ export class MethodComponent implements OnInit {
 
   onSaveClick() {
     this.submitted = true;
-    this.formControls.markAsDirty();
-    this.markAllControlDirty();
+    this.formControls.markAllAsTouched();
 
     if (this.formControls.valid) {
       const request = new MethodRequest();

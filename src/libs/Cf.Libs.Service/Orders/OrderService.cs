@@ -17,6 +17,7 @@ using Cf.Libs.DataAccess.Repository.Wards;
 using Cf.Libs.Service.Dtos.Orders;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace Cf.Libs.Service.Orders
@@ -96,15 +97,13 @@ namespace Cf.Libs.Service.Orders
 
             var orderInserted = _orderRepository.Add(order);
 
-            List<int> methodRequests = new List<int>
-            {
-                request.MethodId,
-                request.SoftId,
-                request.StraightId,
-                request.DeliveryId
-            };
+            List<int> methodRequests = new List<int>();
+            methodRequests.Add(request.CleanId);
+            methodRequests.AddRange(request.OptionsId);
+            methodRequests.Add(request.DeliveryId);
 
-            foreach(var methodId in methodRequests)
+
+            foreach (var methodId in methodRequests)
             {
                 var method = _methodRepository.Get(methodId);
                 if(method != null)

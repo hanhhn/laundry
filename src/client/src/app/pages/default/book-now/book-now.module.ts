@@ -17,7 +17,6 @@ import {
 } from "@angular/material";
 import { VerticalStepperScrollerDirective } from "../../../cores/directives/vertical-stepper-scroller.directive";
 import { MethodService } from "../../../cores/services/method.service";
-import { BookNowService } from "./book-now.service";
 import { AddressService } from "src/app/cores/services/address.service";
 import { ItemService } from "../../../cores/services/item.service";
 import { TimeService } from "../../../cores/services/time.service";
@@ -53,7 +52,6 @@ const routes: Routes = [
   ],
   providers: [
     MethodService,
-    BookNowService,
     AddressService,
     ItemService,
     TimeService,

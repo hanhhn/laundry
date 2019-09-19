@@ -39,36 +39,6 @@ namespace Cf.Libs.Service.Methods
             return GetMethodByType(pageIndex, pageSize);
         }
 
-        public IPagedList<MethodDto> GetCleanMethod(int pageIndex, int pageSize)
-        {
-            return GetMethodByType(pageIndex, pageSize, MethodType.Clean.ToString());
-        }
-
-        public IPagedList<MethodDto> GetSoftMethod(int pageIndex, int pageSize)
-        {
-            return GetMethodByType(pageIndex, pageSize, MethodType.Soft.ToString());
-        }
-
-        public IPagedList<MethodDto> GetDryMethod(int pageIndex, int pageSize)
-        {
-            return GetMethodByType(pageIndex, pageSize, MethodType.Straight.ToString());
-        }
-
-        public IPagedList<MethodDto> GetStraightMethod(int pageIndex, int pageSize)
-        {
-            return GetMethodByType(pageIndex, pageSize, MethodType.Dry.ToString());
-        }
-
-        public IPagedList<MethodDto> GetDeliveryMethod(int pageIndex, int pageSize)
-        {
-            return GetMethodByType(pageIndex, pageSize, MethodType.Delivery.ToString());
-        }
-
-        public IPagedList<MethodDto> GetComboMethod(int pageIndex, int pageSize)
-        {
-            return GetMethodByType(pageIndex, pageSize, MethodType.Combo.ToString());
-        }
-
         public IPagedList<MethodDto> GetAll(int pageIndex, int pageSize)
         {
             return _methodRepository.FindBy(x => !x.IsDeleted).ToPagedList<Method, MethodDto>(pageIndex, pageSize);

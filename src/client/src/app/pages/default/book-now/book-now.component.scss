@@ -3,7 +3,7 @@
 
   .address {
     .address-item {
-      h5 {
+      h4 {
         margin-top: 0px;
         margin-bottom: 7px;
       }
@@ -27,9 +27,9 @@
   }
 
   .date {
-    mat-form-field {
-      min-width: 300px;
-    }
+    // mat-form-field {
+    //   min-width: 300px;
+    // }
 
     .pdr {
       padding-right: 30px;

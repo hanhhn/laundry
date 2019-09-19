@@ -15,10 +15,6 @@ namespace Cf.Libs.Service.Dtos.Orders
         public string Street { get; set; }
         public DateTime DateOfReceipt { get; set; }
         public string HoursOfReceipt { get; set; }
-        public string Method { get; set; }
-        public string Soft { get; set; }
-        public string Straight { get; set; }
-        public string Delivery { get; set; }
 
         public string FullAddress => string.Format("{0}, {1}, {2}, {3}.", Street, WardName, DistrictName, ProvinceName);
     }

@@ -109,7 +109,7 @@
                       <button mat-icon-button class="edit">
                         <i class="fa fa-edit" (click)="onEditAdress($event, item)"></i>
                       </button>
-                      <button mat-icon-button class="remove">
+                      <button mat-icon-button class="remove" type="button">
                         <i class="fa fa-trash" (click)="onRemoveAdress(item.id)"></i>
                       </button>
                     </div>
@@ -193,7 +193,7 @@
               <li *ngIf="clean">
                 Dịch vụ: <strong>{{ clean }}</strong>
               </li>
-              <li *ngIf="options">
+              <li *ngIf="options && options.length > 0">
                 <div>Tùy chọn thêm: </div>
                 <div *ngFor="let item of options"><strong>- {{ item }}</strong></div>
               </li>

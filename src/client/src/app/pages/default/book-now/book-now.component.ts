@@ -309,8 +309,8 @@ export class BookNowComponent implements OnInit {
     request.cleanId = this.serviceControls.clean.value;
     request.note = this.serviceControls.note.value;
     request.optionsId = [];
-    this.optionControls.controls.map((value, index) => {
-      if (value) {
+    this.optionControls.controls.map((control, index) => {
+      if (control.value) {
         const item = this.getOptions[index];
         request.optionsId.push(item.id);
         this.options.push(item.name);
@@ -333,8 +333,6 @@ export class BookNowComponent implements OnInit {
       data => {
         if (data) {
           this.clean = this.methods.find(x => x.id === request.cleanId).name;
-          console.log(this.clean);
-          console.log(this.options);
           this.order = data;
           this.completed = true;
           this.stepper.next();
@@ -382,10 +380,15 @@ export class BookNowComponent implements OnInit {
         this.address = null;
         this.isShowFullAddress = false;
         this.isShowOneMoreAddress = false;
+        const addressFormGroup = this.contactFormGroup.get("address") as FormGroup;
+        addressFormGroup.reset();
+        addressFormGroup.markAsUntouched();
         this.addressControls.id.patchValue(0);
-        this.contactFormGroup.reset();
+        this.contactControls.phone.patchValue(this.phone);
       }
     }
+
+    this.contactFormGroup.markAsUntouched();
   }
 
   onDeliveryTimeSelected(event: MatSelectChange) {

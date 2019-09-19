@@ -96,8 +96,12 @@ export class BookNowComponent implements OnInit {
     return (this.contactFormGroup.get("delivery") as FormGroup).controls;
   }
 
+  get addressFormGroup(): FormGroup {
+    return this.contactFormGroup.get("address") as FormGroup;
+  }
+
   get addressControls() {
-    return (this.contactFormGroup.get("address") as FormGroup).controls;
+    return this.addressFormGroup.controls;
   }
 
   @ViewChild("stepper", { static: false }) stepper: MatStepper;
@@ -203,7 +207,7 @@ export class BookNowComponent implements OnInit {
 
   onOneMoreAddress(e) {
     e.preventDefault();
-    this.contactFormGroup.reset();
+    this.addressFormGroup.reset();
     this.addressControls.id.patchValue(0);
     this.contactControls.phone.patchValue(this.phone);
     this.isShowOneMoreAddress = true;
@@ -213,10 +217,9 @@ export class BookNowComponent implements OnInit {
   onSaveAddress(e) {
     e.preventDefault();
 
-    const addressFormGroup = this.contactFormGroup.get("address") as FormGroup;
-    addressFormGroup.markAllAsTouched();
+    this.addressFormGroup.markAllAsTouched();
 
-    if (addressFormGroup.valid) {
+    if (this.addressFormGroup.valid) {
       const request = new AddressRequest();
       request.id = this.addressControls.id.value;
       request.phone = this.contactControls.phone.value;
@@ -380,9 +383,8 @@ export class BookNowComponent implements OnInit {
         this.address = null;
         this.isShowFullAddress = false;
         this.isShowOneMoreAddress = false;
-        const addressFormGroup = this.contactFormGroup.get("address") as FormGroup;
-        addressFormGroup.reset();
-        addressFormGroup.markAsUntouched();
+        this.addressFormGroup.reset();
+        this.addressFormGroup.markAsUntouched();
         this.addressControls.id.patchValue(0);
         this.contactControls.phone.patchValue(this.phone);
       }

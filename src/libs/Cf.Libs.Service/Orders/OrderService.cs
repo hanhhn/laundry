@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Cf.Libs.Core.Cryption;
 using Cf.Libs.Core.Exeptions;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
@@ -13,11 +12,11 @@ using Cf.Libs.DataAccess.Repository.OrderDetails;
 using Cf.Libs.DataAccess.Repository.Orders;
 using Cf.Libs.DataAccess.Repository.Prices;
 using Cf.Libs.DataAccess.Repository.Provinces;
+using Cf.Libs.DataAccess.Repository.Trackings;
 using Cf.Libs.DataAccess.Repository.Wards;
-using Cf.Libs.Service.Dtos.Orders;
+using Cf.Libs.Service.Dtos.Order;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 
 namespace Cf.Libs.Service.Orders
@@ -33,6 +32,7 @@ namespace Cf.Libs.Service.Orders
         private readonly IDistrictRepository _districtRepository;
         private readonly IWardRepository _wardRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly ITrackingRepository _trackingRepository;
 
         public OrderService(
             IUnitOfWork unitOfWork,
@@ -45,6 +45,7 @@ namespace Cf.Libs.Service.Orders
             IProvinceRepository provinceRepository,
             IDistrictRepository districtRepository,
             IWardRepository wardRepository,
+            ITrackingRepository trackingRepository,
             IAddressRepository addressRepository) : base(unitOfWork, mapper)
         {
             _methodRepository = methodRepository;
@@ -56,6 +57,7 @@ namespace Cf.Libs.Service.Orders
             _districtRepository = districtRepository;
             _wardRepository = wardRepository;
             _addressRepository = addressRepository;
+            _trackingRepository = trackingRepository;
         }
 
 
@@ -121,7 +123,14 @@ namespace Cf.Libs.Service.Orders
                 }
             }
 
-            if(_unitOfWork.SaveChanges() == 0)
+            _trackingRepository.Add(new Tracking
+            {
+                Phone = request.Phone,
+                OrdeCode = orderInserted.OrderCode,
+                OrderStatus = Core.Enums.OrderStatus.Receive,
+            });
+
+            if (_unitOfWork.SaveChanges() == 0)
             {
                 throw new InformationException("An error occurred during save.");
             }
@@ -134,7 +143,7 @@ namespace Cf.Libs.Service.Orders
             var bytes = new byte[4];
             var rng = RandomNumberGenerator.Create();
             rng.GetBytes(bytes);
-            uint random = BitConverter.ToUInt32(bytes, 0) % 1000000;
+            uint random = BitConverter.ToUInt32(bytes, 0) % 100000000;
             return string.Format("{0:D8}", random);
         }
     }

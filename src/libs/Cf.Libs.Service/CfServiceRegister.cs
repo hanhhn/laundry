@@ -9,6 +9,7 @@ using Cf.Libs.Service.Posts;
 using Cf.Libs.Service.Prices;
 using Cf.Libs.Service.Profile;
 using Cf.Libs.Service.Settings;
+using Cf.Libs.Service.Trackings;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cf.Libs.Service
@@ -28,6 +29,7 @@ namespace Cf.Libs.Service
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IPageService, PageService>();
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<ITrackingService, TrackingService>();
         }
     }
 }

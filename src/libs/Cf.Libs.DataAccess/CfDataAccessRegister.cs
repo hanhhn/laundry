@@ -13,6 +13,7 @@ using Cf.Libs.DataAccess.Repository.SeoMetadatas;
 using Cf.Libs.DataAccess.Repository.SeoRecords;
 using Cf.Libs.DataAccess.Repository.Settings;
 using Cf.Libs.DataAccess.Repository.Tags;
+using Cf.Libs.DataAccess.Repository.Trackings;
 using Cf.Libs.DataAccess.Repository.UserProfiles;
 using Cf.Libs.DataAccess.Repository.Wards;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,7 @@ namespace Cf.Libs.DataAccess
             services.AddScoped<ISeoMetadataRepository, SeoMetadataRepository>();
             services.AddScoped<IPageRepository, PageRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<ITrackingRepository, TrackingRepository>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Cf.Libs.Core.Infrastructure.Entity;
+﻿using Cf.Libs.Core.Enums;
+using Cf.Libs.Core.Infrastructure.Entity;
 using Cf.Libs.DataAccess.Entities.Common;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Cf.Libs.DataAccess.Entities.Orders
         public string Street { get; set; }
         public DateTime DateOfReceipt { get; set; }
         public string HoursOfReceipt { get; set; }
+        public PaymentStatus Status { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

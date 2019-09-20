@@ -43,6 +43,7 @@ namespace Cf.Libs.DataAccess.DbContext
         public DbSet<SeoRecord> SeoRecords { get; set; }
         public DbSet<SeoMetadata> SeoMetadatas { get; set; }
         public DbSet<Contact> Conacts { get; set; }
+        public DbSet<Tracking> Trackings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

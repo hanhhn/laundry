@@ -1,3 +1,5 @@
+import { Method } from "./method.model";
+
 export class Order {
   id: number;
   orderCode: string;
@@ -46,4 +48,26 @@ export class OrderRequest {
   dateOfReceipt: string;
   hoursOfReceipt: string;
   note: string;
+}
+
+export class OrderHistory {
+  orderCode: string;
+  purchaseDate: Date;
+  services: Method[];
+  amount: number;
+  paymentStatus: number;
+  orderStatus: number;
+  payment: string;
+  order: string;
+
+  constructor(json) {
+    this.orderCode = json.orderCode;
+    this.purchaseDate = json.purchaseDate;
+    this.services = json.services ? this.services.map(x => new Method(x)) : [];
+    this.amount = json.amount;
+    this.paymentStatus = json.paymentStatus;
+    this.orderStatus = json.orderStatus;
+    this.payment = json.payment;
+    this.order = json.order;
+  }
 }

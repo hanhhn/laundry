@@ -1,4 +1,4 @@
-﻿using Cf.Libs.Service.Dtos.Orders;
+﻿using Cf.Libs.Service.Dtos.Order;
 using Cf.Libs.Service.Orders;
 using Microsoft.AspNetCore.Mvc;
 using System;

@@ -8,7 +8,7 @@ using Cf.Libs.Service.Dtos.Adress;
 using Cf.Libs.Service.Dtos.Contact;
 using Cf.Libs.Service.Dtos.Item;
 using Cf.Libs.Service.Dtos.Method;
-using Cf.Libs.Service.Dtos.Orders;
+using Cf.Libs.Service.Dtos.Order;
 using Cf.Libs.Service.Dtos.Page;
 using Cf.Libs.Service.Dtos.Post;
 using Cf.Libs.Service.Dtos.Price;
@@ -46,6 +46,12 @@ namespace Cf.Libs.Service
 
             CreateMap<OrderRequest, Address>();
             CreateMap<Order, OrderDto>();
+            CreateMap<OrderDetail, MethodDto>()
+                .ForMember(x => x.Id, y => y.MapFrom(a => a.MethodId))
+                .ForMember(x => x.Name, y => y.MapFrom(a => a.MethodName))
+                .ForMember(x => x.Description, y => y.MapFrom(a => a.Description))
+                .ForMember(x => x.Type, y => y.MapFrom(a => a.Type));
+
 
             CreateMap<Post, PostDto>();
             CreateMap<PostRequest, Post>();
@@ -55,6 +61,7 @@ namespace Cf.Libs.Service
 
             CreateMap<PageRequest, Page>();
             CreateMap<Page, PageDto>();
+
         }
     }
 }

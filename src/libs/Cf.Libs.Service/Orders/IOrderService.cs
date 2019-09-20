@@ -1,5 +1,5 @@
 ﻿using Cf.Libs.Core.Infrastructure.Service;
-using Cf.Libs.Service.Dtos.Orders;
+using Cf.Libs.Service.Dtos.Order;
 
 namespace Cf.Libs.Service.Orders
 {

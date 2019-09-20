@@ -1,4 +1,4 @@
-﻿namespace Cf.Libs.Service.Dtos.Orders
+﻿namespace Cf.Libs.Service.Dtos.Order
 {
     public class OrderDetailDto
     {

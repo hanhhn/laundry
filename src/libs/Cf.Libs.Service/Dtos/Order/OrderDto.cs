@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-
-namespace Cf.Libs.Service.Dtos.Orders
+namespace Cf.Libs.Service.Dtos.Order
 {
     public class OrderDto
     {

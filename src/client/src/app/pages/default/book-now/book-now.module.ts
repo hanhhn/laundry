@@ -35,7 +35,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    FlexLayoutModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MatStepperModule,

@@ -9,11 +9,7 @@ export class TrackingService {
   constructor(private httpService: HttpService) {}
 
   order(phone: string, code: string): Observable<OrderHistory> {
-    const url = "trackings/" + phone + "/" + code;
-    return this.httpService.doPost(url, null).pipe(
-      map(data => {
-        return data ? new OrderHistory(data) : null;
-      })
-    );
+    const url = "trackings/order/" + phone + "/" + code;
+    return this.httpService.doGet(url, null);
   }
 }

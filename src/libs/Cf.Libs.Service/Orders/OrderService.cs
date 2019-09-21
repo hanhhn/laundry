@@ -126,7 +126,7 @@ namespace Cf.Libs.Service.Orders
             _trackingRepository.Add(new Tracking
             {
                 Phone = request.Phone,
-                OrdeCode = orderInserted.OrderCode,
+                OrderCode = orderInserted.OrderCode,
                 OrderStatus = Core.Enums.OrderStatus.Receive,
             });
 

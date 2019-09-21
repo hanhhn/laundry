@@ -13,6 +13,7 @@ using Cf.Libs.Service.Dtos.Page;
 using Cf.Libs.Service.Dtos.Post;
 using Cf.Libs.Service.Dtos.Price;
 using Cf.Libs.Service.Dtos.Setting;
+using Cf.Libs.Service.Dtos.Tracking;
 
 namespace Cf.Libs.Service
 {
@@ -51,6 +52,7 @@ namespace Cf.Libs.Service
                 .ForMember(x => x.Name, y => y.MapFrom(a => a.MethodName))
                 .ForMember(x => x.Description, y => y.MapFrom(a => a.Description))
                 .ForMember(x => x.Type, y => y.MapFrom(a => a.Type));
+            CreateMap<Tracking, TrackingDto>();
 
 
             CreateMap<Post, PostDto>();

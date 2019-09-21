@@ -1,3 +1,59 @@
 <div class="container background">
 
+    <div class="content">
+        <form [formGroup]="formControls" fxLayoutGap=20px>
+            <mat-form-field>
+                <input formControlName="phone" matInput placeholder="Số điện thoại" />
+            </mat-form-field>
+            <mat-form-field>
+                <input formControlName="code" matInput placeholder="Số đơn hàng" />
+            </mat-form-field>
+            <button mat-flat-button (click)="onSearchClicked($event)" color="primary">Tìm kiếm</button>
+        </form>
+        <h4 *ngIf="order">Chi tiết đơn hàng</h4>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" *ngIf="order">
+            <div class="order" fxFlex="auto">
+                <p>
+                    Số đơn hàng của bạn là
+                    <a style="color: #007ff0;"><strong>#{{ order.orderCode }}</strong></a>
+                </p>
+                <ul>
+                    <li>
+                        Ngày đặt hàng: <strong>{{ order.purchaseDate | date: "dd/MM/yyyy" }}</strong>
+                    </li>
+                    <li *ngIf="clean">
+                        Dịch vụ: <strong>{{ clean.name }}</strong>
+                    </li>
+                    <li *ngIf="options && options.length > 0">
+                        <div>Tùy chọn thêm:</div>
+                        <div *ngFor="let item of options">
+                            <strong>- {{ item.name }}</strong>
+                        </div>
+                    </li>
+                    <li *ngIf="order.dateOfReceipt">
+                        Ngày tới nhận hàng:
+                        <strong>{{ order.dateOfReceipt | date: "dd/MM/yyyy" }}</strong>
+                    </li>
+                    <li *ngIf="order.hoursOfReceipt">
+                        Giờ tới nhận hàng: <strong>{{ order.hoursOfReceipt }}</strong>
+                    </li>
+                </ul>
+                <p>Địa chỉ của bạn: {{ order.fullAddress }}</p>
+            </div>
+            <div class="tracking" fxFlex="auto" *ngIf="order.orderStatus">
+                <p>
+                    Trạng thái đơn hàng
+                </p>
+                <ul>
+                    <li *ngFor="let item of order.orderStatus">
+                        {{ item.status | trackConverter}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="notfound" *ngIf="!order">
+            <p>Nhập <strong>chính xác</strong> số điện thoại, số hóa đơn để
+                theo dỏi đơn hàng của bạn</p>
+        </div>
+    </div>
 </div>

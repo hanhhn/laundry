@@ -48,17 +48,20 @@ namespace Cf.Libs.Service.Trackings
                                select d).ToList();
 
             var tracking = (from track in _trackingRepository.GetQuery()
-                            where track.OrdeCode == order.OrderCode && track.Phone == order.Phone
+                            where track.OrderCode == order.OrderCode && track.Phone == order.Phone
                             orderby track.CreateDate descending
                             orderby track.ModifiedDate descending
-                            select track).FirstOrDefault();
+                            select track).AsEnumerable();
 
             OrderHistoryDto history = new OrderHistoryDto
             {
                 OrderCode = order.OrderCode,
-                OrderStatus = tracking.OrderStatus,
+                OrderStatus = _mapper.Map<IEnumerable<TrackingDto>>(tracking),
                 PaymentStatus = order.Status,
                 PurchaseDate = order.CreateDate,
+                DateOfReceipt = order.DateOfReceipt,
+                HoursOfReceipt = order.HoursOfReceipt,
+                FullAddress = string.Format("{0}, {1}, {2}, {3}.", order.Street, order.WardName, order.DistrictName, order.ProvinceName),
                 Amount = 0,
                 Services = _mapper.Map<IEnumerable<MethodDto>>(orderDetail)
             };

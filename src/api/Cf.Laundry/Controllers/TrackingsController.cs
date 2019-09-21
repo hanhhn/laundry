@@ -15,7 +15,7 @@ namespace Cf.Laundry.Controllers
             _trackingService = trackingService;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("order/{phone}/{code}")]
         public OrderHistoryDto Order(string phone, string code)
         {

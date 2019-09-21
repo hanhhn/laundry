@@ -1,0 +1,42 @@
+.content {
+  padding: 30px;
+  min-height: 600px;
+}
+
+.done {
+  .title {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    .mat-icon {
+      height: auto;
+      width: auto;
+    }
+
+    .icon {
+      font-size: 66px;
+      color: #155724;
+    }
+  }
+
+  .content {
+    text-align: left;
+  }
+}
+
+.tracking {
+  ul {
+    list-style: none;
+
+    :last-child {
+      color: #007ff0;
+    }
+  }
+}
+
+.notfound {
+  text-align: left;
+  align-items: center;
+  margin: 50px auto;
+}

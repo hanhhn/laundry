@@ -10,10 +10,12 @@ namespace Cf.Libs.Service.Dtos.Tracking
         public string OrderCode { get; set; }
         public DateTime PurchaseDate { get; set; }
         public IEnumerable<MethodDto> Services { get; set; }
+        public IEnumerable<TrackingDto> OrderStatus { get; set; }
         public decimal Amount { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
-        public OrderStatus OrderStatus { get; set; }
+        public DateTime DateOfReceipt { get; set; }
+        public string HoursOfReceipt { get; set; }
+        public string FullAddress { get; set; }
         public string Payment => PaymentStatus.ToString();
-        public string Order => OrderStatus.ToString();
     }
 }

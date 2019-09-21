@@ -7,7 +7,8 @@ import {
   MatTableModule,
   MatFormFieldModule,
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  MatStepperModule
 } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { TrackingConverterPipe } from "src/app/cores/pipes/tracking.pipe";
@@ -31,6 +32,7 @@ const routes: Routes = [
     MatInputModule,
     MatTableModule,
     FlexLayoutModule,
+    MatStepperModule,
     RouterModule.forChild(routes)
   ],
   providers: [TrackingService]

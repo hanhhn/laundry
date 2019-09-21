@@ -27,10 +27,14 @@
 
 .tracking {
   ul {
-    list-style: none;
-
-    :last-child {
+    :first-child {
       color: #007ff0;
+      font-weight: 500;
+    }
+
+    li {
+        padding: 5px 0px;
+        position: relative;
     }
   }
 }

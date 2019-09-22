@@ -24,8 +24,6 @@ namespace Cf.Libs.Service.Orders
     public class OrderService : BaseService, IOrderService
     {
         private readonly IMethodRepository _methodRepository;
-        private readonly IPriceRepository _priceRepository;
-        private readonly IItemRepository _itemRepository;
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderDetailRepository _orderDetailRepository;
         private readonly IProvinceRepository _provinceRepository;
@@ -49,8 +47,6 @@ namespace Cf.Libs.Service.Orders
             IAddressRepository addressRepository) : base(unitOfWork, mapper)
         {
             _methodRepository = methodRepository;
-            _priceRepository = priceRepository;
-            _itemRepository = itemRepository;
             _orderRepository = orderRepository;
             _orderDetailRepository = orderDetailRepository;
             _provinceRepository = provinceRepository;

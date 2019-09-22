@@ -188,7 +188,8 @@ export class BookNowComponent implements OnInit {
       const length = e.target.value.length;
       this.phone = e.target.value;
       this.isShowOneMoreAddress = false;
-      this.contactFormGroup.reset();
+      this.addressFormGroup.reset();
+      this.addressControls.id.setValue(0);
 
       if (10 <= length && length <= 11) {
         this.contactControls.phone.patchValue(this.phone);

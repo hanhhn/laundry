@@ -17,19 +17,19 @@ export class SettingService {
   getMenu(): Menu[] {
     return [
       new Menu({
-        desktopOrder: 5,
-        mobileOrder: 1,
+        desktopOrder: 1,
+        mobileOrder: 3,
         mobile: false,
         url: "/ve-chung-toi",
         label: "Về chúng tôi"
       }),
-      new Menu({
-        desktopOrder: 2,
-        mobileOrder: 3,
-        mobile: true,
-        url: "/quy-trinh",
-        label: "Quy trình"
-      }),
+      // new Menu({
+      //   desktopOrder: 2,
+      //   mobileOrder: 3,
+      //   mobile: true,
+      //   url: "/quy-trinh",
+      //   label: "Quy trình"
+      // }),
       new Menu({
         desktopOrder: 3,
         mobileOrder: 2,
@@ -38,9 +38,9 @@ export class SettingService {
         label: "Bảng giá"
       }),
       new Menu({
-        desktopOrder: 4,
-        mobileOrder: 1,
-        mobile: false,
+        desktopOrder: 2,
+        mobileOrder: 4,
+        mobile: true,
         url: "/lien-he",
         label: "Liên hệ"
       }),

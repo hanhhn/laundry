@@ -1,12 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { SniperService } from "src/app/cores/services/sniper.service";
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from "@angular/animations";
 import { ActivatedRoute } from "@angular/router";
 import { TrackingService } from "src/app/cores/services/trackings.service";
 import { OrderHistory } from "src/app/cores/models/orders.model";
@@ -16,17 +9,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 @Component({
   selector: "app-tracking",
   templateUrl: "./tracking.component.html",
-  styleUrls: ["./tracking.component.scss"],
-  animations: [
-    trigger("detailExpand", [
-      state("collapsed", style({ height: "0px", minHeight: "0" })),
-      state("expanded", style({ height: "*" })),
-      transition(
-        "expanded <=> collapsed",
-        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
-      )
-    ])
-  ]
+  styleUrls: ["./tracking.component.scss"]
 })
 export class TrackingComponent implements OnInit {
   phone: string;
@@ -89,7 +72,7 @@ export class TrackingComponent implements OnInit {
           this.order = data;
           if (this.order) {
             this.clean = this.order.services.find(x => x.type === "Clean");
-            this.options = this.order.services.filter(x => x.type !== "Clean");
+            this.options = this.order.services.filter(x => x.type !== "Clean" && x.type !== "Delivery");
           }
 
           this.sniper.hideSniper();

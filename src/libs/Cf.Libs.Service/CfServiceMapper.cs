@@ -53,6 +53,7 @@ namespace Cf.Libs.Service
                 .ForMember(x => x.Description, y => y.MapFrom(a => a.Description))
                 .ForMember(x => x.Type, y => y.MapFrom(a => a.Type));
             CreateMap<Tracking, TrackingDto>();
+            CreateMap<OrderDetail, OrderDetailDto>();
 
 
             CreateMap<Post, PostDto>();

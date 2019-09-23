@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Cf.Laundry.Common;
 using Cf.Libs.Core.Exeptions;
+using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
 using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Common;
@@ -17,7 +19,7 @@ using Cf.Libs.DataAccess.Repository.Wards;
 using Cf.Libs.Service.Dtos.Order;
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using System.Linq;
 
 namespace Cf.Libs.Service.Orders
 {
@@ -77,7 +79,7 @@ namespace Cf.Libs.Service.Orders
             DateTime.TryParse(request.DateOfReceipt, out dateOfReceipt);
             var order = new Order
             {
-                OrderCode = Get8Digits().ToUpper(),
+                OrderCode = Utility.GetDigits(),
                 Phone = address.Phone,
                 FullName = address.FullName,
                 ProvinceId = address.ProvinceId,
@@ -100,11 +102,10 @@ namespace Cf.Libs.Service.Orders
             methodRequests.AddRange(request.OptionsId);
             methodRequests.Add(request.DeliveryId);
 
-
             foreach (var methodId in methodRequests)
             {
                 var method = _methodRepository.Get(methodId);
-                if(method != null)
+                if (method != null)
                 {
                     var detail = _orderDetailRepository.Add(new OrderDetail
                     {
@@ -134,13 +135,33 @@ namespace Cf.Libs.Service.Orders
             return _mapper.Map<OrderDto>(orderInserted);
         }
 
-        private string Get8Digits()
+        public IPagedList<OrderDto> Get(OrderFilter filter)
         {
-            var bytes = new byte[4];
-            var rng = RandomNumberGenerator.Create();
-            rng.GetBytes(bytes);
-            uint random = BitConverter.ToUInt32(bytes, 0) % 10000;
-            return string.Format("{0:D4}", random);
+            var queryOrders = from o in _orderRepository.GetQuery()
+                              where !o.IsDeleted
+                              select o;
+
+            if (!string.IsNullOrEmpty(filter.Phone))
+            {
+                queryOrders = from o in queryOrders
+                              where o.Phone == filter.Phone
+                              select o;
+            }
+
+            if (!string.IsNullOrEmpty(filter.OrderCode))
+            {
+                queryOrders = from o in queryOrders
+                              where o.OrderCode == filter.OrderCode
+                              select o;
+            }
+
+            queryOrders = from o in queryOrders
+                          orderby o.CreateDate descending
+                          select o;
+
+            var result = queryOrders.ToPagedList<Order, OrderDto>(filter.PageIndex, filter.PageSize);
+
+            return result;
         }
     }
 }

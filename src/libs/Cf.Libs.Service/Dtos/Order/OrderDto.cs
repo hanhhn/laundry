@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Cf.Libs.Core.Enums;
+using System;
+using System.Collections.Generic;
+
 namespace Cf.Libs.Service.Dtos.Order
 {
     public class OrderDto
@@ -13,7 +16,8 @@ namespace Cf.Libs.Service.Dtos.Order
         public string Street { get; set; }
         public DateTime DateOfReceipt { get; set; }
         public string HoursOfReceipt { get; set; }
-
+        public PaymentStatus Status { get; set; }
         public string FullAddress => string.Format("{0}, {1}, {2}, {3}.", Street, WardName, DistrictName, ProvinceName);
+        public virtual IEnumerable<OrderDetailDto> OrderDetails { get; set; }
     }
 }

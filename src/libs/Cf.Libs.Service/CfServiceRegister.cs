@@ -2,7 +2,6 @@
 using Cf.Libs.Service.Contacts;
 using Cf.Libs.Service.Items;
 using Cf.Libs.Service.Methods;
-using Cf.Libs.Service.OrderDetails;
 using Cf.Libs.Service.Orders;
 using Cf.Libs.Service.Pages;
 using Cf.Libs.Service.Posts;
@@ -24,7 +23,6 @@ namespace Cf.Libs.Service
             services.AddScoped<IMethodService, MethodService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IOrderService, OrderService>();
-            services.AddScoped<IOrderDetailService, OrderDetailService>();
             services.AddScoped<ISettingService, SettingService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IPageService, PageService>();

@@ -68,10 +68,14 @@ export function vnToEn(str) {
 }
 
 export function toQueryString(obj) {
-  let str = [];
-  for (var p in obj)
-    if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+  if (obj) {
+    const str = [];
+    for (const p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
     }
-  return "&" + str.join("&");
+
+    return "&" + str.join("&");
+  }
 }

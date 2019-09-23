@@ -66,3 +66,12 @@ export function vnToEn(str) {
   str = str.replace(/[^a-zA-Z0-9-]/g, "");
   return str;
 }
+
+export function toQueryString(obj) {
+  let str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return "&" + str.join("&");
+}

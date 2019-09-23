@@ -92,3 +92,9 @@ export class OrderHistory {
     this.fullAddress = json.fullAddress;
   }
 }
+
+export class OrderFilter {
+  orderCode: string;
+  phone: string;
+  fullName: string;
+}

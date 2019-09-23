@@ -2,7 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { OrderRequest, Order } from "../models/orders.model";
+import { OrderRequest, Order, OrderFilter } from "../models/orders.model";
+import { toQueryString } from "../helpers/utils.helper";
+import { PagedList } from "../models/paged.model";
 
 @Injectable()
 export class OrdersService {
@@ -15,5 +17,15 @@ export class OrdersService {
         return data ? new Order(data) : null;
       })
     );
+  }
+
+  getAll(
+    filter: OrderFilter,
+    pageIndex: number,
+    pageSize: number
+  ): Observable<PagedList<Order>> {
+    const url =
+      "orders/get?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    return this.httpService.doGet(url, toQueryString(filter));
   }
 }

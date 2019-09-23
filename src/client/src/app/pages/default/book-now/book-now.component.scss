@@ -1,18 +1,17 @@
 .book-now {
   padding: 2vw;
+  min-height: 577px;
 
   .address {
-    .address-item {
-      h4 {
-        margin-top: 0px;
-        margin-bottom: 7px;
-      }
+    h4 {
+      margin-top: 0px;
+      margin-bottom: 7px;
+    }
 
-      p {
-        margin: 0px;
-        font-size: 14px;
-        white-space: normal;
-      }
+    p {
+      margin: 0px;
+      font-size: 14px;
+      white-space: normal;
     }
   }
 
@@ -26,23 +25,15 @@
     }
   }
 
-  .service {
-    .sub-step {
-      margin: 15px 0px;
-    }
+  .service .sub-step {
+    margin: 15px 0px;
   }
 
   .step-action {
     margin-top: 20px;
-  }
 
-  .date {
-    // mat-form-field {
-    //   min-width: 300px;
-    // }
-
-    .pdr {
-      padding-right: 30px;
+    button {
+      margin-right: 15px;
     }
   }
 
@@ -66,18 +57,26 @@
     .content {
       text-align: left;
     }
-  }
 
-  .min-height {
-    min-height: 400px;
-  }
+    .thanks {
+      a {
+        color: #0077cc;
+      }
 
-  .action {
-    text-align: right;
+      span {
+        font-weight: 500;
+        color: crimson; font-size: 24px;
+      }
+    }
   }
 
   .action {
     margin-left: 10px;
+    text-align: right;
+
+    button {
+      margin-left: 10px;
+    }
 
     i {
       font-size: 18px;

@@ -1,328 +1,185 @@
 <div class="container background">
-  <mat-horizontal-stepper class="book-now" [linear]="true" #stepper>
+  <mat-horizontal-stepper class="book-now" linear="true" #stepper>
     <mat-step [stepControl]="serviceFormGroup" [editable]="!completed">
       <form [formGroup]="serviceFormGroup">
         <ng-template matStepLabel>Dịch vụ</ng-template>
-        <div class="min-height">
-          <div
-            fxLayout="row"
-            fxLayoutAlign="space-between start"
-            fxLayout.xs="column"
-            fxLayoutAlign.xs="none"
-          >
-            <div class="service" fxFlex="auto">
-              <div
-                class="sub-step"
-                *ngIf="getWayClean && getWayClean.length > 0"
-              >
-                <h4 class="title">Chọn dịch vụ</h4>
-                <div class="content">
-                  <mat-radio-group
-                    formControlName="clean"
-                    fxLayout="column"
-                    fxLayoutGap="10px"
-                    (change)="onCleanChanged($event)"
-                  >
-                    <mat-radio-button
-                      *ngFor="let item of getWayClean"
-                      [value]="item.id"
-                    >
-                      <div
-                        class="inner"
-                        fxLayout="row"
-                        fxLayoutAlign="space-between start"
-                      >
-                        <div style="margin-right: 5px">{{ item.name }}</div>
-                        <div
-                          *ngIf="item.description"
-                          [innerHTML]="item.description"
-                        ></div>
-                      </div>
-                    </mat-radio-button>
-                  </mat-radio-group>
-                </div>
-              </div>
-              <div class="sub-step" *ngIf="getOptions && getOptions.length > 0">
-                <h4 class="title">Tùy chọn thêm</h4>
-                <div class="content">
-                  <div
-                    formArrayName="options"
-                    fxLayout="column"
-                    fxLayoutGap="10px"
-                  >
-                    <mat-checkbox
-                      *ngFor="let item of optionControls.controls; index as i"
-                      [formControlName]="i"
-                    >
-                      {{ getOptions[i].name }}</mat-checkbox
-                    >
-                  </div>
-                </div>
-              </div>
-              <div
-                class="sub-step"
-                *ngIf="getWayClean && getWayClean.length > 0"
-              >
-                <h4 class="title">Ghi chú</h4>
-                <div class="content">
-                  <mat-form-field appearance="outline" style="width: 100%">
-                    <textarea
-                      formControlName="note"
-                      matInput
-                      placeholder="Ghi chú cho chúng tôi"
-                    ></textarea>
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-            <div class="discount">
-              <form>
-                <mat-form-field>
-                  <input matInput placeholder="Mã giảm giá / Quà tặng" />
-                </mat-form-field>
-                <button mat-raised-button color="primary">Áp dụng</button>
-              </form>
-            </div>
-          </div>
-          <div class="step-action">
-            <button
-              (click)="onNextSecond($event)"
-              mat-raised-button
-              color="primary"
-            >
-              Tiếp Tục
-            </button>
-          </div>
-        </div>
-      </form>
-    </mat-step>
-
-    <mat-step [stepControl]="secondFormGroup" [editable]="!completed">
-      <form [formGroup]="contactFormGroup">
-        <ng-template matStepLabel>Liên hệ</ng-template>
-        <div class="min-height">
-          <div
-            fxLayout="row"
-            fxLayout.xs="column"
-            fxLayoutAlign="space-between start"
-            fxLayoutAlign.xs="none"
-            fxLayoutGap="30px"
-          >
-            <div fxFlex="40" fxFlex.xs="auto">
-              <div class="phone">
-                <mat-form-field>
-                  <input
-                    formControlName="phone"
-                    matInput
-                    placeholder="Số diện thoại"
-                    (change)="onPhoneChanged($event)"
-                  />
-                </mat-form-field>
-                <button
-                  mat-button
-                  color="primary"
-                  *ngIf="alreadyExists || isShowOneMoreAddress"
-                  (click)="onOneMoreAddress($event)"
-                >
-                  Thêm địa chỉ mới
-                </button>
-              </div>
-              <div class="date" formGroupName="delivery">
-                <h4 class="title" style="margin: 23px 0px;">
-                  Thời gian chúng tôi đến nhận đồ
-                </h4>
-                <div fxLayout="column">
-                  <mat-form-field>
-                    <mat-label>Chọn ngày</mat-label>
-                    <mat-select formControlName="dateOfReceipt">
-                      <mat-option
-                        *ngFor="let item of activeDay"
-                        [value]="item.key"
-                        >{{ item.value }}</mat-option
-                      >
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <mat-label>Chọn giờ</mat-label>
-                    <mat-select
-                      formControlName="hoursOfReceipt"
-                      (selectionChange)="onDeliveryTimeSelected($event)"
-                    >
-                      <mat-option
-                        *ngFor="let item of getDeliveryTime"
-                        [value]="item.id"
-                      >
-                        <div
-                          class="inner"
-                          fxLayout="row"
-                          fxLayoutAlign="space-between start"
-                        >
-                          <strong>{{ item.name }}</strong>
-                          <div
-                            *ngIf="item.description"
-                            [innerHTML]="item.description"
-                          ></div>
-                        </div>
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-            <div formGroupName="address" fxFlex="60" fxFlex.xs="auto">
-              <div class="address" fxLayout="row" *ngIf="alreadyExists">
-                <mat-radio-group
-                  formControlName="id"
-                  fxLayout="column"
-                  fxLayoutGap="20px"
-                >
-                  <div
-                    *ngFor="let item of addresses"
-                    fxLayout="row"
-                    fxLayoutAlign="space-between center"
-                  >
-                    <mat-radio-button [value]="item.id" class="address-item">
-                      <h4>{{ item.fullName }}</h4>
-                      <p>{{ item.fullAddress }}</p>
-                    </mat-radio-button>
-                    <div
-                      class="action"
-                      fxLayout="row"
-                      fxLayoutAlign="space-between center"
-                    >
-                      <button mat-icon-button class="edit">
-                        <i
-                          class="fa fa-edit"
-                          (click)="onEditAdress($event, item)"
-                        ></i>
-                      </button>
-                      <button mat-icon-button class="remove" type="button">
-                        <i
-                          class="fa fa-trash"
-                          (click)="onRemoveAdress(item.id)"
-                        ></i>
-                      </button>
+        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.xs="column" fxLayoutAlign.xs="none">
+          <div class="service" fxFlex="auto">
+            <div class="sub-step" *ngIf="getWayClean && getWayClean.length > 0">
+              <h4 class="title">Chọn dịch vụ</h4>
+              <div class="content">
+                <mat-radio-group formControlName="clean" fxLayout="column" fxLayoutGap="10px"
+                  (change)="onCleanChanged($event)">
+                  <mat-radio-button *ngFor="let item of getWayClean" [value]="item.id">
+                    <div class="inner" fxLayout="row" fxLayoutAlign="space-between start">
+                      <div style="margin-right: 5px">{{ item.name }}</div>
+                      <div *ngIf="item.description" [innerHTML]="item.description"></div>
                     </div>
-                  </div>
+                  </mat-radio-button>
                 </mat-radio-group>
               </div>
-
-              <div class="contact" fxLayout="column" *ngIf="!alreadyExists">
-                <mat-form-field>
-                  <input
-                    formControlName="fullName"
-                    matInput
-                    placeholder="Họ tên"
-                  />
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-label>Tỉnh/Thành phố</mat-label>
-                  <mat-select
-                    formControlName="province"
-                    (selectionChange)="onProvinceChanged($event.value)"
-                  >
-                    <mat-option
-                      *ngFor="let item of provinces"
-                      [value]="item.id"
-                      >{{ item.fullName }}</mat-option
-                    >
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-label>Quận/Huyện</mat-label>
-                  <mat-select
-                    formControlName="district"
-                    (selectionChange)="onDistrictChanged($event.value)"
-                  >
-                    <mat-option
-                      *ngFor="let item of districts"
-                      [value]="item.id"
-                      >{{ item.fullName }}</mat-option
-                    >
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field>
-                  <mat-label>Phường/Xã</mat-label>
-                  <mat-select formControlName="ward">
-                    <mat-option *ngFor="let item of wards" [value]="item.id">{{
-                      item.fullName
-                    }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field>
-                  <textarea
-                    formControlName="street"
-                    matInput
-                    rows="3"
-                    placeholder="Địa chỉ: số nhà, đường..."
-                  ></textarea>
-                </mat-form-field>
-                <div class="action">
-                  <button
-                    *ngIf="isShowOneMoreAddress"
-                    (click)="onCancelMoreAddress($event)"
-                    mat-stroked-button
-                    color="primary"
-                  >
-                    Hủy
-                  </button>
-                  <button
-                    *ngIf="isShowOneMoreAddress"
-                    (click)="onSaveAddress($event)"
-                    mat-flat-button
-                    color="primary"
-                  >
-                    Lưu
-                  </button>
+            </div>
+            <div class="sub-step" *ngIf="getOptions && getOptions.length > 0">
+              <h4 class="title">Tùy chọn thêm</h4>
+              <div class="content">
+                <div formArrayName="options" fxLayout="column" fxLayoutGap="10px">
+                  <mat-checkbox *ngFor="let item of optionControls.controls; index as i" [formControlName]="i">
+                    {{ getOptions[i].name }}</mat-checkbox>
                 </div>
               </div>
             </div>
+            <div class="sub-step" *ngIf="getWayClean && getWayClean.length > 0">
+              <h4 class="title">Ghi chú</h4>
+              <div class="content">
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <textarea formControlName="note" matInput placeholder="Ghi chú cho chúng tôi"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
           </div>
-          <div class="step-action">
-            <button mat-stroked-button matStepperPrevious color="primary">
-              Quay lại
-            </button>
-            <button
-              (click)="onConfirmOrder($event)"
-              mat-raised-button
-              color="primary"
-            >
-              Xác nhận
-            </button>
+          <div class="discount">
+            <form>
+              <mat-form-field>
+                <input matInput placeholder="Mã giảm giá / Quà tặng" />
+              </mat-form-field>
+              <button mat-raised-button color="primary">Áp dụng</button>
+            </form>
           </div>
+        </div>
+        <div class="step-action">
+          <div class="error" style="margin-bottom: 10px;" *ngIf="submitted && serviceControls.clean.errors">
+            <label *ngIf="serviceControls.clean.errors.required">Chọn dịch vụ bạn cần đặt để hoàn thành.</label>
+          </div>
+          <button (click)="onNextSecond($event)" mat-raised-button color="primary">
+            Tiếp Tục
+          </button>
         </div>
       </form>
     </mat-step>
 
-    <mat-step>
+    <mat-step [stepControl]="contactFormGroup" [editable]="!completed">
+      <form [formGroup]="contactFormGroup">
+        <ng-template matStepLabel>Liên hệ</ng-template>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="none"
+          fxLayoutGap="30px">
+          <div fxFlex="40" fxFlex.xs="auto">
+            <div class="phone">
+              <mat-form-field>
+                <input formControlName="phone" matInput placeholder="Số diện thoại" (change)="onPhoneChanged($event)" />
+              </mat-form-field>
+              <button mat-button color="primary" *ngIf="alreadyExists || isShowOneMoreAddress"
+                (click)="onOneMoreAddress($event)">
+                Thêm địa chỉ mới
+              </button>
+            </div>
+            <div class="date" formGroupName="delivery">
+              <h4 class="title" style="margin: 23px 0px;">
+                Thời gian chúng tôi đến nhận đồ
+              </h4>
+              <div fxLayout="column">
+                <mat-form-field>
+                  <mat-label>Chọn ngày</mat-label>
+                  <mat-select formControlName="dateOfReceipt">
+                    <mat-option *ngFor="let item of activeDay" [value]="item.key">{{ item.value }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Chọn giờ</mat-label>
+                  <mat-select formControlName="hoursOfReceipt" (selectionChange)="onDeliveryTimeSelected($event)">
+                    <mat-option *ngFor="let item of getDeliveryTime" [value]="item.id">
+                      <div class="inner" fxLayout="row" fxLayoutAlign="space-between start">
+                        <strong>{{ item.name }}</strong>
+                        <div *ngIf="item.description" [innerHTML]="item.description"></div>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div formGroupName="address" fxFlex="60" fxFlex.xs="auto">
+            <div class="address" fxLayout="row" *ngIf="alreadyExists">
+              <mat-radio-group formControlName="id" fxLayout="column" fxLayoutGap="20px">
+                <div *ngFor="let item of addresses" fxLayout="row" fxLayoutAlign="space-between center">
+                  <mat-radio-button [value]="item.id">
+                    <h4>{{ item.fullName }}</h4>
+                    <p>{{ item.fullAddress }}</p>
+                  </mat-radio-button>
+                  <div class="action" fxLayout="row" fxLayoutAlign="space-between center">
+                    <button mat-icon-button class="edit">
+                      <i class="fa fa-edit" (click)="onEditAdress($event, item)"></i>
+                    </button>
+                    <button mat-icon-button class="remove" type="button">
+                      <i class="fa fa-trash" (click)="onRemoveAdress(item.id)"></i>
+                    </button>
+                  </div>
+                </div>
+              </mat-radio-group>
+            </div>
+            <div class="contact" fxLayout="column" *ngIf="!alreadyExists">
+              <mat-form-field>
+                <input formControlName="fullName" matInput placeholder="Họ tên" />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Tỉnh/Thành phố</mat-label>
+                <mat-select formControlName="province" (selectionChange)="onProvinceChanged($event.value)">
+                  <mat-option *ngFor="let item of provinces" [value]="item.id">{{ item.fullName }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Quận/Huyện</mat-label>
+                <mat-select formControlName="district" (selectionChange)="onDistrictChanged($event.value)">
+                  <mat-option *ngFor="let item of districts" [value]="item.id">{{ item.fullName }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Phường/Xã</mat-label>
+                <mat-select formControlName="ward">
+                  <mat-option *ngFor="let item of wards" [value]="item.id">{{
+                      item.fullName
+                    }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <textarea formControlName="street" matInput rows="3" placeholder="Địa chỉ: số nhà, đường..."></textarea>
+              </mat-form-field>
+              <div class="action">
+                <button *ngIf="isShowOneMoreAddress" (click)="onCancelMoreAddress($event)" mat-stroked-button
+                  color="primary">
+                  Hủy
+                </button>
+                <button *ngIf="isShowOneMoreAddress" (click)="onSaveAddress($event)" mat-flat-button color="primary">
+                  Lưu
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-action">
+          <button mat-stroked-button matStepperPrevious color="primary">
+            Quay lại
+          </button>
+          <button (click)="onConfirmOrder($event)" mat-raised-button color="primary">
+            Xác nhận
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [editable]="completed">
       <ng-template matStepLabel>Hoàn thành</ng-template>
-      <div class="min-height done">
+      <div class="done">
         <div class="text-center title">
-          <mat-icon
-            class="icon"
-            aria-hidden="false"
-            aria-label="đặt dịch vụ thành công"
-            >check_circle_outline</mat-icon
-          >
+          <mat-icon class="icon" aria-hidden="false" aria-label="đặt dịch vụ thành công">check_circle_outline</mat-icon>
           <h3>Bạn đã đặt dịch vụ thành công!</h3>
         </div>
-        <div
-          class="content"
-          fxLayout="row"
-          fxLayout.xs="column"
-          fxLayoutAlign="space-between start"
-          *ngIf="order"
-        >
+        <div class="content" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" *ngIf="order">
           <div class="order">
             <h4>Chi tiết đơn hàng</h4>
             <p>
               Số đơn hàng của bạn là
-              <a
-                style="color: #007ff0;"
-                href="{{ order.getTrackingUrl }}"
-                target="_blank"
-                ><strong>#{{ order.orderCode }}</strong></a
-              >
+              <a style="color: #007ff0;" href="{{ order.getTrackingUrl }}"
+                target="_blank"><strong>#{{ order.orderCode }}</strong></a>
             </p>
             <ul>
               <li *ngIf="clean">
@@ -345,14 +202,12 @@
             <p>Địa chỉ của bạn: {{ order.fullAddress }}</p>
           </div>
           <div class="thanks text-center" ngStyle.xs="margin: auto">
-            <img src="{{ thanksYou }}" alt="thanks you for your order!" />
+            <h1>Thanks you!</h1>
+            <h4>for your order <span>&hearts;&hearts;&hearts;</span></h4>
+            <a href=".">www.giatsach.vn</a>
           </div>
         </div>
       </div>
-      <!-- <div class="step-action">
-        <button mat-button matStepperPrevious>Quay lại</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div> -->
     </mat-step>
   </mat-horizontal-stepper>
 </div>

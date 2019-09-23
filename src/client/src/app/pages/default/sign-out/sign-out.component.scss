@@ -1,0 +1,11 @@
+@import '../../../../variables';
+
+.content {
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: $color-primary;
+}

@@ -1,3 +1,6 @@
+
+@import "../../../variables";
+
 .carousel {
   background-color: #ffcf10 !important;
   text-align: center;
@@ -27,6 +30,10 @@
 
     button {
       margin: 0 10px;
+    }
+
+    .primary {
+      background-color: $color-primary;
     }
   }
 }

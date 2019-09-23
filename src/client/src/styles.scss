@@ -9,13 +9,13 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
-@import "variables";
+@import "theme-color";
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $laundry-primary: mat-palette($mat-primary-laundy);
-$laundry-accent: mat-palette($mat-orange, A200, A100, A400);
+$laundry-accent: mat-palette($mat-primary-laundy, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $laundry-warn: mat-palette($mat-red);

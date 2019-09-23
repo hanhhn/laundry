@@ -39,6 +39,7 @@ const METHOD = {
 export class BookNowComponent implements OnInit {
   isLinear: boolean;
   isMobile: boolean;
+  submitted: boolean;
   isShowFullAddress: boolean;
   isShowOneMoreAddress: boolean;
   thanksYou = thankYou;
@@ -117,6 +118,7 @@ export class BookNowComponent implements OnInit {
     private storageService: StorageService
   ) {
     this.isShowFullAddress = false;
+    this.submitted = false;
     this.methods = [];
     this.isLinear = true;
     this.isMobile = false;
@@ -176,7 +178,7 @@ export class BookNowComponent implements OnInit {
 
   onNextSecond(e) {
     e.preventDefault();
-
+    this.submitted = true;
     this.serviceFormGroup.markAllAsTouched();
     if (this.serviceFormGroup.valid) {
       this.stepper.next();
@@ -282,9 +284,9 @@ export class BookNowComponent implements OnInit {
       }
     });
 
-    this.sniper.showSniper();
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
+        this.sniper.showSniper();
         this.addressService.delete(id).subscribe(
           address => {
             this.addresses = address ? address : [];

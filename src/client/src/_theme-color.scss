@@ -1,0 +1,12 @@
+$mat-primary-laundy: (
+  500: #07c,
+  A100: #66bfff,
+  A200: #0095ff,
+  A400: #07c,
+  contrast: (
+    500: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text
+  )
+);

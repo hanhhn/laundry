@@ -2,10 +2,10 @@
   <h1 class="title">{{ title }}</h1>
   <div class="description" [innerHTML]="description"></div>
   <div class="action">
-    <button mat-stroked-button *ngIf="strokedName" [routerLink]="[strokedLink]">
+    <button mat-flat-button *ngIf="strokedName" [routerLink]="[strokedLink]">
       {{ strokedName }}
     </button>
-    <button mat-flat-button *ngIf="flatName" [routerLink]="[flatLink]">
+    <button class="primary" mat-flat-button *ngIf="flatName" [routerLink]="[flatLink]" color="primary">
       {{ flatName }}
     </button>
   </div>

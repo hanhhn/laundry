@@ -1,10 +1,12 @@
+@import '../../../../variables';
+
 .price-list {
   padding: 2vw;
   
   .title {
     margin-top: 0px;
     margin-bottom: 30px;
-    color: #f48024;
+    color: $color-primary;
   }
 
   .item {

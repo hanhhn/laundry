@@ -23,6 +23,23 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadDataSource();
+  }
+
+  onPaging(e) {
+    //event.first = Index of the first record
+    //event.rows = Number of rows to display in new page
+    //event.page = Index of the new page
+    //event.pageCount = Total number of pages
+
+    this.pageIndex = e.page;
+    this.pageSize = e.rows;
+    this.totalPage = e.pageCount;
+
+    this.loadDataSource();
+  }
+
+  loadDataSource() {
     this.orderService
       .getAll(this.filter, this.pageIndex, this.pageSize)
       .subscribe(data => {

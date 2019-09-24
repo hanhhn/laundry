@@ -1,5 +1,24 @@
 import { Method } from "./method.model";
 
+export class OrderDetail {
+  id: number;
+  orderId: string;
+  methodId: number;
+  methodName: string;
+  description: string;
+  type: string;
+
+  constructor(json) {
+    this.id = json.id;
+    this.orderId = json.orderId;
+    this.methodId = json.methodId;
+    this.methodName = json.methodName;
+    this.description = json.description;
+    this.type = json.type;
+  }
+}
+
+
 export class Order {
   id: number;
   orderCode: string;
@@ -13,6 +32,7 @@ export class Order {
   hoursOfReceipt: string;
   note: string;
   fullAddress: string;
+  orderDetails: OrderDetail[];
 
   constructor(json) {
     this.id = json.id;
@@ -27,6 +47,9 @@ export class Order {
     this.hoursOfReceipt = json.hoursOfReceipt;
     this.note = json.note;
     this.fullAddress = json.fullAddress;
+    this.orderDetails = json.orderDetails
+      ? json.orderDetails.map(x => new OrderDetail(x))
+      : [];
   }
 
   get getTrackingUrl(): string {

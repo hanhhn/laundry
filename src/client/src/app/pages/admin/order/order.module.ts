@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { OrderComponent } from "./order.component";
 import { Routes, RouterModule } from "@angular/router";
 import { OrdersService } from "src/app/cores/services/orders.service";
+import { PaginatorModule } from "primeng/paginator";
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [OrderComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, PaginatorModule, RouterModule.forChild(routes)],
   exports: [OrderComponent],
   providers: [OrdersService]
 })

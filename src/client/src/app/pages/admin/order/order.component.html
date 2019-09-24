@@ -46,5 +46,9 @@
                 </tr>
             </tbody>
         </table>
+        <div>
+            <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
+                (onPageChange)="onPaging($event)"></p-paginator>
+        </div>
     </div>
 </div>

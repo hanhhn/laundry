@@ -22,7 +22,7 @@ namespace Cf.Libs.DataAccess
 {
     public static class CfDataAccessRegister
     {
-        public static void AddCoreRepositories(this IServiceCollection services)
+        public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IProvinceRepository, ProvinceRepository>();

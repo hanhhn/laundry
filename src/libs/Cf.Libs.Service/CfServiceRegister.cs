@@ -15,7 +15,7 @@ namespace Cf.Libs.Service
 {
     public static class CfServiceRegister
     {
-        public static void AddCoreServices(this IServiceCollection services)
+        public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IItemService, ItemService>();

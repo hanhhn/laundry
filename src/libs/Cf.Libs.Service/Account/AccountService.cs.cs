@@ -51,7 +51,7 @@ namespace Cf.Libs.Service.Account
 
         public async Task<bool> SignupAsyn(SignupDto model)
         {
-            User user = Mapper.Map<User>(model);
+            User user = _mapper.Map<User>(model);
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {

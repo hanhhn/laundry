@@ -1,4 +1,5 @@
-﻿using Cf.Libs.DataAccess;
+﻿using Cf.Libs.Core;
+using Cf.Libs.DataAccess;
 using Cf.Libs.Service;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,10 +7,11 @@ namespace Cf.Laundry.Configurations
 {
     public static class ServiceConfigure
     {
-        public static void AddServicesAndRepository(this IServiceCollection services)
+        public static void AddCustomServices(this IServiceCollection services)
         {
-            services.AddCoreRepositories();
-            services.AddCoreServices();
+            services.AddCoreService();
+            services.AddRepositories();
+            services.AddServices();
         }
     }
 }

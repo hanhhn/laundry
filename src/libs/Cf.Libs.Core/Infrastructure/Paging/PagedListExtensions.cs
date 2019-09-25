@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cf.Libs.Core.Infrastructure.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,9 @@ namespace Cf.Libs.Core.Infrastructure.Paging
 
             int totalRecord = query.Count();
             var source = query.Skip(pageIndex * pageSize).Take(pageSize).AsEnumerable();
-            var result = Mapper.Map<IEnumerable<TDestination>>(source);
+
+            var mapper = EngineContext.Current.Resolve<IMapper>();
+            var result = mapper.Map<IEnumerable<TDestination>>(source);
 
             return new PagedList<TDestination>(result, pageIndex, pageSize, totalRecord);
         }

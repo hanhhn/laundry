@@ -24,8 +24,12 @@ export class OrdersService {
     pageIndex: number,
     pageSize: number
   ): Observable<PagedList<Order>> {
-    const url =
-      "orders/get?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+    const url = "orders/get?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
     return this.httpService.doGet(url, toQueryString(filter));
+  }
+
+  get(id: string): Observable<Order> {
+    const url = "orders/get/" + id;
+    return this.httpService.doGet(url, null);
   }
 }

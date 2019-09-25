@@ -141,17 +141,12 @@ namespace Cf.Libs.Service.Orders
                               where !o.IsDeleted
                               select o;
 
-            if (!string.IsNullOrEmpty(filter.Phone))
+            if (!string.IsNullOrEmpty(filter.Keyword))
             {
                 queryOrders = from o in queryOrders
-                              where o.Phone == filter.Phone
-                              select o;
-            }
-
-            if (!string.IsNullOrEmpty(filter.OrderCode))
-            {
-                queryOrders = from o in queryOrders
-                              where o.OrderCode == filter.OrderCode
+                              where o.Phone == filter.Keyword 
+                                || o.OrderCode == filter.Keyword
+                                || o.FullName.Contains(filter.Keyword)
                               select o;
             }
 
@@ -162,6 +157,21 @@ namespace Cf.Libs.Service.Orders
             var result = queryOrders.ToPagedList<Order, OrderDto>(filter.PageIndex, filter.PageSize);
 
             return result;
+        }
+
+        public OrderDto Get(string id)
+        {
+            var queryOrders = from o in _orderRepository.GetQuery()
+                              where !o.IsDeleted && o.Id == id
+                              select o;
+
+            var record = queryOrders.SingleOrDefault();
+            if (record == null)
+            {
+                throw new RecordNotFoundException("Record can not be found.");
+            }
+
+            return _mapper.Map<OrderDto>(record);
         }
     }
 }

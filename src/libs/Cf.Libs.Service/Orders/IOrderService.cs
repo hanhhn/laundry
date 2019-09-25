@@ -8,5 +8,6 @@ namespace Cf.Libs.Service.Orders
     {
         OrderDto SaveOrder(OrderRequest request);
         IPagedList<OrderDto> Get(OrderFilter filter);
+        OrderDto Get(string id);
     }
 }

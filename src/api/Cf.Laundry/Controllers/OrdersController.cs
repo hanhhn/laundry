@@ -40,5 +40,12 @@ namespace Cf.Laundry.Controllers
 
             return _orderService.Get(filter);
         }
+
+        [HttpGet]
+        [Route("get/{id}")]
+        public OrderDto GetOrder(string id)
+        {
+            return _orderService.Get(id);
+        }
     }
 }

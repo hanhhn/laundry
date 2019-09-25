@@ -9,8 +9,8 @@
                     <option value="3">Three</option>
                 </select>
             </div>
-            <div class="col-sm-5">
-                <input class="form-control" placeholder="Phone, code..." />
+            <div class="col-sm-3">
+                <input class="form-control" placeholder="Keyword..." />
             </div>
         </div>
     </form>
@@ -23,7 +23,7 @@
                     <th scope="col" width="200" class="text-center">Phone</th>
                     <th scope="col" width="200" class="text-left">Customer</th>
                     <th scope="col" class="text-center">Service</th>
-                    <th scope="col" width="150">action</th>
+                    <th scope="col" width="150"></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,14 +32,15 @@
                     <td class="text-center">{{ item.orderCode }}</td>
                     <td class="text-center">{{ item.phone }}</td>
                     <td class="text-left">{{ item.fullName }}</td>
-                    <td class="text-left">Service</td>
+                    <td class="text-left">{{ getService(item.orderDetails) }}</td>
                     <td class="text-center">
                         <div class="action">
-                            <button type="button" class="btn btn-primary btn-sm">
+                            <button type="button" class="btn btn-sm btn-primary" (click)="onPrintGoodsReceipt(item.id)">
                                 <i class="fa fa-print"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-outline-danger">
-                                <i class="fa fa-trash"></i>
+                            <button type="button" class="btn btn-sm btn-outline-success"
+                                (click)="onShowOrderInfo(item.id)">
+                                <i class="fa fa-info-circle"></i>
                             </button>
                         </div>
                     </td>
@@ -52,3 +53,80 @@
         </div>
     </div>
 </div>
+
+
+<p-dialog *ngIf="order" header="Chi tiết đơn hàng" [(visible)]="display" [modal]="true" [responsive]="true"
+    [style]="{ width: '959px' }" [maximizable]="true">
+    <form [formGroup]="formControls" class="row">
+
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label>Payment Status</label>
+                    <input [value]="order.status" type="text" class="form-control" disabled>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>Date of receipt</label>
+                    <input [value]="order.dateOfReceipt | date: 'dd-MM-yyyy HH:mm:ss' " type="text" class="form-control"
+                        disabled>
+                </div>
+                <div class="form-group col-sm-5">
+                    <label>Hours of receipt</label>
+                    <input [value]="order.hoursOfReceipt" type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label>Order code</label>
+                    <input [value]="order.orderCode" type="text" class="form-control" disabled>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label>Phone</label>
+                    <input [value]="order.phone" type="text" class="form-control" disabled>
+                </div>
+
+                <div class="form-group col-sm-5">
+                    <label>Full name</label>
+                    <input [value]="order.fullName" type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label>Address</label>
+                    <input [value]="order.fullAddress" type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label>Note</label>
+                    <textarea rows="5" class="form-control" disabled>{{ order.note }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="row">
+                <div class="form-group col-sm-12" *ngIf="order.orderDetails && order.orderDetails.length > 0">
+                    <div>Dịch vụ:</div>
+                    <div *ngFor="let item of order.orderDetails">
+                        <strong>- {{ item.methodName }}</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+    <p-footer>
+        <button type="button" class="btn btn-primary" color="primary">
+            Xuất Bill
+        </button>
+        <button type="button" class="btn btn-default" (click)="display = false">
+            Close
+        </button>
+    </p-footer>
+</p-dialog>

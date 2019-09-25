@@ -9,12 +9,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatRadioModule } from "@angular/material/radio";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import {
-  MatCheckboxModule,
-  MatSelectModule,
-  MatDialogModule,
-  MatIconModule
-} from "@angular/material";
 import { VerticalStepperScrollerDirective } from "../../../cores/directives/vertical-stepper-scroller.directive";
 import { MethodService } from "../../../cores/services/method.service";
 import { AddressService } from "src/app/cores/services/address.service";
@@ -22,6 +16,10 @@ import { ItemService } from "../../../cores/services/item.service";
 import { TimeService } from "../../../cores/services/time.service";
 import { ConfirmModule } from "src/app/components/confirm/confirm.module";
 import { OrdersService } from "../../../cores/services/orders.service";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {
@@ -45,8 +43,8 @@ const routes: Routes = [
     MatCheckboxModule,
     MatSelectModule,
     MatDialogModule,
-    ConfirmModule,
     MatIconModule,
+    ConfirmModule,
     RouterModule.forChild(routes)
   ],
   providers: [

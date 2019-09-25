@@ -6,16 +6,14 @@ import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { DropdownModule } from "primeng/dropdown";
 import { CalendarModule } from "primeng/calendar";
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatTableModule,
-  MatIconModule
-} from "@angular/material";
 import { PostDetailComponent } from "./post-detail.component";
 import { PostService } from "src/app/cores/services/post.service";
 import { ImageService } from "src/app/cores/services/image.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {

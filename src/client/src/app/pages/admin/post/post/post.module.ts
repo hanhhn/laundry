@@ -8,13 +8,11 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { DropdownModule } from "primeng/components/dropdown/dropdown";
 import { PostService } from "src/app/cores/services/post.service";
 import { ImageService } from "src/app/cores/services/image.service";
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatTableModule,
-  MatIconModule
-} from "@angular/material";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {

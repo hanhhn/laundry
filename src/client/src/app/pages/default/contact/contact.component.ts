@@ -6,8 +6,8 @@ import { SniperService } from "../../../cores/services/sniper.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ContactService } from "src/app/cores/services/contact.service";
 import { ContactRequest } from "src/app/cores/models/contact.model";
-import { MatDialog } from "@angular/material";
 import { ConfirmComponent } from "src/app/components/confirm/confirm.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-contact",

@@ -1,6 +1,6 @@
 import { Directive, HostListener } from "@angular/core";
-import { MatStepper } from "@angular/material";
 import { StepperSelectionEvent } from "@angular/cdk/stepper";
+import { MatStepper } from "@angular/material/stepper";
 
 @Directive({
   selector: "[appVerticalStepperScroller]"

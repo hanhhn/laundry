@@ -16,12 +16,10 @@ import {
   Address,
   AddressRequest
 } from "src/app/cores/models/address.model";
-import {
-  MatStepper,
-  MatSelectChange,
-  MatOption,
-  MatRadioChange
-} from "@angular/material";
+import { MatStepper } from "@angular/material/stepper";
+import { MatSelectChange } from "@angular/material/select";
+import { MatOption } from "@angular/material/core";
+import { MatRadioChange } from "@angular/material/radio";
 
 const thankYou = "./../../../../assets/thanks-you-for-your-order.png";
 

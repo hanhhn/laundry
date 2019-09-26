@@ -3,16 +3,14 @@ import { CommonModule } from "@angular/common";
 import { TrackingComponent } from "./tracking.component";
 import { Routes, RouterModule } from "@angular/router";
 import { TrackingService } from "src/app/cores/services/trackings.service";
-import {
-  MatTableModule,
-  MatFormFieldModule,
-  MatButtonModule,
-  MatInputModule,
-  MatStepperModule
-} from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { TrackingConverterPipe } from "src/app/cores/pipes/tracking.pipe";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatTableModule } from "@angular/material/table";
+import { MatStepperModule } from "@angular/material/stepper";
 
 const routes: Routes = [
   {

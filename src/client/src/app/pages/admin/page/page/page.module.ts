@@ -8,13 +8,11 @@ import { DropdownModule } from "primeng/components/dropdown/dropdown";
 import { PageService } from "../../../../cores/services/page.service";
 import { ImageService } from "src/app/cores/services/image.service";
 import { PageComponent } from "./page.component";
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatTableModule,
-  MatIconModule
-} from "@angular/material";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {

@@ -8,13 +8,11 @@ import { FileUploadModule } from "primeng/fileupload";
 import { DropdownModule } from "primeng/dropdown";
 import { CalendarModule } from "primeng/calendar";
 import { RouterModule, Routes } from "@angular/router";
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatTableModule,
-  MatIconModule
-} from "@angular/material";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {

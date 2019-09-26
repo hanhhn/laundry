@@ -11,11 +11,7 @@ namespace Cf.Libs.Core.Infrastructure.Engine
 
         public IServiceProvider GetServiceProvider()
         {
-            var accessor = _serviceProvider.GetService<IHttpContextAccessor>();
-            if (accessor == null)
-                throw new NullReferenceException("Service can not be found!");
-
-            return accessor.HttpContext.RequestServices;
+            return _serviceProvider;
         }
 
         public void ConfigureServices(IServiceProvider serviceProvider)

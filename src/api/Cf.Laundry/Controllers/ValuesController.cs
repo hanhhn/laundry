@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Cf.Libs.Core.Infrastructure.Engine;
+using Cf.Libs.Service.Orders;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cf.Laundry.Controllers
 {
@@ -10,7 +13,8 @@ namespace Cf.Laundry.Controllers
         [Route("index")]
         public object Get()
         {
-            return new { code = "success" };
+            var mapper = EngineContext.Current.Resolve<IMapper>();
+            return new { code = mapper.ToString() };
         }
     }
 }

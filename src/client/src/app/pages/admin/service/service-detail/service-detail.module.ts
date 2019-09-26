@@ -5,17 +5,15 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { DialogModule } from "primeng/dialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { DropdownModule } from "primeng/dropdown";
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatTableModule,
-  MatIconModule
-} from "@angular/material";
 import { ImageService } from "src/app/cores/services/image.service";
 import { MethodService } from "../../../../cores/services/method.service";
 import { ItemService } from "../../../../cores/services/item.service";
 import { ServiceDetailComponent } from "./service-detail.component";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {

@@ -8,15 +8,13 @@ import { FileUploadModule } from "primeng/fileupload";
 import { ItemService } from "../../../cores/services/item.service";
 import { DropdownModule } from "primeng/dropdown";
 import { CalendarModule } from "primeng/calendar";
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatTableModule,
-  MatIconModule
-} from "@angular/material";
 import { PriceService } from "src/app/cores/services/price.service";
 import { MethodService } from "src/app/cores/services/method.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {

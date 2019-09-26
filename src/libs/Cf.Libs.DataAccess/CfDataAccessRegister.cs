@@ -1,4 +1,6 @@
 ﻿using Cf.Libs.DataAccess.Repository.Addresses;
+using Cf.Libs.DataAccess.Repository.BillDetails;
+using Cf.Libs.DataAccess.Repository.Bills;
 using Cf.Libs.DataAccess.Repository.Contacts;
 using Cf.Libs.DataAccess.Repository.Districts;
 using Cf.Libs.DataAccess.Repository.Items;
@@ -42,6 +44,8 @@ namespace Cf.Libs.DataAccess
             services.AddScoped<IPageRepository, PageRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<ITrackingRepository, TrackingRepository>();
+            services.AddScoped<IBillRepository, BillRepository>();
+            services.AddScoped<IBillDetailRepository, BillDetailRepository>();
         }
     }
 }

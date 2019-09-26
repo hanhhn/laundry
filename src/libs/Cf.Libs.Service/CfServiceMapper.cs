@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Cf.Libs.DataAccess.Entities.Billing;
 using Cf.Libs.DataAccess.Entities.Common;
 using Cf.Libs.DataAccess.Entities.Items;
 using Cf.Libs.DataAccess.Entities.News;
 using Cf.Libs.DataAccess.Entities.Orders;
 using Cf.Libs.DataAccess.Entities.Static;
 using Cf.Libs.Service.Dtos.Adress;
+using Cf.Libs.Service.Dtos.Billing;
 using Cf.Libs.Service.Dtos.Contact;
 using Cf.Libs.Service.Dtos.Item;
 using Cf.Libs.Service.Dtos.Method;
@@ -65,6 +67,8 @@ namespace Cf.Libs.Service
             CreateMap<PageRequest, Page>();
             CreateMap<Page, PageDto>();
 
+            CreateMap<Bill, BillDto>();
+            CreateMap<BillDetail, BillDetailDto>();
         }
     }
 }

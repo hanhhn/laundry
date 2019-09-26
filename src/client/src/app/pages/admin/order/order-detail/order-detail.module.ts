@@ -8,6 +8,7 @@ import { DialogModule } from "primeng/dialog";
 import { DropdownModule } from "primeng/dropdown";
 import { OrderDetailComponent } from "./order-detail.component";
 import { MethodService } from "src/app/cores/services/method.service";
+import { BillingService } from "src/app/cores/services/billing.service";
 
 const routes: Routes = [
   {
@@ -28,6 +29,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [OrderDetailComponent],
-  providers: [OrdersService, MethodService]
+  providers: [OrdersService, MethodService, BillingService]
 })
 export class OrderDetailModule {}

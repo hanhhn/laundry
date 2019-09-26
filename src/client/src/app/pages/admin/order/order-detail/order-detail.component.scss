@@ -6,7 +6,7 @@
 
 .bill {
   font-size: 12px;
-  padding: 20px;
+  padding: 30px;
   min-width: 360px;
 
   .right {
@@ -26,16 +26,12 @@
 
     .title {
       text-align: center;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
+      text-transform: uppercase;
     }
 
     .code {
-      text-align: right;
-      font-weight: bold;
-    }
-
-    .date {
       text-align: right;
       font-weight: bold;
     }

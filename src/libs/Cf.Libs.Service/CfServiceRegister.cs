@@ -1,4 +1,5 @@
 ﻿using Cf.Libs.Service.Addresses;
+using Cf.Libs.Service.Billing;
 using Cf.Libs.Service.Contacts;
 using Cf.Libs.Service.Items;
 using Cf.Libs.Service.Methods;
@@ -28,6 +29,7 @@ namespace Cf.Libs.Service
             services.AddScoped<IPageService, PageService>();
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<ITrackingService, TrackingService>();
+            services.AddScoped<IBillingService, BillingService>();
         }
     }
 }

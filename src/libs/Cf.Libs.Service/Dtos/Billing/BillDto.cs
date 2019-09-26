@@ -1,10 +1,10 @@
-﻿using Cf.Libs.Core.Infrastructure.Entity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Cf.Libs.DataAccess.Entities.Billing
+namespace Cf.Libs.Service.Dtos.Billing
 {
-    public class Bill : BaseEntity<int>
+    public class BillDto
     {
+        public int Id { get; set; }
         public string BillCode { get; set; }
         public string OrderCode { get; set; }
         public string Phone { get; set; }
@@ -15,6 +15,6 @@ namespace Cf.Libs.DataAccess.Entities.Billing
         public decimal Amount { get; set; }
         public decimal BillAmount { get; set; }
 
-        public virtual ICollection<BillDetail> BillDetails { get; set; }
+        public IEnumerable<BillDetailDto> BillDetails { get; set; }
     }
 }

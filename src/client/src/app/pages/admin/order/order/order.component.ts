@@ -5,8 +5,7 @@ import {
   OrderDetail
 } from "src/app/cores/models/orders.model";
 import { OrdersService } from "src/app/cores/services/orders.service";
-import { PagedList } from "src/app/cores/models/paged.model";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-order",

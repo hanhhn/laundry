@@ -7,6 +7,7 @@ using Cf.Libs.Core.Infrastructure.UnitOfWork;
 using Cf.Libs.DataAccess.Entities.Common;
 using Cf.Libs.DataAccess.Entities.Orders;
 using Cf.Libs.DataAccess.Repository.Addresses;
+using Cf.Libs.DataAccess.Repository.Bills;
 using Cf.Libs.DataAccess.Repository.Districts;
 using Cf.Libs.DataAccess.Repository.Items;
 using Cf.Libs.DataAccess.Repository.Methods;
@@ -33,6 +34,7 @@ namespace Cf.Libs.Service.Orders
         private readonly IWardRepository _wardRepository;
         private readonly IAddressRepository _addressRepository;
         private readonly ITrackingRepository _trackingRepository;
+        private readonly IBillRepository _billRepository;
 
         public OrderService(
             IUnitOfWork unitOfWork,
@@ -46,7 +48,8 @@ namespace Cf.Libs.Service.Orders
             IDistrictRepository districtRepository,
             IWardRepository wardRepository,
             ITrackingRepository trackingRepository,
-            IAddressRepository addressRepository) : base(unitOfWork, mapper)
+            IAddressRepository addressRepository,
+            IBillRepository billRepository) : base(unitOfWork, mapper)
         {
             _methodRepository = methodRepository;
             _orderRepository = orderRepository;
@@ -56,6 +59,7 @@ namespace Cf.Libs.Service.Orders
             _wardRepository = wardRepository;
             _addressRepository = addressRepository;
             _trackingRepository = trackingRepository;
+            _billRepository = billRepository;
         }
 
 
@@ -171,7 +175,14 @@ namespace Cf.Libs.Service.Orders
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
-            return _mapper.Map<OrderDto>(record);
+            var order = _mapper.Map<OrderDto>(record);
+            var bill = _billRepository.GetBill(record.Phone, record.OrderCode);
+            if (bill != null)
+            {
+                order.BillId = bill.Id;
+            }
+
+            return order;
         }
     }
 }

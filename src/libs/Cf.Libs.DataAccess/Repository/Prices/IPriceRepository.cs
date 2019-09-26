@@ -8,5 +8,6 @@ namespace Cf.Libs.DataAccess.Repository.Prices
     {
         IQueryable<Price> FindByItem();
         IQueryable<Price> FindByMethod();
+        Price GetRate(int itemId);
     }
 }

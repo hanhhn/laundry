@@ -83,33 +83,35 @@
 
             <div class="row">
                 <div class="form-group col-sm-12 text-right">
-                    <button type="button" class="btn btn-primary" color="primary">
+                    <button type="button" class="btn btn-primary" style="margin-right: 10px">
                         Lưu
+                    </button>
+                    <button type="button" class="btn btn-primary" (click)="onPublishClicked($event)">
+                        Xuất Bill
                     </button>
                 </div>
             </div>
         </div>
 
-
-
         <div class="col-sm-5">
             <div class="row">
                 <div class="form-group col-sm-12">
-                    <div class="text-right">
-                        <button type="button" class="btn btn-primary" color="primary" style="margin-right: 10px">
-                            Xuất Bill
-                        </button>
-                        <button type="button" class="btn btn-primary" color="primary" disabled>
+                    <div class="text-right" *ngIf="bill">
+                        <button type="button" class="btn btn-primary" disabled>
                             Print
                         </button>
                     </div>
-                    <div class="print bill">
+                    <div style="text-align: center; margin-top: 50px" *ngIf="!bill">
+                        <h4>Chưa xuất phiếu thanh toán</h4>
+                    </div>
+                    <div class="print bill" *ngIf="bill">
                         <div class="header">
                             <div class="title">Phiếu Thanh Toán</div>
-                            <div class="code">#code</div>
-                            <div class="date">20-12-2012</div>
-                            <div class="fullName"><span>Khách hàng: </span>Hoàng Ngọc Hạnh</div>
-                            <div class="address"><span>Địa chỉ: </span>Lê văn việt, Quận 9, Hồ chí minh</div>
+                            <div class="code">#{{ bill.orderCode }}</div>
+                            <div class="code">{{ bill.billCode }}</div>
+                            <div class="phone"><span>Số điện thoại: </span>{{bill.phone}}</div>
+                            <div class="fullName"><span>Khách hàng: </span>{{bill.fullName}}</div>
+                            <div class="address"><span>Địa chỉ: </span>{{bill.address}}</div>
                         </div>
                         <div class="body">
                             <table>
@@ -123,18 +125,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="center">1</td>
-                                        <td class="left">Jill</td>
-                                        <td class="center">1</td>
-                                        <td class="right">15.000</td>
-                                        <td class="right">15.000</td>
+                                    <tr *ngFor="let item of bill.billDetails; let i = index">
+                                        <td class="center">{{ i + 1 }}</td>
+                                        <td class="left">{{ item.description }}</td>
+                                        <td class="center">{{ item.qty }}</td>
+                                        <td class="right">{{ item.rate }}</td>
+                                        <td class="right">{{ item.amount }}</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="4" class="right">Tổng:</td>
-                                        <td class="right">15.000</td>
+                                        <td colspan="4" class="right">Tổng cộng:</td>
+                                        <td class="right">{{ bill.billAmount }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -142,6 +144,7 @@
                         <div class="footer center">
                             <p>www.giatsach.vn</p>
                             <p>Thanks you for your order!</p>
+                            <p>20-12-2012</p>
                         </div>
                     </div>
                 </div>

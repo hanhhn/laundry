@@ -3,6 +3,7 @@ using Cf.Libs.Core.Enums;
 using Cf.Libs.Core.Infrastructure.DataAccess;
 using Cf.Libs.DataAccess.DbContext;
 using Cf.Libs.DataAccess.Entities.Items;
+using System;
 using System.Linq;
 
 namespace Cf.Libs.DataAccess.Repository.Prices
@@ -31,6 +32,16 @@ namespace Cf.Libs.DataAccess.Repository.Prices
                         orderby rate.CreateDate descending
                         select rate;
             return query;
+        }
+
+        public Price GetRate(int itemId)
+        {
+            var query = from rate in DbSet
+                        where !rate.IsDeleted && rate.ItemId == itemId && DateTime.Now > rate.ApplyDate
+                        orderby rate.ApplyDate descending
+                        orderby rate.Priority ascending
+                        select rate;
+            return query.FirstOrDefault();
         }
     }
 }

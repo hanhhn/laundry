@@ -10,6 +10,8 @@ import { ActivatedRoute } from "@angular/router";
 import { Method } from "src/app/cores/models/method.model";
 import { MethodService } from "src/app/cores/services/method.service";
 import { forkJoin } from "rxjs";
+import { BillingService } from "src/app/cores/services/billing.service";
+import { Bill } from "src/app/cores/models/billing.model";
 
 const METHOD = {
   CLEAN: "Clean",
@@ -31,6 +33,8 @@ export class OrderDetailComponent implements OnInit {
 
   methods: Method[];
 
+  bill: Bill;
+
   get getWayClean() {
     return this.methods.filter(x => x.type === METHOD.CLEAN);
   }
@@ -50,6 +54,7 @@ export class OrderDetailComponent implements OnInit {
   constructor(
     private orderService: OrdersService,
     private methodService: MethodService,
+    private billing: BillingService,
     private formBuilder: FormBuilder,
     route: ActivatedRoute
   ) {
@@ -91,5 +96,20 @@ export class OrderDetailComponent implements OnInit {
         );
       });
     });
+  }
+
+  onPublishClicked(e) {
+    e.preventDefault();
+
+    this.billing.publish(this.id).subscribe(
+      data => {
+        if (data) {
+          this.bill = data;
+        }
+      },
+      err => {
+        alert("Xảy ra lỗi");
+      }
+    );
   }
 }

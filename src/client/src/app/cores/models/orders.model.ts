@@ -18,7 +18,6 @@ export class OrderDetail {
   }
 }
 
-
 export class Order {
   id: number;
   orderCode: string;
@@ -33,6 +32,7 @@ export class Order {
   note: string;
   fullAddress: string;
   orderDetails: OrderDetail[];
+  billId: number;
 
   constructor(json) {
     this.id = json.id;
@@ -50,6 +50,7 @@ export class Order {
     this.orderDetails = json.orderDetails
       ? json.orderDetails.map(x => new OrderDetail(x))
       : [];
+    this.billId = json.billId;
   }
 
   get getTrackingUrl(): string {

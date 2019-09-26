@@ -29,8 +29,8 @@ namespace Cf.Libs.DataAccess.DbContext
         public DbSet<Method> Methods { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        //public DbSet<Bill> Bills { get; set; }
-        //public DbSet<BillDetail> BillDetails { get; set; }
+        public DbSet<Bill> Bills { get; set; }
+        public DbSet<BillDetail> BillDetails { get; set; }
         //public DbSet<Invoice> Invoices { get; set; }
         //public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public DbSet<Address> Addresses { get; set; }

@@ -120,4 +120,5 @@ export class OrderFilter {
   orderCode: string;
   phone: string;
   fullName: string;
+  keyword: string;
 }

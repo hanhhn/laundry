@@ -29,7 +29,7 @@
             <tbody>
                 <tr *ngFor="let item of dataSource; let i = index">
                     <th scope="row">{{ i + 1 }}</th>
-                    <td class="text-center">{{ item.orderCode }}</td>
+                    <td class="text-center"><a target="_blank" href="/admin/order/{{ item.id }}">{{ item.orderCode }}</a></td>
                     <td class="text-center">{{ item.phone }}</td>
                     <td class="text-left">{{ item.fullName }}</td>
                     <td class="text-left">{{ getService(item.orderDetails) }}</td>

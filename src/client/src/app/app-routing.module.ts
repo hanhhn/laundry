@@ -73,8 +73,12 @@ const routes: Routes = [
         loadChildren: "./pages/admin/dashboard/dashboard.module#DashboardModule"
       },
       {
+        path: "order/:id",
+        loadChildren: "./pages/admin/order/order-detail/order-detail.module#OrderDetailModule"
+      },
+      {
         path: "order",
-        loadChildren: "./pages/admin/order/order.module#OrderModule"
+        loadChildren: "./pages/admin/order/order/order.module#OrderModule"
       },
       {
         path: "price",

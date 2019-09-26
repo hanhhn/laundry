@@ -71,7 +71,7 @@ export function toQueryString(obj) {
   if (obj) {
     const str = [];
     for (const p in obj) {
-      if (obj.hasOwnProperty(p)) {
+      if (obj.hasOwnProperty(p) && obj[p] !== undefined && obj[p] !== "") {
         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
       }
     }

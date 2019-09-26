@@ -1,0 +1,151 @@
+<div class="order">
+    <form [formGroup]="serviceFormGroup" class="row" *ngIf="order">
+        <div class="col-sm-7">
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label>Payment Status</label>
+                    <input [value]="order.status" type="text" class="form-control" disabled>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label>Date of receipt</label>
+                    <input [value]="order.dateOfReceipt | date: 'dd-MM-yyyy HH:mm:ss' " type="text" class="form-control"
+                        disabled>
+                </div>
+                <div class="form-group col-sm-5">
+                    <label>Hours of receipt</label>
+                    <input [value]="order.hoursOfReceipt" type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label>Order code</label>
+                    <input [value]="order.orderCode" type="text" class="form-control" disabled>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label>Phone</label>
+                    <input [value]="order.phone" type="text" class="form-control" disabled>
+                </div>
+
+                <div class="form-group col-sm-5">
+                    <label>Full name</label>
+                    <input [value]="order.fullName" type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label>Address</label>
+                    <input [value]="order.fullAddress" type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label>Note</label>
+                    <textarea rows="3" class="form-control" disabled>{{ order.note }}</textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4" *ngIf="order.orderDetails && order.orderDetails.length > 0">
+                    <div>Dịch vụ đã đặt</div>
+                    <div *ngFor="let item of order.orderDetails">
+                        <strong>- {{ item.methodName }}</strong>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="form-group" *ngIf="getWayClean && getWayClean.length > 0">
+                        <strong>Chọn đã dịch vụ</strong>
+                        <div>
+                            <p-dropdown formControlName="clean" [options]="getWayClean" optionLabel="name"></p-dropdown>
+                        </div>
+                    </div>
+                    <div *ngIf="getOptions && getOptions.length> 0">
+                        <strong>Tùy chọn thêm</strong>
+                        <div formArrayName="options" class="form-check">
+                            <div *ngFor="let item of optionControls.controls; index as i">
+                                <label>
+                                    <input class="form-check-input" type="checkbox" [formControlName]="i">
+                                    {{ getOptions[i].name }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <strong>Note</strong>
+                        <textarea class="form-control" formControlName="note" rows="5"></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-12 text-right">
+                    <button type="button" class="btn btn-primary" color="primary">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-5">
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-primary" color="primary" style="margin-right: 10px">
+                            Xuất Bill
+                        </button>
+                        <button type="button" class="btn btn-primary" color="primary" disabled>
+                            Print
+                        </button>
+                    </div>
+                    <div class="print bill">
+                        <div class="header">
+                            <div class="title">Phiếu Thanh Toán</div>
+                            <div class="code">#code</div>
+                            <div class="date">20-12-2012</div>
+                            <div class="fullName"><span>Khách hàng: </span>Hoàng Ngọc Hạnh</div>
+                            <div class="address"><span>Địa chỉ: </span>Lê văn việt, Quận 9, Hồ chí minh</div>
+                        </div>
+                        <div class="body">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th width="40">#</th>
+                                        <th width="180">Item</th>
+                                        <th width="40">Qty</th>
+                                        <th width="60">Rate</th>
+                                        <th width="80">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="center">1</td>
+                                        <td class="left">Jill</td>
+                                        <td class="center">1</td>
+                                        <td class="right">15.000</td>
+                                        <td class="right">15.000</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="right">Tổng:</td>
+                                        <td class="right">15.000</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="footer center">
+                            <p>www.giatsach.vn</p>
+                            <p>Thanks you for your order!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

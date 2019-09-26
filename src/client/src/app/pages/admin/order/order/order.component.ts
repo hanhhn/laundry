@@ -42,6 +42,7 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.filter = new OrderFilter();
     this.formControls = this.formBuilder.group({});
     this.loadDataSource();
   }
@@ -68,6 +69,11 @@ export class OrderComponent implements OnInit {
 
   getService(orderDetails: OrderDetail[]): string {
     return orderDetails.find(x => x.type === "Clean").methodName;
+  }
+
+  onKeywordChanged(e) {
+    this.filter.keyword = e.target.value;
+    this.loadDataSource();
   }
 
   onPrintGoodsReceipt(id) {

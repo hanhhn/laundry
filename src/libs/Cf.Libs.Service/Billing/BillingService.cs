@@ -94,9 +94,9 @@ namespace Cf.Libs.Service.Billing
                 var detail = _billDetailRepository.Add(new BillDetail
                 {
                     Description = item.MethodName,
-                    Qty = 1,
+                    Qty = item.Qty,
                     Rate = rate.Rate,
-                    Amount = rate.Rate * 1,
+                    Amount = rate.Rate * (decimal)item.Qty,
                     Bill = bill,
                 });
 

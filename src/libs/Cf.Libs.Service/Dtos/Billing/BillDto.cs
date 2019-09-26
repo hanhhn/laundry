@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Cf.Libs.Service.Dtos.Billing
 {
@@ -14,6 +15,7 @@ namespace Cf.Libs.Service.Dtos.Billing
         public int Discount { get; set; }
         public decimal Amount { get; set; }
         public decimal BillAmount { get; set; }
+        public DateTime CreateDate { get; set; }
 
         public IEnumerable<BillDetailDto> BillDetails { get; set; }
     }

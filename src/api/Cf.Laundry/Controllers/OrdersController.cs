@@ -29,6 +29,18 @@ namespace Cf.Laundry.Controllers
             return _orderService.SaveOrder(request);
         }
 
+        [HttpPost]
+        [Route("update")]
+        public bool UpdateOrderDetail(OrderDetailRequest request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException("Param is invalid.");
+            }
+
+            return _orderService.UpdateOrderDetail(request);
+        }
+
         [HttpGet]
         [Route("get")]
         public IPagedList<OrderDto> GetOrders([FromQuery] OrderFilter filter)

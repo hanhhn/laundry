@@ -17,7 +17,7 @@ export class BillingService {
     );
   }
 
-  get(id: string): Observable<Bill> {
+  get(id: number): Observable<Bill> {
     const url = "billing/get/" + id;
     return this.httpService.doGet(url, null).pipe(
       map(data => {

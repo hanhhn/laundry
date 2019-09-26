@@ -25,7 +25,7 @@ export class Bill {
   discount: number;
   amount: number;
   billAmount: number;
-
+  createDate: Date;
   billDetails: BillDetail[];
 
   constructor(json) {
@@ -39,7 +39,7 @@ export class Bill {
     this.discount = json.discount;
     this.amount = json.amount;
     this.billAmount = json.billAmount;
-    this.billDetails = json.billDetails;
+    this.createDate = json.createDate ? new Date(json.createDate) : null;
     this.billDetails = json.billDetails
       ? json.billDetails.map(x => new BillDetail(x))
       : [];

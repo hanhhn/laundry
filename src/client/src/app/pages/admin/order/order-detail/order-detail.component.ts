@@ -54,7 +54,7 @@ export class OrderDetailComponent implements OnInit {
   constructor(
     private orderService: OrdersService,
     private methodService: MethodService,
-    private billing: BillingService,
+    private billingService: BillingService,
     private formBuilder: FormBuilder,
     route: ActivatedRoute
   ) {
@@ -95,13 +95,26 @@ export class OrderDetailComponent implements OnInit {
           this.formBuilder.control(checked ? true : false)
         );
       });
+
+      if (this.order.billId && this.order.billId > 0) {
+        this.billingService.get(this.order.billId).subscribe(
+          data => {
+            if (data) {
+              this.bill = data;
+            }
+          },
+          err => {
+            alert(err);
+          }
+        );
+      }
     });
   }
 
   onPublishClicked(e) {
     e.preventDefault();
 
-    this.billing.publish(this.id).subscribe(
+    this.billingService.publish(this.id).subscribe(
       data => {
         if (data) {
           this.bill = data;

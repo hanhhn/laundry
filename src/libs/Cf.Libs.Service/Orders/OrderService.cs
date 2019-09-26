@@ -114,6 +114,7 @@ namespace Cf.Libs.Service.Orders
                     var detail = _orderDetailRepository.Add(new OrderDetail
                     {
                         Order = order,
+                        Qty = 0,
                         MethodId = method.Id,
                         MethodName = method.Name,
                         Description = method.Description,
@@ -137,6 +138,29 @@ namespace Cf.Libs.Service.Orders
             }
 
             return _mapper.Map<OrderDto>(orderInserted);
+        }
+
+        public bool UpdateOrderDetail(OrderDetailRequest request)
+        {
+            var order = _orderRepository.Get(request.OrderId);
+            if(order == null)
+            {
+                throw new RecordNotFoundException("Record can not be found.");
+            }
+
+            foreach(var detail in request.Details)
+            {
+                var orderDetail = _orderDetailRepository.Get(detail.Id);
+                if (orderDetail == null)
+                {
+                    throw new RecordNotFoundException("Record can not be found.");
+                }
+
+                orderDetail.Qty = detail.Qty;
+                _orderDetailRepository.Update(orderDetail);
+            }
+
+            return _unitOfWork.SaveChanges() > 0;
         }
 
         public IPagedList<OrderDto> Get(OrderFilter filter)

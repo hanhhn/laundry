@@ -8,7 +8,7 @@ namespace Cf.Libs.DataAccess.Entities.Billing
         [ForeignKey("Bill")]
         public int BillId { get; set; }
         public string Description { get; set; }
-        public int Qty { get; set; }
+        public float Qty { get; set; }
         public decimal Rate { get; set; }
         public decimal Amount { get; set; }
 

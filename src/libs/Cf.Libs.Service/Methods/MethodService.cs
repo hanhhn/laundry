@@ -78,6 +78,7 @@ namespace Cf.Libs.Service.Methods
                             Description = i.Description,
                             SortOrder = i.SortOrder,
                             Type = i.Type,
+                            Unit = i.Unit,
                             Rate = g.Rate,
                             Tax = g.Tax,
                             Discount = g.Discount,
@@ -112,6 +113,7 @@ namespace Cf.Libs.Service.Methods
             record.Description = request.Description;
             record.EnableDiscount = request.EnableDiscount;
             record.Type = request.Type;
+            record.Unit = request.Unit;
 
             _methodRepository.Update(record);
 

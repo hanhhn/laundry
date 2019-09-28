@@ -83,6 +83,11 @@ export class AdminLayoutComponent implements OnInit {
         label: "Method",
         items: [
           {
+            label: "New Phương án",
+            icon: "",
+            routerLink: "method/add"
+          },
+          {
             label: "Phương án",
             icon: "",
             routerLink: "method"

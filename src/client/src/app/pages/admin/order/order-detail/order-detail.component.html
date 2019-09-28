@@ -2,132 +2,7 @@
   <form [formGroup]="serviceFormGroup" class="row" *ngIf="order">
     <div class="col-sm-7">
       <div class="row">
-        <div class="form-group col-sm-3">
-          <label>Payment Status</label>
-          <input
-            [value]="order.status"
-            type="text"
-            class="form-control"
-            disabled
-          />
-        </div>
-        <div class="form-group col-sm-4">
-          <label>Date of receipt</label>
-          <input
-            [value]="order.dateOfReceipt | date: 'dd-MM-yyyy HH:mm:ss'"
-            type="text"
-            class="form-control"
-            disabled
-          />
-        </div>
-        <div class="form-group col-sm-5">
-          <label>Hours of receipt</label>
-          <input
-            [value]="order.hoursOfReceipt"
-            type="text"
-            class="form-control"
-            disabled
-          />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-sm-3">
-          <label>Order code</label>
-          <input
-            [value]="order.orderCode"
-            type="text"
-            class="form-control"
-            disabled
-          />
-        </div>
-
-        <div class="form-group col-sm-4">
-          <label>Phone</label>
-          <input
-            [value]="order.phone"
-            type="text"
-            class="form-control"
-            disabled
-          />
-        </div>
-
-        <div class="form-group col-sm-5">
-          <label>Full name</label>
-          <input
-            [value]="order.fullName"
-            type="text"
-            class="form-control"
-            disabled
-          />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-sm-12">
-          <label>Address</label>
-          <input
-            [value]="order.fullAddress"
-            type="text"
-            class="form-control"
-            disabled
-          />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="form-group col-sm-12">
-          <label>Note</label>
-          <textarea rows="3" class="form-control" disabled>{{
-            order.note
-          }}</textarea>
-        </div>
-      </div>
-
-      <div class="row">
-        <div
-          class="col-sm-4"
-          *ngIf="order.orderDetails && order.orderDetails.length > 0"
-        >
-          <div>Dịch vụ đã đặt</div>
-          <div *ngFor="let item of order.orderDetails">
-            <strong>- {{ item.methodName }}</strong>
-          </div>
-        </div>
-        <div class="col-sm-8">
-          <div class="form-group" *ngIf="getWayClean && getWayClean.length > 0">
-            <strong>Chọn đã dịch vụ</strong>
-            <div>
-              <p-dropdown
-                formControlName="clean"
-                [options]="getWayClean"
-                optionLabel="name"
-              ></p-dropdown>
-            </div>
-          </div>
-          <div *ngIf="getOptions && getOptions.length > 0">
-            <strong>Tùy chọn thêm</strong>
-            <div formArrayName="options" class="form-check">
-              <div *ngFor="let item of optionControls.controls; index as i">
-                <label>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    [formControlName]="i"
-                  />
-                  {{ getOptions[i].name }}
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <strong>Note</strong>
-            <textarea
-              class="form-control"
-              formControlName="note"
-              rows="5"
-            ></textarea>
-          </div>
+        <div class="form-group">
         </div>
       </div>
 
@@ -208,7 +83,7 @@
             <div class="footer center">
               <p>www.giatsach.vn</p>
               <p>Thanks you for your order!</p>
-              <p>{{ bill.createDate | date: 'dd-MM-yyyy HH:mm:ss'}}</p>
+              <p>{{ bill.createDate | date: "dd-MM-yyyy HH:mm:ss" }}</p>
             </div>
           </div>
         </div>

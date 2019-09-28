@@ -1,32 +1,39 @@
 import { Component, OnInit } from "@angular/core";
-import { Method, MethodRequest } from "../../../cores/models/method.model";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MethodService } from "../../../cores/services/method.service";
 import { ConfirmationService } from "primeng/api";
-import { KeyValue } from "../../../cores/models/object.model";
+import { Method, MethodRequest } from "../../../../cores/models/method.model";
+import { MethodService } from "../../../../cores/services/method.service";
+import { KeyValue } from "src/app/cores/models/object.model";
+import { forkJoin } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: "app-method",
-  templateUrl: "./method.component.html",
-  styleUrls: ["./method.component.scss"]
+  selector: "app-method-detail",
+  templateUrl: "./method-detail.component.html",
+  styleUrls: ["./method-detail.component.scss"]
 })
-export class MethodComponent implements OnInit {
-  display: boolean;
+export class MethodDetailComponent implements OnInit {
   submitted: boolean;
   methodTypes: KeyValue[];
-  dataSource: Method[];
+  method: Method;
+  id: number;
 
   formControls: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private methodService: MethodService,
-    private confirmationService: ConfirmationService
+    private router: Router,
+    route: ActivatedRoute
   ) {
-    this.dataSource = [];
+    this.method = null;
     this.methodTypes = [];
-    this.display = false;
     this.submitted = false;
+    route.params.subscribe(param => {
+      if (param) {
+        this.id = param.id ? param.id : 0;
+      }
+    });
   }
 
   get controls() {
@@ -34,49 +41,56 @@ export class MethodComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadList();
-    this.loadMethodType();
+    this.loadDataSource();
+  }
 
+  loadDataSource() {
+    forkJoin([
+      this.methodService.getMethodTypes(),
+      this.methodService.get(this.id)
+    ]).subscribe(([methodType, method]) => {
+      this.methodTypes = methodType;
+      this.method = method;
+      this.initForm();
+    });
+  }
+
+  initForm() {
     this.formControls = this.formBuilder.group({
       id: [0],
       type: [null, Validators.required],
       name: [null, Validators.required],
+      unit: [null, Validators.required],
       description: [null, Validators.required],
       sortOrder: [1, Validators.required],
       enableDiscount: [false]
     });
+
+    if (this.method) {
+      this.onShowEdit(this.method);
+    } else {
+      this.onShowAdd();
+    }
   }
 
-  loadList() {
-    this.methodService.getAll(0, 100).subscribe(data => {
-      this.dataSource = data.dataSource ? data.dataSource : [];
-    });
-  }
-
-  loadMethodType() {
-    this.methodService.getMethodTypes().subscribe(data => {
-      this.methodTypes = data;
-    });
-  }
-
-  onShowAddDialog() {
-    this.display = true;
+  onShowAdd() {
     this.submitted = false;
     this.formControls.reset();
+    this.formControls.markAsUntouched();
     this.controls.id.patchValue(0);
     this.controls.sortOrder.patchValue(1);
     this.controls.enableDiscount.patchValue(false);
   }
 
-  onShowEditDialog(method: Method) {
-    const type = this.methodTypes.filter(x => x.key === method.type);
+  onShowEdit(method: Method) {
+    const type = this.methodTypes.find(x => x.key === method.type);
     this.controls.id.patchValue(method.id);
-    this.controls.type.patchValue(type[0]);
+    this.controls.type.patchValue(type);
+    this.controls.unit.patchValue(method.unit);
     this.controls.name.patchValue(method.name);
     this.controls.description.patchValue(method.description);
     this.controls.sortOrder.patchValue(method.sortOrder);
     this.controls.enableDiscount.patchValue(method.enableDiscount);
-    this.display = true;
     this.submitted = false;
   }
 
@@ -92,41 +106,21 @@ export class MethodComponent implements OnInit {
       request.sortOrder = this.controls.sortOrder.value;
       request.enableDiscount = this.controls.enableDiscount.value;
       request.type = this.controls.type.value.key;
+      request.unit = this.controls.unit.value;
 
       this.methodService.save(request).subscribe(
         data => {
           if (data) {
             alert("Lưu dữ liệu thành công.");
+            this.router.navigate(["/admin/method"]);
           } else {
             alert("Xẩy ra lỗi xin vui lòng thử lại sau.");
           }
-
-          this.display = false;
-          this.loadList();
         },
         err => {
           alert(err);
         }
       );
     }
-  }
-
-  onDeleteClick(item) {
-    this.confirmationService.confirm({
-      message: "Bạn chắc chắn muốn xóa dữ liệu",
-      acceptLabel: "Xác nhận",
-      rejectLabel: "Hủy",
-      accept: () => {
-        this.methodService.delete(item.id).subscribe(data => {
-          if (data) {
-            alert("Xóa dữ liệu thành công");
-          } else {
-            alert("Xẩy ra lỗi xin vui lòng thử lại sau.");
-          }
-
-          this.loadList();
-        });
-      }
-    });
   }
 }

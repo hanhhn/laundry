@@ -43,12 +43,21 @@ export class MethodService {
     );
   }
 
+  get(id: number): Observable<Method> {
+    const url = "methods/get/" + id;
+    return this.httpService.doGet(url, null).pipe(
+      map(data => {
+        return data ? new Method(data) : null;
+      })
+    );
+  }
+
   getMethodTypes(): Observable<KeyValue[]> {
     const types = [
       new KeyValue("Clean", "Clean - Giặt Ủi"),
       new KeyValue("Delivery", "Delivery - Giao hàng"),
       new KeyValue("Combo", "Combo - Kết hợp"),
-      new KeyValue("Other", "Other - Khác"),
+      new KeyValue("Other", "Other - Khác")
     ];
     return of(types);
   }

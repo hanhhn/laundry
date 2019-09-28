@@ -4,6 +4,7 @@ export class Method {
   description: string;
   sortOrder: number;
   type: string;
+  unit: string;
   rate: number;
   tax: number;
   discountRate: number;
@@ -17,6 +18,7 @@ export class Method {
     this.description = json.description;
     this.enableDiscount = json.enableDiscount;
     this.sortOrder = json.sortOrder;
+    this.unit = json.unit;
     this.type = json.type;
     this.rate = json.rate;
     this.tax = json.tax;
@@ -33,4 +35,5 @@ export class MethodRequest {
   sortOrder: number;
   enableDiscount: boolean;
   type: string;
+  unit: string;
 }

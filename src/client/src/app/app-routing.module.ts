@@ -100,8 +100,16 @@ const routes: Routes = [
         loadChildren: "./pages/admin/service/service/service.module#ServiceModule"
       },
       {
+        path: "method/add",
+        loadChildren: "./pages/admin/method/method-detail/method-detail.module#MethodDetailModule"
+      },
+      {
+        path: "method/detail/:id",
+        loadChildren: "./pages/admin/method/method-detail/method-detail.module#MethodDetailModule"
+      },
+      {
         path: "method",
-        loadChildren: "./pages/admin/method/method.module#MethodModule"
+        loadChildren: "./pages/admin/method/method/method.module#MethodModule"
       },
       {
         path: "post/add",

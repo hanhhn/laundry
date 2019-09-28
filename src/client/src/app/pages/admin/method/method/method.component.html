@@ -1,0 +1,63 @@
+<div class="service">
+  <form class="search">
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <input
+          class="form-control"
+          placeholder="Keyword..."
+          (change)="onKeywordChanged($event)"
+        />
+      </div>
+      <div>
+        <button class="btn btn-primary" routerLink="add">Thêm</button>
+      </div>
+    </div>
+  </form>
+  <div class="list">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" width="100">#</th>
+          <th scope="col">Name</th>
+          <!-- <th scope="col">Description</th> -->
+          <th scope="col" class="text-right">Discount</th>
+          <th scope="col" class="text-center">EnableDiscount</th>
+          <th scope="col" class="text-center" width="100">Type</th>
+          <th scope="col" class="text-center" width="100">Unit</th>
+          <th scope="col" class="text-center" width="100">Sort Order</th>
+          <th scope="col" width="150"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dataSource; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ item.name }}</td>
+          <!-- <td>{{ item.description }}</td> -->
+          <td class="text-right">{{ item.discount }}</td>
+          <td class="text-center">{{ item.enableDiscount }}</td>
+          <td class="text-center">{{ item.type }}</td>
+          <td class="text-center">{{ item.unit }}</td>
+          <td class="text-center">{{ item.sortOrder }}</td>
+          <td>
+            <div class="action text-center">
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                [routerLink]="'detail/' + item.id"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                (click)="onDeleteClick(item)"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

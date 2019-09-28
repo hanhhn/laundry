@@ -10,7 +10,7 @@ namespace Cf.Libs.DataAccess.Entities.Items
         public bool EnableDiscount { get; set; }
         public int SortOrder { get; set; }
         public string Type { get; set; }
-
+        public string Unit { get; set; }
         public virtual ICollection<Item> Items { get; set; }
     }
 }

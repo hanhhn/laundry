@@ -1,0 +1,122 @@
+<form *ngIf="formControls" [formGroup]="formControls">
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label required"
+      >Tên hình thức</label
+    >
+    <div class="col-sm-5">
+      <input
+        formControlName="name"
+        class="form-control"
+        id="name"
+        placeholder="Tên hình thức"
+      />
+      <div class="error" *ngIf="submitted && controls.name.errors">
+        <label *ngIf="controls.name.errors.required"
+          >Tên hình thức bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <p-dropdown
+        [options]="methodTypes"
+        optionLabel="value"
+        formControlName="type"
+        placeholder="Chọn loại hình"
+        [style]="{ width: '100%' }"
+      >
+      </p-dropdown>
+      <div class="error" *ngIf="submitted && controls.type.errors">
+        <label *ngIf="controls.type.errors.required"
+          >Loại hình bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="description" class="col-sm-2 col-form-label required"
+      >Mô tả</label
+    >
+    <div class="col-sm-8">
+      <textarea
+        formControlName="description"
+        class="form-control"
+        id="description"
+        rows="5"
+      ></textarea>
+      <div class="error" *ngIf="submitted && controls.description.errors">
+        <label *ngIf="controls.description.errors.required"
+          >Mô tả bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="sortOrder" class="col-sm-2 col-form-label required"
+      >Sắp xếp</label
+    >
+    <div class="col-sm-4">
+      <input
+        formControlName="sortOrder"
+        class="form-control"
+        id="sortOrder"
+        type="number"
+        min="0"
+      />
+
+      <div class="error" *ngIf="submitted && controls.sortOrder.errors">
+        <label *ngIf="controls.sortOrder.errors.required"
+          >Sắp xếp bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="unit" class="col-sm-2 col-form-label required"
+      >Đơn vị tính</label
+    >
+    <div class="col-sm-4">
+      <input
+        formControlName="unit"
+        class="form-control"
+        id="unit"
+        type="text"
+        placeholder="kg"
+      />
+
+      <div class="error" *ngIf="submitted && controls.unit.errors">
+        <label *ngIf="controls.unit.errors.required"
+          >Đơn vị tính bắt buộc nhập.</label
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-8">
+      <div class="form-check">
+        <label class="form-check-label" for="enableDiscount">
+          <input
+            formControlName="enableDiscount"
+            class="form-check-input"
+            id="enableDiscount"
+            type="checkbox"
+          />
+          Kích hoạt giảm giá
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-8">
+      <button type="button" class="btn btn-primary" (click)="onSaveClick()">
+        Save
+      </button>
+      <button type="button" class="btn btn-default" routerLink="/admin/method">
+        Quay lại
+      </button>
+    </div>
+  </div>
+</form>

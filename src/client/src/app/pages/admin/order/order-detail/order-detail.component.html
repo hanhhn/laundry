@@ -2,38 +2,142 @@
   <form [formGroup]="serviceFormGroup" class="row" *ngIf="order">
     <div class="col-sm-7">
       <div class="row">
-        <div class="form-group">
-        </div>
+        <fieldset class="col-sm-12 order-edit">
+          <legend>
+            {{ order.orderCode }} - {{ order.phone }} - {{ order.fullName }}
+          </legend>
+          <div class="row">
+            <div class="col-sm-8">
+              <div
+                class="form-group"
+                *ngIf="getWayClean && getWayClean.length > 0"
+                formGroupName="method"
+              >
+                <div class="item">
+                  <p-dropdown
+                    class="method"
+                    formControlName="clean"
+                    [options]="getWayClean"
+                    optionLabel="name"
+                  ></p-dropdown>
+                  <input
+                    formControlName="qty"
+                    type="text"
+                    class="unit-charge"
+                    maxlength="5"
+                    (change)="onQtyChanged($event)"
+                  />
+                  <label class="unit">{{
+                    getUnit(methodControls.clean.value.id)
+                  }}</label>
+                </div>
+              </div>
+              <div *ngIf="getOptions && getOptions.length > 0">
+                <strong>Tùy chọn thêm</strong>
+                <div formArrayName="options">
+                  <div
+                    class="item"
+                    *ngFor="let item of optionControls; index as i"
+                    [formGroupName]="i"
+                  >
+                    <label class="method">
+                      <input
+                        type="checkbox"
+                        formControlName="option"
+                        (change)="onOptionChanged($event, i)"
+                      />
+                      {{ getOptions[i].name }}
+                    </label>
+                    <input
+                      formControlName="qty"
+                      type="text"
+                      class="unit-charge"
+                      maxlength="5"
+                    />
+                    <label class="unit"> {{ getOptions[i].unit }}</label>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-danger"
+                      (click)="enabledInputClick($event, i)"
+                    >
+                      <i class="fa fa-edit"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <strong>Note</strong>
+                <textarea
+                  class="form-control"
+                  formControlName="note"
+                  rows="2"
+                ></textarea>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div *ngIf="order.orderDetails && order.orderDetails.length > 0">
+                <div>Dịch vụ đã đặt</div>
+                <div *ngFor="let item of order.orderDetails">
+                  <strong>- {{ item.methodName }}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 text-right">
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="margin-right: 10px"
+                (click)="onUpdateOrderClicked($vent)"
+              >
+                Lưu
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="onPublishClicked($event)"
+              >
+                Xuất Bill
+              </button>
+            </div>
+          </div>
+        </fieldset>
       </div>
 
       <div class="row">
-        <div class="form-group col-sm-12 text-right">
-          <button
-            type="button"
-            class="btn btn-primary"
-            style="margin-right: 10px"
-          >
-            Lưu
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="onPublishClicked($event)"
-          >
-            Xuất Bill
-          </button>
-        </div>
+        <fieldset class="col-sm-12">
+          <legend>
+            {{ order.orderCode }}
+          </legend>
+          <div class="order-info">
+            <label
+              >Payment Status: <strong>{{ order.status }}</strong></label
+            >
+            <label
+              >Date of receipt:
+              <strong>{{
+                order.dateOfReceipt | date: "dd-MM-yyyy HH:mm:ss"
+              }}</strong></label
+            >
+            <label
+              >Hours of receipt:
+              <strong>{{ order.hoursOfReceipt }}</strong></label
+            >
+            <label
+              >Address: <strong>{{ order.fullAddress }}</strong></label
+            >
+            <label *ngIf="order.note"
+              >Note: <strong>{{ order.note }}</strong></label
+            >
+          </div>
+        </fieldset>
       </div>
     </div>
 
     <div class="col-sm-5">
       <div class="row">
         <div class="form-group col-sm-12">
-          <div class="text-right" *ngIf="bill">
-            <button type="button" class="btn btn-primary">
-              Print
-            </button>
-          </div>
           <div style="text-align: center; margin-top: 50px" *ngIf="!bill">
             <h4>Chưa xuất phiếu thanh toán</h4>
           </div>
@@ -85,6 +189,11 @@
               <p>Thanks you for your order!</p>
               <p>{{ bill.createDate | date: "dd-MM-yyyy HH:mm:ss" }}</p>
             </div>
+          </div>
+          <div class="text-right" *ngIf="bill">
+            <button type="button" class="btn btn-primary">
+              Print
+            </button>
           </div>
         </div>
       </div>

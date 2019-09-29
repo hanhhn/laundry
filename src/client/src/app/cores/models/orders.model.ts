@@ -7,6 +7,7 @@ export class OrderDetail {
   methodName: string;
   description: string;
   type: string;
+  qty: number;
 
   constructor(json) {
     this.id = json.id;
@@ -15,6 +16,7 @@ export class OrderDetail {
     this.methodName = json.methodName;
     this.description = json.description;
     this.type = json.type;
+    this.qty = json.qty;
   }
 }
 
@@ -72,6 +74,21 @@ export class OrderRequest {
   dateOfReceipt: string;
   hoursOfReceipt: string;
   note: string;
+}
+
+export class Detail {
+  methodId: number;
+  qty: number;
+}
+
+export class OrderDetailRequest {
+  orderId: string;
+  details: Detail[];
+  note: string;
+
+  constructor() {
+    this.details = [];
+  }
 }
 
 export class Tracking {

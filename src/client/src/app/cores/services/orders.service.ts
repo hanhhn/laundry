@@ -2,19 +2,33 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { OrderRequest, Order, OrderFilter } from "../models/orders.model";
 import { toQueryString } from "../helpers/utils.helper";
 import { PagedList } from "../models/paged.model";
+import {
+  OrderRequest,
+  Order,
+  OrderFilter,
+  OrderDetailRequest
+} from "../models/orders.model";
 
 @Injectable()
 export class OrdersService {
   constructor(private httpService: HttpService) {}
 
-  saveOrder(method: OrderRequest): Observable<Order> {
+  saveOrder(order: OrderRequest): Observable<Order> {
     const url = "orders/save";
-    return this.httpService.doPost(url, method).pipe(
+    return this.httpService.doPost(url, order).pipe(
       map(data => {
         return data ? new Order(data) : null;
+      })
+    );
+  }
+
+  updateOrder(order: OrderDetailRequest): Observable<boolean> {
+    const url = "orders/update";
+    return this.httpService.doPost(url, order).pipe(
+      map(data => {
+        return data;
       })
     );
   }

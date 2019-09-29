@@ -2,7 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import {
   Order,
   OrderFilter,
-  OrderDetail
+  OrderDetail,
+  OrderDetailRequest,
+  Detail
 } from "src/app/cores/models/orders.model";
 import { OrdersService } from "src/app/cores/services/orders.service";
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
@@ -47,8 +49,20 @@ export class OrderDetailComponent implements OnInit {
     return this.serviceFormGroup.controls;
   }
 
-  get optionControls(): FormArray {
+  get optionArray(): FormArray {
     return this.serviceFormGroup.get("options") as FormArray;
+  }
+
+  get optionControls() {
+    return this.optionArray.controls;
+  }
+
+  get methodGroup(): FormGroup {
+    return this.serviceFormGroup.get("method") as FormGroup;
+  }
+
+  get methodControls() {
+    return this.methodGroup.controls;
   }
 
   constructor(
@@ -64,7 +78,10 @@ export class OrderDetailComponent implements OnInit {
       }
 
       this.serviceFormGroup = this.formBuilder.group({
-        clean: [null, Validators.required],
+        method: this.formBuilder.group({
+          clean: [null, Validators.required],
+          qty: [null, Validators.required]
+        }),
         options: this.formBuilder.array([]),
         note: [null]
       });
@@ -77,6 +94,10 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
+  getUnit(id) {
+    return this.methods.find(x => x.id === id).unit;
+  }
+
   loadDataSource(id) {
     forkJoin([
       this.orderService.get(id),
@@ -84,31 +105,97 @@ export class OrderDetailComponent implements OnInit {
     ]).subscribe(([order, option]) => {
       this.order = order;
       this.methods = option ? option.dataSource : [];
-      this.serviceControls.clean.patchValue(
-        this.order.orderDetails.find(x => x.type === "Clean").id
-      );
+
+      const m = this.order.orderDetails.find(x => x.type === "Clean");
+      const c = this.methods.find(x => x.id === m.methodId);
+      this.methodControls.clean.patchValue(c);
+      this.methodControls.qty.patchValue(m ? m.qty : null);
+
       this.getOptions.map((value, index) => {
-        const checked = this.order.orderDetails.find(
-          x => x.methodId === value.id
-        );
-        this.optionControls.controls.push(
-          this.formBuilder.control(checked ? true : false)
+        const o = this.order.orderDetails.find(x => x.methodId === value.id);
+
+        this.optionControls.push(
+          this.formBuilder.group({
+            option: this.formBuilder.control(o ? true : false),
+            qty: [{ value: o ? o.qty : 0, disabled: true }]
+          })
         );
       });
 
-      if (this.order.billId && this.order.billId > 0) {
-        this.billingService.get(this.order.billId).subscribe(
-          data => {
-            if (data) {
-              this.bill = data;
-            }
-          },
-          err => {
-            alert(err);
-          }
-        );
-      }
+      this.loadBilling();
     });
+  }
+
+  loadBilling() {
+    if (this.order.billId && this.order.billId > 0) {
+      this.billingService.get(this.order.billId).subscribe(
+        data => {
+          if (data) {
+            this.bill = data;
+          }
+        },
+        err => {
+          alert(err);
+        }
+      );
+    }
+  }
+
+  onQtyChanged(e) {
+    if (e && e.target) {
+      this.optionControls.map((group, index) => {
+        if (group.get("option").value) {
+          group.get("qty").patchValue(e.target.value);
+        }
+      });
+    }
+  }
+
+  onOptionChanged(e, i) {
+    if (e && e.target) {
+      if (e.target.checked) {
+        this.optionControls[i]
+          .get("qty")
+          .patchValue(this.methodControls.qty.value);
+      } else {
+        this.optionControls[i].get("qty").patchValue(0);
+      }
+    }
+  }
+
+  enabledInputClick(e) {
+    if (e) {
+    }
+  }
+
+  onUpdateOrderClicked(e) {
+    this.serviceFormGroup.markAllAsTouched();
+
+    if (this.serviceFormGroup.valid) {
+      const request = new OrderDetailRequest();
+      request.orderId = this.id;
+      request.note = this.serviceControls.note.value;
+
+      const clean = new Detail();
+      clean.methodId = this.methodControls.clean.value.id;
+      clean.qty = this.methodControls.qty.value * 1;
+      request.details.push(clean);
+
+      this.optionControls.map((group, index) => {
+        if (group.get("option").value) {
+          const option = new Detail();
+          option.methodId = this.getOptions[index].id;
+          option.qty = group.get("qty").value * 1;
+          request.details.push(option);
+        }
+      });
+
+      this.orderService.updateOrder(request).subscribe(data => {
+        if (data) {
+          alert("Cập nhật thông tin đơn hàng thành công");
+        }
+      });
+    }
   }
 
   onPublishClicked(e) {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Cf.Laundry.Common;
+using Cf.Libs.Core.Enums;
 using Cf.Libs.Core.Exeptions;
 using Cf.Libs.Core.Infrastructure.Paging;
 using Cf.Libs.Core.Infrastructure.Service;
@@ -143,21 +144,45 @@ namespace Cf.Libs.Service.Orders
         public bool UpdateOrderDetail(OrderDetailRequest request)
         {
             var order = _orderRepository.Get(request.OrderId);
-            if(order == null)
+            if (order == null)
             {
                 throw new RecordNotFoundException("Record can not be found.");
             }
 
-            foreach(var detail in request.Details)
+            // delete
+            var exists = request.Details.ToList();
+            var deleteList = _orderDetailRepository.FindBy(x => x.OrderId == order.Id
+                                   && !exists.Any(y => y.MethodId == x.MethodId) 
+                                   && x.Type != MethodType.Delivery.ToString()).ToList();
+
+            foreach(var item in deleteList)
             {
-                var orderDetail = _orderDetailRepository.Get(detail.Id);
+                _orderDetailRepository.Remove(item);
+            }
+
+            foreach (var detail in request.Details)
+            {
+                var orderDetail = _orderDetailRepository.FindBy(x => x.OrderId == order.Id
+                                    && x.MethodId == detail.MethodId).SingleOrDefault();
+
                 if (orderDetail == null)
                 {
-                    throw new RecordNotFoundException("Record can not be found.");
+                    var method = _methodRepository.Get(detail.MethodId);
+                    _orderDetailRepository.Add(new OrderDetail
+                    {
+                        Order = order,
+                        Qty = detail.Qty,
+                        MethodId = method.Id,
+                        MethodName = method.Name,
+                        Description = method.Description,
+                        Type = method.Type
+                    });
                 }
-
-                orderDetail.Qty = detail.Qty;
-                _orderDetailRepository.Update(orderDetail);
+                else
+                {
+                    orderDetail.Qty = detail.Qty;
+                    _orderDetailRepository.Update(orderDetail);
+                }
             }
 
             return _unitOfWork.SaveChanges() > 0;
@@ -172,7 +197,7 @@ namespace Cf.Libs.Service.Orders
             if (!string.IsNullOrEmpty(filter.Keyword))
             {
                 queryOrders = from o in queryOrders
-                              where o.Phone == filter.Keyword 
+                              where o.Phone == filter.Keyword
                                 || o.OrderCode == filter.Keyword
                                 || o.FullName.Contains(filter.Keyword)
                               select o;

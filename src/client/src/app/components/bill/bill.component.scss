@@ -1,0 +1,66 @@
+.print {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  border: 1px groove #ddd;
+  min-height: 360px;
+}
+
+.bill {
+  font-size: 12px;
+  padding: 30px;
+  min-width: 360px;
+
+  .right {
+    text-align: right;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .left {
+    text-align: left;
+  }
+
+  .header {
+    padding-bottom: 7px;
+
+    .title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .code {
+      text-align: right;
+      font-weight: bold;
+    }
+  }
+
+  .body {
+    table {
+      border-collapse: collapse;
+      width: 100%;
+
+      th {
+        border: 1px groove #ddd;
+        text-align: center;
+      }
+
+      td {
+        border: 1px groove #ddd;
+      }
+    }
+  }
+
+  .footer {
+    padding: 5px;
+    margin-top: 10px;
+    font-weight: 700;
+
+    p {
+      margin: 0px;
+    }
+  }
+}

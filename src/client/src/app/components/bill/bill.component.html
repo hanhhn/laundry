@@ -1,0 +1,59 @@
+<div>
+    <div style="text-align: center; margin-top: 50px" *ngIf="!bill">
+        <h4>Chưa xuất phiếu thanh toán</h4>
+    </div>
+    <div class="print bill" *ngIf="bill">
+        <div class="header">
+            <div class="title">Phiếu Thanh Toán</div>
+            <div class="code">#{{ bill.orderCode }}</div>
+            <div class="code">{{ bill.billCode }}</div>
+            <div class="phone">
+                <span>Số điện thoại: </span>{{ bill.phone }}
+            </div>
+            <div class="fullName">
+                <span>Khách hàng: </span>{{ bill.fullName }}
+            </div>
+            <div class="address">
+                <span>Địa chỉ: </span>{{ bill.address }}
+            </div>
+        </div>
+        <div class="body">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="40">#</th>
+                        <th width="180">Item</th>
+                        <th width="40">Qty</th>
+                        <th width="60">Rate</th>
+                        <th width="80">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of bill.billDetails; let i = index">
+                        <td class="center">{{ i + 1 }}</td>
+                        <td class="left">{{ item.description }}</td>
+                        <td class="center">{{ item.qty }}</td>
+                        <td class="right">{{ item.rate }}</td>
+                        <td class="right">{{ item.amount }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="right">Tổng cộng:</td>
+                        <td class="right">{{ bill.billAmount }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="footer center">
+            <p>www.giatsach.vn</p>
+            <p>Thanks you for your order!</p>
+            <p>{{ bill.createDate | date: "dd-MM-yyyy HH:mm:ss" }}</p>
+        </div>
+    </div>
+    <div class="text-right" *ngIf="bill">
+        <button type="button" class="btn btn-primary" (click)="onPrint()">
+            Print
+        </button>
+    </div>
+</div>

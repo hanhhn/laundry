@@ -9,6 +9,7 @@ import { DropdownModule } from "primeng/dropdown";
 import { OrderDetailComponent } from "./order-detail.component";
 import { MethodService } from "src/app/cores/services/method.service";
 import { BillingService } from "src/app/cores/services/billing.service";
+import { BillModule } from "src/app/components/bill/bill.module";
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     DialogModule,
     DropdownModule,
     PaginatorModule,
+    BillModule,
     RouterModule.forChild(routes)
   ],
   exports: [OrderDetailComponent],

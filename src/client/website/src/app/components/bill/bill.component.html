@@ -1,0 +1,59 @@
+<div>
+    <div style="text-align: center; margin-top: 50px" *ngIf="!bill">
+        <h4>Chưa xuất phiếu thanh toán</h4>
+    </div>
+    <div id="printArea" style="margin-top: 15px; margin-bottom: 30px; border: 1px groove #ddd; min-height: 360px; font-size: 12px; padding: 30px; min-width: 360px;" *ngIf="bill">
+        <div>
+            <div style="padding-bottom: 7px; text-align: center; font-size: 18px; font-weight: 600; text-transform: uppercase;">Phiếu Thanh Toán</div>
+            <div style="text-align: right; font-weight: bold;">#{{ bill.orderCode }}</div>
+            <div style="text-align: right; font-weight: bold;">{{ bill.billCode }}</div>
+            <div>
+                <span>Số điện thoại: </span>{{ bill.phone }}
+            </div>
+            <div>
+                <span>Khách hàng: </span>{{ bill.fullName }}
+            </div>
+            <div>
+                <span>Địa chỉ: </span>{{ bill.address }}
+            </div>
+        </div>
+        <div>
+            <table style="border-collapse: collapse; width: 100%">
+                <thead>
+                    <tr>
+                        <th style="border: 1px groove #ddd; text-align: center;" width="40">#</th>
+                        <th style="border: 1px groove #ddd; text-align: center;" width="180">Item</th>
+                        <th style="border: 1px groove #ddd; text-align: center;" width="40">Qty</th>
+                        <th style="border: 1px groove #ddd; text-align: center;" width="60">Rate</th>
+                        <th style="border: 1px groove #ddd; text-align: center;" width="80">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of bill.billDetails; let i = index">
+                        <td style="border: 1px groove #ddd;text-align: center">{{ i + 1 }}</td>
+                        <td style="border: 1px groove #ddd;text-align: left">{{ item.description }}</td>
+                        <td style="border: 1px groove #ddd;text-align: center">{{ item.qty }}</td>
+                        <td style="border: 1px groove #ddd;text-align: right">{{ item.rate }}</td>
+                        <td style="border: 1px groove #ddd; text-align: right">{{ item.amount }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" style="text-align: right">Tổng cộng:</td>
+                        <td style="text-align: right">{{ bill.billAmount }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div style="text-align: center; padding: 5px; margin-top: 10px; font-weight: 700;">
+            <p style="margin: 0px;">www.giatsach.vn</p>
+            <p style="margin: 0px;">Thanks you for your order!</p>
+            <p style="margin: 0px;">{{ bill.createDate | date: "dd-MM-yyyy HH:mm:ss" }}</p>
+        </div>
+    </div>
+    <div style="text-align: right" *ngIf="bill">
+        <button type="button" class="btn btn-primary" (click)="onPrint()">
+            Print
+        </button>
+    </div>
+</div>

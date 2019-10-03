@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Bill } from "src/app/cores/models/billing.model";
+import * as print from "print-js";
 
 @Component({
   selector: "app-bill",
@@ -11,6 +12,7 @@ export class BillComponent {
   bill: Bill;
 
   onPrint() {
-    window.print();
+    const html = document.getElementById("printArea").innerHTML;
+    print("printArea", "html");
   }
 }

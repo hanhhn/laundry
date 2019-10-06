@@ -4,7 +4,7 @@ using Cf.Libs.Service.Prices;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace Cf.Laundry.Controllers
+namespace Cf.Laundry.Api.Controllers
 {
     [Route("api/prices")]
     [ApiController]

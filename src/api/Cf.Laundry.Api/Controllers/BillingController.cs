@@ -2,7 +2,7 @@
 using Cf.Libs.Service.Dtos.Billing;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cf.Laundry.Controllers
+namespace Cf.Laundry.Api.Controllers
 {
     [Route("api/billing")]
     [ApiController]

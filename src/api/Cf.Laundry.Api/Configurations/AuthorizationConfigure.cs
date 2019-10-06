@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Cf.Laundry.Configurations
+namespace Cf.Laundry.Api.Configurations
 {
     public static class AuthorizationConfigure
     {

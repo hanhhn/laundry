@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.IO;
 
-namespace Cf.Laundry
+namespace Cf.Laundry.Api
 {
     public class Program
     {

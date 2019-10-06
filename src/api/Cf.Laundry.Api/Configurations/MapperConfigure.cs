@@ -3,7 +3,7 @@ using Cf.Libs.Service;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Cf.Laundry.Configurations
+namespace Cf.Laundry.Api.Configurations
 {
     public static class MapperConfigure
     {

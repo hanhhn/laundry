@@ -3,7 +3,7 @@ using Cf.Libs.DataAccess;
 using Cf.Libs.Service;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Cf.Laundry.Configurations
+namespace Cf.Laundry.Api.Configurations
 {
     public static class ServiceConfigure
     {

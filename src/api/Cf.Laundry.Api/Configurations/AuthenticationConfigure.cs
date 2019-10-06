@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Cf.Laundry.Configurations
+namespace Cf.Laundry.Api.Configurations
 {
     public static class AuthenticationConfigure
     {

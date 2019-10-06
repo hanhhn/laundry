@@ -7,7 +7,7 @@ using Cf.Libs.Service.Settings;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace Cf.Laundry.Controllers
+namespace Cf.Laundry.Api.Controllers
 {
     [Route("api/settings")]
     [ApiController]

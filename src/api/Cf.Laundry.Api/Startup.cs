@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Cf.Laundry.Configurations;
+using Cf.Laundry.Api.Configurations;
 using Cf.Libs.DataAccess.DbContext;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Cf.Laundry
+namespace Cf.Laundry.Api
 {
     public class Startup
     {

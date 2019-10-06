@@ -2,7 +2,7 @@
 using Cf.Libs.Service.Trackings;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cf.Laundry.Controllers
+namespace Cf.Laundry.Api.Controllers
 {
     [Route("api/trackings")]
     [ApiController]

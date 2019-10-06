@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Cf.Laundry.Configurations
+namespace Cf.Laundry.Api.Configurations
 {
     public static class DbContextConfigure
     {

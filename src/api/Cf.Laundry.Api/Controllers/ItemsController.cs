@@ -4,7 +4,7 @@ using Cf.Libs.Service.Items;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace Cf.Laundry.Controllers
+namespace Cf.Laundry.Api.Controllers
 {
     [Route("api/items")]
     [ApiController]

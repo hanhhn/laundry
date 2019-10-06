@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cf.Libs.Core", "src\libs\Cf.Libs.Core\Cf.Libs.Core.csproj", "{72F7794D-F0F0-45D3-A3AF-45ECB1A69DA3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cf.Libs.DataAccess", "src\libs\Cf.Libs.DataAccess\Cf.Libs.DataAccess.csproj", "{F33A0617-D846-4102-B752-D6BB3C9E8F59}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cf.Laundry", "src\api\Cf.Laundry\Cf.Laundry.csproj", "{CC818644-5A23-4ADD-A2BC-D80058588177}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cf.Libs.Service", "src\libs\Cf.Libs.Service\Cf.Libs.Service.csproj", "{1E2FD649-9C79-44CD-8F60-0E2AE4634353}"
 EndProject
@@ -17,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{9A2BD9
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cf.Laundry.Common", "src\api\Cf.Laundry.Common\Cf.Laundry.Common.csproj", "{0F0E5A91-7A38-40A7-9133-B6F2C5C04EE0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cf.Laundry.Api", "src\api\Cf.Laundry.Api\Cf.Laundry.Api.csproj", "{FC36ACB8-C124-4B46-840F-DD83A0DED980}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cf.Laundry.Desktop", "src\client\desktop\Cf.Laundry.Desktop.csproj", "{AA83D83D-2743-46C2-B687-2DBEC2CEBF64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +34,6 @@ Global
 		{F33A0617-D846-4102-B752-D6BB3C9E8F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F33A0617-D846-4102-B752-D6BB3C9E8F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F33A0617-D846-4102-B752-D6BB3C9E8F59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC818644-5A23-4ADD-A2BC-D80058588177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC818644-5A23-4ADD-A2BC-D80058588177}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC818644-5A23-4ADD-A2BC-D80058588177}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC818644-5A23-4ADD-A2BC-D80058588177}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1E2FD649-9C79-44CD-8F60-0E2AE4634353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E2FD649-9C79-44CD-8F60-0E2AE4634353}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E2FD649-9C79-44CD-8F60-0E2AE4634353}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,6 +42,14 @@ Global
 		{0F0E5A91-7A38-40A7-9133-B6F2C5C04EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F0E5A91-7A38-40A7-9133-B6F2C5C04EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F0E5A91-7A38-40A7-9133-B6F2C5C04EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC36ACB8-C124-4B46-840F-DD83A0DED980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC36ACB8-C124-4B46-840F-DD83A0DED980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC36ACB8-C124-4B46-840F-DD83A0DED980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC36ACB8-C124-4B46-840F-DD83A0DED980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA83D83D-2743-46C2-B687-2DBEC2CEBF64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA83D83D-2743-46C2-B687-2DBEC2CEBF64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA83D83D-2743-46C2-B687-2DBEC2CEBF64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA83D83D-2743-46C2-B687-2DBEC2CEBF64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

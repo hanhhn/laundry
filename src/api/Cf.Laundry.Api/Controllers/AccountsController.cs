@@ -3,7 +3,7 @@ using Cf.Libs.Service.Dtos.Account;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace Cf.Laundry.Controllers
+namespace Cf.Laundry.Api.Controllers
 {
     [Route("api/accounts")]
     [ApiController]

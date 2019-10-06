@@ -2,7 +2,7 @@
 using Cf.Libs.Service.Dtos.Contact;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cf.Laundry.Controllers
+namespace Cf.Laundry.Api.Controllers
 {
     [Route("api/contact")]
     [ApiController]

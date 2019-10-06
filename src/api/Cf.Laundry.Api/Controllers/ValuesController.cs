@@ -3,7 +3,7 @@ using Cf.Libs.Core.Infrastructure.Engine;
 using Cf.Libs.Service.Orders;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cf.Laundry.Controllers
+namespace Cf.Laundry.Api.Controllers
 {
     [Route("api/values")]
     [ApiController]
